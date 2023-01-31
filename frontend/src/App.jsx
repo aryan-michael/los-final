@@ -13,7 +13,7 @@ import SignUp from "./pages/signup";
 
 function App() {
   return (
-    <Router>
+    <>
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -24,7 +24,7 @@ function App() {
         <Route path="/quotes" element={<Quotes />} />
         <Route path="/form-data" element={<Formdata />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 
