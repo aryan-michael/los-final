@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import "../styles/form.css"
 
 function Formdata() {
   const [name, setName] = useState(""); //separate out first and last name
@@ -22,7 +23,7 @@ function Formdata() {
   function submitForm() {
     if (name && loanType && gender && agreement) {
       const form = { name, loanType, gender, agreement }; // here form object is created
-      axios.post("http://localhost:5000/form", form).then(response => console.log(response)) // Here the data is send to the url
+      axios.post("http://localhost:5000/form", form).then(response => alert(response.data.msg)) // Here the data is send to the url
       //The only issue is that the response we are getting from the back function is not getting displayed. The page refresh after clicking the submit form button and i think that is the problem
     } else {
       alert("Invalid Input")
@@ -95,7 +96,9 @@ function Formdata() {
         </label>
         {/* submit button */}
         <div class="form-example">
-          <input type="submit" onClick={submitForm} value="Submit" />
+          {/* <input type="submit" onClick={submitForm} value="Submit" /> */}
+          <div className="button" onClick={submitForm} >Submit</div>
+          {/* <button onClick={submitForm}>Submit</button> */}
           {/* Added the submit form function to the submit button */}
         </div>
       </form>
