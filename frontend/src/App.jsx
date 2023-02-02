@@ -10,10 +10,19 @@ import About from "./pages/about";
 import Contact from "./pages/contact";
 import Blogs from "./pages/blogs";
 import SignUp from "./pages/signup";
+import { ColorModeContext, useMode } from "./theme";
+import { CssBaseline, ThemeProvider  } from "@mui/material";
+import TopBar from "./components/TopBar";
 
 function App() {
+const [theme, colorMode] = useMode();
+
   return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
     <>
+      <main className="content"><TopBar/></main>
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -25,6 +34,8 @@ function App() {
         <Route path="/form-data" element={<Formdata />} />
       </Routes>
     </>
+    </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 

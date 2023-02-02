@@ -5,7 +5,7 @@ function Formdata() {
   const [name, setName] = useState(""); //separate out first and last name
   const [loanType, setLoanType] = useState("");
   const [agreement, setAgreement] = useState(false);
-  const [gender, setGender] = useState("Male");
+  const [gender, setGender] = useState("");
 
   function changeValues(event) {
     let { name, type } = event.target;
@@ -79,6 +79,16 @@ function Formdata() {
             checked={gender === "Female"}
           />
           Female
+        </label>
+        <label>
+          <input
+            type="radio"
+            onChange={changeValues}
+            name="gender"
+            value="Others"
+            checked={gender === "Others"}
+          />
+          Others
         </label>
         {/* submit button */}
         <div class="form-example">
