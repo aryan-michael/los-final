@@ -1,0 +1,36 @@
+*** USER PORTAL ***
+
+1) When user sends a request to the main website, the front page
+will open up which will display the 4 products(loans) that the user
+will choose from.
+
+2) Once a product button is clicked, the user will be redirected to
+a new page which will display a form. The base of the form will stay
+similar and will be used for all the products and certain criteria
+which are unique to a certain product will be added later.
+
+3) The user will fill out the personal and contact details and click
+on the 'Next' button which will take them to a new form page which
+will ask for details specific to the product and also the required
+legal documents of the user.
+
+4) Upon submitting that form, all the user details including the
+personal, contact and product information will be stored in the 
+database as JSON objects. The Sidebar(tentative) will display the
+current lead/product for which the user has applied and its status.
+
+5) As the profile has been created at the time of registration,
+the user can launch the website and login to view the dashboard by
+clicking on the login button on the TopBar. The dashboard may include
+the status of the current lead, info regarding installments, timelines
+and other info if necessary. (tentative)
+
+6) User will be reminded about the change in status via emails and 
+will get a final call from the consultant once the loan has been
+sanctioned and the lead has been forwarded to LMS. (functionality is
+tentative but description of this functionality can be displayed on
+the dashboard in the form of text)
+
+7) Upon the final acceptance of the loan request, client will be able
+to download his/her sanction letter in .pdf format from the
+dashboard itself.

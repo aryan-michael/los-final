@@ -7,8 +7,8 @@ return (
 	<>
 	<Nav>
 		<NavMenu>
-		<NavLink to="/about" >
-			About
+		<NavLink to="/pages/personalDetails" >
+			Personal Details
 		</NavLink>
 		<NavLink to="/contact" >
 			Contact Us
