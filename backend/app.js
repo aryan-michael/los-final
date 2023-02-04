@@ -2,7 +2,8 @@ const cors = require("cors")
 const express = require("express");
 const app = express();
 const connectDb = require('./database/connectDb'); 
-const statementRoute = require('./routes/statementRoute');
+const statementRoute = require('./routes/statementRoute'); 
+const formroute = require('./routes/formRoutes')
 require('dotenv').config() //To access .env file
 
 
@@ -18,7 +19,8 @@ app.use(cors());
 
 
 
-app.use('/',statementRoute) //Assigning routes
+app.use('/', statementRoute) //Assigning routes
+app.use('/form',formroute)
 const port = process.env.PORT || 5000;
 
 
