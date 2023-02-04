@@ -1,6 +1,6 @@
 const getQuote = require('webseries-quotes')
 const Statement = require('../model/statementModel')
-const {StatusCodes} = require('http-status-codes')
+const { StatusCodes } = require('http-status-codes')
 
 //This file consists of all the backend task that will be performed
 
