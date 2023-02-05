@@ -37,7 +37,9 @@ const colorMode = useContext(ColorModeContext)
                 <IconButton>
                     <NotificationsOutlinedIcon/>
                 </IconButton>
+                <IconButton>
                     <SettingsOutlinedIcon/>
+                </IconButton>
                 <IconButton>
                     <PersonOutlinedIcon/>
                 </IconButton>

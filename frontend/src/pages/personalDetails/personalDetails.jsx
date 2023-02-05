@@ -28,12 +28,21 @@ const PersonalDetails = ({setpersonalId}) => {
     })
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        let { name, value } = e.target;
+
+        if(name === "pincode" && (value.length > 6 || isNaN(value))){
+            console.log("invalid")
+            return;
+        }
+        else if(name === "firstname"){
+            value = value.toUpperCase();
+        }
         
-        setpersonalDetails({
-            ...personalDetails,
-            [name]: value
-        }) 
+            setpersonalDetails({
+                ...personalDetails,
+                [name]: value
+            }) 
+        
 
         console.log(personalDetails)
     }
@@ -62,7 +71,7 @@ const PersonalDetails = ({setpersonalId}) => {
             <input type="text" name="empStatus" value={personalDetails.empStatus} placeholder="Enter your emp status" onChange={handleChange} />
             <input type="text" name="firmName" value={personalDetails.firmName} placeholder="Enter your firm name" onChange={handleChange} />
             <input type="text" name="address" value={personalDetails.address} placeholder="Enter your address" onChange={handleChange} />
-            <input type="number" name="pincode" value={personalDetails.pincode} placeholder="Enter pincode" onChange={handleChange} />
+            <input type="text" name="pincode" value={personalDetails.pincode} placeholder="Enter pincode" onChange={handleChange} />
             <input type="text" name="city" value={personalDetails.city} placeholder="Enter your city" onChange={handleChange} />
             <input type="text" name="district" value={personalDetails.district} placeholder="Enter your district" onChange={handleChange} />
             <input type="text" name="state" value={personalDetails.state} placeholder="Enter your state" onChange={handleChange} />
