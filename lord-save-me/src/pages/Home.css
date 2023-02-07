@@ -1,0 +1,13 @@
+.tag {
+    border-radius: 58px;
+    background: linear-gradient(45deg, #dbe1e5, #b9bdc1);
+    box-shadow: 22px -22px 30px #96999c,
+        -22px 22px 30px #ffffff;
+}
+
+img {
+    display: block;
+    height: 200px;
+    width: 200px;
+    margin: auto;
+}
