@@ -96,10 +96,7 @@ const Forms = () => {
                 {/* EMAIL */}
                 <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                     <Form.Label>Email</Form.Label>
-                    <InputGroup>
-                        <Form.Control aria-label="Recipient's username" aria-describedby="basic-addon2" type="email" name="email" value={form.email} onChange={handleChange} />
-                        <InputGroup.Text id="basic-addon2">@gmail.com</InputGroup.Text>
-                    </InputGroup>
+                    <Form.Control aria-label="Recipient's username" type="email" name="email" value={form.email} onChange={handleChange} />
                 </Form.Group>
             </Row>
 
@@ -141,11 +138,6 @@ const Forms = () => {
             </Row>
 
             <Row className="mb-3">
-                {/* COUNTRY */}
-                <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                    <Form.Label>Country</Form.Label>
-                    <Form.Control className="form-control" type="text" name="country" value={form.country} onChange={handleChange} />
-                </Form.Group>
                 {/* ORDER DETAILS */}
                 {/* <Form.Group controlId="formGridlabel" className="col col-sm-6">
                     <Form.Label>Order Details</Form.Label>
