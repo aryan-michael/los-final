@@ -5,9 +5,11 @@
         -22px 22px 30px #ffffff;
 }
 
-img {
-    display: block;
-    height: 200px;
-    width: 200px;
-    margin: auto;
+.icons {
+    font-size: 3.5rem;
+    color: rgb(10, 10, 94);
+}
+
+.icons:hover {
+    color: rgb(19, 105, 23)
 }

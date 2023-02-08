@@ -1,11 +1,9 @@
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import './Home.css';
 import { Link, Outlet } from 'react-router-dom';
-import business from '../assets/business.png'
-import home from '../assets/home.png'
-import education from '../assets/education.png'
-import personal from '../assets/personal.png'
-
+import { FaBusinessTime, FaHome } from 'react-icons/fa';
+import { MdCastForEducation } from 'react-icons/md';
+import { BsFillPersonFill } from 'react-icons/bs';
 
 const Home = () => {
     return (
@@ -15,10 +13,7 @@ const Home = () => {
                     <Col className="p-3" xs={12} md={6} lg={3}>
                         <div className="tag px-5 pt-5 pb-3">
                             <Link to={`loan/business`} className="text-black text-decoration-none ">
-                                <Image
-                                    src={business}
-                                    thumbnail
-                                />
+                                <FaBusinessTime className="icons" />
                                 <h4 className="mt-2">Business Loan</h4>
                             </Link>
                         </div>
@@ -26,10 +21,7 @@ const Home = () => {
                     <Col className="p-3" xs={12} md={6} lg={3}>
                         <div className="tag px-5 pt-5 pb-3">
                             <Link to={`loan/home`} className="text-black text-decoration-none ">
-                                <Image
-                                    src={home}
-                                    thumbnail
-                                />
+                                <FaHome className="icons" />
                                 <h4 className="mt-2">Home Loan</h4>
                             </Link>
                         </div>
@@ -38,10 +30,7 @@ const Home = () => {
                         <div className="tag px-5 pt-5 pb-3">
 
                             <Link to={`loan/education`} className="text-black text-decoration-none ">
-                                <Image
-                                    src={education}
-                                    thumbnail
-                                />
+                                <MdCastForEducation className="icons" />
                                 <h4 className="mt-2">Education Loan</h4>
                             </Link>
                         </div>
@@ -50,10 +39,7 @@ const Home = () => {
                         <div className="tag px-5 pt-5 pb-3">
 
                             <Link to={`loan/personal`} className="text-black text-decoration-none ">
-                                <Image
-                                    src={personal}
-                                    thumbnail
-                                />
+                                <BsFillPersonFill className="icons" />
                                 <h4 className="mt-2">Personal Loan</h4>
                             </Link>
                         </div>

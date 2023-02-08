@@ -3,22 +3,22 @@ const { StatusCodes } = require('http-status-codes')
 const BadRequestError = require('../Error/BadRequest')
 const UnauthenticatedError = require('../Error/UnauthorizedError')
 const NotFoundError = require('../Error/NotFoundError');
-const { findById, findByIdAndUpdate, find, findOne } = require('../Model/userModel'); 
-const refreshJWTToken = require('../Database/refreshToken')
+const { findById, findByIdAndUpdate, find, findOne } = require('../Model/userModel');
+const refreshJWTToken = require('../database/refreshToken')
 const jwt = require('jsonwebtoken')
-const sendEmail = require('../Controller/emailController');
+const sendEmail = require('./emailController');
 const crypto = require('crypto')
 
 const createUser = async (req, res) => {
     const user = await User.create(req.body);
     console.log(req.body)
     const token = await user.createJWT()
-    res.status(StatusCodes.CREATED).json({ token,msg:"User successfully registered" })
+    res.status(StatusCodes.CREATED).json({ token, msg: "User successfully registered" })
 }
 
 const getAllUser = async (req, res) => {
     const users = await User.find({});
-    res.status(StatusCodes.OK).json({users})
+    res.status(StatusCodes.OK).json({ users })
 }
 
 const login = async (req, res) => {
@@ -42,7 +42,7 @@ const login = async (req, res) => {
         maxAge: 72 * 60 * 60 * 1000
     })
     const token = await user.createJWT();
-    res.status(StatusCodes.OK).json({ User: {username: user.firstname + " " + user.lastname, token },msg:"Successfully login"})
+    res.status(StatusCodes.OK).json({ User: { username: user.firstname + " " + user.lastname, token }, msg: "Successfully login" })
 }
 
 const handleRefreshToken = async (req, res) => {
@@ -56,7 +56,7 @@ const handleRefreshToken = async (req, res) => {
         throw new UnauthenticatedError('Not authorized')
     }
     const accessToken = await findUser.createJWT();
-    res.status(StatusCodes.OK).json({accessToken})
+    res.status(StatusCodes.OK).json({ accessToken })
 }
 
 const logout = async (req, res) => {
@@ -76,22 +76,22 @@ const logout = async (req, res) => {
     await User.findOneAndUpdate({ refreshToken }, { refreshToken: "" }, { new: true, runValidators: true })
     res.clearCookie("refreshToken", {
         httpOnly: true,
-        secure:true
+        secure: true
     })
     res.sendStatus(StatusCodes.FORBIDDEN)
 }
 
-const getUser = async(req, res) => {
-    const { id:userId } = req.params;
+const getUser = async (req, res) => {
+    const { id: userId } = req.params;
     const user = await User.findById({ _id: userId });
     if (!user) {
         throw new NotFoundError(`No user found with USER_ID:${userId}`)
     }
     const token = await user.createJWT()
-    res.status(StatusCodes.OK).json({user:user.firstname+" "+user.lastname,token})
+    res.status(StatusCodes.OK).json({ user: user.firstname + " " + user.lastname, token })
 }
 
-const updateUser = async (req, res)=>{
+const updateUser = async (req, res) => {
     const { id: userId } = req.params;
     const user = await User.findOneAndUpdate({ _id: userId }, req.body, { new: true, runValidators: true })
     if (!user) {
@@ -100,47 +100,47 @@ const updateUser = async (req, res)=>{
     res.status(StatusCodes.OK).json({ msg: "User updated" })
 }
 
-const deleteUser = async(req, res) => {
+const deleteUser = async (req, res) => {
     const { id: userId } = req.params;
     const user = await User.findOneAndDelete({ _id: userId })
     if (!user) {
         throw new NotFoundError(`No user found with USER_ID:${userId}`)
     }
-    res.status(StatusCodes.OK).json({user:user.firstname+" "+user.lastname+" deleted"})
+    res.status(StatusCodes.OK).json({ user: user.firstname + " " + user.lastname + " deleted" })
 }
 
 const getAdmin = async (req, res) => {
     const user = await User.findOne({ role: 'admin' })
     const token = await user.createJWT();
-    res.status(StatusCodes.OK).json({ Admin: { name: user.firstname+" "+user.lastname, user: user.email }, token})
+    res.status(StatusCodes.OK).json({ Admin: { name: user.firstname + " " + user.lastname, user: user.email }, token })
 }
 
-const blockUser = async (req, res)=>{
+const blockUser = async (req, res) => {
     const { id: userId } = req.params;
     const user = await User.findByIdAndUpdate({ _id: userId }, { isBlocked: true }, { new: true });
     if (!user) {
         throw new NotFoundError(`No user found with USER_ID:${userId}`);
     }
-    res.status(StatusCodes.OK).json({msg:'User blocked'})
+    res.status(StatusCodes.OK).json({ msg: 'User blocked' })
 }
 
-const unblockUser = async (req, res)=>{
+const unblockUser = async (req, res) => {
     const { id: userId } = req.params;
     const user = await User.findByIdAndUpdate({ _id: userId }, { isBlocked: false }, { new: true });
     if (!user) {
         throw new NotFoundError(`No user found with USER_ID:${userId}`);
     }
-    res.status(StatusCodes.OK).json({msg:'User unblocked'})
+    res.status(StatusCodes.OK).json({ msg: 'User unblocked' })
 }
 
-const passwordReset = async (req, res)=>{
+const passwordReset = async (req, res) => {
     const { password } = req.body;
     const { userId } = req.user;
-    const user = await User.findById({ _id:userId })
+    const user = await User.findById({ _id: userId })
     if (!user) throw new NotFoundError(`No user found with ID:${userId}`);
     user.password = password;
     const updateUser = await user.save();
-    res.status(StatusCodes.OK).json({msg:"Password updated",updateUser})
+    res.status(StatusCodes.OK).json({ msg: "Password updated", updateUser })
 }
 
 const forgetPasswordToken = async (req, res) => {
@@ -158,7 +158,7 @@ const forgetPasswordToken = async (req, res) => {
         html: url
     };
     res.status(StatusCodes.OK).json({ token, msg: "Mail sent" })
-    console.log(process.env.MAIL_ID,process.env.MAIL_PASS)
+    console.log(process.env.MAIL_ID, process.env.MAIL_PASS)
     sendEmail(data);
 }
 
@@ -180,8 +180,8 @@ const resetPassword = async (req, res) => {
     user.passwordResetTokenExp = undefined;
     user.passwordChangeAt = Date.now();
     await user.save();
-    res.status(StatusCodes.OK).json({ msg: "Password Updated"})
+    res.status(StatusCodes.OK).json({ msg: "Password Updated" })
 }
 
-module.exports = { createUser, getAllUser,login,getUser,updateUser,deleteUser,getAdmin,blockUser,unblockUser,handleRefreshToken,logout,passwordReset,forgetPasswordToken,resetPassword};
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword };
 
