@@ -1,10 +1,11 @@
-import React from 'react';
-import { Form, InputGroup, Row, Button } from 'react-bootstrap';
-import { useState } from 'react';
+import React, { useState } from "react";
+import PersonalDetails from "./PersonalDetails";
+import LoanDetails from "./LoanDetails";
 
-const Forms = () => {
 
-    const [form, setForm] = useState({
+function Forms() {
+    const [page, setPage] = useState(0);
+    const [formData, setFormData] = useState({
         salutation: '',
         first_name: '',
         middle_name: '',
@@ -17,141 +18,64 @@ const Forms = () => {
         pin: '',
         city: '',
         state: '',
-        country: ''
+        country: '',
+
+        loanAmount: '',
+        loanType: '', //display | not input
+        empStatus: '', //professional | business
+        firmAddress: '',
+        businessName: ''
+
     });
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    }
+    const FormTitles = ["Personal Details", "Loan Details"];
 
-    const submitButton = (e) => {
-        e.preventDefault();
-        console.log(form);
-    }
-
-    const resetButton = (e) => {
-        console.log("form resetted");
-        //reset();
-    }
+    const PageDisplay = () => {
+        if (page === 0) {
+            return <PersonalDetails formData={formData} setFormData={setFormData} />;
+        } else {
+            return <LoanDetails formData={formData} setFormData={setFormData} />;
+        }
+    };
 
     return (
-        <Form className="container mt-3 mb-3">
-            <Row className="mb-3">
-                {/* SALUTATION */}
-                <Form.Group controlId="formGridState" className="col col-sm-4">
-                    <Form.Label>Salutation</Form.Label>
-                    <Form.Select defaultValue="Choose..." className="form-control" name="salutation" value={form.salutation} onChange={handleChange}>
-                        <option value="Choose...">Choose...</option>
-                        <option value="mr">Mr.</option>
-                        <option value="mrs">Mrs.</option>
-                        <option value="ms">Ms.</option>
-                    </Form.Select>
-                </Form.Group>
-                {/* FIRSTNAME */}
-                <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control type="name" name="first_name" value={form.first_name} onChange={handleChange} className="form-control" />
-                </Form.Group>
-            </Row>
+        <div className="form">
+            <div className="progressbar">
+                <div style={{ width: page === 0 ? "50%" : "100%" }} />
+            </div>
+            <div className="form-container">
+                <div className="header">
+                    <h1>{FormTitles[page]}</h1>
+                </div>
+                <div className="body">{PageDisplay()}</div>
+                <div className="footer">
+                    <button
+                        type="submit"
+                        //onClick={submitButton} 
+                        className="me-4 btn btn-danger btn-lg btn-block"
+                        disabled={page === 0}
+                        onClick={() => {
+                            setPage((currentPage) => currentPage - 1);
+                        }}
+                    >Previous</button>
 
-            <Row className="mb-3">
-                {/* MIDDLENAME */}
-                <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                    <Form.Label>Middle Name</Form.Label>
-                    <Form.Control type="name" name="middle_name" value={form.middle_name} onChange={handleChange} className="form-control" />
-                </Form.Group>
-                {/* LASTNAME */}
-                <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control type="name" name="last_name" value={form.last_name} onChange={handleChange} className="form-control" />
-                </Form.Group>
-            </Row>
-
-            <Row className="mb-3">
-                {/* GENDER */}
-                <Form.Group controlId="formGridState" className="col col-sm-3">
-                    <Form.Label>Gender</Form.Label>
-                    <Form.Select defaultValue="Choose..." className="form-control" name="gender" value={form.gender} onChange={handleChange}>
-                        <option value="Choose...">Choose...</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </Form.Select>
-                </Form.Group>
-                {/* DOB */}
-                <Form.Group controlId="formGridpin" className="col col-sm-4">
-                    <Form.Label>Date Of Birth</Form.Label>
-                    <Form.Control className="form-control" type="date" name="dob" value={form.dob} onChange={handleChange} />
-                </Form.Group>
-            </Row>
-
-            <Row className="mb-3">
-                {/* MOBILE */}
-                <Form.Group controlId="formBasicMobile" className="col col-sm-6">
-                    <Form.Label>Mobile Number</Form.Label>
-                    <InputGroup>
-                        <InputGroup.Text id="basic-addon1">+91</InputGroup.Text>
-                        <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" value={form.mobile} onChange={handleChange} />
-                    </InputGroup>
-                </Form.Group>
-                {/* EMAIL */}
-                <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control aria-label="Recipient's username" type="email" name="email" value={form.email} onChange={handleChange} />
-                </Form.Group>
-            </Row>
-
-            <Row className="mb-3">
-                {/* ADDRESS*/}
-                <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control className="form-control" type="text" name="address" value={form.address} onChange={handleChange} />
-                </Form.Group>
-                {/* PINCODE */}
-                <Form.Group controlId="formGridpin" className="col col-sm-4">
-                    <Form.Label>Pin Code</Form.Label>
-                    <Form.Control className="form-control" type="pin" name="pin" value={form.pin} onChange={handleChange} />
-                </Form.Group>
-            </Row>
-
-            <Row className="mb-3">
-                {/* CITY */}
-                <Form.Group controlId="formGridCity" className="col col-sm-4">
-                    <Form.Label>City</Form.Label>
-                    <Form.Control className="form-control" type="text" name="city" value={form.city} onChange={handleChange} />
-                </Form.Group>
-                {/* STATE */}
-                <Form.Group controlId="formGridState" className="col col-sm-4">
-                    <Form.Label>State</Form.Label>
-                    <Form.Select defaultValue="Choose..." className="form-control" name="state" value={form.state} onChange={handleChange}>
-                        <option value="Choose...">Choose...</option>
-                        <option value="Gujarat">Gujarat</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Rajasthan">Rajasthan</option>
-                        <option value="Kashmir">Kashmir</option>
-                    </Form.Select>
-                </Form.Group>
-                {/* Country */}
-                <Form.Group controlId="formGridpin" className="col col-sm-4">
-                    <Form.Label>Country</Form.Label>
-                    <Form.Control className="form-control" type="text" name="country" value={form.country} onChange={handleChange} />
-                </Form.Group>
-            </Row>
-
-            <Row className="mb-3">
-                {/* ORDER DETAILS */}
-                {/* <Form.Group controlId="formGridlabel" className="col col-sm-6">
-                    <Form.Label>Order Details</Form.Label>
-                    <Form.Control as="textarea" rows="{3}" className="form-control" name="order" value={form.order} onChange={handleChange} />
-                </Form.Group> */}
-            </Row>
-            <Row className="mb-3">
-                <Form.Group controlId="formGridCheckbox" className="col col-sm-6">
-                    <Button type="submit" onClick={submitButton} className="me-4 btn btn-success btn-lg btn-block">Submit</Button>
-                    <Button type="reset" onClick={resetButton} className="me-4 btn btn-danger btn-lg btn-block">Reset</Button>
-                </Form.Group>
-            </Row>
-        </Form>
-
+                    <button
+                        type="submit"
+                        className="me-4 btn btn-success btn-lg btn-block"
+                        onClick={() => {
+                            if (page === FormTitles.length - 1) {
+                                alert("FORM SUBMITTED");
+                                console.log(formData);
+                            } else {
+                                setPage((currentPage) => currentPage + 1);
+                            }
+                        }}
+                    >
+                        {page === FormTitles.length - 1 ? "Submit" : "Next"}
+                    </button>
+                </div>
+            </div>
+        </div>
     );
 }
 
