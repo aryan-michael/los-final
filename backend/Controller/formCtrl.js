@@ -1,4 +1,4 @@
-const Form = require('../model/formModel')
+const Form = require('../Model/formModel')
 const { StatusCodes } = require('http-status-codes');
 
 const createForm = async (req, res) => {

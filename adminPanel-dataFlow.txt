@@ -1,0 +1,20 @@
+*** ADMIN PANEL ***
+
+1) The login button on the TopBar will consist of a dropdown of 2 
+options, i.e. Client & Admin. Admin credentials will be set from the
+backend itself, no need to register an admin via the GUI/website.
+
+2) Admin Panel will show all the leads/requests that have been 
+created by the clients including all the info they have submitted in
+the forms.
+
+3) Consultant/Manager can validate the cliet's details and documents
+ via this panel and make decision on whether to accept or reject a
+particular lead.
+
+4) The Client will be notified via 3 ways.
+	1. Client Dashboard
+	2. Notifications (Button in TopBar)
+	3. E-mail
+
+
