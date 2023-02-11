@@ -17,7 +17,7 @@ const LoanDetails = ({ formData, setFormData }) => {
                     {/* LOAN TYPE : ONLY DISPLAY */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Loan Type</Form.Label>
-                        <Form.Control type="text" name="loanType" value={formData.loanType} onChange={setFormData} className="form-control" />
+                        <Form.Control type="text" placeholder="Business" readOnly />
                     </Form.Group>
                 </Row>
 

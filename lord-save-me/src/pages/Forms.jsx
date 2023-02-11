@@ -6,6 +6,7 @@ import LoanDetails from "./LoanDetails";
 function Forms() {
     const [page, setPage] = useState(0);
     const [formData, setFormData] = useState({
+        //personal details
         salutation: '',
         first_name: '',
         middle_name: '',
@@ -19,7 +20,7 @@ function Forms() {
         city: '',
         state: '',
         country: '',
-
+        //loan details
         loanAmount: '',
         loanType: '', //display | not input
         empStatus: '', //professional | business
@@ -64,7 +65,7 @@ function Forms() {
                         className="me-4 btn btn-success btn-lg btn-block"
                         onClick={() => {
                             if (page === FormTitles.length - 1) {
-                                alert("FORM SUBMITTED");
+                                alert("An Email has been sent for verification");
                                 console.log(formData);
                             } else {
                                 setPage((currentPage) => currentPage + 1);
