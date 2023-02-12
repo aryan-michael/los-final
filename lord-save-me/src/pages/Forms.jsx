@@ -3,9 +3,9 @@ import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 
 
-function Forms() {
+function Forms({ loan_type }) {
     const [page, setPage] = useState(0);
-    const [formData, setFormData] = useState({
+    const [fullDetails, setFullDetails] = useState({
         //personal details
         salutation: '',
         first_name: '',
@@ -22,20 +22,38 @@ function Forms() {
         country: '',
         //loan details
         loanAmount: '',
-        loanType: '', //display | not input
+        loanType: loan_type, //display | not input
         empStatus: '', //professional | business
         firmAddress: '',
         businessName: ''
 
     });
 
+    const handleChange = (e) => {
+        const el = e.target;
+        let x = { ...fullDetails };
+        x[el.name] = el.value;
+        setFullDetails(x);
+    };
+
+    const PrintData = (e) => {
+
+        e.preventDefault();
+        if (page === FormTitles.length - 1) {
+            //alert("An Email has been sent for verification");
+            console.log(fullDetails);
+        } else {
+            setPage((currentPage) => currentPage + 1);
+        }
+    };
+
     const FormTitles = ["Personal Details", "Loan Details"];
 
     const PageDisplay = () => {
         if (page === 0) {
-            return <PersonalDetails formData={formData} setFormData={setFormData} />;
+            return <PersonalDetails fullDetails={fullDetails} setFullDetails={handleChange} />;
         } else {
-            return <LoanDetails formData={formData} setFormData={setFormData} />;
+            return <LoanDetails fullDetails={fullDetails} setFullDetails={handleChange} />;
         }
     };
 
@@ -63,14 +81,7 @@ function Forms() {
                     <button
                         type="submit"
                         className="me-4 btn btn-success btn-lg btn-block"
-                        onClick={() => {
-                            if (page === FormTitles.length - 1) {
-                                alert("An Email has been sent for verification");
-                                console.log(formData);
-                            } else {
-                                setPage((currentPage) => currentPage + 1);
-                            }
-                        }}
+                        onClick={PrintData}
                     >
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
                     </button>

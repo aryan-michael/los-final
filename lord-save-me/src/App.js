@@ -10,7 +10,10 @@ function App() {
       <NavBar />
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route path='loan/:type' element={<Forms />} />
+        <Route path='loan/business' element={<Forms loan_type={"Business"} />} />
+        <Route path='loan/home' element={<Forms loan_type={"Home"} />} />
+        <Route path='loan/education' element={<Forms loan_type={"Education"} />} />
+        <Route path='loan/personal' element={<Forms loan_type={"Personal"} />} />
       </Routes>
     </>
   );
