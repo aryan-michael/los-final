@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
+import axios from "axios"
+import {  decString, encJsonData } from "../middleware/encDecMiddleware";
 
+export let userToken
 
-function Forms() {
+function Forms({ loan_type }) {
     const [page, setPage] = useState(0);
-    const [formData, setFormData] = useState({
+    const [fullDetails, setFullDetails] = useState({
+        //personal details
         salutation: '',
         first_name: '',
         middle_name: '',
@@ -15,26 +19,58 @@ function Forms() {
         mobile: '',
         email: '',
         address: '',
-        pin: '',
+        pincode: '',
         city: '',
         state: '',
         country: '',
-
+        //loan details
         loanAmount: '',
-        loanType: '', //display | not input
+        loanType: loan_type, //display | not input
         empStatus: '', //professional | business
         firmAddress: '',
         businessName: ''
 
     });
 
+    const handleChange = (e) => {
+        const el = e.target;
+        let x = { ...fullDetails };
+        x[el.name] = el.value;
+        setFullDetails(x);
+    };
+
+    const PrintData = async (e) => {
+
+        e.preventDefault();
+        if (page === FormTitles.length - 1) {
+            //alert("An Email has been sent for verification");
+            const encUserDetails = { enc : encJsonData(fullDetails) }
+            try {
+                await axios.post("http://localhost:5000/api/v1/user/signup", encUserDetails)
+                    .then(response => {
+                        userToken = decString(response.data.encToken)
+                        // alert(response.data.msg)
+                        alert("An email has been sent for verfication")
+                    })
+            } catch (err) {
+                if (err.response) {
+                    alert(err.response.data.msg)
+                }else{
+                    alert("Something went wrong")
+                }
+            }
+        } else {
+            setPage((currentPage) => currentPage + 1);
+        }
+    };
+
     const FormTitles = ["Personal Details", "Loan Details"];
 
     const PageDisplay = () => {
         if (page === 0) {
-            return <PersonalDetails formData={formData} setFormData={setFormData} />;
+            return <PersonalDetails fullDetails={fullDetails} setFullDetails={handleChange} />;
         } else {
-            return <LoanDetails formData={formData} setFormData={setFormData} />;
+            return <LoanDetails fullDetails={fullDetails} setFullDetails={handleChange} />;
         }
     };
 
@@ -62,14 +98,7 @@ function Forms() {
                     <button
                         type="submit"
                         className="me-4 btn btn-success btn-lg btn-block"
-                        onClick={() => {
-                            if (page === FormTitles.length - 1) {
-                                alert("FORM SUBMITTED");
-                                console.log(formData);
-                            } else {
-                                setPage((currentPage) => currentPage + 1);
-                            }
-                        }}
+                        onClick={PrintData}
                     >
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
                     </button>

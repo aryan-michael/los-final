@@ -6,6 +6,7 @@ import { MdCastForEducation } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
 
 const Home = () => {
+
     return (
         <>
             <Container fluid>
