@@ -6,14 +6,14 @@ const NavBar = () => {
             <Navbar bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="#home">
-                        React Bootstrap
+                        LOS
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="#features">Features</Nav.Link>
                             <Nav.Link href="#pricing">Pricing</Nav.Link>
-                            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+                            <NavDropdown title="Products" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">
                                     Another action
@@ -26,9 +26,9 @@ const NavBar = () => {
                             </NavDropdown>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#deets">More deets</Nav.Link>
+                            <Nav.Link href="#deets">Contact Us</Nav.Link>
                             <Nav.Link eventKey={2} href="#memes">
-                                Dank memes
+                                Login
                             </Nav.Link>
                         </Nav>
                         <br />
