@@ -4,80 +4,16 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
 let userSchema = new mongoose.Schema({
-    salutation: {
-        type: String,
-        required: true
-    },
-    first_name: {
-        type: String,
-        required: [true, 'Firstname is required']
-    },
-    middle_name: {
-        type: String
-    },
-    last_name: {
-        type: String,
-        required: [true, 'Lastname is required']
-    },
-    gender: {
-        type: String,
-        required:[true,'Gender is required']
-    },
-    dob: {
-        type: Date,
-        required:[true,'Date of birth is required']
-    },
-    loanAmount: {
-        type: String,
-        required: [true, 'Loan Amount is required'],
-        maxlength: 10
-    },
-    empStatus: {
-        type: String,
-        required:[true, 'Employement status required'],
-    },
-    businessName: {
-        type: String,
-        required: [true, 'Firm name is required'],
-    },
-    address: {
-        type: String,
-        required: [true, 'Address is required'],
-    },
-    pincode: {
-        type: String,
-        required:[true,'Pincode is required']
-    },
-    city: {
-        type: String,
-        required: [true,'City is required']
-    },
-    state: {
-        type: String,
-        required:[true,'State is required']
-    },
-    country: {
-        type: String,
-        required:[true,'Country is required']
-    },
-    loanType: {
-        type: String,
-        required:[true,'Loan type is required']
-    },
     email: {
         type: String,
-        required: [true, 'Email is required'],
+        required: true,
         unique: true
     },
     mobile:{
         type: String,
-        required: [true,'Mobile is required'],
+        required: true,
         // minlength:10,
         unique: true
-    },
-    firmAddress: {
-        type: String,
-        required: [true,'Firm address is required']
     },
     password:{
         type: String
@@ -85,6 +21,10 @@ let userSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'user'
+    },
+    userDetails: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Detail"
     },
     isBlocked: {
         type: Boolean,
@@ -95,10 +35,7 @@ let userSchema = new mongoose.Schema({
     },
     passwordChangeAt: Date,
     passwordResetToken: String,
-    passwordResetTokenExp: Date,
-    userOtp: String,
-    userOtpExp: Date,
-    userOtpToken: String
+    passwordResetTokenExp: Date
 }, {
     timestamps:true
 }
@@ -119,7 +56,7 @@ userSchema.methods.checkPassword = async function (enteredPassword) {
 }
 
 userSchema.methods.createJWT = async function () {
-    return jwt.sign({ userId: this._id, name: this.first_name+" "+this.last_name,email:this.email}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME }) 
+    return jwt.sign({ userId: this._id, name: this.firstname+" "+this.lastname,email:this.email}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME }) 
 }
 
 userSchema.methods.generateResetPasswordToken = async function () {
@@ -128,6 +65,5 @@ userSchema.methods.generateResetPasswordToken = async function () {
     this.passwordResetTokenExp = Date.now() + 30 * 60 * 1000;
     return resetToken;
 }
-
 
 module.exports = mongoose.model('User', userSchema);

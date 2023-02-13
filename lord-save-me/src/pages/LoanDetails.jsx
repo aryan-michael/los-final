@@ -17,7 +17,7 @@ const LoanDetails = ({ fullDetails, setFullDetails }) => {
                     {/* LOAN TYPE : ONLY DISPLAY */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Loan Type</Form.Label>
-                        <Form.Control type="text" placeholder="Business" value={fullDetails.loanType} readOnly />
+                        <Form.Control type="text" name="loanType" value={fullDetails.loanType} readOnly />
                     </Form.Group>
                 </Row>
 
@@ -29,6 +29,7 @@ const LoanDetails = ({ fullDetails, setFullDetails }) => {
                             <option defaultValue value="Choose...">Choose...</option>
                             <option value="business">Business Owner</option>
                             <option value="professional">Professional</option>
+                            <option value="salaried_employee">Salaried Employee</option>
                         </Form.Select>
                     </Form.Group>
                     {/* BUSINESS NAME */}

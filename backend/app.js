@@ -1,11 +1,13 @@
 const cors = require("cors")
 const express = require("express");
 const app = express();
-require('express-async-errors')
 const connectDb = require('./database/connectDb'); 
 require('dotenv').config()
 const port = process.env.PORT || 5000;
+const statementRoute = require('./routes/statementRoute'); 
+const formroute = require('./routes/formRoutes')
 const authRoute = require('./routes/authRoutes')
+const personalDetailRoute = require('./routes/personalDetailRoutes')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -29,8 +31,10 @@ app.use(cors());
 
 
 
-
+app.use('/', statementRoute) //Assigning routes
+app.use('/form', formroute)
 app.use('/api/v1/user', authRoute);
+app.use('/api/v1/personal-detail', personalDetailRoute)
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware)

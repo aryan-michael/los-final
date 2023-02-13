@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
 
 const PersonalDetails = ({ fullDetails, setFullDetails }) => {
+
     return (
         <>
             <Form className="container mt-3 mb-3">
@@ -78,7 +79,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* PINCODE */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
                         <Form.Label>Pin Code</Form.Label>
-                        <Form.Control className="form-control" type="pincode" name="pincode" value={fullDetails.pin} onChange={setFullDetails} />
+                        <Form.Control className="form-control" type="pin" name="pin" value={fullDetails.pin} onChange={setFullDetails} />
                     </Form.Group>
                 </Row>
 
@@ -102,7 +103,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* Country */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
                         <Form.Label>Country</Form.Label>
-                        <Form.Control className="form-control" type="text" name="country" value={fullDetails.country} onChange={setFullDetails} />
+                        <Form.Control className="form-control" type="text" name="country" value={fullDetails.country} readOnly />
                     </Form.Group>
                 </Row>
 

@@ -1,13 +1,89 @@
 import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
-import axios from "axios"
-import {  decString, encJsonData } from "../middleware/encDecMiddleware";
+import { Alert } from "react-bootstrap";
 
-export let userToken
+function validatePinCode(value) {
+    let status = true
+    let error = ''
+    if (value.length > 6) {
+        status = false
+        error = 'Pincode: Cannot accept more than 6 digits'
+    }
+    if (isNaN(value) && typeof value !== "undefined") {
+        status = false
+        error = 'Pincode: Number expected'
+    }
 
-function Forms({ loan_type }) {
+    return {
+        status,
+        value,
+        error
+    }
+}
+function validateName(value) {
+    let error = ''
+    let status = true
+    for (let letter of value) {
+        if (!isNaN(letter)) {
+            error = "Name: Letter expected"
+            status = false
+            break
+        }
+    }
+    return {
+        status,
+        value: value.toLocaleUpperCase(),
+        error
+    }
+}
+function validateMobile(value) {
+    let error = ''
+    let status = true
+    if (value.length > 10) {
+        status = false
+        error = 'Mobile: Cannot accept more than 10 digits'
+    }
+    for (let number of value) {
+        if (isNaN(number)) {
+            error = "Mobile: Number expected"
+            status = false
+            break
+        }
+    }
+    return {
+        status,
+        value,
+        error
+    }
+}
+
+function validateEmail(value) {
+    let error = ''
+    let status = true
+    if (value.match !== /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) {
+        status = false
+        error = 'Email: Please enter a valid email'
+    }
+    return {
+        status,
+        value,
+        error
+    }
+}
+
+const fieldValidations = {
+    pin: validatePinCode,
+    first_name: validateName,
+    middle_name: validateName,
+    last_name: validateName,
+    mobile: validateMobile,
+    email: validateEmail
+}
+
+function Forms({ loan_type, country }) {
     const [page, setPage] = useState(0);
+    const [error, setError] = useState('');
     const [fullDetails, setFullDetails] = useState({
         //personal details
         salutation: '',
@@ -19,10 +95,10 @@ function Forms({ loan_type }) {
         mobile: '',
         email: '',
         address: '',
-        pincode: '',
+        pin: '',
         city: '',
         state: '',
-        country: '',
+        country: country,
         //loan details
         loanAmount: '',
         loanType: loan_type, //display | not input
@@ -33,32 +109,39 @@ function Forms({ loan_type }) {
     });
 
     const handleChange = (e) => {
-        const el = e.target;
+        const targetName = e.target.name
+        let valid = { status: true, value: e.target.value }
+
+        const validateFn = fieldValidations[targetName]
+        if (typeof validateFn === "function") {
+            valid = validateFn(valid.value) // boolean value
+            console.log(valid)
+        }
+        if (!valid.status) {
+            setError(valid.error)
+            return
+        } else {
+            setError('')
+        }
+
+        // if (name === "pin" && (value.length > 6 || isNaN(value))) {
+        //     console.log("invalid")
+        //     return;
+        // }
+        // else if (name === "firstname") {
+        //     value = value.toUpperCase();
+        // }
         let x = { ...fullDetails };
-        x[el.name] = el.value;
+        x[targetName] = valid.value;
         setFullDetails(x);
     };
 
-    const PrintData = async (e) => {
+    const PrintData = (e) => {
 
         e.preventDefault();
         if (page === FormTitles.length - 1) {
             //alert("An Email has been sent for verification");
-            const encUserDetails = { enc : encJsonData(fullDetails) }
-            try {
-                await axios.post("http://localhost:5000/api/v1/user/signup", encUserDetails)
-                    .then(response => {
-                        userToken = decString(response.data.encToken)
-                        // alert(response.data.msg)
-                        alert("An email has been sent for verfication")
-                    })
-            } catch (err) {
-                if (err.response) {
-                    alert(err.response.data.msg)
-                }else{
-                    alert("Something went wrong")
-                }
-            }
+            console.log(fullDetails);
         } else {
             setPage((currentPage) => currentPage + 1);
         }
@@ -66,24 +149,24 @@ function Forms({ loan_type }) {
 
     const FormTitles = ["Personal Details", "Loan Details"];
 
-    const PageDisplay = () => {
+    const pageDisplay = () => {
         if (page === 0) {
             return <PersonalDetails fullDetails={fullDetails} setFullDetails={handleChange} />;
         } else {
             return <LoanDetails fullDetails={fullDetails} setFullDetails={handleChange} />;
         }
     };
-
     return (
         <div className="form">
             <div className="progressbar">
                 <div style={{ width: page === 0 ? "50%" : "100%" }} />
             </div>
             <div className="form-container">
+                <Alert>{error}</Alert>
                 <div className="header">
                     <h1>{FormTitles[page]}</h1>
                 </div>
-                <div className="body">{PageDisplay()}</div>
+                <div className="body">{pageDisplay()}</div>
                 <div className="footer">
                     <button
                         type="submit"
@@ -109,3 +192,30 @@ function Forms({ loan_type }) {
 }
 
 export default Forms;
+
+
+// PAN number validation
+
+// function validatePAN(value) {
+//     let status = true
+//     let error = ''
+//     if (value.length > 10) {
+//         status = false
+//         error = 'Pincode: can not accept more than 10.'
+//     }
+//     if (isNaN(value[5]) && typeof value[5] !== "undefined") {
+//         status = false
+//         error = 'Pincode: number expected'
+//     }
+
+//     if (value[9] && !isNaN(value[9])) {
+//         status = false
+//         error = 'Pincode: letter expected'
+//     }
+
+//     return {
+//         status,
+//         value: value.toLocaleUpperCase(),
+//         error
+//     }
+// }
