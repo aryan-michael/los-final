@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createUser, getAllUser, login, getUser, deleteUser, updateUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword } = require('../Controller/userController');
+const { createUser, getAllUser, login, getUser, deleteUser, updateUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword, checkOtp } = require('../Controller/userController');
 const { authMiddleware, isAdmin } = require('../Middleware/AuthMiddleware')
 
 router.post('/signup', createUser)
@@ -18,6 +18,7 @@ router.patch('/:id', authMiddleware, updateUser);
 router.get('/block-user/:id', authMiddleware, isAdmin, blockUser)
 router.get('/unblock-user/:id', authMiddleware, isAdmin, unblockUser)
 router.put('/password', authMiddleware, passwordReset)
+router.put('/user-otp/:id',checkOtp)
 
 
 
