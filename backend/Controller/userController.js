@@ -7,59 +7,13 @@ const { findById, findByIdAndUpdate, find, findOne } = require('../Model/userMod
 const refreshJWTToken = require('../database/refreshToken')
 const jwt = require('jsonwebtoken')
 const sendEmail = require('./emailController');
-const crypto = require('crypto');
-const { encString, decString,decJsonData } = require('../Middleware/EncDecMiddleware');
-
-
-
-function generateOTP () {
-    var str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let otp = '';
-    for (i = 0; i < 6; i++){
-        otp += str[Math.floor(Math.random()*str.length)]
-    }
-    return otp
-    // this.userOtp = otp;
-    // this.userOtpExp = Date.now() + 30 * 60 * 300;
-    
-}
-
-
+const crypto = require('crypto')
 
 const createUser = async (req, res) => {
-    const { enc } = req.body;
-    const decUserDetail = decJsonData(enc)
-    const user = await User.create(decUserDetail);
+    const user = await User.create(req.body);
+    console.log(req.body)
     const token = await user.createJWT()
-    const encToken = encString(token)
-    const otp = generateOTP()
-    user.userOtp = otp;
-    const otpToken = crypto.randomBytes(32).toString("hex");
-    user.userOtpToken = crypto.createHash("sha256").update(otpToken).digest("hex");
-    user.userOtpExp = Date.now() + 30 * 60 * 300;
-    await user.save()
-    console.log(user.userOtp)
-    const url = `<h1>Hello ${user.salutation} ${user.first_name} ${user.last_name}, this is a verfication mail for the recent enquiry being made. Here is the otp:[ ${user.userOtp} ]to verify your account. This otp is valid for 3 minutes. Please do not share this otp with anyone</h1>`
-    const data = {
-        to: user.email,
-        subject: "Account verifcation",
-        text: "Hello",
-        html: url
-    }
-    sendEmail(data)
-    res.status(StatusCodes.CREATED).json({ encToken, msg: "User successfully registered",otpToken:user.userOtpToken})
-}
-
-const checkOtp = async (req, res) => {
-    const { otp } = req.body
-    const { id: otpToken } = req.params;
-    const user = await User.findOne({ userOtpToken: otpToken,userOtpExp:{$gt: Date.now()}})
-    if (!user) throw new NotFoundError(`Token has expired, please try again later`);
-    user.userOtp = undefined;
-    user.userOtpExp = undefined;
-    user.userOtpToken = undefined;
-    await user.save();
-    res.status(StatusCodes.OK).json({success:true})
+    res.status(StatusCodes.CREATED).json({ token, msg: "User successfully registered" })
 }
 
 const getAllUser = async (req, res) => {
@@ -229,5 +183,5 @@ const resetPassword = async (req, res) => {
     res.status(StatusCodes.OK).json({ msg: "Password Updated" })
 }
 
-module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,checkOtp };
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword };
 
