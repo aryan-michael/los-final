@@ -7,13 +7,17 @@ const { findById, findByIdAndUpdate, find, findOne } = require('../Model/userMod
 const refreshJWTToken = require('../database/refreshToken')
 const jwt = require('jsonwebtoken')
 const sendEmail = require('./emailController');
-const crypto = require('crypto')
+const crypto = require('crypto');
+const { encString, decString,decJsonData } = require('../Middleware/EncDecMiddleware');
+
 
 const createUser = async (req, res) => {
-    const user = await User.create(req.body);
-    console.log(req.body)
+    const { enc } = req.body;
+    const decUserDetail = decJsonData(enc)
+    const user = await User.create(decUserDetail);
     const token = await user.createJWT()
-    res.status(StatusCodes.CREATED).json({ token, msg: "User successfully registered" })
+    const encToken = encString(token)
+    res.status(StatusCodes.CREATED).json({ encToken, msg: "User successfully registered" })
 }
 
 const getAllUser = async (req, res) => {

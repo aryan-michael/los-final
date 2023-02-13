@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
+import axios from "axios"
+import {  decString, encJsonData } from "../middleware/encDecMiddleware";
 
+export let userToken
 
 function Forms({ loan_type }) {
     const [page, setPage] = useState(0);
@@ -16,7 +19,7 @@ function Forms({ loan_type }) {
         mobile: '',
         email: '',
         address: '',
-        pin: '',
+        pincode: '',
         city: '',
         state: '',
         country: '',
@@ -36,12 +39,26 @@ function Forms({ loan_type }) {
         setFullDetails(x);
     };
 
-    const PrintData = (e) => {
+    const PrintData = async (e) => {
 
         e.preventDefault();
         if (page === FormTitles.length - 1) {
             //alert("An Email has been sent for verification");
-            console.log(fullDetails);
+            const encUserDetails = { enc : encJsonData(fullDetails) }
+            try {
+                await axios.post("http://localhost:5000/api/v1/user/signup", encUserDetails)
+                    .then(response => {
+                        userToken = decString(response.data.encToken)
+                        // alert(response.data.msg)
+                        alert("An email has been sent for verfication")
+                    })
+            } catch (err) {
+                if (err.response) {
+                    alert(err.response.data.msg)
+                }else{
+                    alert("Something went wrong")
+                }
+            }
         } else {
             setPage((currentPage) => currentPage + 1);
         }
