@@ -167,11 +167,11 @@ function Forms({ loan_type, country }) {
                     <h1>{FormTitles[page]}</h1>
                 </div>
                 <div className="body">{pageDisplay()}</div>
-                <div className="footer">
+                <div className="footer text-center">
                     <button
                         type="submit"
                         //onClick={submitButton} 
-                        className="me-4 btn btn-danger btn-lg btn-block"
+                        className="me-4 btn btn-danger btn-lg"
                         disabled={page === 0}
                         onClick={() => {
                             setPage((currentPage) => currentPage - 1);
@@ -180,7 +180,7 @@ function Forms({ loan_type, country }) {
 
                     <button
                         type="submit"
-                        className="me-4 btn btn-success btn-lg btn-block"
+                        className="me-4 btn btn-success btn-lg"
                         onClick={PrintData}
                     >
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
