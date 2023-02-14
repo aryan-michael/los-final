@@ -58,19 +58,19 @@ function validateMobile(value) {
     }
 }
 
-function validateEmail(value) {
-    let error = ''
-    let status = true
-    if (value.match !== /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) {
-        status = false
-        error = 'Email: Please enter a valid email'
-    }
-    return {
-        status,
-        value,
-        error
-    }
-}
+// function validateEmail(value) {
+//     let error = ''
+//     let status = true
+//     if (!value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+//         status = false
+//         error = 'Email: Please enter a valid email'
+//     }
+//     return {
+//         status,
+//         value,
+//         error
+//     }
+// }
 
 const fieldValidations = {
     pin: validatePinCode,
@@ -78,7 +78,7 @@ const fieldValidations = {
     middle_name: validateName,
     last_name: validateName,
     mobile: validateMobile,
-    email: validateEmail
+    //email: validateEmail
 }
 
 function Forms({ loan_type, country }) {

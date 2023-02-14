@@ -1,9 +1,11 @@
 import './App.css';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
-import Forms from './pages/Forms';
-import Login from './pages/Login';
+import Forms from './pages/Register/Forms';
+import Login from './pages/Login/Login';
+import ForgotPassword from './pages/Password/ForgotPassword';
+import OTP from './pages/Password/OTP';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path='loan/education' element={<Forms loan_type={"Education"} country={"India"} />} />
         <Route path='loan/personal' element={<Forms loan_type={"Personal"} country={"India"} />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/otp' element={<OTP />} />
       </Routes>
     </>
   );
