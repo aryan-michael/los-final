@@ -165,7 +165,7 @@ function Forms({ loan_type, country }) {
             </div>
             <div className="form-container">
                 <Alert>{error}</Alert>
-                <div className="header">
+                <div className="header text-center">
                     <h1>{FormTitles[page]}</h1>
                 </div>
                 <div className="body">{pageDisplay()}</div>

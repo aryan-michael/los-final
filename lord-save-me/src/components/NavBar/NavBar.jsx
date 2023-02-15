@@ -34,9 +34,14 @@ const NavBar = () => {
                         </Nav>
                         <Nav>
                             <Nav.Link href="#deets">Contact Us</Nav.Link>
-                            <Nav.Link eventKey={2} href="/login">
-                                Login
-                            </Nav.Link>
+                            <NavDropdown title="Login" id="collasible-nav-dropdown">
+                                <NavDropdown.Item eventKey={2} href="/login/client">
+                                    Client
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="">
+                                    Admin
+                                </NavDropdown.Item>
+                            </NavDropdown>
                         </Nav>
                         <br />
                     </Navbar.Collapse>

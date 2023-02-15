@@ -3,10 +3,11 @@ import Home from './pages/Home/Home';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Forms from './pages/Register/Forms';
-import Login from './pages/Login/Login';
+import ClientLogin from './pages/Login/ClientLogin';
 import SetPassword from './pages/Password/SetPassword';
 import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
+import Test from './pages/Register/Test';
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
         <Route path='loan/personal' element={<Forms loan_type={"Personal"} country={"India"} />} />
         <Route path='/otp' element={<OTP />} />
         <Route path='/set-password' element={<SetPassword />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/login/client' element={<ClientLogin />} />
+        <Route path='/forgot-password/:id' element={<ForgotPassword />} />
+        <Route path='/test' element={<Test />} />
       </Routes>
     </>
   );

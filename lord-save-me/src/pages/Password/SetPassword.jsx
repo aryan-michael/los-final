@@ -15,8 +15,8 @@ function SetPassword() {
                 <p>Set a Strong Password</p>
             </div>
 
-            <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' />
-            <MDBInput wrapperClass='mb-4' label='Re-enter Password' id='form2' type='password' />
+            <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' autoComplete='off' />
+            <MDBInput wrapperClass='mb-4' label='Re-enter Password' id='form2' type='password' autoComplete='off' />
 
             <div className="d-flex justify-content-between mx-3 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Show Password' />

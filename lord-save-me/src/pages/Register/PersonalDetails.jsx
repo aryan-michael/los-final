@@ -5,12 +5,12 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
 
     return (
         <>
-            <Form className="container mt-3 mb-3">
+            <Form className="container mt-3 mb-3" autoComplete='off'>
                 <Row className="mb-3">
                     {/* SALUTATION */}
                     <Form.Group controlId="formGridState" className="col col-sm-4">
                         <Form.Label>Salutation</Form.Label>
-                        <Form.Select className="form-control" name="salutation" value={fullDetails.salutation} onChange={setFullDetails}>
+                        <Form.Select className="form-control" name="salutation" value={fullDetails.salutation} onChange={setFullDetails} required>
                             <option defaultValue value="Choose...">Choose...</option>
                             <option value="mr">Mr.</option>
                             <option value="mrs">Mrs.</option>
@@ -20,7 +20,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* FIRSTNAME */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="name" name="first_name" value={fullDetails.first_name} onChange={setFullDetails} className="form-control" />
+                        <Form.Control type="name" name="first_name" value={fullDetails.first_name} onChange={setFullDetails} className="form-control" required />
                     </Form.Group>
                 </Row>
 
@@ -28,12 +28,12 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* MIDDLENAME */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Middle Name</Form.Label>
-                        <Form.Control type="name" name="middle_name" value={fullDetails.middle_name} onChange={setFullDetails} className="form-control" />
+                        <Form.Control type="name" name="middle_name" value={fullDetails.middle_name} onChange={setFullDetails} className="form-control" required />
                     </Form.Group>
                     {/* LASTNAME */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="name" name="last_name" value={fullDetails.last_name} onChange={setFullDetails} className="form-control" />
+                        <Form.Control type="name" name="last_name" value={fullDetails.last_name} onChange={setFullDetails} className="form-control" required />
                     </Form.Group>
                 </Row>
 
@@ -41,7 +41,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* GENDER */}
                     <Form.Group controlId="formGridState" className="col col-sm-3">
                         <Form.Label>Gender</Form.Label>
-                        <Form.Select className="form-control" name="gender" value={fullDetails.gender} onChange={setFullDetails}>
+                        <Form.Select className="form-control" name="gender" value={fullDetails.gender} onChange={setFullDetails} required>
                             <option defaultValue value="Choose...">Choose...</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -50,7 +50,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* DOB */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
                         <Form.Label>Date Of Birth</Form.Label>
-                        <Form.Control className="form-control" type="date" name="dob" value={fullDetails.dob} onChange={setFullDetails} />
+                        <Form.Control className="form-control" type="date" name="dob" value={fullDetails.dob} onChange={setFullDetails} required />
                     </Form.Group>
                 </Row>
 
@@ -60,13 +60,13 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                         <Form.Label>Mobile Number</Form.Label>
                         <InputGroup>
                             <InputGroup.Text id="basic-addon1">+91</InputGroup.Text>
-                            <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" value={fullDetails.mobile} onChange={setFullDetails} />
+                            <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" value={fullDetails.mobile} onChange={setFullDetails} required />
                         </InputGroup>
                     </Form.Group>
                     {/* EMAIL */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control aria-label="Recipient's username" type="email" name="email" value={fullDetails.email} onChange={setFullDetails} />
+                        <Form.Control aria-label="Recipient's username" type="email" name="email" value={fullDetails.email} onChange={setFullDetails} required />
                     </Form.Group>
                 </Row>
 
@@ -74,12 +74,12 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* ADDRESS*/}
                     <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
                         <Form.Label>Address</Form.Label>
-                        <Form.Control className="form-control" type="text" name="address" value={fullDetails.address} onChange={setFullDetails} />
+                        <Form.Control className="form-control" type="text" name="address" value={fullDetails.address} onChange={setFullDetails} required />
                     </Form.Group>
                     {/* PINCODE */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
                         <Form.Label>Pin Code</Form.Label>
-                        <Form.Control className="form-control" type="pin" name="pin" value={fullDetails.pin} onChange={setFullDetails} />
+                        <Form.Control className="form-control" type="pin" name="pin" value={fullDetails.pin} onChange={setFullDetails} required />
                     </Form.Group>
                 </Row>
 
@@ -87,12 +87,12 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* CITY */}
                     <Form.Group controlId="formGridCity" className="col col-sm-4">
                         <Form.Label>City</Form.Label>
-                        <Form.Control className="form-control" type="text" name="city" value={fullDetails.city} onChange={setFullDetails} />
+                        <Form.Control className="form-control" type="text" name="city" value={fullDetails.city} onChange={setFullDetails} required />
                     </Form.Group>
                     {/* STATE */}
                     <Form.Group controlId="formGridState" className="col col-sm-4">
                         <Form.Label>State</Form.Label>
-                        <Form.Select className="form-control" name="state" value={fullDetails.state} onChange={setFullDetails}>
+                        <Form.Select className="form-control" name="state" value={fullDetails.state} onChange={setFullDetails} required>
                             <option defaultValue value="Choose...">Choose...</option>
                             <option value="Gujarat">Gujarat</option>
                             <option value="Maharashtra">Maharashtra</option>
