@@ -15,14 +15,17 @@ function ForgotPassword() {
                 <p>Reset Password</p>
             </div>
 
-            <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' />
-            <MDBInput wrapperClass='mb-4' label='Re-enter Password' id='form2' type='password' />
+            <MDBInput wrapperClass='mb-4' label='Registered Email' id='form1' type='email' />
 
             <div className="d-flex justify-content-between mx-3 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Show Password' />
             </div>
 
-            <MDBBtn className="mb-4">Confirm New Password</MDBBtn>
+            <MDBBtn className="mb-4">Send Link</MDBBtn>
+
+            <div className="d-flex mx-auto">
+                <p>A password reset link has been sent to your registered email.</p>
+            </div>
 
             <div className="text-center">
 
