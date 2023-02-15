@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
+import { useNavigate } from 'react-router-dom';
 import { Alert } from "react-bootstrap";
 
 function validatePinCode(value) {
@@ -135,13 +136,14 @@ function Forms({ loan_type, country }) {
         x[targetName] = valid.value;
         setFullDetails(x);
     };
-
+    const Navigate = useNavigate();
     const PrintData = (e) => {
 
         e.preventDefault();
         if (page === FormTitles.length - 1) {
             //alert("An Email has been sent for verification");
             console.log(fullDetails);
+            Navigate('/otp');
         } else {
             setPage((currentPage) => currentPage + 1);
         }

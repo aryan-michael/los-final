@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     MDBContainer,
     MDBInput,
@@ -8,6 +9,14 @@ import {
     from 'mdb-react-ui-kit';
 
 function OTP() {
+
+    const Navigate = useNavigate();
+
+    const ConfirmOTP = (e) => {
+        e.preventDefault();
+        Navigate('/set-password');
+    };
+
     return (
         <MDBContainer className="p-5 my-5 d-flex flex-column w-25">
             <div className="d-flex justify-content">
@@ -16,7 +25,7 @@ function OTP() {
 
             <MDBInput wrapperClass='mb-4' label='Enter OTP' id='form1' type='text' />
 
-            <MDBBtn className="mb-4">Check OTP</MDBBtn>
+            <MDBBtn type="submit" className="mb-4" onClick={ConfirmOTP}>Check OTP</MDBBtn>
 
             <div className="text-center">
                 <p><a href="#!">Resend OTP</a></p>

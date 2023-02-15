@@ -10,8 +10,8 @@ import {
 
 function ForgotPassword() {
     return (
-        <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
-            <div className="d-flex justify-content-between mx-0 mb-2">
+        <MDBContainer className="p-3 my-5 d-flex flex-column w-25">
+            <div className="d-flex mx-auto">
                 <p>Reset Password</p>
             </div>
 
