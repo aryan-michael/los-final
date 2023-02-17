@@ -3,6 +3,7 @@ import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
 import { Alert, Button } from "react-bootstrap";
+import './Forms.css';
 
 function validatePinCode(value) {
     let status = true
@@ -156,54 +157,56 @@ function Forms({ loan_type, country }) {
             setError('')
         }
 
-        // if (name === "pin" && (value.length > 6 || isNaN(value))) {
-        //     console.log("invalid")
-        //     return;
-        // }
-        // else if (name === "firstname") {
-        //     value = value.toUpperCase();
-        // }
         let x = { ...loanDetails };
         x[targetName] = valid.value;
         setLoanDetails(x);
     };
 
     const Navigate = useNavigate();
-    const [validated, setValidated] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (step, e) => {
         console.log("button working!")
         e.preventDefault();
 
-        for (let x in personalDetails) {
-            if (personalDetails[x] === '') {
-                console.log("hello");
-                break
-                //return false;
-            }
-            else {
-                return true;
-            }
-        }
+        let isFormEmpty = false;
 
-        for (let x in loanDetails) {
-            if (loanDetails[x] === '') {
-                console.log("hi");
-                break
-                //return false;
+        if (step === "Next")
+            for (let x in personalDetails) {
+                if (personalDetails[x] === '') {
+                    console.log("pd data showing", x, personalDetails[x]);
+                    isFormEmpty = true;
+                    break
+                    //return false;
+                }
+                else {
+                    // return true;
+                }
             }
-            else {
-                return true;
-            }
-        }
 
-        if (page === FormTitles.length - 1) {
+        if (step === "Submit")
+            for (let x in loanDetails) {
+                if (loanDetails[x] === '') {
+                    console.log("ld data showing", x, loanDetails[x]);
+                    isFormEmpty = true;
+                    break
+                    //return false;
+                }
+                else {
+                    // return true;
+                }
+            }
+
+
+        if (page === FormTitles.length - 1 && isFormEmpty === false) {
             //alert("An Email has been sent for verification");
             console.log(personalDetails);
             console.log(loanDetails);
             Navigate('/otp');
         } else {
-            setPage((currentPage) => currentPage + 1);
+            if (!isFormEmpty) {
+                console.log('form is not empty')
+                setPage((currentPage) => currentPage + 1);
+            }
         }
 
     };
@@ -243,7 +246,7 @@ function Forms({ loan_type, country }) {
                         type="submit"
                         className="me-4 btn btn-success btn-lg"
                         //  disabled={!validated}
-                        onClick={handleSubmit}
+                        onClick={(e) => handleSubmit(page === FormTitles.length - 1 ? "Submit" : "Next", e)}
                     >
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
                     </Button>
