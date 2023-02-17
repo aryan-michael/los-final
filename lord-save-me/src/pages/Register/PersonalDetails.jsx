@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
 
-const PersonalDetails = ({ fullDetails, setFullDetails }) => {
+const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
 
     return (
         <>
@@ -10,7 +10,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* SALUTATION */}
                     <Form.Group controlId="formGridState" className="col col-sm-4">
                         <Form.Label>Salutation</Form.Label>
-                        <Form.Select className="form-control" name="salutation" value={fullDetails.salutation} onChange={setFullDetails} required>
+                        <Form.Select className="form-control" name="salutation" value={personalDetails.salutation} onChange={setPersonalDetails} required>
                             <option defaultValue value="Choose...">Choose...</option>
                             <option value="mr">Mr.</option>
                             <option value="mrs">Mrs.</option>
@@ -22,7 +22,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* FIRSTNAME */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="name" name="first_name" value={fullDetails.first_name} onChange={setFullDetails} className="form-control" required />
+                        <Form.Control type="name" name="first_name" value={personalDetails.first_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your first name.</Form.Control.Feedback>
                     </Form.Group>
@@ -32,14 +32,14 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* MIDDLENAME */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Middle Name</Form.Label>
-                        <Form.Control type="name" name="middle_name" value={fullDetails.middle_name} onChange={setFullDetails} className="form-control" required />
+                        <Form.Control type="name" name="middle_name" value={personalDetails.middle_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your middle name.</Form.Control.Feedback>
                     </Form.Group>
                     {/* LASTNAME */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="name" name="last_name" value={fullDetails.last_name} onChange={setFullDetails} className="form-control" required />
+                        <Form.Control type="name" name="last_name" value={personalDetails.last_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your last name.</Form.Control.Feedback>
                     </Form.Group>
@@ -49,7 +49,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* GENDER */}
                     <Form.Group controlId="formGridState" className="col col-sm-3">
                         <Form.Label>Gender</Form.Label>
-                        <Form.Select className="form-control" name="gender" value={fullDetails.gender} onChange={setFullDetails} required>
+                        <Form.Select className="form-control" name="gender" value={personalDetails.gender} onChange={setPersonalDetails} required>
                             <option defaultValue value="Choose...">Choose...</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -60,7 +60,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* DOB */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
                         <Form.Label>Date Of Birth</Form.Label>
-                        <Form.Control className="form-control" type="date" name="dob" value={fullDetails.dob} onChange={setFullDetails} required />
+                        <Form.Control className="form-control" type="date" name="dob" value={personalDetails.dob} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your DOB.</Form.Control.Feedback>
                     </Form.Group>
@@ -72,7 +72,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                         <Form.Label>Mobile Number</Form.Label>
                         <InputGroup hasValidation>
                             <InputGroup.Text id="basic-addon1">+91</InputGroup.Text>
-                            <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" value={fullDetails.mobile} onChange={setFullDetails} required />
+                            <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" value={personalDetails.mobile} onChange={setPersonalDetails} required />
                         </InputGroup>
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your mobile number.</Form.Control.Feedback>
@@ -80,7 +80,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* EMAIL */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control aria-label="Recipient's username" type="email" name="email" value={fullDetails.email} onChange={setFullDetails} required />
+                        <Form.Control aria-label="Recipient's username" type="email" name="email" value={personalDetails.email} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your email.</Form.Control.Feedback>
                     </Form.Group>
@@ -90,14 +90,14 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* ADDRESS*/}
                     <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
                         <Form.Label>Address</Form.Label>
-                        <Form.Control className="form-control" type="text" name="address" value={fullDetails.address} onChange={setFullDetails} required />
+                        <Form.Control className="form-control" type="text" name="address" value={personalDetails.address} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your address.</Form.Control.Feedback>
                     </Form.Group>
                     {/* PINCODE */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
                         <Form.Label>Pin Code</Form.Label>
-                        <Form.Control className="form-control" type="pin" name="pin" value={fullDetails.pin} onChange={setFullDetails} required />
+                        <Form.Control className="form-control" type="pin" name="pin" value={personalDetails.pin} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your pincode.</Form.Control.Feedback>
                     </Form.Group>
@@ -107,14 +107,14 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* CITY */}
                     <Form.Group controlId="formGridCity" className="col col-sm-4">
                         <Form.Label>City</Form.Label>
-                        <Form.Control className="form-control" type="text" name="city" value={fullDetails.city} onChange={setFullDetails} required />
+                        <Form.Control className="form-control" type="text" name="city" value={personalDetails.city} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your city.</Form.Control.Feedback>
                     </Form.Group>
                     {/* STATE */}
                     <Form.Group controlId="formGridState" className="col col-sm-4">
                         <Form.Label>State</Form.Label>
-                        <Form.Select className="form-control" name="state" value={fullDetails.state} onChange={setFullDetails} required>
+                        <Form.Select className="form-control" name="state" value={personalDetails.state} onChange={setPersonalDetails} required>
                             <option defaultValue value="Choose...">Choose...</option>
                             <option value="Gujarat">Gujarat</option>
                             <option value="Maharashtra">Maharashtra</option>
@@ -127,7 +127,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* Country */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
                         <Form.Label>Country</Form.Label>
-                        <Form.Control className="form-control" type="text" name="country" value={fullDetails.country} readOnly />
+                        <Form.Control className="form-control" type="text" name="country" value={personalDetails.country} readOnly />
                     </Form.Group>
                 </Row>
 
@@ -135,7 +135,7 @@ const PersonalDetails = ({ fullDetails, setFullDetails }) => {
                     {/* ORDER DETAILS */}
                     {/* <Form.Group controlId="formGridlabel" className="col col-sm-6">
                     <Form.Label>Order Details</Form.Label>
-                    <Form.Control as="textarea" rows="{3}" className="form-control" name="order" value={fullDetails.order} onChange={setFullDetails} />
+                    <Form.Control as="textarea" rows="{3}" className="form-control" name="order" value={personalDetails.order} onChange={setPersonalDetails} />
                 </Form.Group> */}
                 </Row>
                 {/* <Row className="mb-3">

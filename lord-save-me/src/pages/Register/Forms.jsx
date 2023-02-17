@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button, Form } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 
 function validatePinCode(value) {
     let status = true
@@ -185,9 +185,22 @@ function Forms({ loan_type, country }) {
                 return true;
             }
         }
+
+        for (let x in loanDetails) {
+            if (loanDetails[x] === '') {
+                console.log("hi");
+                break
+                //return false;
+            }
+            else {
+                return true;
+            }
+        }
+
         if (page === FormTitles.length - 1) {
             //alert("An Email has been sent for verification");
             console.log(personalDetails);
+            console.log(loanDetails);
             Navigate('/otp');
         } else {
             setPage((currentPage) => currentPage + 1);
@@ -199,9 +212,9 @@ function Forms({ loan_type, country }) {
 
     const pageDisplay = () => {
         if (page === 0) {
-            return <PersonalDetails fullDetails={personalDetails} setFullDetails={handlePersonalDetails} />;
+            return <PersonalDetails personalDetails={personalDetails} setPersonalDetails={handlePersonalDetails} />;
         } else {
-            return <LoanDetails fullDetails={loanDetails} setFullDetails={handleLoanDetails} />;
+            return <LoanDetails loanDetails={loanDetails} setLoanDetails={handleLoanDetails} />;
         }
     };
     return (
