@@ -5,7 +5,7 @@ const NavBar = () => {
         <>
             <Navbar bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         LOS
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -14,39 +14,36 @@ const NavBar = () => {
                             <Nav.Link href="#features">Features</Nav.Link>
                             <Nav.Link href="#pricing">Pricing</Nav.Link>
                             <NavDropdown title="Products" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
-                                    Another action
+                                <NavDropdown.Item href="/loan/business">
+                                    Business Loan
                                 </NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                                <NavDropdown.Item href="/loan/home">
+                                    Home Loan
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/loan/education">
+                                    Education Loan
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/loan/personal">
+                                    Personal Loan
+                                </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">
-                                    Separated link
+                                    Upcoming Products
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav>
                             <Nav.Link href="#deets">Contact Us</Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
-                                Login
-                            </Nav.Link>
-                        </Nav>
-                        <br />
-                        {/* <Nav className="me-auto">
-                            <Nav.Link href="#features">Features</Nav.Link>
-                            <Nav.Link href="#pricing">Pricing</Nav.Link>
-                            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
-                                    Another action
+                            <NavDropdown title="Login" id="collasible-nav-dropdown">
+                                <NavDropdown.Item eventKey={2} href="/login/client">
+                                    Client
                                 </NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">
-                                    Separated link
+                                <NavDropdown.Item href="">
+                                    Admin
                                 </NavDropdown.Item>
                             </NavDropdown>
-                        </Nav> */}
+                        </Nav>
+                        <br />
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

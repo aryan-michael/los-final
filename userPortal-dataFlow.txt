@@ -34,3 +34,20 @@ the dashboard in the form of text)
 7) Upon the final acceptance of the loan request, client will be able
 to download his/her sanction letter in .pdf format from the
 dashboard itself.
+
+>> product button selected
+> personal and loan details filled (id: email)
+
+> OTP.jsx -- 'An OTP has been sent to your registered email. Please 
+  authenticate your email by entering the OTP.'
+-- title, subtitle, input field, submit button
+
+> SetPassword.jsx
+> title, subtitle
+> Enter Password, Confirm Password
+> Submit button
+> Re-route to Login.jsx
+
+>> ForgetPassword.jsx
+> title, subtitle
+> button 'Send OTP' onClick() - otp sent to email -- if otp matches then redirect to SetPassword.jsx 

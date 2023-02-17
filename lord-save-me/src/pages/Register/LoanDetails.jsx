@@ -2,9 +2,10 @@ import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
 
 const LoanDetails = ({ fullDetails, setFullDetails }) => {
+
     return (
         <>
-            <Form className="container mt-3 mb-3">
+            <Form className="container mt-3 mb-3" autoComplete='off'>
                 <Row className="mb-3">
                     {/* LOAN AMOUNT */}
                     <Form.Group controlId="formBasicNumber" className="col col-sm-6">
