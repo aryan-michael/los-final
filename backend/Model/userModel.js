@@ -4,15 +4,61 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
 let userSchema = new mongoose.Schema({
+    salutation: {
+        type: String,
+    },
+    first_name: {
+        type: String,
+    },
+    middle_name: {
+        type: String
+    },
+    last_name: {
+        type: String,
+    },
+    gender: {
+        type: String,
+    },
+    dob: {
+        type: Date,
+    },
+    loanAmount: {
+        type: Number,
+    },
+    empStatus: {
+        type: String,
+    },
+    firmAddress: {
+        type: String,
+    },
+    BusinesName: {
+        type: String
+    },
+    address: {
+        type: String,
+    },
+    pincode: {
+        type: Number,
+    },
+    city: {
+        type: String,
+    },
+    state: {
+        type: String,
+    },
+    country: {
+        type: String,
+    },
+    loanType: {
+        type: String,
+    },
     email: {
         type: String,
-        required: true,
         unique: true
     },
     mobile:{
         type: String,
-        required: true,
-        // minlength:10,
+        maxlength: 10,
         unique: true
     },
     password:{
@@ -22,9 +68,9 @@ let userSchema = new mongoose.Schema({
         type: String,
         default: 'user'
     },
-    userDetails: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Detail"
+    status: {
+        type: String,
+        default: 'inactive'
     },
     isBlocked: {
         type: Boolean,
@@ -56,7 +102,7 @@ userSchema.methods.checkPassword = async function (enteredPassword) {
 }
 
 userSchema.methods.createJWT = async function () {
-    return jwt.sign({ userId: this._id, name: this.firstname+" "+this.lastname,email:this.email}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME }) 
+    return jwt.sign({ userId: this._id, name: this.first_name+" "+this.last_name,email:this.email}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME }) 
 }
 
 userSchema.methods.generateResetPasswordToken = async function () {

@@ -9,11 +9,31 @@ const jwt = require('jsonwebtoken')
 const sendEmail = require('./emailController');
 const crypto = require('crypto')
 
+function generateOtp () {
+    var str = 'abcdefghijklmnopqrstuvxyz0123456789ABCDEFGHIJKLMNOPQRSTUVXYZ';
+    let otp = ''
+    for (i = 0; i < 6; i++){
+        otp += str[Math.floor(Math.random()*(str.length))]
+    }
+    return otp
+}
+
 const createUser = async (req, res) => {
     const user = await User.create(req.body);
     console.log(req.body)
     const token = await user.createJWT()
     res.status(StatusCodes.CREATED).json({ token, msg: "User successfully registered" })
+}
+
+const updateUserLoanDetails = async (req, res) => {
+    console.log(req.headers.authorization)
+    const { userId, email } = req.user;
+    const user = await User.findOneAndUpdate({ _id: userId, email: email }, req.body, { new: true, runValidators: true })
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID:${userId}`)
+    }
+    const otp = generateOtp()
+    res.status(StatusCodes.OK).json({ msg: "User updated" })
 }
 
 const getAllUser = async (req, res) => {
@@ -88,12 +108,13 @@ const getUser = async (req, res) => {
         throw new NotFoundError(`No user found with USER_ID:${userId}`)
     }
     const token = await user.createJWT()
-    res.status(StatusCodes.OK).json({ user: user.firstname + " " + user.lastname, token })
+    res.status(StatusCodes.OK).json({ user: user.first_name + " " + user.last_name, token })
 }
 
 const updateUser = async (req, res) => {
-    const { id: userId } = req.params;
-    const user = await User.findOneAndUpdate({ _id: userId }, req.body, { new: true, runValidators: true })
+    console.log(req.headers.authorization)
+    const { userId,email} = req.user;
+    const user = await User.findOneAndUpdate({ _id: userId,email:email }, req.body, { new: true, runValidators: true })
     if (!user) {
         throw new NotFoundError(`No user found with USER_ID:${userId}`)
     }
@@ -183,5 +204,5 @@ const resetPassword = async (req, res) => {
     res.status(StatusCodes.OK).json({ msg: "Password Updated" })
 }
 
-module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword };
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails };
 
