@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
 
-const LoanDetails = ({ fullDetails, setFullDetails }) => {
+const LoanDetails = ({ loanDetails, setLoanDetails }) => {
 
     return (
         <>
@@ -12,13 +12,13 @@ const LoanDetails = ({ fullDetails, setFullDetails }) => {
                         <Form.Label>Desired Loan Amount</Form.Label>
                         <InputGroup>
                             <InputGroup.Text id="basic-addon1">₹</InputGroup.Text>
-                            <Form.Control aria-label="Loan Amount" type="number" aria-describedby="basic-addon1" className="form-control" name="loanAmount" value={fullDetails.loanAmount} onChange={setFullDetails} />
+                            <Form.Control aria-label="Loan Amount" type="number" aria-describedby="basic-addon1" className="form-control" name="loanAmount" value={loanDetails.loanAmount} onChange={setLoanDetails} />
                         </InputGroup>
                     </Form.Group>
                     {/* LOAN TYPE : ONLY DISPLAY */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Loan Type</Form.Label>
-                        <Form.Control type="text" name="loanType" value={fullDetails.loanType} readOnly />
+                        <Form.Control type="text" name="loanType" value={loanDetails.loanType} readOnly />
                     </Form.Group>
                 </Row>
 
@@ -26,7 +26,7 @@ const LoanDetails = ({ fullDetails, setFullDetails }) => {
                     {/* EMPLOYMENT STATUS */}
                     <Form.Group controlId="formGridState" className="col col-sm-3">
                         <Form.Label>Employment Status</Form.Label>
-                        <Form.Select className="form-control" name="empStatus" value={fullDetails.empStatus} onChange={setFullDetails}>
+                        <Form.Select className="form-control" name="empStatus" value={loanDetails.empStatus} onChange={setLoanDetails}>
                             <option defaultValue value="Choose...">Choose...</option>
                             <option value="business">Business Owner</option>
                             <option value="professional">Professional</option>
@@ -36,7 +36,7 @@ const LoanDetails = ({ fullDetails, setFullDetails }) => {
                     {/* BUSINESS NAME */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Firm Name / Business Name</Form.Label>
-                        <Form.Control type="name" name="businessName" value={fullDetails.businessName} onChange={setFullDetails} className="form-control" />
+                        <Form.Control type="name" name="businessName" value={loanDetails.businessName} onChange={setLoanDetails} className="form-control" />
                     </Form.Group>
                 </Row>
 
@@ -44,7 +44,7 @@ const LoanDetails = ({ fullDetails, setFullDetails }) => {
                     {/* FIRM/BUSINESS ADDRESS*/}
                     <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
                         <Form.Label>Firm Address / Business Address</Form.Label>
-                        <Form.Control className="form-control" type="text" name="firmAddress" value={fullDetails.firmAddress} onChange={setFullDetails} />
+                        <Form.Control className="form-control" type="text" name="firmAddress" value={loanDetails.firmAddress} onChange={setLoanDetails} />
                     </Form.Group>
                 </Row>
 
