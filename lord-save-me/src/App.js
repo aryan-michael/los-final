@@ -8,6 +8,7 @@ import SetPassword from './pages/Password/SetPassword';
 import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
 import Test from './pages/Register/Test';
+import Practice from './pages/Register/Practice';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/login/client' element={<ClientLogin />} />
         <Route path='/forgot-password/:id' element={<ForgotPassword />} />
         <Route path='/test' element={<Test />} />
+        <Route path='/practice' element={<Practice />} />
       </Routes>
     </>
   );

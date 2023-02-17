@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
-import { Alert } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 
 function validatePinCode(value) {
     let status = true
     let error = ''
-    if (value.length > 6) {
+    if (value.length > 6 || value === '') {
         status = false
-        error = 'Pincode: Cannot accept more than 6 digits'
+        error = 'Pincode: Should be exactly 6 digits'
     }
     if (isNaN(value) && typeof value !== "undefined") {
         status = false
@@ -41,9 +41,9 @@ function validateName(value) {
 function validateMobile(value) {
     let error = ''
     let status = true
-    if (value.length > 10) {
+    if (value.length > 10 || value.length === '') {
         status = false
-        error = 'Mobile: Cannot accept more than 10 digits'
+        error = 'Mobile: Cannot be empty or accept more than 10 digits'
     }
     for (let number of value) {
         if (isNaN(number)) {
@@ -85,7 +85,7 @@ const fieldValidations = {
 function Forms({ loan_type, country }) {
     const [page, setPage] = useState(0);
     const [error, setError] = useState('');
-    const [fullDetails, setFullDetails] = useState({
+    const [personalDetails, setPersonalDetails] = useState({
         //personal details
         salutation: '',
         first_name: '',
@@ -100,23 +100,26 @@ function Forms({ loan_type, country }) {
         city: '',
         state: '',
         country: country,
-        //loan details
+    });
+    const [loanDetails, setLoanDetails] = useState({
         loanAmount: '',
         loanType: loan_type, //display | not input
         empStatus: '', //professional | business
         firmAddress: '',
         businessName: ''
+    })  //loan details
 
-    });
 
-    const handleChange = (e) => {
+
+
+    const handlePersonalDetails = (e) => {
         const targetName = e.target.name
         let valid = { status: true, value: e.target.value }
 
         const validateFn = fieldValidations[targetName]
         if (typeof validateFn === "function") {
             valid = validateFn(valid.value) // boolean value
-            console.log(valid)
+            //console.log(valid)
         }
         if (!valid.status) {
             setError(valid.error)
@@ -132,30 +135,73 @@ function Forms({ loan_type, country }) {
         // else if (name === "firstname") {
         //     value = value.toUpperCase();
         // }
-        let x = { ...fullDetails };
+        let x = { ...personalDetails };
         x[targetName] = valid.value;
-        setFullDetails(x);
+        setPersonalDetails(x);
     };
-    const Navigate = useNavigate();
-    const PrintData = (e) => {
 
+    const handleLoanDetails = (e) => {
+        const targetName = e.target.name
+        let valid = { status: true, value: e.target.value }
+
+        const validateFn = fieldValidations[targetName]
+        if (typeof validateFn === "function") {
+            valid = validateFn(valid.value) // boolean value
+            //console.log(valid)
+        }
+        if (!valid.status) {
+            setError(valid.error)
+            return
+        } else {
+            setError('')
+        }
+
+        // if (name === "pin" && (value.length > 6 || isNaN(value))) {
+        //     console.log("invalid")
+        //     return;
+        // }
+        // else if (name === "firstname") {
+        //     value = value.toUpperCase();
+        // }
+        let x = { ...loanDetails };
+        x[targetName] = valid.value;
+        setLoanDetails(x);
+    };
+
+    const Navigate = useNavigate();
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (e) => {
+        console.log("button working!")
         e.preventDefault();
+
+        for (let x in personalDetails) {
+            if (personalDetails[x] === '') {
+                console.log("hello");
+                break
+                //return false;
+            }
+            else {
+                return true;
+            }
+        }
         if (page === FormTitles.length - 1) {
             //alert("An Email has been sent for verification");
-            console.log(fullDetails);
+            console.log(personalDetails);
             Navigate('/otp');
         } else {
             setPage((currentPage) => currentPage + 1);
         }
+
     };
 
     const FormTitles = ["Personal Details", "Loan Details"];
 
     const pageDisplay = () => {
         if (page === 0) {
-            return <PersonalDetails fullDetails={fullDetails} setFullDetails={handleChange} />;
+            return <PersonalDetails fullDetails={personalDetails} setFullDetails={handlePersonalDetails} />;
         } else {
-            return <LoanDetails fullDetails={fullDetails} setFullDetails={handleChange} />;
+            return <LoanDetails fullDetails={loanDetails} setFullDetails={handleLoanDetails} />;
         }
     };
     return (
@@ -171,7 +217,7 @@ function Forms({ loan_type, country }) {
                 <div className="body">{pageDisplay()}</div>
                 <div className="footer text-center">
                     <button
-                        type="submit"
+                        type="button"
                         //onClick={submitButton} 
                         className="me-4 btn btn-danger btn-lg"
                         disabled={page === 0}
@@ -180,13 +226,14 @@ function Forms({ loan_type, country }) {
                         }}
                     >Previous</button>
 
-                    <button
+                    <Button
                         type="submit"
                         className="me-4 btn btn-success btn-lg"
-                        onClick={PrintData}
+                        //  disabled={!validated}
+                        onClick={handleSubmit}
                     >
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
