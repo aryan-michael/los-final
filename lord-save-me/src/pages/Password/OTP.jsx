@@ -1,31 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     MDBContainer,
     MDBInput,
     MDBBtn,
-    MDBIcon
+    MDBIcon,
+    MDBValidation,
+    MDBValidationItem
 }
     from 'mdb-react-ui-kit';
+import { Form } from 'react-bootstrap';
 
 function OTP() {
 
+    const [data, setData] = useState({
+        otp : ''
+    })
+
+
     const Navigate = useNavigate();
 
+    const handleChange = (e) => {
+        const { value, name } = e.target
+        setData({
+            ...data,
+            [name]: value
+        })
+        console.log(data)
+    }
+
     const ConfirmOTP = (e) => {
+        if (!data.otp) {
+            return
+        }
         e.preventDefault();
         Navigate('/set-password');
     };
 
     return (
-        <MDBContainer className="p-5 my-5 d-flex flex-column w-25">
+        <MDBValidation>
+        <MDBContainer className="p-5 my-5 d-flex flex-column w-25" >
             <div className="d-flex justify-content">
                 <p>OTP has been sent to your email</p>
             </div>
-
-            <MDBInput wrapperClass='mb-4' label='Enter OTP' id='form1' type='text' />
-
+            <MDBValidationItem feedback='Please enter OTP' invalid>
+                    <MDBInput wrapperClass='mb-4' placeholder='Enter OTP' id='form1' type='text' value={data.otp} name='otp' onChange={handleChange} required />
+            </MDBValidationItem>
+            
             <MDBBtn type="submit" className="mb-4" onClick={ConfirmOTP}>Check OTP</MDBBtn>
+            
 
             <div className="text-center">
                 <p><a href="#!">Resend OTP</a></p>
@@ -50,7 +73,8 @@ function OTP() {
                 </div>
             </div>
 
-        </MDBContainer>
+            </MDBContainer>
+            </MDBValidation>
     );
 }
 

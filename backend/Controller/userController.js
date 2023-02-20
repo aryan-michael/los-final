@@ -18,11 +18,23 @@ function generateOtp () {
     return otp
 }
 
+
 const createUser = async (req, res) => {
     const user = await User.create(req.body);
-    console.log(req.body)
     const token = await user.createJWT()
-    res.status(StatusCodes.CREATED).json({ token, msg: "User successfully registered" })
+    const otp = generateOtp()
+    user.userOTP = otp
+    user.otpExp = Date.now() + 30 * 60 * 300;
+    await user.save()
+    const url = `<p> Hello ${user.first_name} ${user.last_name},here is the OTP to verify email: ${user.email}.<br><h1>${user.userOTP}</h1></br>OTP is valid for 3 minutes. Please do not share your OTP with anyone</p>`
+    const data = {
+        to: user.email,
+        subject: 'Account verification',
+        text: 'Hello user',
+        html: url
+    }
+    sendEmail(data)
+    res.status(StatusCodes.CREATED).json({ user: { username:`${user.first_name} ${user.last_name}`,token }, msg: "User successfully registered" })
 }
 
 const updateUserLoanDetails = async (req, res) => {

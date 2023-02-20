@@ -1,28 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     MDBContainer,
     MDBInput,
     MDBCheckbox,
     MDBBtn,
-    MDBIcon
+    MDBIcon,
+    MDBValidationItem,
+    MDBValidation,
+    MDBModalContent
 }
     from 'mdb-react-ui-kit';
+import { Form } from 'react-bootstrap';
+import { type } from 'os';
+
 
 function SetPassword() {
+
+    const [error, setError] = useState('')
+    const [password, setPassword] = useState({
+        pass: '',
+        re_pass: ''
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        // console.log(name,value)
+        setPassword({
+            ...password,
+            [name]:value
+        })
+        console.log(password);
+    }
+
+    const sendPass = (e) => {
+        if (password.pass !== password.re_pass) {
+            console.log('here')
+            setError('Password does not match')
+        }
+    }
+
     return (
+        <div>
+        <MDBValidation>
         <MDBContainer className="p-3 my-5 d-flex flex-column w-25">
             <div className="d-flex mx-auto">
                 <p>Set a Strong Password</p>
             </div>
-
-            <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password' autoComplete='off' />
-            <MDBInput wrapperClass='mb-4' label='Re-enter Password' id='form2' type='password' autoComplete='off' />
+            <MDBValidationItem feedback='Please enter your password' invalid >
+                    <MDBInput wrapperClass='mb-4' id='form1' type='password' onChange={handleChange} name='pass' value={password.pass} autoComplete='off' placeholder='Password' required />
+                </MDBValidationItem>
+            <MDBValidationItem feedback='Please Re-enter your password' invalid >
+                    <MDBInput wrapperClass='mb-4' placeholder='Re-enter Password' onChange={handleChange} name='re_pass' value={password.re_pass} id='form2' type='password' autoComplete='off' required />
+            </MDBValidationItem>        
 
             <div className="d-flex justify-content-between mx-3 mb-4">
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Show Password' />
             </div>
 
-            <MDBBtn className="mb-4">Confirm New Password</MDBBtn>
+            <MDBBtn className="mb-4" onClick={sendPass}>Confirm New Password</MDBBtn>
 
             <div className="text-center">
 
@@ -46,7 +81,9 @@ function SetPassword() {
                 </div>
             </div>
 
-        </MDBContainer>
+            </MDBContainer>
+        </MDBValidation>  
+    </div>
     );
 }
 

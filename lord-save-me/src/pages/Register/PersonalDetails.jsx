@@ -1,17 +1,17 @@
 import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
 
-const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
+const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error}) => {
 
     return (
         <>
-            <Form className="container mt-3 mb-3" autoComplete='off'>
+            <Form className="container mt-3 mb-3" autoComplete='off' validated={validated} hasValidation  >
                 <Row className="mb-3">
                     {/* SALUTATION */}
                     <Form.Group controlId="formGridState" className="col col-sm-4">
                         <Form.Label>Salutation</Form.Label>
-                        <Form.Select className="form-control" name="salutation" value={personalDetails.salutation} onChange={setPersonalDetails} required>
-                            <option defaultValue value="Choose...">Choose...</option>
+                        <Form.Select className="form-control" name="salutation" value={personalDetails.salutation} onChange={setPersonalDetails} required >
+                            <option defaultValue value=''>Choose...</option>
                             <option value="mr">Mr.</option>
                             <option value="mrs">Mrs.</option>
                             <option value="ms">Ms.</option>
@@ -25,6 +25,8 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                         <Form.Control type="name" name="first_name" value={personalDetails.first_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your first name.</Form.Control.Feedback>
+                        <Form.Control.Feedback style={{ display: error.first_name ? 'block' : 'none' }} type='invalid'>{error.first_name}</Form.Control.Feedback>
+                        {/* <p style={{ display: error.first_name ? 'block' : 'none' }}>{error.first_name}</p> */}
                     </Form.Group>
                 </Row>
 
@@ -35,6 +37,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                         <Form.Control type="name" name="middle_name" value={personalDetails.middle_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your middle name.</Form.Control.Feedback>
+                        <Form.Control.Feedback style={{ display: error.middle_name ? 'block' : 'none' }} type='invalid'>{error.middle_name}</Form.Control.Feedback>
                     </Form.Group>
                     {/* LASTNAME */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
@@ -42,6 +45,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                         <Form.Control type="name" name="last_name" value={personalDetails.last_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your last name.</Form.Control.Feedback>
+                        <Form.Control.Feedback style={{ display: error.last_name ? 'block' : 'none' }} type='invalid'>{error.last_name}</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
 
@@ -50,7 +54,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                     <Form.Group controlId="formGridState" className="col col-sm-3">
                         <Form.Label>Gender</Form.Label>
                         <Form.Select className="form-control" name="gender" value={personalDetails.gender} onChange={setPersonalDetails} required>
-                            <option defaultValue value="Choose...">Choose...</option>
+                            <option defaultValue value=''>Choose...</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </Form.Select>
@@ -63,6 +67,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                         <Form.Control className="form-control" type="date" name="dob" value={personalDetails.dob} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your DOB.</Form.Control.Feedback>
+                        <Form.Control.Feedback style={{ display: error.dob ? 'block' : 'none' }} type='invalid'>{error.dob}</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
 
@@ -73,9 +78,10 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                         <InputGroup hasValidation>
                             <InputGroup.Text id="basic-addon1">+91</InputGroup.Text>
                             <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" value={personalDetails.mobile} onChange={setPersonalDetails} required />
+                            <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type='invalid'>Please provide your mobile number.</Form.Control.Feedback>
+                            <Form.Control.Feedback style={{ display: error.mobile ? 'block' : 'none' }} type='invalid'>{error.mobile}</Form.Control.Feedback>
                         </InputGroup>
-                        <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
-                        <Form.Control.Feedback type='invalid'>Please provide your mobile number.</Form.Control.Feedback>
                     </Form.Group>
                     {/* EMAIL */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
@@ -100,6 +106,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                         <Form.Control className="form-control" type="pin" name="pin" value={personalDetails.pin} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your pincode.</Form.Control.Feedback>
+                        <Form.Control.Feedback style={{ display: error.pin ? 'block' : 'none' }} type='invalid'>{error.pin}</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
 
@@ -115,7 +122,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                     <Form.Group controlId="formGridState" className="col col-sm-4">
                         <Form.Label>State</Form.Label>
                         <Form.Select className="form-control" name="state" value={personalDetails.state} onChange={setPersonalDetails} required>
-                            <option defaultValue value="Choose...">Choose...</option>
+                            <option defaultValue value=''>Choose...</option>
                             <option value="Gujarat">Gujarat</option>
                             <option value="Maharashtra">Maharashtra</option>
                             <option value="Rajasthan">Rajasthan</option>

@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
 import { Alert, Button } from "react-bootstrap";
+import './Forms.css';
+
 
 function validatePinCode(value) {
     let status = true
     let error = ''
-    if (value.length > 6 || value === '') {
-        status = false
+    if (value.length < 6) {
         error = 'Pincode: Should be exactly 6 digits'
     }
+    if (value.length > 6 || value === '') {
+        status = false
+        // error = 'Pincode: Cannot exceed 6 digits'
+    }
+    
     if (isNaN(value) && typeof value !== "undefined") {
         status = false
         error = 'Pincode: Number expected'
@@ -41,9 +47,12 @@ function validateName(value) {
 function validateMobile(value) {
     let error = ''
     let status = true
+    if (value.length < 10) {
+        error= 'Mobile: should be of exact 10 digits'
+    }
     if (value.length > 10 || value.length === '') {
         status = false
-        error = 'Mobile: Cannot be empty or accept more than 10 digits'
+        // error = 'Mobile: Cannot be empty or accept more than 10 digits'
     }
     for (let number of value) {
         if (isNaN(number)) {
@@ -56,6 +65,44 @@ function validateMobile(value) {
         status,
         value,
         error
+    }
+}
+
+function validateDob(value) {
+    let error = ''
+    let status = true
+    var dob = new Date(value)
+    var diff_ms = Date.now() - dob.getTime();
+    var age_dt = new Date(diff_ms); 
+    const age = Math.abs(age_dt.getUTCFullYear() - 1970);
+    if (age < 21) {
+        error = "Age: Should be above 20"
+    }
+    return {
+        value,
+        error,
+        status
+    }
+}
+
+function validateLoanAmount(value) {
+    let error = ''
+    let status = true
+    if (value.length > 10) {
+        status = false
+        error = 'Loan Amount: Cannot exceed 10 digits'
+    }
+    for (let number of value) {
+        if (isNaN(number)) {
+            error = 'Loan Amount: Number expected'
+            status = false
+            break
+        }
+    }
+    return {
+        value,
+        error,
+        status
     }
 }
 
@@ -79,12 +126,21 @@ const fieldValidations = {
     middle_name: validateName,
     last_name: validateName,
     mobile: validateMobile,
+    dob: validateDob,
+    loanAmount: validateLoanAmount
     //email: validateEmail
 }
 
 function Forms({ loan_type, country }) {
     const [page, setPage] = useState(0);
-    const [error, setError] = useState('');
+    const [error, setError] = useState({
+        pin: '',
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+        mobile: '',
+        dob:''
+    });
     const [personalDetails, setPersonalDetails] = useState({
         //personal details
         salutation: '',
@@ -109,23 +165,43 @@ function Forms({ loan_type, country }) {
         businessName: ''
     })  //loan details
 
-
-
+    const [validated,setValidated] = useState(false)
+    const [loanValidated,setLoanValidated] = useState(false)
 
     const handlePersonalDetails = (e) => {
         const targetName = e.target.name
         let valid = { status: true, value: e.target.value }
-
         const validateFn = fieldValidations[targetName]
         if (typeof validateFn === "function") {
             valid = validateFn(valid.value) // boolean value
-            //console.log(valid)
         }
         if (!valid.status) {
-            setError(valid.error)
+            setError({
+                ...error,
+                [targetName]:valid.error
+            })
             return
-        } else {
-            setError('')
+        } else if ((targetName === 'mobile' || targetName === 'pin' || targetName ==='dob') && valid.status && valid.error) {
+            console.log('Here')
+            console.log(valid.error)
+            setError({
+                ...error,
+                [targetName]:valid.error
+            })
+            console.log(error[targetName])
+        }
+        // if (targetName === 'dob' && valid.error && valid.status) {
+        //     setError({
+        //             ...error,
+        //             [targetName]:valid.error
+        //         })
+                // valid.value = e.target.value
+            // }
+        else {
+            setError({
+                ...error,
+                [targetName]:''
+            })
         }
 
         // if (name === "pin" && (value.length > 6 || isNaN(value))) {
@@ -150,71 +226,98 @@ function Forms({ loan_type, country }) {
             //console.log(valid)
         }
         if (!valid.status) {
-            setError(valid.error)
+            setError({
+                ...error,
+                [targetName]:valid.error
+            })
             return
         } else {
-            setError('')
+            setError({
+                ...error,
+                [targetName]: ''
+            })
         }
 
-        // if (name === "pin" && (value.length > 6 || isNaN(value))) {
-        //     console.log("invalid")
-        //     return;
-        // }
-        // else if (name === "firstname") {
-        //     value = value.toUpperCase();
-        // }
         let x = { ...loanDetails };
         x[targetName] = valid.value;
         setLoanDetails(x);
     };
 
     const Navigate = useNavigate();
-    const [validated, setValidated] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (step, e) => {
         console.log("button working!")
         e.preventDefault();
 
-        for (let x in personalDetails) {
-            if (personalDetails[x] === '') {
-                console.log("hello");
-                break
-                //return false;
+        
+        let isFormEmpty = false;
+
+        if (step === "Next") {
+            const form = e.currentTarget;
+            if (form.checkValidity() === false) {
+                e.stopPropagation()
             }
             else {
-                return true;
+                setValidated(true)
+            }
+            for (let x in personalDetails) {
+                if (personalDetails[x] === '') {
+                    console.log("pd data showing", x, personalDetails[x]);
+                    isFormEmpty = true;
+                    break
+                    //return false;
+                }
+                else {
+                    // return true;
+                }
+            }
+        }
+        if (step === "Submit") {
+            const form = e.currentTarget;
+            if (form.checkValidity() === false) {
+                e.stopPropagation()
+            }
+            setLoanValidated(true)
+            for (let x in loanDetails) {
+                if (loanDetails[x] === '') {
+                    console.log("ld data showing", x, loanDetails[x]);
+                    isFormEmpty = true;
+                    break
+                    //return false;
+                }
+                else {
+                    // return true;
+                }
             }
         }
 
-        for (let x in loanDetails) {
-            if (loanDetails[x] === '') {
-                console.log("hi");
-                break
-                //return false;
-            }
-            else {
-                return true;
-            }
-        }
-
-        if (page === FormTitles.length - 1) {
+        if (page === FormTitles.length - 1 && isFormEmpty === false) {
             //alert("An Email has been sent for verification");
             console.log(personalDetails);
             console.log(loanDetails);
             Navigate('/otp');
         } else {
-            setPage((currentPage) => currentPage + 1);
+            if (!isFormEmpty) {
+                if (personalDetails.pin.length < 6 || personalDetails.mobile.length < 10 || error.dob) {
+                    return
+                }
+                console.log('form is not empty')
+                setValidated(false)
+                setPage((currentPage) => currentPage + 1);
+            }
         }
 
     };
 
     const FormTitles = ["Personal Details", "Loan Details"];
 
+    
+
     const pageDisplay = () => {
         if (page === 0) {
-            return <PersonalDetails personalDetails={personalDetails} setPersonalDetails={handlePersonalDetails} />;
+            return <PersonalDetails personalDetails={personalDetails} setPersonalDetails={handlePersonalDetails} validated={validated} error={error} />;
         } else {
-            return <LoanDetails loanDetails={loanDetails} setLoanDetails={handleLoanDetails} />;
+            return <LoanDetails loanDetails={loanDetails} setLoanDetails={handleLoanDetails} loanValidated={loanValidated} error={error} />;
         }
     };
     return (
@@ -223,7 +326,7 @@ function Forms({ loan_type, country }) {
                 <div style={{ width: page === 0 ? "50%" : "100%" }} />
             </div>
             <div className="form-container">
-                <Alert>{error}</Alert>
+                {/* <Alert>{error.first_name}</Alert> */}
                 <div className="header text-center">
                     <h1>{FormTitles[page]}</h1>
                 </div>
@@ -234,16 +337,14 @@ function Forms({ loan_type, country }) {
                         //onClick={submitButton} 
                         className="me-4 btn btn-danger btn-lg"
                         disabled={page === 0}
-                        onClick={() => {
-                            setPage((currentPage) => currentPage - 1);
-                        }}
+                        onClick={()=>setPage((currentPage) => currentPage - 1)}
                     >Previous</button>
 
                     <Button
                         type="submit"
                         className="me-4 btn btn-success btn-lg"
                         //  disabled={!validated}
-                        onClick={handleSubmit}
+                        onClick={(e) => handleSubmit(page === FormTitles.length - 1 ? "Submit" : "Next", e)}
                     >
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
                     </Button>

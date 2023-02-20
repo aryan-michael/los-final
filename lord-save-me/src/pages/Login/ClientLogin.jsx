@@ -1,7 +1,7 @@
 import React from 'react';
 //import { MDBIcon } from 'mdbreact';
 import './ClientLogin.css';
-import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox, MDBValidation, MDBValidationItem } from 'mdb-react-ui-kit';
 
 function ClientLogin() {
 
@@ -37,9 +37,14 @@ function ClientLogin() {
                     <div className="divider d-flex align-items-center my-4">
                         <p className="text-center fw-bold mx-3 mb-0">Login</p>
                     </div>
-
-                    <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg" />
-                    <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg" autoComplete='new-password' />
+                    <MDBValidation>
+                        <MDBValidationItem feedback='Please enter email' invalid>
+                            <MDBInput wrapperClass='mb-4' placeholder='Email address' id='formControlLg' type='email' size="lg" required />
+                        </MDBValidationItem>
+                        <MDBValidationItem feedback='Please enter password' invalid>
+                        <MDBInput wrapperClass='mb-4' placeholder='Password' id='formControlLg' type='password' size="lg" autoComplete='new-password' required />
+                        </MDBValidationItem>
+                    
 
                     <div className="d-flex justify-content-between mb-4">
                         <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
@@ -47,9 +52,11 @@ function ClientLogin() {
                     </div>
 
                     <div className='text-center text-md-start mt-4 pt-2'>
-                        <MDBBtn className="mb-0 px-5" size='lg'>Login</MDBBtn>
+                            <MDBBtn className="mb-0 px-5" size='lg'>Login</MDBBtn>
+                            
                         <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="/" className="link-danger">Register</a></p>
-                    </div>
+                        </div>
+                    </MDBValidation>
 
                 </MDBCol>
 
