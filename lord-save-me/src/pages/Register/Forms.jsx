@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button } from "react-bootstrap";
-import './Forms.css';
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
 
 function validatePinCode(value) {
     let status = true
@@ -110,8 +110,7 @@ function Forms({ loan_type, country }) {
         businessName: ''
     })  //loan details
 
-
-
+    const [progressStep, setProgressStep] = useState(1);
 
     const handlePersonalDetails = (e) => {
         const targetName = e.target.name
@@ -175,12 +174,12 @@ function Forms({ loan_type, country }) {
                 if (personalDetails[x] === '') {
                     console.log("pd data showing", x, personalDetails[x]);
                     isFormEmpty = true;
+                    //setProgressStep : progressbar should only move if form is filled
+                    //progress bar works for only 1 iteration
                     break
                     //return false;
                 }
-                else {
-                    // return true;
-                }
+
             }
 
         if (step === "Submit")
@@ -190,9 +189,6 @@ function Forms({ loan_type, country }) {
                     isFormEmpty = true;
                     break
                     //return false;
-                }
-                else {
-                    // return true;
                 }
             }
 
@@ -206,6 +202,9 @@ function Forms({ loan_type, country }) {
             if (!isFormEmpty) {
                 console.log('form is not empty')
                 setPage((currentPage) => currentPage + 1);
+                if (progressStep < 2) {
+                    setProgressStep(progressStep => progressStep + 1);
+                }
             }
         }
 
@@ -220,13 +219,18 @@ function Forms({ loan_type, country }) {
             return <LoanDetails loanDetails={loanDetails} setLoanDetails={handleLoanDetails} />;
         }
     };
+
     return (
         <div className="form">
-            <div className="progressbar">
-                <div style={{ width: page === 0 ? "50%" : "100%" }} />
-            </div>
             <div className="form-container">
                 <Alert>{error}</Alert>
+                <Container className="h-100">
+                    <Row className="h-100">
+                        <Col className="align-self-center">
+                            <MultiStepProgressBar step={progressStep} />
+                        </Col>
+                    </Row>
+                </Container>
                 <div className="header text-center">
                     <h1>{FormTitles[page]}</h1>
                 </div>
@@ -239,6 +243,9 @@ function Forms({ loan_type, country }) {
                         disabled={page === 0}
                         onClick={() => {
                             setPage((currentPage) => currentPage - 1);
+                            if (progressStep === 2) {
+                                setProgressStep(1);
+                            }
                         }}
                     >Previous</button>
 
