@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button } from "react-bootstrap";
 import './Forms.css';
 import axios from 'axios'
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
 
 function validatePinCode(value) {
     let status = true
@@ -166,7 +167,9 @@ function Forms({ loan_type, country,setLoginToken }) {
     })  //loan details
 
     const [validated,setValidated] = useState(false)
-    const [loanValidated,setLoanValidated] = useState(false)
+    const [loanValidated, setLoanValidated] = useState(false)
+    
+    const [progressStep, setProgressStep] = useState(1);
 
     const handlePersonalDetails = (e) => {
         const targetName = e.target.name
@@ -337,6 +340,9 @@ function Forms({ loan_type, country,setLoginToken }) {
                 console.log('form is not empty')
                 setValidated(false)
                 setPage((currentPage) => currentPage + 1);
+                if (progressStep < 2) {
+                    setProgressStep(progressStep => progressStep + 1);
+                }
             }
         }
 
@@ -355,11 +361,15 @@ function Forms({ loan_type, country,setLoginToken }) {
     };
     return (
         <div className="form">
-            <div className="progressbar">
-                <div style={{ width: page === 0 ? "50%" : "100%" }} />
-            </div>
             <div className="form-container">
                 {/* <Alert>{error.first_name}</Alert> */}
+                <Container className="h-100">
+                    <Row className="h-100">
+                        <Col className="align-self-center">
+                            <MultiStepProgressBar step={progressStep} />
+                        </Col>
+                    </Row>
+                </Container>
                 <div className="header text-center">
                     <h1>{FormTitles[page]}</h1>
                 </div>
@@ -370,8 +380,12 @@ function Forms({ loan_type, country,setLoginToken }) {
                         //onClick={submitButton} 
                         className="me-4 btn btn-danger btn-lg"
                         disabled={page === 0}
-                        onClick={()=>setPage((currentPage) => currentPage - 1)}
-                    >Previous</button>
+                        onClick={() => {
+                            setPage((currentPage) => currentPage - 1);
+                            if (progressStep === 2) {
+                                setProgressStep(1);
+                            }
+                        }}>Previous</button>
 
                     <Button
                         type="submit"
