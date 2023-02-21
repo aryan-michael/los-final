@@ -12,10 +12,12 @@ import {
     from 'mdb-react-ui-kit';
 import { Form } from 'react-bootstrap';
 import { type } from 'os';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-
-function SetPassword() {
-
+function SetPassword({ setLoginToken, loginToken }) {
+    
+    const Navigate = useNavigate()
     const [error, setError] = useState('')
     const [password, setPassword] = useState({
         pass: '',
@@ -32,11 +34,30 @@ function SetPassword() {
         console.log(password);
     }
 
-    const sendPass = (e) => {
+    const sendPass = async (e) => {
         if (password.pass !== password.re_pass) {
-            console.log('here')
             setError('Password does not match')
+            return
         }
+        try {
+            await axios.put('http://localhost:5000/api/v1/user/set-password', password, {
+                headers: {
+                    Authorization: `Bearer ${loginToken.token}`
+                }
+            }).then(response => {
+                console.log(response)
+            })
+        } catch (err) {
+            if (err.response) {
+                alert(err.response.data.msg)
+                return
+            } else {
+                alert('Something went wrong')
+                return
+            }
+        }
+        setLoginToken({})
+        Navigate('/login/client')
     }
 
     return (

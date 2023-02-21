@@ -10,8 +10,9 @@ import {
 }
     from 'mdb-react-ui-kit';
 import { Form } from 'react-bootstrap';
+import axios from 'axios';
 
-function OTP() {
+function OTP({ setLoginToken, loginToken }) {
 
     const [data, setData] = useState({
         otp : ''
@@ -29,11 +30,29 @@ function OTP() {
         console.log(data)
     }
 
-    const ConfirmOTP = (e) => {
+    const ConfirmOTP = async (e) => {
         if (!data.otp) {
             return
         }
         e.preventDefault();
+        try {
+            await axios.post('http://localhost:5000/api/v1/user/check-otp', data, {
+                headers: {
+                    Authorization: `Bearer ${loginToken.token}`
+                }
+            }).then(response => {
+                console.log(response)
+                setLoginToken(response.data.user)
+            })
+        } catch (err) {
+            if (err.response) {
+                alert(err.response.data.msg)
+                return
+            } else {
+                alert('Something went wronggg')
+                return
+            }
+        }
         Navigate('/set-password');
     };
 

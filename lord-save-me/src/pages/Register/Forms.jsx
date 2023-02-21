@@ -4,7 +4,7 @@ import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
 import { Alert, Button } from "react-bootstrap";
 import './Forms.css';
-
+import axios from 'axios'
 
 function validatePinCode(value) {
     let status = true
@@ -131,7 +131,7 @@ const fieldValidations = {
     //email: validateEmail
 }
 
-function Forms({ loan_type, country }) {
+function Forms({ loan_type, country,setLoginToken }) {
     const [page, setPage] = useState(0);
     const [error, setError] = useState({
         pin: '',
@@ -245,7 +245,7 @@ function Forms({ loan_type, country }) {
 
     const Navigate = useNavigate();
 
-    const handleSubmit = (step, e) => {
+    const handleSubmit = async (step, e) => {
         console.log("button working!")
         e.preventDefault();
 
@@ -295,6 +295,39 @@ function Forms({ loan_type, country }) {
             //alert("An Email has been sent for verification");
             console.log(personalDetails);
             console.log(loanDetails);
+            const user = {
+                salutation: personalDetails.salutation,
+                first_name: personalDetails.first_name,
+                middle_name: personalDetails.middle_name,
+                last_name: personalDetails.last_name,
+                gender: personalDetails.gender,
+                dob: personalDetails.dob,
+                mobile: personalDetails.mobile,
+                email: personalDetails.email,
+                address: personalDetails.address,
+                pin: personalDetails.pin,
+                city:personalDetails.city,
+                state:personalDetails.state,
+                country:personalDetails.country,
+            }
+            console.log(user)
+            /////////////////////////////////////////Backend Code ///////////////////////////////////////////
+            try {
+                await axios.post('http://localhost:5000/api/v1/user/signup', user).then(response => {
+                    console.log(response)
+                    setLoginToken(response.data.user)
+                })
+            } catch (err) {
+                if (err.response) {
+                    alert(err.response.data.msg)
+                    return
+                } else {
+                    alert('Something went wrong!!')
+                    return
+                }
+            }
+
+             /////////////////////////////////////////Backend Code ///////////////////////////////////////////
             Navigate('/otp');
         } else {
             if (!isFormEmpty) {

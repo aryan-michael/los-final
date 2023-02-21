@@ -34,7 +34,18 @@ const createUser = async (req, res) => {
         html: url
     }
     sendEmail(data)
-    res.status(StatusCodes.CREATED).json({ user: { username:`${user.first_name} ${user.last_name}`,token }, msg: "User successfully registered" })
+    res.status(StatusCodes.CREATED).json({ user: {userOtp: true,token }, msg: "User successfully registered" })
+}
+
+const setUserPassword = async (req, res) => {
+    const { userId, email } = req.user;
+    const { pass } = req.body;
+    const user = await User.findOne({ _id: userId, email: email })
+    if (!user) throw new NotFoundError('User does not exists')
+    user.password = pass
+    user.status = 'active'
+    await user.save()
+    res.status(StatusCodes.OK).json({msg:'Success'})
 }
 
 const updateUserLoanDetails = async (req, res) => {
@@ -46,6 +57,20 @@ const updateUserLoanDetails = async (req, res) => {
     }
     const otp = generateOtp()
     res.status(StatusCodes.OK).json({ msg: "User updated" })
+}
+
+const checkOtp = async (req, res) => {
+    const { userId, email } = req.user;
+    const { otp } = req.body;
+    const user = await User.findOne({ _id: userId, email: email, userOTP: otp, otpExp: { $gt: Date.now() } })
+    if (!user) {
+        throw new NotFoundError('Invalid OTP')
+    }
+    user.userOTP = undefined
+    user.otpExp = undefined
+    await user.save()
+    const token = await user.createJWT()
+    res.status(StatusCodes.OK).json({user:{userPass:true,token},msg:'Success'})
 }
 
 const getAllUser = async (req, res) => {
@@ -67,14 +92,38 @@ const login = async (req, res) => {
     if (!isPasswordCorrect) {
         throw new UnauthenticatedError('Invalid Credentials')
     }
+    const token = await user.createJWT();
+    const otp = generateOtp()
+    user.userOTP = otp
+    user.otpExp = Date.now() + 30 * 60 * 300
+    await user.save()
+    console.log(user.userOTP);
+    const url = `<h1> Hello ${user.first_name} ${user.last_name}</h1><br></br><p>Here is your otp. Please do not share it with anyone.<br></br><h1>${user.userOTP}</h1>`
+    const data = {
+        to: user.email,
+        subject: 'Account Verification',
+        text: 'Hello user',
+        html:url
+    }
+    sendEmail(data)
+    res.status(StatusCodes.OK).json({ user: { username: `${user.first_name} ${user.last_name}`, token }, msg: "Otp sent" })
+}
+
+const checkLoginOtp = async (req, res) => {
+    const { userId, email } = req.user;
+    console.log(userId,email);
+    const { otp } = req.body
+    console.log(otp);
+    const user = await User.findOne({ _id: userId, email: email, userOTP: otp, otpExp: { $gt: Date.now() } })
+    if (!user) throw new NotFoundError(`Invalid OTP`)
     const refreshToken = await refreshJWTToken(user);
     const updatedUser = await User.findOneAndUpdate(user.email, { refreshToken: refreshToken }, { new: true, runValidators: true })
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         maxAge: 72 * 60 * 60 * 1000
     })
-    const token = await user.createJWT();
-    res.status(StatusCodes.OK).json({ User: { username: user.firstname + " " + user.lastname, token }, msg: "Successfully login" })
+    const token = updatedUser.createJWT()
+    res.status(StatusCodes.OK).json({ user: token ,msg:'Success'})
 }
 
 const handleRefreshToken = async (req, res) => {
@@ -216,5 +265,5 @@ const resetPassword = async (req, res) => {
     res.status(StatusCodes.OK).json({ msg: "Password Updated" })
 }
 
-module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails };
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp };
 
