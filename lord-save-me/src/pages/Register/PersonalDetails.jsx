@@ -89,6 +89,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error})
                         <Form.Control aria-label="Recipient's username" type="email" name="email" value={personalDetails.email} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your email.</Form.Control.Feedback>
+                        <Form.Control.Feedback style={{display:error.email?'block':'none'}} type='invalid'>{error.email}</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
 

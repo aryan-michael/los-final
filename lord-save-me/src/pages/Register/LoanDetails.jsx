@@ -12,7 +12,7 @@ const LoanDetails = ({ loanDetails, setLoanDetails,loanValidated,error }) => {
                         <Form.Label>Desired Loan Amount</Form.Label>
                         <InputGroup>
                             <InputGroup.Text id="basic-addon1">₹</InputGroup.Text>
-                            <Form.Control aria-label="Loan Amount" type="number" aria-describedby="basic-addon1" className="form-control" name="loanAmount" value={loanDetails.loanAmount} onChange={setLoanDetails} required />
+                            <Form.Control aria-label="Loan Amount" type="amount" aria-describedby="basic-addon1" className="form-control" name="loanAmount" value={loanDetails.loanAmount} onChange={setLoanDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide loan amount.</Form.Control.Feedback>
                             <Form.Control.Feedback style={{ display: error.loanAmount ? 'block' : 'none' }} type='invalid'>{error.loanAmount}</Form.Control.Feedback>    

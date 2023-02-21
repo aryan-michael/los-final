@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './pages/Home/Home';
 import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/MultiStepProgressBar/NavBar';
 import Forms from './pages/Register/Forms';
 import ClientLogin from './pages/Login/ClientLogin';
 import SetPassword from './pages/Password/SetPassword';

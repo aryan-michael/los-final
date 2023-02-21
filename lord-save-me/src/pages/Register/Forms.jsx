@@ -7,6 +7,7 @@ import axios from 'axios'
 import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
 
+//PINCODE VALIDATION//
 function validatePinCode(value) {
     let status = true
     let error = ''
@@ -29,6 +30,8 @@ function validatePinCode(value) {
         error
     }
 }
+
+// USERNAME VALIDATION//
 function validateName(value) {
     let error = ''
     let status = true
@@ -45,6 +48,8 @@ function validateName(value) {
         error
     }
 }
+
+//MOBILE NUMBER VALIDATION//
 function validateMobile(value) {
     let error = ''
     let status = true
@@ -69,6 +74,7 @@ function validateMobile(value) {
     }
 }
 
+//DATE OF BIRTH VALIDATION//
 function validateDob(value) {
     let error = ''
     let status = true
@@ -86,6 +92,7 @@ function validateDob(value) {
     }
 }
 
+//LOAN AMOUNT VALIDATION//
 function validateLoanAmount(value) {
     let error = ''
     let status = true
@@ -107,20 +114,22 @@ function validateLoanAmount(value) {
     }
 }
 
-// function validateEmail(value) {
-//     let error = ''
-//     let status = true
-//     if (!value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
-//         status = false
-//         error = 'Email: Please enter a valid email'
-//     }
-//     return {
-//         status,
-//         value,
-//         error
-//     }
-// }
+//EMAIL VALIDATION//
+function validateEmail(value) {
+    let error = ''
+    let status = true
+    if (!value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+        // status = false
+        error = 'Email: Please enter a valid email'
+    }
+    return {
+        status,
+        value,
+        error
+    }
+}
 
+//ASSIGNING VALIDATION FUCNTIONS//
 const fieldValidations = {
     pin: validatePinCode,
     first_name: validateName,
@@ -128,12 +137,13 @@ const fieldValidations = {
     last_name: validateName,
     mobile: validateMobile,
     dob: validateDob,
-    loanAmount: validateLoanAmount
-    //email: validateEmail
+    loanAmount: validateLoanAmount,
+    email: validateEmail
 }
 
+//MAIN CONTENT FOR FORMS STARTS HERE//
 function Forms({ loan_type, country,setLoginToken }) {
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(0); 
     const [error, setError] = useState({
         pin: '',
         first_name: '',
@@ -184,7 +194,7 @@ function Forms({ loan_type, country,setLoginToken }) {
                 [targetName]:valid.error
             })
             return
-        } else if ((targetName === 'mobile' || targetName === 'pin' || targetName ==='dob') && valid.status && valid.error) {
+        } else if ((targetName === 'mobile' || targetName === 'pin' || targetName ==='dob' || targetName ==='email') && valid.status && valid.error) {
             console.log('Here')
             console.log(valid.error)
             setError({
@@ -193,27 +203,12 @@ function Forms({ loan_type, country,setLoginToken }) {
             })
             console.log(error[targetName])
         }
-        // if (targetName === 'dob' && valid.error && valid.status) {
-        //     setError({
-        //             ...error,
-        //             [targetName]:valid.error
-        //         })
-                // valid.value = e.target.value
-            // }
         else {
             setError({
                 ...error,
                 [targetName]:''
             })
         }
-
-        // if (name === "pin" && (value.length > 6 || isNaN(value))) {
-        //     console.log("invalid")
-        //     return;
-        // }
-        // else if (name === "firstname") {
-        //     value = value.toUpperCase();
-        // }
         let x = { ...personalDetails };
         x[targetName] = valid.value;
         setPersonalDetails(x);
@@ -225,10 +220,10 @@ function Forms({ loan_type, country,setLoginToken }) {
 
         const validateFn = fieldValidations[targetName]
         if (typeof validateFn === "function") {
-            valid = validateFn(valid.value) // boolean value
-            //console.log(valid)
+            valid = validateFn(valid.value) 
         }
         if (!valid.status) {
+            console.log(valid.error);
             setError({
                 ...error,
                 [targetName]:valid.error
@@ -268,7 +263,6 @@ function Forms({ loan_type, country,setLoginToken }) {
                     console.log("pd data showing", x, personalDetails[x]);
                     isFormEmpty = true;
                     break
-                    //return false;
                 }
                 else {
                     // return true;
@@ -286,7 +280,6 @@ function Forms({ loan_type, country,setLoginToken }) {
                     console.log("ld data showing", x, loanDetails[x]);
                     isFormEmpty = true;
                     break
-                    //return false;
                 }
                 else {
                     // return true;
@@ -295,7 +288,6 @@ function Forms({ loan_type, country,setLoginToken }) {
         }
 
         if (page === FormTitles.length - 1 && isFormEmpty === false) {
-            //alert("An Email has been sent for verification");
             console.log(personalDetails);
             console.log(loanDetails);
             const user = {
@@ -334,7 +326,7 @@ function Forms({ loan_type, country,setLoginToken }) {
             Navigate('/otp');
         } else {
             if (!isFormEmpty) {
-                if (personalDetails.pin.length < 6 || personalDetails.mobile.length < 10 || error.dob) {
+                if (personalDetails.pin.length < 6 || personalDetails.mobile.length < 10 || error.dob || error.email) {
                     return
                 }
                 console.log('form is not empty')
