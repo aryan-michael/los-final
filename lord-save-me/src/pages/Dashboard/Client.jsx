@@ -1,5 +1,10 @@
+import React from "react";
+import SideBar from "../../components/SideBar/SideBar";
+
 const Client = () => {
-    return <h1>client dashboard</h1>
+    return (
+        <SideBar />
+    );
 }
 
 export default Client;

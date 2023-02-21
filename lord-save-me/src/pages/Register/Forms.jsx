@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Navbar, Row } from "react-bootstrap";
 import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
+import NavBar from "../../components/NavBar/NavBar";
 
 function validatePinCode(value) {
     let status = true
@@ -221,45 +222,48 @@ function Forms({ loan_type, country }) {
     };
 
     return (
-        <div className="form">
-            <div className="form-container">
-                <Alert>{error}</Alert>
-                <Container className="h-100">
-                    <Row className="h-100">
-                        <Col className="align-self-center">
-                            <MultiStepProgressBar step={progressStep} />
-                        </Col>
-                    </Row>
-                </Container>
-                <div className="header text-center">
-                    <h1>{FormTitles[page]}</h1>
-                </div>
-                <div className="body">{pageDisplay()}</div>
-                <div className="footer text-center">
-                    <button
-                        type="button"
-                        //onClick={submitButton} 
-                        className="me-4 btn btn-danger btn-lg"
-                        disabled={page === 0}
-                        onClick={() => {
-                            setPage((currentPage) => currentPage - 1);
-                            if (progressStep === 2) {
-                                setProgressStep(1);
-                            }
-                        }}
-                    >Previous</button>
+        <>
+            <NavBar />
+            <div className="form">
+                <div className="form-container">
+                    <Alert>{error}</Alert>
+                    <Container className="h-100">
+                        <Row className="h-100">
+                            <Col className="align-self-center">
+                                <MultiStepProgressBar step={progressStep} />
+                            </Col>
+                        </Row>
+                    </Container>
+                    <div className="header text-center">
+                        <h1>{FormTitles[page]}</h1>
+                    </div>
+                    <div className="body">{pageDisplay()}</div>
+                    <div className="footer text-center">
+                        <button
+                            type="button"
+                            //onClick={submitButton} 
+                            className="me-4 btn btn-danger btn-lg"
+                            disabled={page === 0}
+                            onClick={() => {
+                                setPage((currentPage) => currentPage - 1);
+                                if (progressStep === 2) {
+                                    setProgressStep(1);
+                                }
+                            }}
+                        >Previous</button>
 
-                    <Button
-                        type="submit"
-                        className="me-4 btn btn-success btn-lg"
-                        //  disabled={!validated}
-                        onClick={(e) => handleSubmit(page === FormTitles.length - 1 ? "Submit" : "Next", e)}
-                    >
-                        {page === FormTitles.length - 1 ? "Submit" : "Next"}
-                    </Button>
+                        <Button
+                            type="submit"
+                            className="me-4 btn btn-success btn-lg"
+                            //  disabled={!validated}
+                            onClick={(e) => handleSubmit(page === FormTitles.length - 1 ? "Submit" : "Next", e)}
+                        >
+                            {page === FormTitles.length - 1 ? "Submit" : "Next"}
+                        </Button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
