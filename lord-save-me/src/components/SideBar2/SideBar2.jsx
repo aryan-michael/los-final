@@ -6,7 +6,7 @@ import * as AiIcons from 'react-icons/ai';
 import { SideBarData } from './SideBarData';
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
-import './SideBar.css';
+import './SideBar2.css';
 
 const Nav = styled.div`
   background: #15171c;
@@ -42,7 +42,7 @@ const SideBarWrap = styled.div`
   width: 100%;
 `;
 
-const SideBar = () => {
+const SideBar2 = () => {
     const [sideBar, setSideBar] = useState(false);
 
     const showSideBar = () => setSideBar(!sideBar);
@@ -74,4 +74,4 @@ const SideBar = () => {
     );
 };
 
-export default SideBar;
+export default SideBar2;

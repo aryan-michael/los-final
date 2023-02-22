@@ -8,6 +8,7 @@ import OTP from './pages/Password/OTP';
 import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
 import SideBar from './components/Sidebar/SideBar';
+import SideBar2 from './components/SideBar2/SideBar2';
 //import './App.css'
 import Dashboard from "./pages/AdminPanel/Dashboard";
 import Users from "./pages/AdminPanel/Users";
@@ -34,6 +35,7 @@ function App() {
         <Route path='/test' element={<Test />} />
         <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar' element={<SideBar />} />
+        <Route path='/sidebar2' element={<SideBar2 />} />
         {/* <SideBar>
           <Route path="/admin-dashboard" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />

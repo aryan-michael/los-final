@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
+import data from '../../india.json';
 
 const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
 
@@ -116,10 +117,15 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails }) => {
                         <Form.Label>State</Form.Label>
                         <Form.Select className="form-control" name="state" value={personalDetails.state} onChange={setPersonalDetails} required>
                             <option defaultValue value="Choose...">Choose...</option>
-                            <option value="Gujarat">Gujarat</option>
+                            {/* <option value="Gujarat">Gujarat</option>
                             <option value="Maharashtra">Maharashtra</option>
                             <option value="Rajasthan">Rajasthan</option>
-                            <option value="Kashmir">Kashmir</option>
+                            <option value="Kashmir">Kashmir</option> */}
+                            {data ? Object.keys(data).map((d) => (
+                                <option key={d} value={d}>{d}</option>
+                            )) : null}
+
+
                         </Form.Select>
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please choose your state.</Form.Control.Feedback>
