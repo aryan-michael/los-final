@@ -20,7 +20,7 @@ main {
 
 /* Sidebar */
 .sidebar {
-    background: rgb(0, 7, 61);
+    background: #212529;
     color: white;
     height: 100vh;
     overflow-y: auto;
@@ -60,7 +60,7 @@ main {
     border-radius: 5px;
     background: rgb(238, 238, 238);
 
-    color: white;
+    color: black;
 }
 
 .routes {
