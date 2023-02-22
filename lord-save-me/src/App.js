@@ -9,6 +9,14 @@ import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
 import SideBar from './components/Sidebar/SideBar';
 //import './App.css'
+import Dashboard from "./pages/AdminPanel/Dashboard";
+import Users from "./pages/AdminPanel/Users";
+import Messages from "./pages/AdminPanel/Messages";
+import FileManager from "./pages/AdminPanel/FileManager";
+import Analytics from "./pages/AdminPanel/Analytics";
+import Order from "./pages/AdminPanel/Order";
+import Saved from "./pages/AdminPanel/Saved";
+import Setting from "./pages/AdminPanel/Setting";
 
 function App() {
   return (
@@ -26,6 +34,34 @@ function App() {
         <Route path='/test' element={<Test />} />
         <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar' element={<SideBar />} />
+        {/* <SideBar>
+          <Route path="/admin-dashboard" element={<Dashboard />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/file-manager" element={<FileManager />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/saved" element={<Saved />} />
+          <Route path="/settings" element={<Setting />} />
+
+          <Route path="*" element={<> not found</>} />
+        </SideBar> */}
+        {/* break */}
+
+        {/* <SideBar>
+          <Routes>
+            <Route path="/admin-dashboard" element={<Dashboard />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/file-manager" element={<FileManager />} />
+            <Route path="/order" element={<Order />} />
+            <Route path="/saved" element={<Saved />} />
+            <Route path="/settings" element={<Setting />} />
+
+            <Route path="*" element={<> not found</>} />
+          </Routes>
+        </SideBar> */}
       </Routes>
     </>
   );

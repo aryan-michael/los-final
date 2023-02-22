@@ -12,7 +12,7 @@ import './SideBar.css';
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 const routes = [
   {
-    path: "/",
+    path: "/admin-dashboard",
     name: "Dashboard",
     icon: <FaHome />,
   },
@@ -171,6 +171,8 @@ const SideBar = ({ children }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {/* SIDEBAR */}
       <div className="main-container">
         <motion.div
           animate={{
