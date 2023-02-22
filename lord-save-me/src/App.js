@@ -7,7 +7,8 @@ import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
 import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
-import Sidebar from './components/SideBar/SideBar';
+import SideBar from './components/Sidebar/SideBar';
+//import './App.css'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path='/forgot-password/:id' element={<ForgotPassword />} />
         <Route path='/test' element={<Test />} />
         <Route path='/practice' element={<Practice />} />
-        <Route path='/sidebar' element={<Sidebar />} />
+        <Route path='/sidebar' element={<SideBar />} />
       </Routes>
     </>
   );

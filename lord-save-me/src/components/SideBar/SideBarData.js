@@ -1,6 +1,7 @@
 import React from "react";
 import * as FaIcons from 'react-icons/fa';
 import * as RiIcons from 'react-icons/ri';
+import * as FiIcons from 'react-icons/fi';
 
 export const SideBarData = [
     {
@@ -78,6 +79,13 @@ export const SideBarData = [
         title: 'Profile',
         path: '/dashboard/profile',
         icon: <FaIcons.FaHome />,
+        iconClosed: < RiIcons.RiArrowDownSFill />,
+        iconOpened: <RiIcons.RiArrowUpSFill />
+    },
+    {
+        title: 'Settings',
+        path: '/dashboard/profile/settings',
+        icon: <FiIcons.FiSettings />,
         iconClosed: < RiIcons.RiArrowDownSFill />,
         iconOpened: <RiIcons.RiArrowUpSFill />
     }

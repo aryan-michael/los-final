@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button, Col, Container, Navbar, Row } from "react-bootstrap";
+import { Alert, Button, Col, Row, Container } from "react-bootstrap";
 import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
 import NavBar from "../../components/NavBar/NavBar";
 
