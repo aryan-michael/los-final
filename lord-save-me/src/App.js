@@ -1,5 +1,5 @@
 import Home from './pages/Home/Home';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet, useParams } from 'react-router-dom';
 import Forms from './pages/Register/Forms';
 import ClientLogin from './pages/Login/ClientLogin';
 import SetPassword from './pages/Password/SetPassword';
@@ -7,17 +7,16 @@ import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
 import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
-import SideBar from './components/Sidebar/SideBar';
 import SideBar2 from './components/SideBar2/SideBar2';
+
 //import './App.css'
-import Dashboard from "./pages/AdminPanel/Dashboard";
-import Users from "./pages/AdminPanel/Users";
-import Messages from "./pages/AdminPanel/Messages";
-import FileManager from "./pages/AdminPanel/FileManager";
-import Analytics from "./pages/AdminPanel/Analytics";
-import Order from "./pages/AdminPanel/Order";
-import Saved from "./pages/AdminPanel/Saved";
-import Setting from "./pages/AdminPanel/Setting";
+import SideBar from './components/Sidebar/SideBar';
+import Dashboard from "./pages/UserPanel/Dashboard";
+import KYC from "./pages/UserPanel/KYC";
+import CheckStatus from "./pages/UserPanel/CheckStatus";
+import Analytics from "./pages/UserPanel/Analytics";
+import Setting from "./pages/UserPanel/Setting";
+import AddInquiry from './pages/UserPanel/AddInquiry';
 
 function App() {
   return (
@@ -34,37 +33,18 @@ function App() {
         <Route path='/forgot-password/:id' element={<ForgotPassword />} />
         <Route path='/test' element={<Test />} />
         <Route path='/practice' element={<Practice />} />
-        <Route path='/sidebar' element={<SideBar />} />
         <Route path='/sidebar2' element={<SideBar2 />} />
-        {/* <SideBar>
-          <Route path="/admin-dashboard" element={<Dashboard />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/file-manager" element={<FileManager />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/saved" element={<Saved />} />
-          <Route path="/settings" element={<Setting />} />
 
-          <Route path="*" element={<> not found</>} />
-        </SideBar> */}
-        {/* break */}
-
-        {/* <SideBar>
-          <Routes>
-            <Route path="/admin-dashboard" element={<Dashboard />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/file-manager" element={<FileManager />} />
-            <Route path="/order" element={<Order />} />
-            <Route path="/saved" element={<Saved />} />
-            <Route path="/settings" element={<Setting />} />
-
-            <Route path="*" element={<> not found</>} />
-          </Routes>
-        </SideBar> */}
+        <Route path='/sidebar' element={<SideBar />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="kyc-docs" element={<KYC />} />
+          <Route path="check-status" element={<CheckStatus />} />
+          <Route path="add-inquiry" element={<AddInquiry />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="settings" element={<Setting />} />
+        </Route>
       </Routes>
+      <Outlet />
     </>
   );
 }

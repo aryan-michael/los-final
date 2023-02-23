@@ -1,10 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
-import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
-import { BsCartCheck } from "react-icons/bs";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -12,79 +10,53 @@ import './SideBar.css';
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 const routes = [
   {
-    path: "/admin-dashboard",
+    path: "dashboard",
     name: "Dashboard",
     icon: <FaHome />,
   },
   {
-    path: "/users",
-    name: "My Account",
+    path: "kyc-docs",
+    name: "KYC Documents",
     icon: <FaUser />,
   },
   {
-    path: "/messages",
-    name: "Messages",
+    path: "add-inquiry",
+    name: "Add Inquiry",
     icon: <MdMessage />,
   },
   {
-    path: "/analytics",
+    path: "check-status",
+    name: "Check Status",
+    icon: <MdMessage />,
+  },
+  {
+    path: "analytics",
     name: "Analytics",
     icon: <BiAnalyse />,
   },
+
   {
-    path: "/file-manager",
-    name: "File Manager",
-    icon: <AiTwotoneFileExclamation />,
-    subRoutes: [
-      {
-        path: "/settings/profile",
-        name: "Profile ",
-        icon: <FaUser />,
-      },
-      {
-        path: "/settings/2fa",
-        name: "2FA",
-        icon: <FaLock />,
-      },
-      {
-        path: "/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
-      },
-    ],
-  },
-  {
-    path: "/order",
-    name: "Order",
-    icon: <BsCartCheck />,
-  },
-  {
-    path: "/settings",
+    path: "settings",
     name: "Settings",
     icon: <BiCog />,
     exact: true,
     subRoutes: [
       {
-        path: "/settings/profile",
+        path: "settings/profile",
         name: "Profile ",
         icon: <FaUser />,
       },
       {
-        path: "/settings/2fa",
+        path: "settings/2fa",
         name: "2FA",
         icon: <FaLock />,
       },
       {
-        path: "/settings/billing",
+        path: "settings/billing",
         name: "Billing",
         icon: <FaMoneyBill />,
       },
     ],
-  },
-  {
-    path: "/saved",
-    name: "Saved",
-    icon: <AiFillHeart />,
   },
 ];
 
@@ -196,7 +168,7 @@ const SideBar = ({ children }) => {
                   exit="hidden"
                   className="logo"
                 >
-                  MENU
+                  USER PANEL
                 </motion.h1>
               )}
             </AnimatePresence>
@@ -240,7 +212,7 @@ const SideBar = ({ children }) => {
                   to={route.path}
                   key={index}
                   className="link"
-                  activeClassName="active"
+                // activeClassName="active"
                 >
                   <div className="icon">{route.icon}</div>
                   <AnimatePresence>
@@ -264,6 +236,7 @@ const SideBar = ({ children }) => {
 
         <main>{children}</main>
       </div>
+      <Outlet />
     </>
   );
 };
