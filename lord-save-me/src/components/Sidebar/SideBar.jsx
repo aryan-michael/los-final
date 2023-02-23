@@ -10,49 +10,49 @@ import './SideBar.css';
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 const routes = [
   {
-    path: "dashboard",
+    path: "/dashboard",
     name: "Dashboard",
     icon: <FaHome />,
   },
   {
-    path: "kyc-docs",
+    path: "/kyc-docs",
     name: "KYC Documents",
     icon: <FaUser />,
   },
   {
-    path: "add-inquiry",
+    path: "/add-inquiry",
     name: "Add Inquiry",
     icon: <MdMessage />,
   },
   {
-    path: "check-status",
+    path: "/check-status",
     name: "Check Status",
     icon: <MdMessage />,
   },
   {
-    path: "analytics",
+    path: "/analytics",
     name: "Analytics",
     icon: <BiAnalyse />,
   },
 
   {
-    path: "settings",
+    path: "/settings",
     name: "Settings",
     icon: <BiCog />,
     exact: true,
     subRoutes: [
       {
-        path: "settings/profile",
+        path: "/settings/profile",
         name: "Profile ",
         icon: <FaUser />,
       },
       {
-        path: "settings/2fa",
+        path: "/settings/2fa",
         name: "2FA",
         icon: <FaLock />,
       },
       {
-        path: "settings/billing",
+        path: "/settings/billing",
         name: "Billing",
         icon: <FaMoneyBill />,
       },

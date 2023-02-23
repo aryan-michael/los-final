@@ -1,5 +1,12 @@
+import SideBar from "../../components/Sidebar/SideBar";
+
 const KYC = () => {
-  return <div className="title">KYC</div>;
+  return (
+    <>
+      <SideBar />
+      <div className="title">KYC</div>;
+    </>
+  );
 };
 
 export default KYC;

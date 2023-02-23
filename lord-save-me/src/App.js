@@ -35,14 +35,14 @@ function App() {
         <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar2' element={<SideBar2 />} />
 
-        <Route path='/sidebar' element={<SideBar />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="kyc-docs" element={<KYC />} />
-          <Route path="check-status" element={<CheckStatus />} />
-          <Route path="add-inquiry" element={<AddInquiry />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="settings" element={<Setting />} />
-        </Route>
+        <Route path='/sidebar' element={<SideBar />} />
+
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/kyc-docs" element={<KYC />} />
+        <Route path="/check-status" element={<CheckStatus />} />
+        <Route path="/add-inquiry" element={<AddInquiry />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/settings" element={<Setting />} />
       </Routes>
       <Outlet />
     </>

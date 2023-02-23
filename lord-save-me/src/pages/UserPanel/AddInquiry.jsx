@@ -1,5 +1,14 @@
+import SideBar from "../../components/Sidebar/SideBar";
+
 const AddInquiry = () => {
-  return <div className="title">Add Inquiry</div>;
+  return (
+    <>
+      <SideBar>
+        <div className="title">Add Inquiry</div>
+      </SideBar>
+    </>
+  );
+
 };
 
 export default AddInquiry;
