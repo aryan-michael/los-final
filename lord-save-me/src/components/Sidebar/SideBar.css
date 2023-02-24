@@ -15,7 +15,6 @@ main {
 .title {
     font-size: 3rem;
     display: grid;
-    place-items: center;
 }
 
 /* Sidebar */
@@ -78,6 +77,12 @@ main {
     padding: 5px 10px;
     border-right: 4px solid transparent;
     transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    text-decoration: none;
+}
+
+.link_text {
+    white-space: nowrap;
+    font-size: 15px;
 }
 
 .link:hover {
@@ -89,11 +94,7 @@ main {
 .active {
     border-right: 4px solid white;
     background: rgb(45, 51, 89);
-}
-
-.link_text {
-    white-space: nowrap;
-    font-size: 15px;
+    text-decoration: underline;
 }
 
 .menu {

@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
+import { FaBars, FaHome, FaLock, FaRupeeSign, FaMoneyBill, FaUser } from "react-icons/fa";
+import { HiDocumentArrowUp } from "react-icons/hi2";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { MdMessage } from "react-icons/md";
-import { BiAnalyse, BiSearch } from "react-icons/bi";
-import { BiCog } from "react-icons/bi";
+import { BiAnalyse, BiSearch, BiCog } from "react-icons/bi";
+import { IoInformationCircle } from "react-icons/io5";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -19,7 +21,7 @@ const routes = [
   {
     path: "/sidebar/my-info",
     name: "My Information",
-    icon: <BiCog />,
+    icon: <IoInformationCircle />,
     exact: true,
     subRoutes: [
       {
@@ -30,19 +32,19 @@ const routes = [
       {
         path: "/sidebar/my-info/loan-info",
         name: "Loan",
-        icon: <FaLock />,
+        icon: <FaRupeeSign />,
       },
     ],
   },
   {
     path: "/sidebar/kyc-docs",
     name: "KYC Documents",
-    icon: <FaUser />,
+    icon: <HiDocumentArrowUp />,
   },
   {
     path: "/sidebar/add-inquiry",
     name: "Add Inquiry",
-    icon: <MdMessage />,
+    icon: <AiOutlineUserAdd />,
   },
   {
     path: "/sidebar/check-status",
