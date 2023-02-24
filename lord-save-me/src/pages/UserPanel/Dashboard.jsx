@@ -1,10 +1,11 @@
 import React from 'react';
-import { Form, Row, InputGroup } from 'react-bootstrap';
+import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/Sidebar/SideBar";
 
 const Dashboard = () => {
   return (
     <>
+      <NavBar />
       <div style={{ display: 'flex' }}>
         <SideBar />
         <div>

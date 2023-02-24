@@ -1,10 +1,12 @@
 import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
 import SideBar from "../../components/Sidebar/SideBar";
+import NavBar from "../../components/NavBar/NavBar";
 
 const LoanInfo = () => {
     return (
         <>
+            <NavBar />
             <div style={{ display: 'flex' }}>
                 <SideBar />
                 <div>
@@ -28,7 +30,7 @@ const LoanInfo = () => {
 
                         <Row className="mb-3">
                             {/* EMPLOYMENT STATUS */}
-                            <Form.Group controlId="formGridState" className="col col-sm-3">
+                            <Form.Group controlId="formGridState" className="col col-sm-5">
                                 <Form.Label>Employment Status</Form.Label>
                                 <Form.Select className="form-control" name="empStatus" readOnly >
                                     <option defaultValue value="Choose...">Choose...</option>

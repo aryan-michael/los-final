@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
@@ -7,7 +7,9 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
 import './SideBar.css';
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+// import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+// import NavBar from "../NavBar/NavBar";
+
 const routes = [
   {
     path: "/sidebar/dashboard",

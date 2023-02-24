@@ -1,10 +1,12 @@
 import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
 import SideBar from "../../components/Sidebar/SideBar";
+import NavBar from "../../components/NavBar/NavBar";
 
 const PersonalInfo = () => {
     return (
         <>
+            <NavBar />
             <div style={{ display: 'flex' }}>
                 <SideBar />
                 <div>
