@@ -10,49 +10,67 @@ import './SideBar.css';
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 const routes = [
   {
-    path: "/dashboard",
+    path: "/sidebar/dashboard",
     name: "Dashboard",
     icon: <FaHome />,
   },
   {
-    path: "/kyc-docs",
+    path: "/sidebar/my-info",
+    name: "My Information",
+    icon: <BiCog />,
+    exact: true,
+    subRoutes: [
+      {
+        path: "/sidebar/my-info/personal-info",
+        name: "Personal ",
+        icon: <FaUser />,
+      },
+      {
+        path: "/sidebar/my-info/loan-info",
+        name: "Loan",
+        icon: <FaLock />,
+      },
+    ],
+  },
+  {
+    path: "/sidebar/kyc-docs",
     name: "KYC Documents",
     icon: <FaUser />,
   },
   {
-    path: "/add-inquiry",
+    path: "/sidebar/add-inquiry",
     name: "Add Inquiry",
     icon: <MdMessage />,
   },
   {
-    path: "/check-status",
+    path: "/sidebar/check-status",
     name: "Check Status",
     icon: <MdMessage />,
   },
   {
-    path: "/analytics",
+    path: "/sidebar/analytics",
     name: "Analytics",
     icon: <BiAnalyse />,
   },
 
   {
-    path: "/settings",
+    path: "/sidebar/settings",
     name: "Settings",
     icon: <BiCog />,
     exact: true,
     subRoutes: [
       {
-        path: "/settings/profile",
+        path: "/sidebar/settings/profile",
         name: "Profile ",
         icon: <FaUser />,
       },
       {
-        path: "/settings/2fa",
+        path: "/sidebar/settings/2fa",
         name: "2FA",
         icon: <FaLock />,
       },
       {
-        path: "/settings/billing",
+        path: "/sidebar/settings/billing",
         name: "Billing",
         icon: <FaMoneyBill />,
       },
@@ -99,7 +117,7 @@ const SideBar = ({ children }) => {
 
   return (
     <>
-      <Navbar sticky="top" bg="dark" variant="dark">
+      {/* <Navbar sticky="top" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/">
             LOS
@@ -142,7 +160,7 @@ const SideBar = ({ children }) => {
             <br />
           </Navbar.Collapse>
         </Container>
-      </Navbar>
+      </Navbar> */}
 
       {/* SIDEBAR */}
       <div className="main-container">
@@ -151,7 +169,7 @@ const SideBar = ({ children }) => {
             width: isOpen ? "200px" : "45px",
 
             transition: {
-              duration: 0.5,
+              duration: 0.8,
               type: "spring",
               damping: 10,
             },
@@ -212,7 +230,7 @@ const SideBar = ({ children }) => {
                   to={route.path}
                   key={index}
                   className="link"
-                // activeClassName="active"
+                  activeClassName="active"
                 >
                   <div className="icon">{route.icon}</div>
                   <AnimatePresence>
@@ -233,10 +251,9 @@ const SideBar = ({ children }) => {
             })}
           </section>
         </motion.div>
-
         <main>{children}</main>
+
       </div>
-      <Outlet />
     </>
   );
 };

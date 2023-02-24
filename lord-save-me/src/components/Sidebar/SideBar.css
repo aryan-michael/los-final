@@ -1,4 +1,4 @@
-/* * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -16,7 +16,7 @@ main {
     font-size: 3rem;
     display: grid;
     place-items: center;
-} */
+}
 
 /* Sidebar */
 .sidebar {

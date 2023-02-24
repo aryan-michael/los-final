@@ -1,10 +1,14 @@
 import SideBar from "../../components/Sidebar/SideBar";
 
 const Setting = () => {
-  return (<>
-    <SideBar />
-    <div className="title"> Setting</div>
-  </>);
+  return (
+    <>
+      <div style={{ display: 'flex' }}>
+        <SideBar />
+        <div className="title"> Settings </div>
+      </div>
+    </>
+  );
 };
 
 export default Setting;

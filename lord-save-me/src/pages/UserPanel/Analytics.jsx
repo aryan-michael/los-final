@@ -3,8 +3,10 @@ import SideBar from "../../components/Sidebar/SideBar";
 const Analytics = () => {
   return (
     <>
-      <SideBar />
-      <div className="title"> Analytics</div>;
+      <div style={{ display: 'flex' }}>
+        <SideBar />
+        <div className="title"> Analytics </div>
+      </div>
     </>
   )
 };

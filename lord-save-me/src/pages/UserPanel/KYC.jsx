@@ -3,8 +3,10 @@ import SideBar from "../../components/Sidebar/SideBar";
 const KYC = () => {
   return (
     <>
-      <SideBar />
-      <div className="title">KYC</div>;
+      <div style={{ display: 'flex' }}>
+        <SideBar />
+        <div className="title"> KYC </div>
+      </div>
     </>
   );
 };

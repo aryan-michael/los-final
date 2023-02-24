@@ -15,8 +15,10 @@ import Dashboard from "./pages/UserPanel/Dashboard";
 import KYC from "./pages/UserPanel/KYC";
 import CheckStatus from "./pages/UserPanel/CheckStatus";
 import Analytics from "./pages/UserPanel/Analytics";
-import Setting from "./pages/UserPanel/Setting";
+//import Setting from "./pages/UserPanel/Setting";
 import AddInquiry from './pages/UserPanel/AddInquiry';
+import PersonalInfo from './pages/UserPanel/PersonalInfo';
+import LoanInfo from './pages/UserPanel/LoanInfo';
 
 function App() {
   return (
@@ -36,15 +38,14 @@ function App() {
         <Route path='/sidebar2' element={<SideBar2 />} />
 
         <Route path='/sidebar' element={<SideBar />} />
-
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/kyc-docs" element={<KYC />} />
-        <Route path="/check-status" element={<CheckStatus />} />
-        <Route path="/add-inquiry" element={<AddInquiry />} />
-        <Route path="/analytics" element={<Analytics />} />
-        <Route path="/settings" element={<Setting />} />
+        <Route path="/sidebar/dashboard" element={<Dashboard />} />
+        <Route path="/sidebar/kyc-docs" element={<KYC />} />
+        <Route path="/sidebar/analytics" element={<Analytics />} />
+        <Route path="/sidebar/check-status" element={<CheckStatus />} />
+        <Route path="/sidebar/add-inquiry" element={<AddInquiry />} />
+        <Route path="/sidebar/my-info/personal-info" element={<PersonalInfo />} />
+        <Route path="/sidebar/my-info/loan-info" element={<LoanInfo />} />
       </Routes>
-      <Outlet />
     </>
   );
 }
