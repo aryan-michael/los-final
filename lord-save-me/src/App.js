@@ -1,5 +1,5 @@
 import Home from './pages/Home/Home';
-import { Routes, Route, Outlet, useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Forms from './pages/Register/Forms';
 import ClientLogin from './pages/Login/ClientLogin';
 import SetPassword from './pages/Password/SetPassword';
@@ -19,6 +19,7 @@ import Analytics from "./pages/UserPanel/Analytics";
 import AddInquiry from './pages/UserPanel/AddInquiry';
 import PersonalInfo from './pages/UserPanel/PersonalInfo';
 import LoanInfo from './pages/UserPanel/LoanInfo';
+import PostLoginNavBar from './components/NavBar/PostLoginNavBar';
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
         <Route path='/test' element={<Test />} />
         <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar2' element={<SideBar2 />} />
-
+        <Route path='/new-navbar' element={<PostLoginNavBar />} />
         <Route path='/sidebar' element={<SideBar />} />
         <Route path="/sidebar/dashboard" element={<Dashboard />} />
         <Route path="/sidebar/kyc-docs" element={<KYC />} />

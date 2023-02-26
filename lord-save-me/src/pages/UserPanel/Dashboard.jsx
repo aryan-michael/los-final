@@ -1,11 +1,10 @@
-import React from 'react';
-import NavBar from "../../components/NavBar/NavBar";
+import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import SideBar from "../../components/Sidebar/SideBar";
 
 const Dashboard = () => {
   return (
     <>
-      <NavBar />
+      <PostLoginNavBar />
       <div style={{ display: 'flex' }}>
         <SideBar />
         <div>

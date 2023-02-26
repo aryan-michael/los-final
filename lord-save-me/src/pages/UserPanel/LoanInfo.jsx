@@ -1,12 +1,12 @@
-import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
+import PostLoginNavBar from '../../components/NavBar/PostLoginNavBar';
 import SideBar from "../../components/Sidebar/SideBar";
-import NavBar from "../../components/NavBar/NavBar";
+
 
 const LoanInfo = () => {
     return (
         <>
-            <NavBar />
+            <PostLoginNavBar />
             <div style={{ display: 'flex' }}>
                 <SideBar />
                 <div>
