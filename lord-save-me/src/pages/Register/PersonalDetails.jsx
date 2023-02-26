@@ -12,9 +12,9 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error})
                         <Form.Label>Salutation</Form.Label>
                         <Form.Select className="form-control" name="salutation" value={personalDetails.salutation} onChange={setPersonalDetails} required >
                             <option defaultValue value=''>Choose...</option>
-                            <option value="mr">Mr.</option>
-                            <option value="mrs">Mrs.</option>
-                            <option value="ms">Ms.</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Ms.">Ms.</option>
                         </Form.Select>
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your salutation.</Form.Control.Feedback>
@@ -89,7 +89,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error})
                         <Form.Control aria-label="Recipient's username" type="email" name="email" value={personalDetails.email} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your email.</Form.Control.Feedback>
-                        <Form.Control.Feedback style={{display:error.email?'block':'none'}} type='invalid'>{error.email}</Form.Control.Feedback>
+                        {/* <Form.Control.Feedback style={{display:error.email?'block':'none'}} type='invalid'>{error.email}</Form.Control.Feedback> */}
                     </Form.Group>
                 </Row>
 

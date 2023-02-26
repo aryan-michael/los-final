@@ -27,7 +27,6 @@ function OTP({ setLoginToken, loginToken }) {
             ...data,
             [name]: value
         })
-        console.log(data)
     }
 
     const ConfirmOTP = async (e) => {
@@ -39,7 +38,8 @@ function OTP({ setLoginToken, loginToken }) {
             await axios.post('http://localhost:5000/api/v1/user/check-otp', data, {
                 headers: {
                     Authorization: `Bearer ${loginToken.token}`
-                }
+                },
+                withCredentials:true
             }).then(response => {
                 console.log(response)
                 setLoginToken(response.data.user)

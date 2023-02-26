@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 function ClientLogin() {
 
+
     const Navigate = useNavigate()
 
     const [userOtp, setUserOtp] = useState({
@@ -49,7 +50,9 @@ function ClientLogin() {
             return
         }
         try {
-            await axios.post('http://localhost:5000/api/v1/user/login', user).then(response => {
+            await axios.post('http://localhost:5000/api/v1/user/login', user, {
+                withCredentials:true
+            }).then(response => {
                 console.log(response)
                 alert(response.data.msg)
                 setToken(response.data.user.token)
@@ -74,10 +77,13 @@ function ClientLogin() {
             await axios.post('http://localhost:5000/api/v1/user/check-login-otp', userOtp, {
                 headers: {
                     Authorization: `Bearer ${token}`
-                }
+                },
+                withCredentials:true
             }).then(response => {
                 console.log(response)
                 alert(response.data.msg)
+                const cookie = document.cookie
+                console.log(cookie);
             })
         } catch (err) {
             if (err.response) {
@@ -88,7 +94,7 @@ function ClientLogin() {
                 return
             }
         }
-        Navigate('/')
+        Navigate('/sidebar/my-info/personal-info')
     }
     
     return (

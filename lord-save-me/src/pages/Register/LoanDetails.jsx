@@ -31,9 +31,9 @@ const LoanDetails = ({ loanDetails, setLoanDetails,loanValidated,error }) => {
                         <Form.Label>Employment Status</Form.Label>
                         <Form.Select className="form-control" name="empStatus" value={loanDetails.empStatus} onChange={setLoanDetails} required>
                             <option defaultValue value=''>Choose...</option>
-                            <option value="business">Business Owner</option>
+                            <option value="Business owner">Business Owner</option>
                             <option value="professional">Professional</option>
-                            <option value="salaried_employee">Salaried Employee</option>
+                            <option value="Salaried employee">Salaried Employee</option>
                         </Form.Select>
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide loan amount.</Form.Control.Feedback>

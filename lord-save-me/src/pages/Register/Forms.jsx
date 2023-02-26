@@ -195,13 +195,10 @@ function Forms({ loan_type, country,setLoginToken }) {
             })
             return
         } else if ((targetName === 'mobile' || targetName === 'pin' || targetName ==='dob' || targetName ==='email') && valid.status && valid.error) {
-            console.log('Here')
-            console.log(valid.error)
             setError({
                 ...error,
                 [targetName]:valid.error
             })
-            console.log(error[targetName])
         }
         else {
             setError({
@@ -244,7 +241,6 @@ function Forms({ loan_type, country,setLoginToken }) {
     const Navigate = useNavigate();
 
     const handleSubmit = async (step, e) => {
-        console.log("button working!")
         e.preventDefault();
 
         
@@ -303,13 +299,18 @@ function Forms({ loan_type, country,setLoginToken }) {
                 pin: personalDetails.pin,
                 city:personalDetails.city,
                 state:personalDetails.state,
-                country:personalDetails.country,
+                country: personalDetails.country,
+                loanAmount: loanDetails.loanAmount,
+                loanType: loanDetails.loanType, //display | not input
+                empStatus: loanDetails.empStatus, //professional | business
+                firmAddress: loanDetails.firmAddress,
+                businessName: loanDetails.businessName
             }
-            console.log(user)
             /////////////////////////////////////////Backend Code ///////////////////////////////////////////
             try {
-                await axios.post('http://localhost:5000/api/v1/user/signup', user).then(response => {
-                    console.log(response)
+                await axios.post('http://localhost:5000/api/v1/user/signup', user, {
+                    withCredentials:true
+                }).then(response => {
                     setLoginToken(response.data.user)
                 })
             } catch (err) {

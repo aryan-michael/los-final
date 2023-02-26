@@ -31,13 +31,13 @@ let userSchema = new mongoose.Schema({
     firmAddress: {
         type: String,
     },
-    BusinesName: {
+    businessName: {
         type: String
     },
     address: {
         type: String,
     },
-    pincode: {
+    pin: {
         type: Number,
     },
     city: {
@@ -83,7 +83,8 @@ let userSchema = new mongoose.Schema({
     passwordResetToken: String,
     passwordResetTokenExp: Date,
     userOTP: String,
-    otpExp: Date
+    otpExp: Date,
+    otpToken: String,
 }, {
     timestamps:true
 }

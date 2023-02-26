@@ -43,7 +43,8 @@ function SetPassword({ setLoginToken, loginToken }) {
             await axios.put('http://localhost:5000/api/v1/user/set-password', password, {
                 headers: {
                     Authorization: `Bearer ${loginToken.token}`
-                }
+                },
+                withCredentials:true
             }).then(response => {
                 console.log(response)
             })
