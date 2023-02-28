@@ -23,57 +23,57 @@ createTheme("solarized", {
         hover: "rgba(0,0,0,.08)",
         disabled: "rgba(0,0,0,.12)"
     }
-});
+}); //color scheme system
 
 export default function ClientData() {
     const columns = [
         {
-            name: "Player ID",
-            selector: (row) => row.PlayerID,
+            name: "Client ID",
+            selector: (row) => row.ClientID,
             sortable: true
         },
         {
-            name: "Player Name",
-            selector: (row) => row.PlayerName,
+            name: "Client Name",
+            selector: (row) => row.ClientName,
             sortable: true
         }, {
-            name: "Player Image",
-            selector: (row) => <img className="mt-1" src={row.PlayerImage} alt="MDN logo" />,
+            name: "Profile Picture",
+            selector: (row) => <img className="mt-1" src={row.ProfileImage} alt="MDN logo" />,
         },
         {
-            name: "Team",
-            selector: (row) => row.Team,
+            name: "Loan Type",
+            selector: (row) => row.LoanType,
             sortable: true
         },
         {
-            name: "Team Image",
-            selector: (row) => <img src={row.TeamImage} alt="MDN logo" />,
+            name: "Loan Amount",
+            selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
             sortable: true
         },
         {
-            name: "Country",
-            selector: (row) => row.Country,
+            name: "Gender",
+            selector: (row) => row.Gender,
             sortable: true
         },
-        {
-            name: "CountryImage",
+        /*{
+            name: "Age",
             selector: (row) => (
-                <img src={row.CountryImage} width="50%" height="50%" />
+                <img src={row.Age} width="50%" height="50%" />
             ),
             sortable: true
-        },
+        },*/
         {
-            name: "Position",
-            selector: (row) => row.Position,
+            name: "Age",
+            selector: (row) => row.ROI,
             sortable: true
         },
         {
-            name: "Goals",
-            selector: (row) => row.Goals,
+            name: "ROI",
+            selector: (row) => row.Status,
             sortable: true
         },
         {
-            name: "Apps",
+            name: "Status",
             selector: (row) => row.Apps,
             sortable: true
         },
@@ -83,9 +83,9 @@ export default function ClientData() {
         //         let arrayData = [];
         //         let count = 0
         //         gamePerformance.forEach((element) => {
-        //             if (row.PlayerID === element.PlayerID) {
+        //             if (row.ClientID === element.ClientID) {
         //                 count++;
-        //                 console.log(row.PlayerID, count)
+        //                 console.log(row.ClientID, count)
         //                 arrayData.push(element.Value);
         //             }
         //         });
@@ -100,153 +100,153 @@ export default function ClientData() {
 
     const playerSummary = [
         {
-            PlayerID: 1,
-            PlayerName: "Aaron Ramsey",
-            PlayerImage:
+            ClientID: 1,
+            ClientName: "Aaron Ramsey",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p447715.png",
-            Team: "Aston Villa",
-            TeamImage:
+            LoanType: "Aston Villa",
+            LoanAmount: 22,
+            Gender:
                 "https://resources.premierleague.com/premierleague/badges/50/t7.png",
-            Country: "Jamaica",
-            CountryImage:
+            Age: "Jamaica",
+            ROI:
                 "https://www.countryflags.com/wp-content/uploads/jamaica-flag-png-large.png",
-            Position: "MID",
-            Goals: 22,
+            Status: "Completed (attempt pill input)",
             Apps: 23
         },
         {
-            PlayerID: 2,
-            PlayerName: "Alex Telles",
-            PlayerImage:
+            ClientID: 2,
+            ClientName: "Alex Telles",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p152590.png",
-            Team: "Manchester United",
-            TeamImage:
+            LoanType: "Manchester United",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Country: "Brazil",
-            CountryImage:
+            Gender: "Brazil",
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/brazil-flag-png-large.png",
-            Position: "DEF",
-            Goals: 21,
+            ROI: "DEF",
+            Status: "Pending (attempt pill input)",
             Apps: 10
         },
         {
-            PlayerID: 3,
-            PlayerName: "Allan",
-            PlayerImage:
+            ClientID: 3,
+            ClientName: "Allan",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p119765.png",
-            Team: "Everton",
-            TeamImage:
+            LoanType: "Everton",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t11.png",
-            Country: "England",
-            CountryImage:
+            Gender: "England",
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
-            Position: "MID",
-            Goals: 30,
+            ROI: "MID",
+            Status: 30,
             Apps: 23
         },
         {
-            PlayerID: 4,
-            PlayerName: "Dele Alli",
-            PlayerImage:
+            ClientID: 4,
+            ClientName: "Dele Alli",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p108823.png",
-            Team: "Spurs",
-            TeamImage:
+            LoanType: "Spurs",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t6.png",
-            Country: "Brazil",
-            CountryImage:
+            Gender: "Brazil",
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/brazil-flag-png-large.png",
-            Position: "MID",
-            Goals: 3,
+            ROI: "MID",
+            Status: 3,
             Apps: 27
         },
         {
-            PlayerID: 5,
-            PlayerName: "Leon Bailey",
-            PlayerImage:
+            ClientID: 5,
+            ClientName: "Leon Bailey",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p215711.png",
-            Team: "Aston Villa",
-            TeamImage:
+            LoanType: "Aston Villa",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t7.png",
-            Country: "Jamaica",
-            CountryImage:
+            Gender: "Jamaica",
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/jamaica-flag-png-large.png",
-            Position: "FWD",
-            Goals: 29,
+            ROI: "FWD",
+            Status: 29,
             Apps: 30
         },
         {
-            PlayerID: 6,
-            PlayerName: "Bernando Silva",
-            PlayerImage:
+            ClientID: 6,
+            ClientName: "Bernando Silva",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p165809.png",
-            Team: "Manchester City",
-            TeamImage:
+            LoanType: "Manchester City",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t43.png",
-            Country: "Portugal",
-            CountryImage:
+            Gender: "Portugal",
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
-            Position: "MID",
-            Goals: 5,
+            ROI: "MID",
+            Status: 5,
             Apps: 15
         },
         {
-            PlayerID: 7,
-            PlayerName: "Willy Boly",
-            PlayerImage:
+            ClientID: 7,
+            ClientName: "Willy Boly",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p90585.png",
-            Team: "Wolves",
-            TeamImage:
+            LoanType: "Wolves",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t39.png",
-            Country: "Cote D’Ivoire",
-            CountryImage:
+            Gender: "Cote D’Ivoire",
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/cote-d-ivoire-flag-png-large.png",
-            Position: "DEF",
-            Goals: 26,
+            ROI: "DEF",
+            Status: 26,
             Apps: 16
         },
         {
-            PlayerID: 8,
-            PlayerName: "Bruno Fernandes",
-            PlayerImage:
+            ClientID: 8,
+            ClientName: "Bruno Fernandes",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            Team: "Manchester United",
-            TeamImage:
+            LoanType: "Manchester United",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Country: "Portugal",
-            CountryImage:
+            Gender: "Portugal",
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
-            Position: "MID",
-            Goals: 23,
+            ROI: "MID",
+            Status: 23,
             Apps: 2
         },
         {
-            PlayerID: 9,
-            PlayerName: "Edinson Cavani",
-            PlayerImage:
+            ClientID: 9,
+            ClientName: "Edinson Cavani",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            Team: "Manchester United",
-            TeamImage:
+            LoanType: "Manchester United",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Country: "Uruguay",
-            CountryImage:
+            Gender: "Uruguay",
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
-            Position: "FWD",
-            Goals: 2,
+            ROI: "FWD",
+            Status: 2,
             Apps: 19
         },
         {
-            PlayerID: 10,
-            PlayerName: "Ben Chilwell",
-            PlayerImage:
+            ClientID: 10,
+            ClientName: "Ben Chilwell",
+            ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            Team: "Chelsea",
-            TeamImage:
+            LoanType: "Chelsea",
+            LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t8.png",
-            Country: "England",
-            "Country Image":
+            Gender: "England",
+            "Gender Image":
                 "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
-            Position: "DEF",
-            Goals: 12,
+            ROI: "DEF",
+            Status: 12,
             Apps: 17
         }
     ];
@@ -254,12 +254,12 @@ export default function ClientData() {
     // const columnGamePerformance = [
     //     {
     //         name: "Player ID",
-    //         selector: (row) => row.PlayerID,
+    //         selector: (row) => row.ClientID,
     //         sortable: true
     //     },
     //     {
     //         name: "Player Name",
-    //         selector: (row) => row.PlayerName,
+    //         selector: (row) => row.ClientName,
     //         sortable: true
     //     },
     //     {
@@ -271,502 +271,502 @@ export default function ClientData() {
 
     const gamePerformance = [
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 1,
             Value: 8
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 2,
             Value: 8
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 3,
             Value: 4
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 4,
             Value: 2
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 5,
             Value: 4
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 6,
             Value: 6
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 7,
             Value: 6
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 8,
             Value: 8
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 9,
             Value: 3
         },
         {
-            PlayerID: 1,
+            ClientID: 1,
             GameID: 10,
             Value: 5
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 1,
             Value: 1
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 2,
             Value: 4
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 3,
             Value: 6
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 4,
             Value: 1
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 5,
             Value: 9
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 6,
             Value: 3
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 7,
             Value: 2
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 8,
             Value: 6
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 9,
             Value: 7
         },
         {
-            PlayerID: 2,
+            ClientID: 2,
             GameID: 10,
             Value: 2
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 1,
             Value: 8
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 2,
             Value: 6
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 3,
             Value: 4
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 4,
             Value: 8
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 5,
             Value: 10
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 6,
             Value: 5
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 7,
             Value: 6
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 8,
             Value: 2
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 9,
             Value: 10
         },
         {
-            PlayerID: 3,
+            ClientID: 3,
             GameID: 10,
             Value: 6
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 1,
             Value: 3
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 2,
             Value: 1
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 3,
             Value: 2
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 4,
             Value: 5
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 5,
             Value: 4
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 6,
             Value: 9
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 7,
             Value: 8
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 8,
             Value: 3
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 9,
             Value: 6
         },
         {
-            PlayerID: 4,
+            ClientID: 4,
             GameID: 10,
             Value: 4
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 1,
             Value: 3
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 2,
             Value: 6
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 3,
             Value: 3
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 4,
             Value: 9
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 5,
             Value: 6
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 6,
             Value: 3
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 7,
             Value: 8
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 8,
             Value: 5
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 9,
             Value: 1
         },
         {
-            PlayerID: 5,
+            ClientID: 5,
             GameID: 10,
             Value: 3
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 1,
             Value: 7
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 2,
             Value: 3
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 3,
             Value: 9
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 4,
             Value: 5
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 5,
             Value: 1
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 6,
             Value: 4
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 7,
             Value: 2
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 8,
             Value: 3
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 9,
             Value: 4
         },
         {
-            PlayerID: 6,
+            ClientID: 6,
             GameID: 10,
             Value: 7
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 1,
             Value: 3
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 2,
             Value: 8
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 3,
             Value: 1
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 4,
             Value: 7
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 5,
             Value: 4
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 6,
             Value: 6
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 7,
             Value: 10
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 8,
             Value: 8
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 9,
             Value: 2
         },
         {
-            PlayerID: 7,
+            ClientID: 7,
             GameID: 10,
             Value: 4
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 1,
             Value: 5
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 2,
             Value: 2
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 3,
             Value: 3
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 4,
             Value: 7
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 5,
             Value: 4
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 6,
             Value: 8
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 7,
             Value: 3
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 8,
             Value: 1
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 9,
             Value: 3
         },
         {
-            PlayerID: 8,
+            ClientID: 8,
             GameID: 10,
             Value: 5
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 1,
             Value: 3
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 2,
             Value: 7
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 3,
             Value: 5
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 4,
             Value: 8
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 5,
             Value: 4
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 6,
             Value: 2
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 7,
             Value: 10
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 8,
             Value: 7
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 9,
             Value: 3
         },
         {
-            PlayerID: 9,
+            ClientID: 9,
             GameID: 10,
             Value: 7
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 1,
             Value: 7
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 2,
             Value: 2
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 3,
             Value: 5
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 4,
             Value: 9
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 5,
             Value: 10
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 6,
             Value: 6
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 7,
             Value: 7
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 8,
             Value: 2
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 9,
             Value: 3
         },
         {
-            PlayerID: 10,
+            ClientID: 10,
             GameID: 10,
             Value: 9
         }
@@ -786,12 +786,13 @@ export default function ClientData() {
     //     { name: "C", info: "CCC" }
     // ];
 
-    const arrInfoMap = new Map(playerSummary.map((o) => [o.PlayerID, o]));
+    const arrInfoMap = new Map(playerSummary.map((o) => [o.ClientID, o]));
+    //maps the id onto the playerSummary of respective players
 
     const result = gamePerformance.map((o) => ({
         ...o,
-        ...arrInfoMap.get(o.PlayerID)
-    }));
+        ...arrInfoMap.get(o.ClientID)
+    })); //maps the id onto the gamePerformance of respective players
 
     // const conditionalRowStyles = [
     //     {
@@ -808,8 +809,10 @@ export default function ClientData() {
     // ];
 
     const handleRowClicked = (row) => {
-        console.log(row.PlayerName);
+        console.log(row.ClientName);
     };
+    //outputs the name property into the console
+    
     return (
         <>
             <PostLoginNavBar />
@@ -817,14 +820,18 @@ export default function ClientData() {
                 <AdminSideBar />
                 <div style={{ display: 'inline-block' }}>
 
+
                     <DataTable
                         title="Player Summary"
                         columns={columns}
                         data={playerSummary}
                         defaultSortFieldId
-                        pagination={5}
+                        pagination={10}
+                        fixedHeader
+  			fixedHeaderScrollHeight="600px"
                         onRowClicked={handleRowClicked}
-                        highlightOnHover />
+                        highlightOnHover
+                         />
                 </div>
             </div>
         </>
