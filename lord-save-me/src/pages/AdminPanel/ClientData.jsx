@@ -815,8 +815,7 @@ export default function ClientData() {
             <PostLoginNavBar />
             <div style={{ display: 'flex' }}>
                 <AdminSideBar />
-
-                <div style={{ display: 'block' }}>
+                <div style={{ display: 'inline-block' }}>
 
                     <DataTable
                         title="Player Summary"
