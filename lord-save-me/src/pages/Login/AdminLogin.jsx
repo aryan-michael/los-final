@@ -1,6 +1,5 @@
-import { MDBIcon } from 'mdbreact';
 import './Login.css';
-import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import NavBar from '../../components/NavBar/NavBar';
 
 function ClientLogin() {

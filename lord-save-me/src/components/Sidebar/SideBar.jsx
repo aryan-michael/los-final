@@ -37,6 +37,11 @@ const routes = [
     ],
   },
   {
+    path: "/sidebar/bank-details",
+    name: "Bank Details",
+    icon: <HiDocumentArrowUp />,
+  },
+  {
     path: "/sidebar/kyc-docs",
     name: "KYC Documents",
     icon: <HiDocumentArrowUp />,

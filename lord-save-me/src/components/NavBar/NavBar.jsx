@@ -33,13 +33,14 @@ const NavBar = () => {
                             </NavDropdown>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="/new-navbar">Post Login</Nav.Link>
+                            <Nav.Link href="/new-navbar">PostLogin Navbar</Nav.Link>
                             <Nav.Link href="/sidebar">SideBar</Nav.Link>
+                            <Nav.Link href="/admin-sidebar">AdminSideBar</Nav.Link>
                             <NavDropdown title="Login" id="collasible-nav-dropdown">
                                 <NavDropdown.Item eventKey={2} href="/login/client">
                                     Client
                                 </NavDropdown.Item>
-                                <NavDropdown.Item href="">
+                                <NavDropdown.Item eventKey={2} href="/login/admin">
                                     Admin
                                 </NavDropdown.Item>
                             </NavDropdown>

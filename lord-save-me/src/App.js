@@ -1,30 +1,47 @@
-import Home from './pages/Home/Home';
 import { Routes, Route } from 'react-router-dom';
+
+//MAIN PAGES
+import Home from './pages/Home/Home';
 import Forms from './pages/Register/Forms';
 import ClientLogin from './pages/Login/ClientLogin';
+import AdminLogin from './pages/Login/AdminLogin';
 import SetPassword from './pages/Password/SetPassword';
 import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
+
+//USER PANEL
+import Dashboard from "./pages/UserPanel/Dashboard";
+import KYC from "./pages/UserPanel/KYC";
+import BankDetails from "./pages/UserPanel/BankDetails";
+import CheckStatus from "./pages/UserPanel/CheckStatus";
+import Analytics from "./pages/UserPanel/Analytics";
+import AddInquiry from './pages/UserPanel/AddInquiry';
+import PersonalInfo from './pages/UserPanel/PersonalInfo';
+import LoanInfo from './pages/UserPanel/LoanInfo';
+
+//ADMIN PANEL
+import AdminDashboard from "./pages/AdminPanel/AdminDashboard";
+import ClientData from "./pages/AdminPanel/ClientData";
+import Statistics from "./pages/AdminPanel/Statistics";
+
+//COMPONENTS
+import SideBar from './components/Sidebar/SideBar';
+import AdminSideBar from './components/Sidebar/AdminSideBar';
+import PostLoginNavBar from './components/NavBar/PostLoginNavBar';
+
+
+//TESTING
 import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
 import SideBar2 from './components/SideBar2/SideBar2';
 
-//import './App.css'
-import SideBar from './components/Sidebar/SideBar';
-import Dashboard from "./pages/UserPanel/Dashboard";
-import KYC from "./pages/UserPanel/KYC";
-import CheckStatus from "./pages/UserPanel/CheckStatus";
-import Analytics from "./pages/UserPanel/Analytics";
-//import Setting from "./pages/UserPanel/Setting";
-import AddInquiry from './pages/UserPanel/AddInquiry';
-import PersonalInfo from './pages/UserPanel/PersonalInfo';
-import LoanInfo from './pages/UserPanel/LoanInfo';
-import PostLoginNavBar from './components/NavBar/PostLoginNavBar';
 
 function App() {
   return (
     <>
       <Routes>
+
+        {/* MAIN PAGES */}
         <Route exact path='/' element={<Home />} />
         <Route path='loan/business' element={<Forms loan_type={"Business"} country={"India"} />} />
         <Route path='loan/home' element={<Forms loan_type={"Home"} country={"India"} />} />
@@ -33,19 +50,34 @@ function App() {
         <Route path='/otp' element={<OTP />} />
         <Route path='/set-password' element={<SetPassword />} />
         <Route path='/login/client' element={<ClientLogin />} />
+        <Route path='/login/admin' element={<AdminLogin />} />
         <Route path='/forgot-password/:id' element={<ForgotPassword />} />
-        <Route path='/test' element={<Test />} />
-        <Route path='/practice' element={<Practice />} />
-        <Route path='/sidebar2' element={<SideBar2 />} />
+
+        {/* COMPONENTS */}
         <Route path='/new-navbar' element={<PostLoginNavBar />} />
         <Route path='/sidebar' element={<SideBar />} />
+        <Route path='/admin-sidebar' element={<AdminSideBar />} />
+
+        {/* USER PANEL */}
         <Route path="/sidebar/dashboard" element={<Dashboard />} />
         <Route path="/sidebar/kyc-docs" element={<KYC />} />
+        <Route path="/sidebar/bank-details" element={<BankDetails />} />
         <Route path="/sidebar/analytics" element={<Analytics />} />
         <Route path="/sidebar/check-status" element={<CheckStatus />} />
         <Route path="/sidebar/add-inquiry" element={<AddInquiry />} />
         <Route path="/sidebar/my-info/personal-info" element={<PersonalInfo />} />
         <Route path="/sidebar/my-info/loan-info" element={<LoanInfo />} />
+
+        {/* ADMIN PANEL */}
+        <Route path="/admin-sidebar/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/admin-sidebar/client-data" element={<ClientData />} />
+        <Route path="/admin-sidebar/statistics" element={<Statistics />} />
+
+        {/* TESTING */}
+        <Route path='/test' element={<Test />} />
+        <Route path='/practice' element={<Practice />} />
+        <Route path='/sidebar2' element={<SideBar2 />} />
+
       </Routes>
     </>
   );

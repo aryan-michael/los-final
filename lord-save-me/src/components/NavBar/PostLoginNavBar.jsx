@@ -1,4 +1,4 @@
-import { Nav, Navbar, NavDropdown, Container, Icon } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import { BiPowerOff } from 'react-icons/bi';
 
 const PostLoginNavBar = () => {
