@@ -812,11 +812,11 @@ export default function ClientData() {
         console.log(row.ClientName);
     };
     //outputs the name property into the console
-    
+
     return (
         <>
             <PostLoginNavBar />
-            <div style={{ display: 'flex' }}>
+            <div style={{ height: '100%', display: 'flex' }}>
                 <AdminSideBar />
                 <div style={{ display: 'inline-block' }}>
 
@@ -826,12 +826,12 @@ export default function ClientData() {
                         columns={columns}
                         data={playerSummary}
                         defaultSortFieldId
-                        pagination={10}
+                        pagination={5}
                         fixedHeader
-  			fixedHeaderScrollHeight="600px"
+                        fixedHeaderScrollHeight="600px"
                         onRowClicked={handleRowClicked}
                         highlightOnHover
-                         />
+                    />
                 </div>
             </div>
         </>
