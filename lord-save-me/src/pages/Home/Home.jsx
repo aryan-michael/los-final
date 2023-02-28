@@ -4,11 +4,13 @@ import { Link, Outlet } from 'react-router-dom';
 import { FaBusinessTime, FaHome } from 'react-icons/fa';
 import { MdCastForEducation } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
+import NavBar from "../../components/NavBar/NavBar";
 
 const Home = () => {
 
     return (
         <>
+            <NavBar />
             <Container fluid>
                 <Row className="text-center ">
                     <Col className="p-3" xs={12} md={6} lg={3}>

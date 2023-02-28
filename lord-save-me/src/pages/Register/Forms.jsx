@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Col, Row, Container } from "react-bootstrap";
+import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
+import NavBar from "../../components/NavBar/NavBar";
 
 function validatePinCode(value) {
     let status = true
@@ -109,8 +111,7 @@ function Forms({ loan_type, country }) {
         businessName: ''
     })  //loan details
 
-
-
+    const [progressStep, setProgressStep] = useState(1);
 
     const handlePersonalDetails = (e) => {
         const targetName = e.target.name
@@ -156,54 +157,56 @@ function Forms({ loan_type, country }) {
             setError('')
         }
 
-        // if (name === "pin" && (value.length > 6 || isNaN(value))) {
-        //     console.log("invalid")
-        //     return;
-        // }
-        // else if (name === "firstname") {
-        //     value = value.toUpperCase();
-        // }
         let x = { ...loanDetails };
         x[targetName] = valid.value;
         setLoanDetails(x);
     };
 
     const Navigate = useNavigate();
-    const [validated, setValidated] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (step, e) => {
         console.log("button working!")
         e.preventDefault();
 
-        for (let x in personalDetails) {
-            if (personalDetails[x] === '') {
-                console.log("hello");
-                break
-                //return false;
-            }
-            else {
-                return true;
-            }
-        }
+        let isFormEmpty = false;
 
-        for (let x in loanDetails) {
-            if (loanDetails[x] === '') {
-                console.log("hi");
-                break
-                //return false;
-            }
-            else {
-                return true;
-            }
-        }
+        if (step === "Next")
+            for (let x in personalDetails) {
+                if (personalDetails[x] === '') {
+                    console.log("pd data showing", x, personalDetails[x]);
+                    isFormEmpty = true;
+                    //setProgressStep : progressbar should only move if form is filled
+                    //progress bar works for only 1 iteration
+                    break
+                    //return false;
+                }
 
-        if (page === FormTitles.length - 1) {
+            }
+
+        if (step === "Submit")
+            for (let x in loanDetails) {
+                if (loanDetails[x] === '') {
+                    console.log("ld data showing", x, loanDetails[x]);
+                    isFormEmpty = true;
+                    break
+                    //return false;
+                }
+            }
+
+
+        if (page === FormTitles.length - 1 && isFormEmpty === false) {
             //alert("An Email has been sent for verification");
             console.log(personalDetails);
             console.log(loanDetails);
             Navigate('/otp');
         } else {
-            setPage((currentPage) => currentPage + 1);
+            if (!isFormEmpty) {
+                console.log('form is not empty')
+                setPage((currentPage) => currentPage + 1);
+                if (progressStep < 2) {
+                    setProgressStep(progressStep => progressStep + 1);
+                }
+            }
         }
 
     };
@@ -217,39 +220,50 @@ function Forms({ loan_type, country }) {
             return <LoanDetails loanDetails={loanDetails} setLoanDetails={handleLoanDetails} />;
         }
     };
-    return (
-        <div className="form">
-            <div className="progressbar">
-                <div style={{ width: page === 0 ? "50%" : "100%" }} />
-            </div>
-            <div className="form-container">
-                <Alert>{error}</Alert>
-                <div className="header text-center">
-                    <h1>{FormTitles[page]}</h1>
-                </div>
-                <div className="body">{pageDisplay()}</div>
-                <div className="footer text-center">
-                    <button
-                        type="button"
-                        //onClick={submitButton} 
-                        className="me-4 btn btn-danger btn-lg"
-                        disabled={page === 0}
-                        onClick={() => {
-                            setPage((currentPage) => currentPage - 1);
-                        }}
-                    >Previous</button>
 
-                    <Button
-                        type="submit"
-                        className="me-4 btn btn-success btn-lg"
-                        //  disabled={!validated}
-                        onClick={handleSubmit}
-                    >
-                        {page === FormTitles.length - 1 ? "Submit" : "Next"}
-                    </Button>
+    return (
+        <>
+            <NavBar />
+            <div className="form">
+                <div className="form-container">
+                    <Alert>{error}</Alert>
+                    <Container className="h-100">
+                        <Row className="h-100">
+                            <Col className="align-self-center">
+                                <MultiStepProgressBar step={progressStep} />
+                            </Col>
+                        </Row>
+                    </Container>
+                    <div className="header text-center">
+                        <h1>{FormTitles[page]}</h1>
+                    </div>
+                    <div className="body">{pageDisplay()}</div>
+                    <div className="footer text-center">
+                        <button
+                            type="button"
+                            //onClick={submitButton} 
+                            className="me-4 btn btn-danger btn-lg"
+                            disabled={page === 0}
+                            onClick={() => {
+                                setPage((currentPage) => currentPage - 1);
+                                if (progressStep === 2) {
+                                    setProgressStep(1);
+                                }
+                            }}
+                        >Previous</button>
+
+                        <Button
+                            type="submit"
+                            className="me-4 btn btn-success btn-lg"
+                            //  disabled={!validated}
+                            onClick={(e) => handleSubmit(page === FormTitles.length - 1 ? "Submit" : "Next", e)}
+                        >
+                            {page === FormTitles.length - 1 ? "Submit" : "Next"}
+                        </Button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
