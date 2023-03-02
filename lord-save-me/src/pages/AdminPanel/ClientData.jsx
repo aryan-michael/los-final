@@ -76,7 +76,8 @@ export default function ClientData() {
         {
             name: "Status",
             selector: (row) => row.Apps,
-            sortable: true
+            sortable: true,
+            allowOverflow: false,
         },
         // {
         //     name: "Top 10 Games",
@@ -104,11 +105,11 @@ export default function ClientData() {
             ClientID: 1,
             ClientName: "Aaron Ramsey",
             ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p447715.png",
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p119765.png",
+            LoanType: "Everton",
             LoanType: "Aston Villa",
             LoanAmount: 22,
-            Gender:
-                "https://resources.premierleague.com/premierleague/badges/50/t7.png",
+            Gender: "Wales",
             Age: "Jamaica",
             ROI:
                 "https://www.countryflags.com/wp-content/uploads/jamaica-flag-png-large.png",
