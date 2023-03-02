@@ -2,6 +2,7 @@ import React from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 import AdminSideBar from "../../components/Sidebar/AdminSideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
+import './ClientData.css';
 
 createTheme("solarized", {
     text: {
@@ -812,7 +813,7 @@ export default function ClientData() {
         console.log(row.ClientName);
     };
     //outputs the name property into the console
-    
+
     return (
         <>
             <PostLoginNavBar />
@@ -826,12 +827,12 @@ export default function ClientData() {
                         columns={columns}
                         data={playerSummary}
                         defaultSortFieldId
-                        pagination={10}
+                        pagination={5}
                         fixedHeader
-  			fixedHeaderScrollHeight="600px"
+                        fixedHeaderScrollHeight="450px"
                         onRowClicked={handleRowClicked}
                         highlightOnHover
-                         />
+                    />
                 </div>
             </div>
         </>
