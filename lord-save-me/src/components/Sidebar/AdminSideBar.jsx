@@ -153,7 +153,7 @@ const AdminSideBar = ({ children }) => {
                                     exit="hidden"
                                     className="logo"
                                 >
-                                    USER PANEL
+                                    ADMIN PANEL
                                 </motion.h1>
                             )}
                         </AnimatePresence>

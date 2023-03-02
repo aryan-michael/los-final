@@ -22,6 +22,7 @@ import LoanInfo from './pages/UserPanel/LoanInfo';
 //ADMIN PANEL
 import AdminDashboard from "./pages/AdminPanel/AdminDashboard";
 import ClientData from "./pages/AdminPanel/ClientData";
+import ClientDetails from "./pages/AdminPanel/ClientDetails";
 import Statistics from "./pages/AdminPanel/Statistics";
 
 //COMPONENTS
@@ -71,6 +72,7 @@ function App() {
         {/* ADMIN PANEL */}
         <Route path="/admin-sidebar/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin-sidebar/client-data" element={<ClientData />} />
+        <Route path="/admin-sidebar/client-details" element={<ClientDetails />} />
         <Route path="/admin-sidebar/statistics" element={<Statistics />} />
 
         {/* TESTING */}

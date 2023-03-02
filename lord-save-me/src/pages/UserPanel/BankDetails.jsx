@@ -180,7 +180,7 @@ const BankDetails = () => {
                 <SideBar />
                 <Form bankDetails={bankDetails} setBankDetails={handleBankDetails} error={error} className="container mt-3 mb-3" autoComplete='off'>
                     <Row className="mb-3">
-                        <Alert>{error}</Alert>
+                        {/* <Alert>{error}</Alert> */}
                         <div className="title"> Bank Details </div>
                     </Row>
 

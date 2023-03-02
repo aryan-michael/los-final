@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import DataTable, { createTheme } from "react-data-table-component";
 import AdminSideBar from "../../components/Sidebar/AdminSideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
@@ -27,6 +28,9 @@ createTheme("solarized", {
 }); //color scheme system
 
 export default function ClientData() {
+
+    const Navigate = useNavigate();
+
     const columns = [
         {
             name: "Client ID",
@@ -205,6 +209,156 @@ export default function ClientData() {
             ROI: "DEF",
             Status: 26,
             Apps: 16
+        },
+        {
+            ClientID: 8,
+            ClientName: "Bruno Fernandes",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
+            LoanType: "Manchester United",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
+            Gender: "Portugal",
+            Age:
+                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
+            ROI: "MID",
+            Status: 23,
+            Apps: 2
+        },
+        {
+            ClientID: 9,
+            ClientName: "Edinson Cavani",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
+            LoanType: "Manchester United",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
+            Gender: "Uruguay",
+            Age:
+                "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
+            ROI: "FWD",
+            Status: 2,
+            Apps: 19
+        },
+        {
+            ClientID: 10,
+            ClientName: "Ben Chilwell",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
+            LoanType: "Chelsea",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t8.png",
+            Gender: "England",
+            "Gender Image":
+                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
+            ROI: "DEF",
+            Status: 12,
+            Apps: 17
+        },
+        {
+            ClientID: 8,
+            ClientName: "Bruno Fernandes",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
+            LoanType: "Manchester United",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
+            Gender: "Portugal",
+            Age:
+                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
+            ROI: "MID",
+            Status: 23,
+            Apps: 2
+        },
+        {
+            ClientID: 9,
+            ClientName: "Edinson Cavani",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
+            LoanType: "Manchester United",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
+            Gender: "Uruguay",
+            Age:
+                "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
+            ROI: "FWD",
+            Status: 2,
+            Apps: 19
+        },
+        {
+            ClientID: 10,
+            ClientName: "Ben Chilwell",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
+            LoanType: "Chelsea",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t8.png",
+            Gender: "England",
+            "Gender Image":
+                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
+            ROI: "DEF",
+            Status: 12,
+            Apps: 17
+        },
+        {
+            ClientID: 7,
+            ClientName: "Willy Boly",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p90585.png",
+            LoanType: "Wolves",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t39.png",
+            Gender: "Cote D’Ivoire",
+            Age:
+                "https://www.countryflags.com/wp-content/uploads/cote-d-ivoire-flag-png-large.png",
+            ROI: "DEF",
+            Status: 26,
+            Apps: 16
+        },
+        {
+            ClientID: 8,
+            ClientName: "Bruno Fernandes",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
+            LoanType: "Manchester United",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
+            Gender: "Portugal",
+            Age:
+                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
+            ROI: "MID",
+            Status: 23,
+            Apps: 2
+        },
+        {
+            ClientID: 9,
+            ClientName: "Edinson Cavani",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
+            LoanType: "Manchester United",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
+            Gender: "Uruguay",
+            Age:
+                "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
+            ROI: "FWD",
+            Status: 2,
+            Apps: 19
+        },
+        {
+            ClientID: 10,
+            ClientName: "Ben Chilwell",
+            ProfilePicture:
+                "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
+            LoanType: "Chelsea",
+            LoanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t8.png",
+            Gender: "England",
+            "Gender Image":
+                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
+            ROI: "DEF",
+            Status: 12,
+            Apps: 17
         },
         {
             ClientID: 8,
@@ -811,7 +965,7 @@ export default function ClientData() {
     // ];
 
     const handleRowClicked = (row) => {
-        console.log(row.ClientName);
+        Navigate('/admin-sidebar/client-details');
     };
     //outputs the name property into the console
 
