@@ -818,7 +818,7 @@ export default function ClientData() {
     return (
         <>
             <PostLoginNavBar />
-            <div style={{ display: 'flex' }}>
+            <div style={{ height: '100%', display: 'flex' }}>
                 <AdminSideBar />
                 <div style={{ display: 'inline-block' }}>
 
@@ -828,7 +828,7 @@ export default function ClientData() {
                         columns={columns}
                         data={playerSummary}
                         defaultSortFieldId
-                        pagination={5}
+                        pagination={10}
                         fixedHeader
                         fixedHeaderScrollHeight="450px"
                         onRowClicked={handleRowClicked}
