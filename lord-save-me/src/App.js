@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Forms from './pages/Register/Forms';
 import ClientLogin from './pages/Login/ClientLogin';
+import AdminLogin from './pages/Login/AdminLogin';
+import Policy from './pages/Policy';
 import SetPassword from './pages/Password/SetPassword';
 import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
@@ -29,21 +31,21 @@ import Statistics from "./pages/AdminPanel/Statistics";
 import AdminSideBar from './components/Sidebar/AdminSideBar';
 import PostLoginNavBar from './components/NavBar/PostLoginNavBar';
 function App() {
-  const [loginToken,setLoginToken] = useState({})
+  const [loginToken, setLoginToken] = useState({})
   return (
     <>
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route path='loan/business' element={<Forms loan_type={"Business"} country={"India"} setLoginToken={setLoginToken} />} />
-        <Route path='loan/home' element={<Forms loan_type={"Home"} country={"India"} setLoginToken={setLoginToken} />} />
-        <Route path='loan/education' element={<Forms loan_type={"Education"} country={"India"} setLoginToken={setLoginToken} />} />
-        <Route path='loan/personal' element={<Forms loan_type={"Personal"} country={"India"} setLoginToken={setLoginToken} />} />
-        <Route path='/otp' element={loginToken.userOtp && loginToken.token ? <OTP setLoginToken={setLoginToken} loginToken={loginToken} /> : <Home />} />
-        <Route path='/set-password' element={loginToken.userPass && loginToken.token ? <SetPassword setLoginToken={setLoginToken} loginToken={loginToken} />:<Home />} />
+        <Route path='loan/business' element={<Forms loan_type={"Business"} country={"India"} />} />
+        <Route path='loan/home' element={<Forms loan_type={"Home"} country={"India"} />} />
+        <Route path='loan/education' element={<Forms loan_type={"Education"} country={"India"} />} />
+        <Route path='loan/personal' element={<Forms loan_type={"Personal"} country={"India"} />} />
+        <Route path='/otp' element={<OTP />} />
+        <Route path='/set-password' element={<SetPassword />} />
         <Route path='/login/client' element={<ClientLogin />} />
         <Route path='/forgot-password/:id' element={<ForgotPassword />} />
         <Route path='/test' element={<Test />} />
-          <Route path='/practice' element={<Practice />} />
+        <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar' element={<SideBar />} />
         <Route path="/sidebar/dashboard" element={<Dashboard />} />
         <Route path="/sidebar/kyc-docs" element={<KYC />} />
@@ -56,14 +58,14 @@ function App() {
         <Route path='/new-navbar' element={<PostLoginNavBar />} />
         <Route path='/sidebar' element={<SideBar />} />
         <Route path='/admin-sidebar' element={<AdminSideBar />} />
-         {/* ADMIN PANEL */}
+        {/* ADMIN PANEL */}
         <Route path="/admin-sidebar/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin-sidebar/client-data" element={<ClientData />} />
         <Route path="/admin-sidebar/client-details" element={<ClientDetails />} />
         <Route path="/admin-sidebar/statistics" element={<Statistics />} />
 
-        
-        </Routes>
+
+      </Routes>
     </>
   );
 }
