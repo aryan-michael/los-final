@@ -1,4 +1,4 @@
-# Quotes App
+# LOS FINAL
 
 ## Backend
 
@@ -37,3 +37,4 @@ npm i browser-router
 npm i --save styled-components
 npm i react-icons
 ```
+
