@@ -13,12 +13,18 @@ require('dotenv').config() //To access .env file
 const notFoundMiddleware = require('./Middleware/NotFound');
 const errorHandlerMiddleware = require('./Middleware/ErrorHandler')
 
-
+const corsOrigin = {
+  origin:'http://localhost:3000', //or whatever port your frontend is using
+  credentials: true,
+  withCredentials: true
+}
+app.use(cors(corsOrigin));
 app.use(morgan());
 app.use(express.urlencoded())
+
 app.use(cookieParser())
 app.use(express.json()) //For printing json data 
-app.use(cors());
+
 
 
 // app.get("/", function(req, res) {

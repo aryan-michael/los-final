@@ -31,13 +31,13 @@ let userSchema = new mongoose.Schema({
     firmAddress: {
         type: String,
     },
-    BusinesName: {
+    businessName: {
         type: String
     },
     address: {
         type: String,
     },
-    pincode: {
+    pin: {
         type: Number,
     },
     city: {
@@ -81,7 +81,10 @@ let userSchema = new mongoose.Schema({
     },
     passwordChangeAt: Date,
     passwordResetToken: String,
-    passwordResetTokenExp: Date
+    passwordResetTokenExp: Date,
+    userOTP: String,
+    otpExp: Date,
+    otpToken: String,
 }, {
     timestamps:true
 }
@@ -102,7 +105,7 @@ userSchema.methods.checkPassword = async function (enteredPassword) {
 }
 
 userSchema.methods.createJWT = async function () {
-    return jwt.sign({ userId: this._id, name: this.first_name+" "+this.last_name,email:this.email}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME }) 
+    return jwt.sign({ userId: this._id,email:this.email}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME }) 
 }
 
 userSchema.methods.generateResetPasswordToken = async function () {

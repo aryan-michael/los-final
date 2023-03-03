@@ -4,15 +4,32 @@ const NotFoundError = require('../Error/NotFoundError')
 require('dotenv').config
 const User = require('../Model/userModel')
 
+// const authMiddleware = async (req, res, next) => {
+//     const authHeader = req.headers.authorization;
+//     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+//         throw new UnauthorizedError('Unauthorized');
+//     } else {
+//         const token = authHeader.split(' ')[1]
+//         try {
+//             const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+//             req.user = { userId: decoded.userId, email:decoded.email }
+//             next()
+//         } catch (error) {
+//             throw new UnauthorizedError('Unauthorized');
+//         }
+//     }
+// }
+
 const authMiddleware = async (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    const authHeader = req.cookies.Token;
+    console.log(">>"+authHeader)
+    if (!authHeader) {
         throw new UnauthorizedError('Unauthorized');
     } else {
-        const token = authHeader.split(' ')[1]
+        const token = authHeader
         try {
             const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-            req.user = { userId: decoded.userId, name: decoded.name, email:decoded.email }
+            req.user = { userId: decoded.userId, email:decoded.email }
             next()
         } catch (error) {
             throw new UnauthorizedError('Unauthorized');

@@ -16,6 +16,11 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         customError.msg = `${Object.keys(err.keyValue)} already in use, please use any other ${Object.keys(err.keyValue)}`;
         customError.Statucodes = 400;
     }
+    if (err.name === 'No recipients defined') {
+        console.log('Here')
+        customError.msg = 'Please enter a valid email address';
+        customError.Statucodes = 400
+    }
     
     return res.status(customError.Statucodes).json({ msg: customError.msg })
 }

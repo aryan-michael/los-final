@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import DataTable, { createTheme } from "react-data-table-component";
 import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
@@ -28,6 +29,8 @@ createTheme("solarized", {
 }); //color scheme system
 
 export default function ClientData() {
+
+    const Navigate = useNavigate();
 
     const columns = [
         {
