@@ -8,7 +8,7 @@ const Analytics = () => {
       <PostLoginNavBar />
       <div style={{ display: 'flex' }}>
         <SideBar />
-        <div className="title"> Analytics </div>
+        <div className="title">Analytics</div>
       </div>
     </>
   )
