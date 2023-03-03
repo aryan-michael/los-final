@@ -1,13 +1,13 @@
 import SideBar from "../../components/Sidebar/SideBar";
-import NavBar from "../../components/NavBar/NavBar";
+import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 
 const Analytics = () => {
   return (
     <>
-      <NavBar />
+      <PostLoginNavBar />
       <div style={{ display: 'flex' }}>
         <SideBar />
-        <div className="title"> Analytics </div>
+        <div className="title">Analytics</div>
       </div>
     </>
   )
