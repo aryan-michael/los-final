@@ -1,5 +1,7 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
-import { BiPowerOff } from 'react-icons/bi';
+//import { BiPowerOff } from 'react-icons/bi';
+import { CgProfile } from 'react-icons/cg';
+import "./PostLoginNavBar.css";
 
 const PostLoginNavBar = () => {
     return (
@@ -35,15 +37,16 @@ const PostLoginNavBar = () => {
                         </Nav>
                         <Nav>
                             <Nav.Link href="/sidebar">SideBar</Nav.Link>
-                            {/* <NavDropdown title="Login" id="collasible-nav-dropdown">
-                                <NavDropdown.Item eventKey={2} href="/login/client">
-                                    Client
+                            <NavDropdown title=<CgProfile className="icon" /> 
+                            	id="collasible-nav-dropdown">
+                                <NavDropdown.Item eventKey={2} href="">
+                                    Profile Settings
                                 </NavDropdown.Item>
-                                <NavDropdown.Item href="">
-                                    Admin
+                                <NavDropdown.Item href="/login/client">
+                                    Log Out
                                 </NavDropdown.Item>
-                            </NavDropdown> */}
-                            <Nav.Link href="/login/client"><BiPowerOff /></Nav.Link>
+                            </NavDropdown> 
+                            {/*<Nav.Link href="/login/client"><CgProfile /></Nav.Link>*/}
                         </Nav>
                         <br />
                     </Navbar.Collapse>

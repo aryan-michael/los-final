@@ -26,20 +26,20 @@ const routes = [
     subRoutes: [
       {
         path: "/sidebar/my-info/personal-info",
-        name: "Personal ",
+        name: "Personal Details",
         icon: <FaUser />,
       },
       {
-        path: "/sidebar/my-info/loan-info",
-        name: "Loan",
-        icon: <FaRupeeSign />,
+        path: "/sidebar/bank-details",
+        name: "Bank Details",
+        icon: <HiDocumentArrowUp />,
       },
+      // {
+      //   path: "/sidebar/my-info/loan-info",
+      //   name: "Loan",
+      //   icon: <FaRupeeSign />,
+      // },
     ],
-  },
-  {
-    path: "/sidebar/bank-details",
-    name: "Bank Details",
-    icon: <HiDocumentArrowUp />,
   },
   {
     path: "/sidebar/kyc-docs",

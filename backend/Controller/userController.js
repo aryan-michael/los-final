@@ -18,11 +18,70 @@ function generateOtp () {
     return otp
 }
 
+
 const createUser = async (req, res) => {
     const user = await User.create(req.body);
-    console.log(req.body)
     const token = await user.createJWT()
-    res.status(StatusCodes.CREATED).json({ token, msg: "User successfully registered" })
+    // const otp = generateOtp()
+    const otpToken = crypto.randomBytes(32).toString("hex");
+    user.otpToken = crypto.createHash("sha256").update(otpToken).digest("hex");
+    user.otpExp = Date.now() + 1000 * 60 * 3;
+    // const otp = '111111'
+    const otp = generateOtp()
+    user.userOTP = otp
+    await user.save()
+    const url = `<p> Hello ${user.first_name} ${user.last_name},here is the OTP to verify email: ${user.email}.<br><h1>${user.userOTP}</h1></br>OTP is valid for 3 minutes. Please do not share your OTP with anyone</p>`
+    const data = {
+        to: user.email,
+        subject: 'Account verification',
+        text: 'Hello user',
+        html: url
+    }
+    const threeMin = 1000*60*3
+    res.cookie("otpToken", user.otpToken,{
+        httpOnly: true,
+        expires: new Date(Date.now() + threeMin)
+    })
+    sendEmail(data)
+    res.status(StatusCodes.CREATED).json({ user: {userOtp: true,token }, msg: "User successfully registered" })
+}
+
+const checkOtp = async (req, res) => {
+    const { otp } = req.body;
+    const optToken = req.cookies.otpToken;
+    const user = await User.findOne({userOTP: otp, otpExp: { $gt: Date.now() }, otpToken: optToken})
+    if (!user) {
+        throw new NotFoundError('Invalid OTP')
+    }
+    user.userOTP = undefined
+    user.otpExp = undefined
+    user.otpToken = undefined
+    await user.save()
+    const token = await user.createJWT()
+    res.clearCookie("otpToken", {
+        httpOnly: true,
+        secure:true
+    })
+    res.cookie("Token", token, {
+        httpOnly: true,
+        expires: new Date(Date.now()+1000*60*3)
+    })
+    res.status(StatusCodes.OK).json({user:{userPass:true,token},msg:'Success'})
+}
+
+const setUserPassword = async (req, res) => {
+    const { userId, email } = req.user;
+    const { pass } = req.body;
+    const user = await User.findOne({ _id: userId, email: email})
+    if (!user) throw new NotFoundError('User does not exists')
+    user.password = pass
+    user.status = 'active'
+    await user.save()
+    res.clearCookie("Token", {
+        httpOnly: true,
+        secure: true
+    })
+    res.status(StatusCodes.OK).json({msg:'Success'})
 }
 
 const updateUserLoanDetails = async (req, res) => {
@@ -36,7 +95,10 @@ const updateUserLoanDetails = async (req, res) => {
     res.status(StatusCodes.OK).json({ msg: "User updated" })
 }
 
+
+
 const getAllUser = async (req, res) => {
+    console.log(req.cookies)
     const users = await User.find({});
     res.status(StatusCodes.OK).json({ users })
 }
@@ -55,14 +117,59 @@ const login = async (req, res) => {
     if (!isPasswordCorrect) {
         throw new UnauthenticatedError('Invalid Credentials')
     }
+    const token = await user.createJWT();
     const refreshToken = await refreshJWTToken(user);
     const updatedUser = await User.findOneAndUpdate(user.email, { refreshToken: refreshToken }, { new: true, runValidators: true })
-    res.cookie('refreshToken', refreshToken, {
+    console.log(refreshToken)
+    // const otp ='111111'
+    const otp = generateOtp()
+    const oneDay = 1000 * 60 * 60 * 24
+    const otpToken = crypto.randomBytes(32).toString("hex");
+    user.otpToken = crypto.createHash("sha256").update(otpToken).digest("hex");
+    user.userOTP = otp
+    user.otpExp = Date.now() + 1000 * 60 * 3
+    await user.save()
+    // res.setHeader("Access-Control-Allow-Origin", "*")
+    // res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.cookie('otpToken', user.otpToken, {
         httpOnly: true,
-        maxAge: 72 * 60 * 60 * 1000
+        expires: new Date( Date.now() + 1000*60*3)
     })
-    const token = await user.createJWT();
-    res.status(StatusCodes.OK).json({ User: { username: user.firstname + " " + user.lastname, token }, msg: "Successfully login" })
+    // const otp = generateOtp()
+    console.log(user.userOTP);
+    const url = `<h1> Hello ${user.first_name} ${user.last_name}</h1><br></br><p>Here is your otp. Please do not share it with anyone.<br></br><h1>${user.userOTP}</h1>`
+    const data = {
+        to: user.email,
+        subject: 'Account Verification',
+        text: 'Hello user',
+        html:url
+    }
+    sendEmail(data)
+    res.status(StatusCodes.OK).json({ user: { username: `${user.first_name} ${user.last_name}`, token }, msg: "Otp sent" })
+}
+
+const checkLoginOtp = async (req, res) => {
+    const { otp } = req.body
+    const otpToken = req.cookies.otpToken
+    console.log(otp);
+    const user = await User.findOne({otpToken:otpToken,userOTP: otp, otpExp: { $gt: Date.now() } })
+    if (!user) throw new NotFoundError(`Invalid OTP`)
+    user.otpToken = undefined
+    user.userOTP = undefined
+    user.otpExp = undefined
+    await user.save()
+    console.log('here')
+    const token = await user.createJWT()
+    console.log("..."+token)
+    res.clearCookie("otpToken", {
+        httpOnly: true,
+        secure:true
+    })
+    res.cookie("Token",token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000*60*60*24)
+    })
+    res.status(StatusCodes.OK).json({ user: token ,msg:'Success'})
 }
 
 const handleRefreshToken = async (req, res) => {
@@ -83,18 +190,18 @@ const logout = async (req, res) => {
     const cookie = req.cookies;
     console.log(cookie)
     if (!cookie) throw new NotFoundError('Cookie not found');
-    const refreshToken = cookie.refreshToken;
+    const refreshToken = cookie.Token;
     const user = await User.findOne({ refreshToken });
     console.log(user)
     if (!user) {
-        res.clearCookie("refreshToken", {
+        res.clearCookie("Token", {
             httpOnly: true,
             secure: true
         });
         return res.sendStatus(StatusCodes.FORBIDDEN)
     }
     await User.findOneAndUpdate({ refreshToken }, { refreshToken: "" }, { new: true, runValidators: true })
-    res.clearCookie("refreshToken", {
+    res.clearCookie("Token", {
         httpOnly: true,
         secure: true
     })
@@ -102,13 +209,23 @@ const logout = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const { id: userId } = req.params;
-    const user = await User.findById({ _id: userId });
+    const { userId,email } = req.user;
+    const user = await User.findById({ _id: userId, email: email }).select("salutation first_name middle_name last_name gender dob mobile email address pin city state country");
     if (!user) {
         throw new NotFoundError(`No user found with USER_ID:${userId}`)
     }
     const token = await user.createJWT()
-    res.status(StatusCodes.OK).json({ user: user.first_name + " " + user.last_name, token })
+    res.status(StatusCodes.OK).json({ user:user})
+}
+
+const getUser1 = async (req, res) => {
+    const { userId,email } = req.user;
+    const user = await User.findById({ _id: userId, email: email }).select("loanAmount loanType empStatus firmAddress businessName");
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID:${userId}`)
+    }
+    const token = await user.createJWT()
+    res.status(StatusCodes.OK).json({ user:user})
 }
 
 const updateUser = async (req, res) => {
@@ -204,5 +321,5 @@ const resetPassword = async (req, res) => {
     res.status(StatusCodes.OK).json({ msg: "Password Updated" })
 }
 
-module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails };
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1 };
 
