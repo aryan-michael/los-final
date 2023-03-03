@@ -1,10 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import DataTable, { createTheme } from "react-data-table-component";
-import SideBar from "../../components/Sidebar/SideBar";
+import AdminSideBar from "../../components/Sidebar/AdminSideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import { MDBBadge } from "mdb-react-ui-kit";
-import './Dashboard.css';
+import './ClientData.css';
 
 createTheme("solarized", {
     text: {
@@ -375,7 +375,7 @@ export default function ClientData() {
     // ];
 
     const handleRowClicked = (row) => {
-        console.log(row.ClientName)
+        Navigate('/admin-sidebar/client-details');
     };
     //outputs the name property into the console
 
@@ -383,12 +383,12 @@ export default function ClientData() {
         <>
             <PostLoginNavBar />
             <div style={{ height: '100%', display: 'flex' }}>
-                <SideBar />
+                <AdminSideBar />
                 <div style={{ display: 'inline-block' }}>
 
 
                     <DataTable
-                        title="Loan History"
+                        title="Client Summary"
                         columns={columns}
                         data={clientSummary}
                         defaultSortFieldId

@@ -1,6 +1,9 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+//import { BiPowerOff } from 'react-icons/bi';
+import { CgProfile } from 'react-icons/cg';
+import "./PostLoginNavBar.css";
 
-const NavBar = () => {
+const PostLoginNavBar = () => {
     return (
         <>
             <Navbar sticky="top" bg="dark" variant="dark">
@@ -13,7 +16,7 @@ const NavBar = () => {
                         <Nav className="me-auto">
                             <Nav.Link href="#features">Features</Nav.Link>
                             <Nav.Link href="#pricing">Pricing</Nav.Link>
-                            <NavDropdown title="Products" id="collasible-nav-dropdown">
+                            {/* <NavDropdown title="Products" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="/loan/business">
                                     Business Loan
                                 </NavDropdown.Item>
@@ -30,20 +33,20 @@ const NavBar = () => {
                                 <NavDropdown.Item href="#action/3.4">
                                     Upcoming Products
                                 </NavDropdown.Item>
-                            </NavDropdown>
+                            </NavDropdown> */}
                         </Nav>
                         <Nav>
-                            <Nav.Link href="/new-navbar">PostLogin Navbar</Nav.Link>
                             <Nav.Link href="/sidebar">SideBar</Nav.Link>
-                            <Nav.Link href="/admin-sidebar">AdminSideBar</Nav.Link>
-                            <NavDropdown title="Login" id="collasible-nav-dropdown">
-                                <NavDropdown.Item eventKey={2} href="/login/client">
-                                    Client
+                            <NavDropdown title=<CgProfile className="icon" /> 
+                            	id="collasible-nav-dropdown">
+                                <NavDropdown.Item eventKey={2} href="">
+                                    Profile Settings
                                 </NavDropdown.Item>
-                                <NavDropdown.Item eventKey={2} href="/login/admin">
-                                    Admin
+                                <NavDropdown.Item href="/login/client">
+                                    Log Out
                                 </NavDropdown.Item>
-                            </NavDropdown>
+                            </NavDropdown> 
+                            {/*<Nav.Link href="/login/client"><CgProfile /></Nav.Link>*/}
                         </Nav>
                         <br />
                     </Navbar.Collapse>
@@ -53,4 +56,4 @@ const NavBar = () => {
     );
 }
 
-export default NavBar;
+export default PostLoginNavBar

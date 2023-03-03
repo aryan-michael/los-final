@@ -4,8 +4,9 @@ import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
 import './Forms.css';
 import axios from 'axios'
-import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Navbar, Row } from "react-bootstrap";
 import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
+import NavBar from "../../components/NavBar/NavBar";
 
 //PINCODE VALIDATION//
 function validatePinCode(value) {
@@ -353,7 +354,10 @@ function Forms({ loan_type, country,setLoginToken }) {
         }
     };
     return (
+        <>
+            <NavBar />
         <div className="form">
+            
             <div className="form-container">
                 {/* <Alert>{error.first_name}</Alert> */}
                 <Container className="h-100">
@@ -390,7 +394,8 @@ function Forms({ loan_type, country,setLoginToken }) {
                     </Button>
                 </div>
             </div>
-        </div>
+            </div>
+            </>
     );
 }
 

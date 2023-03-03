@@ -9,6 +9,7 @@ import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
 import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
+import BankDetails from "./pages/UserPanel/BankDetails";
 import { useState } from 'react';
 
 import SideBar from './components/Sidebar/SideBar';
@@ -20,11 +21,17 @@ import Analytics from "./pages/UserPanel/Analytics";
 import PersonalInfo from './pages/UserPanel/PersonalInfo';
 import LoanInfo from './pages/UserPanel/LoanInfo';
 
+import AdminDashboard from "./pages/AdminPanel/AdminDashboard.jsx";
+import ClientData from "./pages/AdminPanel/ClientData";
+import ClientDetails from "./pages/AdminPanel/ClientDetails";
+import Statistics from "./pages/AdminPanel/Statistics";
+
+import AdminSideBar from './components/Sidebar/AdminSideBar';
+import PostLoginNavBar from './components/NavBar/PostLoginNavBar';
 function App() {
   const [loginToken,setLoginToken] = useState({})
   return (
     <>
-      <NavBar />
       <Routes>
         <Route exact path='/' element={<Home />} />
         <Route path='loan/business' element={<Forms loan_type={"Business"} country={"India"} setLoginToken={setLoginToken} />} />
@@ -45,6 +52,17 @@ function App() {
         <Route path="/sidebar/add-inquiry" element={<AddInquiry />} />
         <Route path="/sidebar/my-info/personal-info" element={<PersonalInfo />} />
         <Route path="/sidebar/my-info/loan-info" element={<LoanInfo />} />
+        <Route path="/sidebar/bank-details" element={<BankDetails />} />
+        <Route path='/new-navbar' element={<PostLoginNavBar />} />
+        <Route path='/sidebar' element={<SideBar />} />
+        <Route path='/admin-sidebar' element={<AdminSideBar />} />
+         {/* ADMIN PANEL */}
+        <Route path="/admin-sidebar/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/admin-sidebar/client-data" element={<ClientData />} />
+        <Route path="/admin-sidebar/client-details" element={<ClientDetails />} />
+        <Route path="/admin-sidebar/statistics" element={<Statistics />} />
+
+        
         </Routes>
     </>
   );

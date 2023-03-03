@@ -5,6 +5,7 @@ import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox, M
 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../../components/NavBar/NavBar';
 
 function ClientLogin() {
 
@@ -98,6 +99,8 @@ function ClientLogin() {
     }
     
     return (
+        <>
+            <NavBar />
         <MDBContainer fluid className="p-3 my-5 h-custom">
 
             
@@ -204,7 +207,8 @@ function ClientLogin() {
 
             </div>
 
-        </MDBContainer>
+            </MDBContainer>
+            </>
     );
 }
 
