@@ -11,7 +11,6 @@ import {
 }
     from 'mdb-react-ui-kit';
 import { Form } from 'react-bootstrap';
-import { type } from 'os';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
