@@ -53,6 +53,6 @@ dashboard itself.
 > button 'Send OTP' onClick() - otp sent to email -- if otp matches then redirect to SetPassword.jsx 
 
 
->> column resizing in DataTable.
+>> column resizing in DataTable. (done)
 
 >>. Upon submitting bank details, that page will become a read-only form. With no Back button.

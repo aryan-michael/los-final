@@ -1,6 +1,7 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 //import { BiPowerOff } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
+import "./PostLoginNavBar.css";
 
 const PostLoginNavBar = () => {
     return (
@@ -36,7 +37,7 @@ const PostLoginNavBar = () => {
                         </Nav>
                         <Nav>
                             <Nav.Link href="/sidebar">SideBar</Nav.Link>
-                            <NavDropdown title=<CgProfile style={{fontSize:"20px"}}/> 
+                            <NavDropdown title=<CgProfile className="icon" /> 
                             	id="collasible-nav-dropdown">
                                 <NavDropdown.Item eventKey={2} href="">
                                     Profile Settings
