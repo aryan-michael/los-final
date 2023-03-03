@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Forms from './pages/Register/Forms';
 import ClientLogin from './pages/Login/ClientLogin';
 import AdminLogin from './pages/Login/AdminLogin';
+import Policy from './pages/Policy';
 import SetPassword from './pages/Password/SetPassword';
 import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
@@ -49,6 +50,7 @@ function App() {
         <Route path='loan/education' element={<Forms loan_type={"Education"} country={"India"} />} />
         <Route path='loan/personal' element={<Forms loan_type={"Personal"} country={"India"} />} />
         <Route path='/otp' element={<OTP />} />
+        <Route path='/policy' element={<Policy />} />
         <Route path='/set-password' element={<SetPassword />} />
         <Route path='/login/client' element={<ClientLogin />} />
         <Route path='/login/admin' element={<AdminLogin />} />
