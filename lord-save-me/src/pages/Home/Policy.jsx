@@ -1,12 +1,12 @@
 import React from "react";
-import NavBar from "../components/NavBar/NavBar";
+import NavBar from "../../components/NavBar/NavBar";
 
 const Policy = () => {
 	return (
-	<>
-		<NavBar />
-		<h1> OUR POLICIES </h1>
-	</>
+		<>
+			<NavBar />
+			<h1> OUR POLICIES </h1>
+		</>
 	);
 }
 
@@ -57,8 +57,8 @@ The closer your score is to 900, the better your
 credit rating is.
 
 eg. 700-900 will be accepted
-    500-700 will be overrided
-    below 500 will be rejected
+	500-700 will be overrided
+	below 500 will be rejected
 
 2) Equifax  3) Highmark
 they are companies like CIBIL approved by the RBI
