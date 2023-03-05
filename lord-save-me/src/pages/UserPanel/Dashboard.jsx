@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable, { createTheme } from "react-data-table-component";
 import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import { MDBBadge } from "mdb-react-ui-kit";
 import './Dashboard.css';
+import axios from "axios";
 
 createTheme("solarized", {
     text: {
@@ -30,50 +31,94 @@ createTheme("solarized", {
 
 export default function ClientData() {
 
+    const [loanDetails,setLoanDetails] = useState([])
+
+    useEffect(() => {
+        getloanDetails()
+    },[])
+
+    const getloanDetails = async () => {
+        try {
+            await axios.get("http://localhost:5000/api/v1/user/getUser1", {
+                withCredentials: true
+            }).then(response => {
+                console.log(response)
+                setLoanDetails(response.data.user.loanInquiries)
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    console.log(loanDetails);
+
     const Navigate = useNavigate();
+
+    // const columns = [
+    //     {
+    //         name: "Client ID",
+    //         selector: (row) => row.ClientID,
+    //         sortable: true
+    //     },
+    //     {
+    //         name: "Client Name",
+    //         selector: (row) => row.ClientName,
+    //         sortable: true
+    //     }, {
+    //         name: "Profile Picture",
+    //         selector: (row) => <img className="mt-1" src={row.ProfilePicture} alt="MDN logo" />,
+    //     },
+    //     {
+    //         name: "Loan Type",
+    //         selector: (row) => row.LoanType,
+    //         sortable: true
+    //     },
+    //     {
+    //         name: "Amount (₹)",
+    //         selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
+    //         sortable: true
+    //     },
+    //     {
+    //         name: "Gender",
+    //         selector: (row) => row.Gender,
+    //         sortable: true
+    //     },
+    //     {
+    //         name: "Age",
+    //         selector: (row) => row.Age,
+    //         sortable: true
+    //     },
+    //     {
+    //         name: "Interest (%)",
+    //         selector: (row) => row.Interest,
+    //         sortable: true
+    //     },
+    //     {
+    //         name: "Status",
+    //         selector: (row) => row.Status,
+    //         sortable: true,
+    //     },
+    // ];
 
     const columns = [
         {
-            name: "Client ID",
-            selector: (row) => row.ClientID,
+            name: "Loan ID",
+            selector: (row) => row._id,
             sortable: true
-        },
-        {
-            name: "Client Name",
-            selector: (row) => row.ClientName,
-            sortable: true
-        }, {
-            name: "Profile Picture",
-            selector: (row) => <img className="mt-1" src={row.ProfilePicture} alt="MDN logo" />,
         },
         {
             name: "Loan Type",
-            selector: (row) => row.LoanType,
+            selector: (row) => row.loanType,
             sortable: true
         },
         {
             name: "Amount (₹)",
-            selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
+            selector: (row) => row.loanAmount,
             sortable: true
         },
         {
-            name: "Gender",
-            selector: (row) => row.Gender,
-            sortable: true
-        },
-        {
-            name: "Age",
-            selector: (row) => row.Age,
-            sortable: true
-        },
-        {
-            name: "Interest (%)",
-            selector: (row) => row.Interest,
-            sortable: true
-        },
-        {
-            name: "Status",
-            selector: (row) => row.Status,
+            name: "Loan Status",
+            selector: (row) => row.applicationStatus,
             sortable: true,
         },
     ];
@@ -390,7 +435,7 @@ export default function ClientData() {
                     <DataTable
                         title="Loan History"
                         columns={columns}
-                        data={clientSummary}
+                        data={loanDetails}
                         defaultSortFieldId
                         pagination={10}
                         fixedHeader

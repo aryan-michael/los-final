@@ -40,9 +40,6 @@ function SetPassword({ setLoginToken, loginToken }) {
         }
         try {
             await axios.put('http://localhost:5000/api/v1/user/set-password', password, {
-                headers: {
-                    Authorization: `Bearer ${loginToken.token}`
-                },
                 withCredentials:true
             }).then(response => {
                 console.log(response)
@@ -56,7 +53,6 @@ function SetPassword({ setLoginToken, loginToken }) {
                 return
             }
         }
-        setLoginToken({})
         Navigate('/login/client')
     }
 

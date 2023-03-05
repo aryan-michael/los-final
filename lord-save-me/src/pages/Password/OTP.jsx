@@ -36,13 +36,9 @@ function OTP({ setLoginToken, loginToken }) {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/v1/user/check-otp', data, {
-                headers: {
-                    Authorization: `Bearer ${loginToken.token}`
-                },
                 withCredentials:true
             }).then(response => {
                 console.log(response)
-                setLoginToken(response.data.user)
             })
         } catch (err) {
             if (err.response) {

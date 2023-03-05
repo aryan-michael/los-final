@@ -22,18 +22,6 @@ let userSchema = new mongoose.Schema({
     dob: {
         type: Date,
     },
-    loanAmount: {
-        type: Number,
-    },
-    empStatus: {
-        type: String,
-    },
-    firmAddress: {
-        type: String,
-    },
-    businessName: {
-        type: String
-    },
     address: {
         type: String,
     },
@@ -49,19 +37,16 @@ let userSchema = new mongoose.Schema({
     country: {
         type: String,
     },
-    loanType: {
-        type: String,
-    },
     email: {
         type: String,
         unique: true
     },
-    mobile:{
+    mobile: {
         type: String,
         maxlength: 10,
         unique: true
     },
-    password:{
+    password: {
         type: String
     },
     role: {
@@ -71,6 +56,14 @@ let userSchema = new mongoose.Schema({
     status: {
         type: String,
         default: 'inactive'
+    },
+    loanInquiries: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Loan"
+    }],
+    bankAccount: {
+        type: mongoose.Types.ObjectId,
+        ref:"BankAccount"
     },
     isBlocked: {
         type: Boolean,

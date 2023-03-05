@@ -4,7 +4,7 @@ import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import { Form, Row } from 'react-bootstrap';
 
 
-const BankDetails = () => {
+const DisplayBankDetails = () => {
 
     // const [error, setError] = useState({
     //     account_number: '',
@@ -25,13 +25,10 @@ const BankDetails = () => {
 
     return (
         <>
-            <PostLoginNavBar />
-            <div style={{ display: 'flex' }}>
-                <SideBar />
                 <Form className="container mt-3 mb-3" autoComplete='off'>
                     <Row className="mb-3">
                         {/* <Alert>{error}</Alert> */}
-                        <div className="title"> Bank Details </div>
+                        <div className="title"> Bank Details Finale </div>
                     </Row>
 
                     <Row className="mb-3">
@@ -78,12 +75,11 @@ const BankDetails = () => {
                     </Row>
 
                 </Form>
-            </div>
         </>
     );
 }
 
-export default BankDetails
+export default DisplayBankDetails
 
 // 1. bank account number >> check button
 // 2. credit/debit card number >> check button

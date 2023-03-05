@@ -309,10 +309,10 @@ function Forms({ loan_type, country,setLoginToken }) {
             }
             /////////////////////////////////////////Backend Code ///////////////////////////////////////////
             try {
-                await axios.post('http://localhost:5000/api/v1/user/signup', user, {
+                await axios.post('http://localhost:5000/api/v1/user/signup', personalDetails, {
                     withCredentials:true
                 }).then(response => {
-                    setLoginToken(response.data.user)
+                    // setLoginToken(response.data.user)
                 })
             } catch (err) {
                 if (err.response) {
@@ -320,6 +320,22 @@ function Forms({ loan_type, country,setLoginToken }) {
                     return
                 } else {
                     alert('Something went wrong!!')
+                    return
+                }
+            }
+
+            try {
+                await axios.post('http://localhost:5000/api/v1/loan/create', {loanDetails,email:personalDetails.email}, {
+                    withCredentials:true
+                }).then(response => {
+                    // setLoginToken(response.data.user)
+                })
+            } catch (err) {
+                if (err.response) {
+                    alert(err.response.data.msg)
+                    return
+                } else {
+                    alert('Something went wrong 222!!')
                     return
                 }
             }

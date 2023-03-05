@@ -4,6 +4,7 @@ import SideBar from "../../components/Sidebar/SideBar";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import PostLoginNavBar from '../../components/NavBar/PostLoginNavBar';
 
 
 const PersonalInfo = () => {
@@ -47,6 +48,7 @@ const PersonalInfo = () => {
 
     return (
         <>
+            <PostLoginNavBar />
             <div style={{ display: 'flex' }}>
                 <SideBar />
                 <div>
