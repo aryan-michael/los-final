@@ -24,7 +24,9 @@ import AddInquiry from './pages/UserPanel/AddInquiry';
 import Analytics from "./pages/UserPanel/Analytics";
 import PersonalInfo from './pages/UserPanel/PersonalInfo';
 import LoanInfo from './pages/UserPanel/LoanInfo';
-import BankDetails from "./pages/UserPanel/BankDetails";
+import LinkBankDetails from "./pages/UserPanel/LinkBankDetails";
+import DisplayBankDetails from "./pages/UserPanel/DisplayBankDetails"
+import BankDetails from "./pages/UserPanel/BankDetails"
 
 //ADMIN PANEL
 import AdminDashboard from "./pages/AdminPanel/AdminDashboard.jsx";
@@ -71,6 +73,7 @@ function App() {
         <Route path="/sidebar/my-info/personal-info" element={<PersonalInfo />} />
         <Route path="/sidebar/my-info/loan-info" element={<LoanInfo />} />
         <Route path="/sidebar/bank-details" element={<BankDetails />} />
+        {/* <Route path="/sidebar/bank-details-final" element={<DisplayBankDetails />} /> */}
 
         {/* ADMIN PANEL */}
         <Route path="/admin-sidebar/admin-dashboard" element={<AdminDashboard />} />

@@ -26,8 +26,8 @@ const createUser = async (req, res) => {
     const otpToken = crypto.randomBytes(32).toString("hex");
     user.otpToken = crypto.createHash("sha256").update(otpToken).digest("hex");
     user.otpExp = Date.now() + 1000 * 60 * 3;
-    // const otp = '111111'
-    const otp = generateOtp()
+    const otp = '111111'
+    // const otp = generateOtp()
     user.userOTP = otp
     await user.save()
     const url = `<p> Hello ${user.first_name} ${user.last_name},here is the OTP to verify email: ${user.email}.<br><h1>${user.userOTP}</h1></br>OTP is valid for 3 minutes. Please do not share your OTP with anyone</p>`
@@ -42,7 +42,7 @@ const createUser = async (req, res) => {
         httpOnly: true,
         expires: new Date(Date.now() + threeMin)
     })
-    sendEmail(data)
+    // sendEmail(data)
     res.status(StatusCodes.CREATED).json({ user: {userOtp: true,token }, msg: "User successfully registered" })
 }
 
@@ -121,8 +121,8 @@ const login = async (req, res) => {
     const refreshToken = await refreshJWTToken(user);
     const updatedUser = await User.findOneAndUpdate(user.email, { refreshToken: refreshToken }, { new: true, runValidators: true })
     console.log(refreshToken)
-    // const otp ='111111'
-    const otp = generateOtp()
+    const otp ='111111'
+    // const otp = generateOtp()
     const oneDay = 1000 * 60 * 60 * 24
     const otpToken = crypto.randomBytes(32).toString("hex");
     user.otpToken = crypto.createHash("sha256").update(otpToken).digest("hex");
@@ -144,7 +144,7 @@ const login = async (req, res) => {
         text: 'Hello user',
         html:url
     }
-    sendEmail(data)
+    // sendEmail(data)
     res.status(StatusCodes.OK).json({ user: { username: `${user.first_name} ${user.last_name}`, token }, msg: "Otp sent" })
 }
 
@@ -210,7 +210,7 @@ const logout = async (req, res) => {
 
 const getUser = async (req, res) => {
     const { userId,email } = req.user;
-    const user = await User.findById({ _id: userId, email: email }).select("salutation first_name middle_name last_name gender dob mobile email address pin city state country");
+    const user = await User.findById({ _id: userId, email: email },{_id:false}).select("salutation first_name middle_name last_name gender dob mobile email address pin city state country");
     if (!user) {
         throw new NotFoundError(`No user found with USER_ID:${userId}`)
     }
@@ -220,7 +220,7 @@ const getUser = async (req, res) => {
 
 const getUser1 = async (req, res) => {
     const { userId,email } = req.user;
-    const user = await User.findById({ _id: userId, email: email }).select("loanAmount loanType empStatus firmAddress businessName");
+    const user = await User.findById({ _id: userId, email: email }).populate("loanInquiries").select("loanInquiries");
     if (!user) {
         throw new NotFoundError(`No user found with USER_ID:${userId}`)
     }
@@ -321,5 +321,15 @@ const resetPassword = async (req, res) => {
     res.status(StatusCodes.OK).json({ msg: "Password Updated" })
 }
 
-module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1 };
+const checkisBankAccountLinked = async (req, res) => {
+    const { userId, email } = req.user
+    const user = await User.findOne({ _id: userId, email: email })
+    if (!user) throw new NotFoundError('No user found')
+    if (user.bankAccount) {
+        return res.status(StatusCodes.OK).json({bankAccount: true})
+    }
+    res.status(StatusCodes.OK).json({bankAccount: false})
+}
+
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1,checkisBankAccountLinked,generateOtp };
 

@@ -6,6 +6,8 @@ require('dotenv').config()
 require('express-async-errors')
 const port = process.env.PORT || 5000;
 const authRoute = require('./routes/authRoutes')
+const loanRoute = require('./routes/loanRoutes')
+const bankRoute =  require('./routes/bankAccountRoutes')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -19,7 +21,7 @@ const corsOrigin = {
   withCredentials: true
 }
 app.use(cors(corsOrigin));
-app.use(morgan());
+app.use(morgan("tiny"));
 app.use(express.urlencoded())
 
 app.use(cookieParser())
@@ -35,6 +37,8 @@ app.use(express.json()) //For printing json data
 
 
 app.use('/api/v1/user', authRoute);
+app.use('/api/v1/loan', loanRoute)
+app.use('/api/v1/bank',bankRoute)
 
 
 app.use(notFoundMiddleware);
