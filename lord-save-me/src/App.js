@@ -29,7 +29,8 @@ import DisplayBankDetails from "./pages/UserPanel/DisplayBankDetails"
 import BankDetails from "./pages/UserPanel/BankDetails"
 
 //ADMIN PANEL
-import AdminDashboard from "./pages/AdminPanel/AdminDashboard.jsx";
+import AdminDashboard from "./pages/AdminPanel/AdminDashboard";
+import AddUser from "./pages/AdminPanel/AddUser";
 import ClientData from "./pages/AdminPanel/ClientData";
 import ClientDetails from "./pages/AdminPanel/ClientDetails";
 import Statistics from "./pages/AdminPanel/Statistics";
@@ -38,6 +39,7 @@ import Statistics from "./pages/AdminPanel/Statistics";
 import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
 import SideBar2 from './components/SideBar2/SideBar2';
+import Creators from './pages/Home/Creators';
 
 
 function App() {
@@ -57,6 +59,7 @@ function App() {
         <Route path='/login/admin' element={<Login />} />
         <Route path='/forgot-password/:id' element={<ForgotPassword />} />
         <Route path='/policy' element={<Policy />} />
+        <Route path='/creators' element={<Creators />} />
 
         {/* COMPONENTS */}
         <Route path='/navbar' element={<NavBar />} />
@@ -77,6 +80,7 @@ function App() {
 
         {/* ADMIN PANEL */}
         <Route path="/admin-sidebar/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/admin-sidebar/add-user" element={<AddUser />} />
         <Route path="/admin-sidebar/client-data" element={<ClientData />} />
         <Route path="/admin-sidebar/client-details" element={<ClientDetails />} />
         <Route path="/admin-sidebar/statistics" element={<Statistics />} />

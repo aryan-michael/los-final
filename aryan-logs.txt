@@ -1,0 +1,7 @@
+=> 6/3/23
+@ ADD USER (ADMIN SIDE)
+> worked on creating a feature for the admin panel to add a user from the admin side.
+> reusable logic created but trouble in selecting method to render results.
+> couldn't find a way to properly render the form component on the same page.
+-> root issue: lack of nested routing.
+> window.open() function used to render results on a new tab.

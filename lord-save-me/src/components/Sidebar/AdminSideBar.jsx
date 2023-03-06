@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome } from "react-icons/fa";
-import { BsPersonLinesFill } from "react-icons/bs";
+import { BsFillPersonPlusFill, BsPersonLinesFill } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
 import { FcStatistics } from "react-icons/fc";
 import { useState } from "react";
@@ -15,6 +15,11 @@ const routes = [
         path: "/admin-sidebar/admin-dashboard",
         name: "Dashboard",
         icon: <FaHome />,
+    },
+    {
+        path: "/admin-sidebar/add-user",
+        name: "Add User",
+        icon: <BsFillPersonPlusFill />,
     },
     {
         path: "/admin-sidebar/client-data",
