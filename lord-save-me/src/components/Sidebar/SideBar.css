@@ -83,6 +83,7 @@ main {
 .link_text {
     white-space: nowrap;
     font-size: 15px;
+    margin-top: 7px;
 }
 
 .link:hover {
