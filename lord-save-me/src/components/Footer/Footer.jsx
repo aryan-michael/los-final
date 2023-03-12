@@ -139,7 +139,7 @@ export default function Footer() {
                         <MDBCol md='4' lg='3' xl='3' className='mx-auto mb-md-0 mb-4'>
                             <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
                             <p>
-                                <MDBIcon color='secondary' icon='home' className='me-2' />
+                                <MDBIcon color='secondary' icon='home' className='me-3' />
                                 Ahmedabad, Gujarat, IND
                             </p>
                             <p>
