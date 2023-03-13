@@ -3,7 +3,6 @@ import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import { Form, Row } from 'react-bootstrap';
 
-
 const DisplayBankDetails = () => {
 
     // const [error, setError] = useState({
