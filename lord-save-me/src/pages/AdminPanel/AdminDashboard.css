@@ -1,0 +1,15 @@
+.title {
+    padding-bottom: 20px;
+}
+.tag {
+    border-radius: 56px;
+    background: #e0e0e0;
+    box-shadow: 23px 23px 46px #bebebe, -23px -23px 46px #ffffff;
+}
+.icons {
+    font-size: 3.5rem;
+    color: rgb(10, 10, 94);
+}
+.icons:hover {
+    color: rgb(19, 105, 23)
+}
