@@ -1,6 +1,7 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 //import { BiPowerOff } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
+import { MDBIcon } from "mdb-react-ui-kit";
 import "./PostLoginNavBar.css";
 
 const PostLoginNavBar = () => {
@@ -9,7 +10,7 @@ const PostLoginNavBar = () => {
             <Navbar sticky="top" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
-                        LOS
+                        <MDBIcon color='secondary' icon='gem' className='me-3' /> LOS
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">

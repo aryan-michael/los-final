@@ -1,7 +1,7 @@
-import { Container, Form, Row, Button } from 'react-bootstrap';
+import { Container, Form, Row } from 'react-bootstrap';
 import AdminSideBar from "../../components/Sidebar/AdminSideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
-import Forms from "../Register/Forms";
+import AdminForms from "../AdminPanel/AdminForms";
 import { useEffect, useState } from 'react';
 
 const AddUser = () => {
@@ -22,7 +22,30 @@ const AddUser = () => {
 
     const handleChange = (e) => {
         setLoan(e.target.value);
-        window.open(`/loan/${e.target.value}`);
+        
+        /*if (e.target.value === "business"){
+        	<div>
+                        <Forms loan_type={"Business"} country={"India"} />       
+                </div>
+        }
+        if (e.target.value === "home"){
+        	<div>
+                        <Forms loan_type={"Home"} country={"India"} />    
+                </div>
+        }
+        if (e.target.value === "education"){
+        	<div>
+                        <Forms loan_type={"Education"} country={"India"} />      
+                </div>
+        }
+        if (e.target.value === "personal"){
+        	<div>
+                        <Forms loan_type={"Personal"} country={"India"} />   
+                </div>
+        }*/
+        
+        
+        /*window.open(`/admin-sidebar/add-user/loan/${e.target.value}`);*/
     }
 
     return (
@@ -54,12 +77,12 @@ const AddUser = () => {
                             </Form.Group>
                         </Row> */}
                     </Form>
-                    {/* <div>
-                        {business && <Forms loan_type={"Business"} country={"India"} />}
-                        {home && <Forms loan_type={"Home"} country={"India"} />}
-                        {education && <Forms loan_type={"Education"} country={"India"} />}
-                        {personal && <Forms loan_type={"Personal"} country={"India"} />}
-                    </div> */}
+                    <div>
+                        {business && <AdminForms loan_type={"Business"} country={"India"} />}
+                        {home && <AdminForms loan_type={"Home"} country={"India"} />}
+                        {education && <AdminForms loan_type={"Education"} country={"India"} />}
+                        {personal && <AdminForms loan_type={"Personal"} country={"India"} />}
+                    </div>
                 </Container>
 
             </div>
