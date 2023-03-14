@@ -1,15 +1,12 @@
 .tag {
     border-radius: 58px;
     background: linear-gradient(45deg, #dbe1e5, #b9bdc1);
-    box-shadow: 22px -22px 30px #96999c,
-        -22px 22px 30px #ffffff;
+    box-shadow: 22px -22px 30px #96999c, -22px 22px 30px #ffffff;
 }
-
 .icons {
     font-size: 3.5rem;
     color: rgb(10, 10, 94);
 }
-
 .icons:hover {
     color: rgb(19, 105, 23)
 }

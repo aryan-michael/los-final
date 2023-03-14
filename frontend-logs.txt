@@ -1,0 +1,19 @@
+=> 06/03/23
+@ ADD USER (ADMIN SIDE)
+> worked on creating a feature for the admin panel to add a user from the admin side.
+> reusable logic created but trouble in selecting method to render results.
+> couldn't find a way to properly render the form component on the same page.
+-> root issue: lack of nested routing.
+> window.open() function used to render results on a new tab.
+
+=> 14/03/23
+@ ADD USER (ADMIN SIDE)
+> window.open() function discarded.
+> instead, conditional div rendered below the drop-down.
+> previous issue resolved, form component rendered on the same page.
+
+@ BOTH DASHBOARDS
+> card components added on both dashboards. will attempt on making it dynamic.
+
+@ PERSONAL DETAILS
+-> dynamic drop-down to be created using india.json.

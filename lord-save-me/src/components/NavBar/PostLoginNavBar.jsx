@@ -2,10 +2,10 @@ import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 //import { BiPowerOff } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { MDBIcon } from "mdb-react-ui-kit";
-import "./PostLoginNavBar.css";
+import "./NavBars.css";
 
 const PostLoginNavBar = () => {
-    return (
+    return ( 
         <>
             <Navbar sticky="top" bg="dark" variant="dark">
                 <Container>
@@ -15,8 +15,8 @@ const PostLoginNavBar = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#features">Features</Nav.Link>
-                            <Nav.Link href="#pricing">Pricing</Nav.Link>
+                            <Nav.Link href="/policy">Policy Agreement</Nav.Link>
+                            <Nav.Link href="/creators">Creators</Nav.Link>
                             {/* <NavDropdown title="Products" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="/loan/business">
                                     Business Loan

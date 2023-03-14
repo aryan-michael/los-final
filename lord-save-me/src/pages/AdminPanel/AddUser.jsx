@@ -84,7 +84,7 @@ const AddUser = () => {
                         {personal && <AdminForms loan_type={"Personal"} country={"India"} />}
                     </div>
                 </Container>
-
+ 
             </div>
         </>
     );

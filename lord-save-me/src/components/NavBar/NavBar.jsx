@@ -1,9 +1,10 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import { MDBIcon } from "mdb-react-ui-kit";
+import "./NavBars.css";
 
 const NavBar = () => {
     return (
-        <>
+        <> 
             <Navbar sticky="top" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
