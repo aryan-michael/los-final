@@ -1,7 +1,7 @@
 import { Container, Form, Row } from 'react-bootstrap';
 import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
-//import NewInquiryForm from "../UserPanel/NewInquiryForm";
+import NewInquiry from "./NewInquiry";
 import { useEffect, useState } from 'react';
 
 const AddInquiry = () => {
@@ -22,29 +22,6 @@ const AddInquiry = () => {
 
     const handleChange = (e) => {
         setLoan(e.target.value);
-        
-        /*if (e.target.value === "business"){
-        	<div>
-                        <Forms loan_type={"Business"} country={"India"} />       
-                </div>
-        }
-        if (e.target.value === "home"){
-        	<div>
-                        <Forms loan_type={"Home"} country={"India"} />    
-                </div>
-        }
-        if (e.target.value === "education"){
-        	<div>
-                        <Forms loan_type={"Education"} country={"India"} />      
-                </div>
-        }
-        if (e.target.value === "personal"){
-        	<div>
-                        <Forms loan_type={"Personal"} country={"India"} />   
-                </div>
-        }*/
-        
-        
         /*window.open(`/admin-sidebar/add-user/loan/${e.target.value}`);*/
     }
 
@@ -52,6 +29,7 @@ const AddInquiry = () => {
         <>
             <PostLoginNavBar />
             <div style={{ display: 'flex' }}>
+                
                 <SideBar />
 
                 <Container fluid>
@@ -70,19 +48,13 @@ const AddInquiry = () => {
                                 </Form.Select>
                             </Form.Group>
                         </Row>
-                        {/* <Row className="mb-3">
-                            <Form.Group controlId="formGridCheckbox" className="col col-sm-3">
-                                <Button type="submit" className="me-4 btn btn-success btn-lg btn-block">Submit
-                                </Button>
-                            </Form.Group>
-                        </Row> */}
                     </Form>
-                    {/*<div>
-                        {business && <NewInquiryForm loan_type={"Business"} country={"India"} />}
-                        {home && <NewInquiryForm loan_type={"Home"} country={"India"} />}
-                        {education && <NewInquiryForm loan_type={"Education"} country={"India"} />}
-                        {personal && <NewInquiryForm loan_type={"Personal"} country={"India"} />}
-                    </div>*/}
+                    {<div>
+                        {business && <NewInquiry loan_type={"Business"} country={"India"} />}
+                        {home && <NewInquiry loan_type={"Home"} country={"India"} />}
+                        {education && <NewInquiry loan_type={"Education"} country={"India"} />}
+                        {personal && <NewInquiry loan_type={"Personal"} country={"India"} />}
+                    </div>}
                 </Container>
 
             </div>
