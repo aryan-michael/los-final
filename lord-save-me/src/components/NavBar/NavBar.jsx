@@ -1,4 +1,5 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import { MDBIcon } from "mdb-react-ui-kit";
 
 const NavBar = () => {
     return (
@@ -6,7 +7,7 @@ const NavBar = () => {
             <Navbar sticky="top" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
-                        LOS
+                        <MDBIcon color='secondary' icon='gem' className='me-3' /> LOS
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -54,3 +55,8 @@ const NavBar = () => {
 }
 
 export default NavBar;
+
+<h6 className='text-uppercase fw-bold mb-4'>
+    <MDBIcon color='secondary' icon='gem' className='me-3' />
+    AD LOS
+</h6>

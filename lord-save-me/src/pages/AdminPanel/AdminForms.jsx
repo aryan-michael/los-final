@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import PersonalDetails from "./PersonalDetails";
-import LoanDetails from "./LoanDetails";
+import PersonalDetails from "../../pages/Register/PersonalDetails";
+import LoanDetails from "../../pages/Register/LoanDetails";
 import { useNavigate } from 'react-router-dom';
-import './Forms.css';
+import './AdminForms.css';
 import axios from 'axios'
 import { Alert, Button, Col, Container, Navbar, Row } from "react-bootstrap";
 import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
-import NavBar from "../../components/NavBar/NavBar";
 
 //PINCODE VALIDATION//
 function validatePinCode(value) {
@@ -143,7 +142,7 @@ const fieldValidations = {
 }
 
 //MAIN CONTENT FOR FORMS STARTS HERE//
-function Forms({ loan_type, country,setLoginToken }) {
+function AdminForms({ loan_type, country, setLoginToken }) {
     const [page, setPage] = useState(0); 
     const [error, setError] = useState({
         pin: '',
@@ -371,11 +370,10 @@ function Forms({ loan_type, country,setLoginToken }) {
     };
     return (
         <>
-            <NavBar />
         <div className="form">
             
             <div className="form-container">
-                {/* <Alert>{error.first_name}</Alert> */}
+                
                 <Container className="h-100">
                     <Row className="h-100">
                         <Col className="align-self-center">
@@ -415,7 +413,7 @@ function Forms({ loan_type, country,setLoginToken }) {
     );
 }
 
-export default Forms;
+export default AdminForms
 
 
 // PAN number validation

@@ -1,5 +1,3 @@
-.list-item {
-    margin: 0;
-    padding: 0;
-    box-sizing: initial;
+.picture {
+    box-sizing: content-box !important
 }

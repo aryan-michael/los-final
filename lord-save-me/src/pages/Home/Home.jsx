@@ -5,6 +5,7 @@ import { FaBusinessTime, FaHome } from 'react-icons/fa';
 import { MdCastForEducation } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
 import NavBar from "../../components/NavBar/NavBar";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
 
@@ -49,6 +50,7 @@ const Home = () => {
                     </Col>
                 </Row>
             </Container>
+            <Footer />
             <Outlet />
         </>
     );
