@@ -1,0 +1,18 @@
+=> 15.03.2023
+@Proxy User:-
+    > Added a collection named Proxy User.
+    > Proxy User will be used as a collection which will temperaroy store user data when during the signup of the user or hwne the user is created by the admin untill that particular user verify itself using the OTP. 
+    > As soon as the user verifies itself using OTP, then complete data of the user is transfered from the Proxy user collection to the main User collection and the entry of the that user in proxy user collection is deleted.
+    >This will help in combacting the issue of user data stored in the main collection eventhough the user has not verified itself.
+
+    >Added a model, controller and routes for Proxy User.
+
+    @frontend:-
+    >Made some routes changes in the frontend for "Form.jsx" and "OTP.jsx" due to the addition of proxy user in the system.
+
+@User:- (Check if email or phone number is available):-
+    >Added an API which will check if the particular email or phone number is registered with us or not.
+
+    @frontend:-
+    >Added the checkIfAvailable route to the "Form.jsx" inside the handlePersonalDetails functions.
+    >Added a [check,setCheck] useState to store the message that stats whether the email/mobile is available to use or not.

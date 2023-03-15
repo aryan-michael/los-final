@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createUser, getAllUser, login, getUser, deleteUser, updateUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword, updateUserLoanDetails, checkOtp, setUserPassword, checkLoginOtp,getUser1, checkisBankAccountLinked } = require('../Controller/userController');
+const { createUser, getAllUser, login, getUser, deleteUser, updateUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword, updateUserLoanDetails, checkOtp, setUserPassword, checkLoginOtp,getUser1, checkisBankAccountLinked, checkIfAvailable } = require('../Controller/userController');
 const { authMiddleware, isAdmin } = require('../Middleware/AuthMiddleware')
 
 router.post('/signup', createUser)
@@ -23,7 +23,8 @@ router.put('/update-user',authMiddleware, updateUser);
 router.get('/block-user/:id', authMiddleware, isAdmin, blockUser)
 router.get('/unblock-user/:id', authMiddleware, isAdmin, unblockUser)
 router.put('/password', authMiddleware, passwordReset)
-router.get('/cibal',authMiddleware,checkisBankAccountLinked)
+router.get('/cibal', authMiddleware, checkisBankAccountLinked)
+router.post('/cia',checkIfAvailable)
 
 
 
