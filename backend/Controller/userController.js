@@ -8,15 +8,8 @@ const refreshJWTToken = require('../database/refreshToken')
 const jwt = require('jsonwebtoken')
 const sendEmail = require('./emailController');
 const crypto = require('crypto')
+const generateOtp = require('../Middleware/AdditionalFunc')
 
-function generateOtp () {
-    var str = 'abcdefghijklmnopqrstuvxyz0123456789ABCDEFGHIJKLMNOPQRSTUVXYZ';
-    let otp = ''
-    for (i = 0; i < 6; i++){
-        otp += str[Math.floor(Math.random()*(str.length))]
-    }
-    return otp
-}
 
 
 const createUser = async (req, res) => {
@@ -331,5 +324,14 @@ const checkisBankAccountLinked = async (req, res) => {
     res.status(StatusCodes.OK).json({bankAccount: false})
 }
 
-module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1,checkisBankAccountLinked,generateOtp };
+const checkIfAvailable = async (req, res) => {
+    console.log(req.body);
+    const user = await User.findOne(req.body);
+    if (!user) {
+        return res.status(StatusCodes.OK).json({available:true})
+    }
+    res.status(StatusCodes.OK).json({available:false})
+}
+
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1,checkisBankAccountLinked,checkIfAvailable };
 

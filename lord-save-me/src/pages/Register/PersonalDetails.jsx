@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
 
-const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error}) => {
+const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,check}) => {
 
     return (
         <>
@@ -78,18 +78,20 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error})
                         <InputGroup hasValidation>
                             <InputGroup.Text id="basic-addon1">+91</InputGroup.Text>
                             <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" value={personalDetails.mobile} onChange={setPersonalDetails} required />
-                            <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
-                            <Form.Control.Feedback type='invalid'>Please provide your mobile number.</Form.Control.Feedback>
+                            {/* <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback> */}
+                            {/* <Form.Control.Feedback type='invalid'>Please provide your mobile number.</Form.Control.Feedback> */}
                             <Form.Control.Feedback style={{ display: error.mobile ? 'block' : 'none' }} type='invalid'>{error.mobile}</Form.Control.Feedback>
+                            <Form.Control.Feedback style={{display:check.mobile?'block':'none'}} type='invalid'>{check.mobile} Already a user? <a href="http://localhost:3000/login/client">Login</a> with us</Form.Control.Feedback>
                         </InputGroup>
                     </Form.Group>
                     {/* EMAIL */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
                         <Form.Label>Email</Form.Label>
                         <Form.Control aria-label="Recipient's username" type="email" name="email" value={personalDetails.email} onChange={setPersonalDetails} required />
-                        <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
+                        {/* <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback> */}
                         <Form.Control.Feedback type='invalid'>Please provide your email.</Form.Control.Feedback>
-                        {/* <Form.Control.Feedback style={{display:error.email?'block':'none'}} type='invalid'>{error.email}</Form.Control.Feedback> */}
+                        <Form.Control.Feedback style={{ display: error.email ? 'block' : 'none' }} type='invalid'>{error.email}</Form.Control.Feedback>
+                        <Form.Control.Feedback style={{display:check.email?'block':'none'}} type='invalid'>{check.email} Already a user? <a href="http://localhost:3000/login/client">Login</a> with us</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
 
