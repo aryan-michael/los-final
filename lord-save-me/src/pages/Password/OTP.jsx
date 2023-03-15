@@ -35,7 +35,7 @@ function OTP({ setLoginToken, loginToken }) {
         }
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/v1/user/check-otp', data, {
+            await axios.post('http://localhost:5000/api/v1/proxyUser/create/check-otp', data, {
                 withCredentials:true
             }).then(response => {
                 console.log(response)

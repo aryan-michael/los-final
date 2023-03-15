@@ -7,7 +7,8 @@ require('express-async-errors')
 const port = process.env.PORT || 5000;
 const authRoute = require('./routes/authRoutes')
 const loanRoute = require('./routes/loanRoutes')
-const bankRoute =  require('./routes/bankAccountRoutes')
+const bankRoute = require('./routes/bankAccountRoutes')
+const proxyUserRoute = require('./routes/proxyUserRoutes')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -23,7 +24,6 @@ const corsOrigin = {
 app.use(cors(corsOrigin));
 app.use(morgan("tiny"));
 app.use(express.urlencoded())
-
 app.use(cookieParser())
 app.use(express.json()) //For printing json data 
 
@@ -38,7 +38,8 @@ app.use(express.json()) //For printing json data
 
 app.use('/api/v1/user', authRoute);
 app.use('/api/v1/loan', loanRoute)
-app.use('/api/v1/bank',bankRoute)
+app.use('/api/v1/bank', bankRoute)
+app.use('/api/v1/proxyUser', proxyUserRoute)
 
 
 app.use(notFoundMiddleware);
