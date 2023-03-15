@@ -1,5 +1,7 @@
 > Logo in place of Navbar Brand
 
+>> 
+
 *************************************DOCUMENTS********************************************
 
 > KYC documents uploading needs to be dynamic
@@ -7,7 +9,7 @@ fields will be provided according to loan type
 
 1) Business Loan
 
-1) Photo Identity Proof: Passport / Driving License / Voter ID / PAN Card / Aadhaar Card.
+1) Photo Identity Proof: PAN Card / Aadhaar Card.
 2) Address Proof: Driving License / Registered Rent Agreement / Electricity Bill (up to 3 months old) / Passport.
 3) COI (Certificate of Incorporation) | business registration, licenses, and permits
 4) 6-12 months of bank statements (some lenders will ask you to link your bank account to apps like Plaid)
@@ -17,7 +19,7 @@ fields will be provided according to loan type
 7) cash flow statements
 8) list of accounts receivables and payables
 9) list of existing loans and debts
-
+ 
 
 
 2) Home Loan
