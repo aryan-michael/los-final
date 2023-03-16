@@ -1,0 +1,96 @@
+> Logo in place of Navbar Brand
+
+>> 
+
+*************************************DOCUMENTS********************************************
+
+> KYC documents uploading needs to be dynamic
+fields will be provided according to loan type
+
+1) Business Loan
+
+1) Photo Identity Proof: PAN Card / Aadhaar Card.
+2) Address Proof: Driving License / Registered Rent Agreement / Electricity Bill (up to 3 months old) / Passport.
+3) COI (Certificate of Incorporation) | business registration, licenses, and permits
+4) 6-12 months of bank statements (some lenders will ask you to link your bank account to apps like Plaid)
+5) 1-2 years of personal and business tax returns
+   document verifying GST number (GST Returns)
+6) 12 months of profit and loss balance sheet
+7) cash flow statements
+8) list of accounts receivables and payables
+9) list of existing loans and debts
+ 
+
+
+2) Home Loan
+
+1) Photo Identity Proof: Passport / Driving License / Voter ID / PAN Card / Aadhaar Card.
+2) Address Proof: Driving License / Registered Rent Agreement / Electricity Bill (up to 3 months old) / Passport.
+3) Employment Appointment Letter: Required if the current employment is less than 1-year old.
+4) Financial Documents:
+--> Last 3 months salary slip.
+--> 6 month bank statement.
+--> 2 year Form 16.
+5) Property Documents: Sale deed, Khata, transfer of ownership.
+6) Advance Processing Cheque: A cancelled cheque for validation of bank account.
+7) Financial Documents:
+   a. For Salaried Individual: 3 month salary slip, Form 16 and bank statement
+
+   b. For Self-Employed Individual: IT returns for last 2 years along with computation of income tax for past 2 years certified by a Chartered accountant
+
+   c. For Self-Employed Non- Professionals: IT returns for last 3 years along with computation of income tax for past 2 years certified by a Chartered accountant
+
+> SALARIED EMPLOYEES
+Loan Form: Bank loan application form to be filled with passport size photographs affixed
+Address Proof: Leave and License / Registered Rent Agreement / Utility Bill (up to 3 months old), Passport
+Identity Proof: Passport / Driving License / Voter ID / PAN
+Income Proof: 3 month payslips, 2 years Form 16, Copy of Income Tax PAN
+Bank Statement: 6 months bank statement that shows salary from the employer and any EMI paid for outstanding debit.
+
+> SELF-EMPLOYED / PROFESSIONALS
+Identity Proof: Passport / Driving License / Voter ID / PAN.
+Address Proof: License / Registered Rent Agreement / Utility Bill.
+Office Address Proof: Property Documents, Utility Bill.
+Office Ownership Proof: Property Documents, Utility Bill, Maintenance Bill.
+Business Existence Proof: 3 years old Saral Copy, the Company Registration license, Shop Establishment Act.
+Income Proof: Latest 3 years Income Tax Returns including Computation of Income, Profit & Loss Account, Audit Report, Balance Sheet, etc.
+Bank Statement: Past 1 year bank statement.
+1 passport size color photograph.
+
+
+
+3) Education Loan
+
+1) [Applicant & Co-Applicant] Photo Identity Proof: Passport / Driving License / Voter ID / PAN Card / Aadhaar Card.
+2) Address Proof: Driving License / Registered Rent Agreement / Electricity Bill (up to 3 months old) / Passport.
+3) Income Proof: Applicant / Co-Applicant (Employment / Document Proof)
+4) Bank Statement / Pass Book of last 6 months
+5) Proof of Admission: Printed Admission Letter From the Institute on its Letterhead With Institute's Address along with fees schedule.
+6) Mark sheets / passing certificates of S.S.C., H.S.C, Degree courses
+7) Collateral Property Document
+
+
+
+
+4) Personal Loan
+
+1) Photo Identity Proof: Passport / Driving License / Voter ID / PAN Card / Aadhaar Card.
+2) Address Proof: Driving License / Registered Rent Agreement / Electricity Bill (up to 3 months old) / Passport.
+
+3) Income Proof: Last 3 months Payslip & Bank Statement of last 3 months.
+4) Job Continuity Proof: Job Offer Letter / Letter from the HRD (if current employment less than 2 years).
+5) Financial Documents	
+    a. Salaried Individuals: Latest 3 month's Salary Slips and Form 16, Bank Statements of 6 months.
+
+    b. Self Employed Individuals: Latest 1 year bank statement for both savings and current account.
+
+
+
+
+*************************************DOCUMENTS********************************************
+
+> form on the admin side which will put in info regarding where the client has outstanding loans ....whether to accept or reject
+
+> form needed on admin side which will decide interest rate and and duration
+read only of that form will be available on the user panel which can be downloadable (printable)
+SANCTION LETTER
