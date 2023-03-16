@@ -5,8 +5,8 @@ import "./NavBars.css";
 const NavBar = () => {
     return (
         <> 
-            <Navbar sticky="top" bg="dark" variant="dark">
-                <Container>
+            <Navbar className="navbar" sticky="top" variant="dark">
+                <Container >
                     <Navbar.Brand href="/">
                         <MDBIcon color='secondary' icon='gem' className='me-3' /> LOS
                     </Navbar.Brand>

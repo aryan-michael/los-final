@@ -7,7 +7,7 @@ import "./NavBars.css";
 const PostLoginNavBar = () => {
     return ( 
         <>
-            <Navbar sticky="top" bg="dark" variant="dark">
+            <Navbar className="navbar" sticky="top" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
                         <MDBIcon color='secondary' icon='gem' className='me-3' /> LOS
