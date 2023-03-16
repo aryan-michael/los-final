@@ -1,0 +1,12 @@
+.displayBankDetails{
+    padding: 20px;
+}
+
+.displayContainer{
+    display: flex;
+    box-shadow: 1px 1px 4px 6px rgba(137, 137, 137, 0.75);
+    -webkit-box-shadow: 1px 1px 4px 6px rgba(137, 137, 137, 0.75);
+    -moz-box-shadow: 1px 1px 4px 6px rgba(137, 137, 137, 0.75);
+    border-radius: 10px;
+    justify-content: center;
+}

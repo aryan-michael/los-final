@@ -1,9 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import { Form, Row } from 'react-bootstrap';
+import "./userPanelStyles/displayBankDetails.css"
+import axios from "axios"
+import { Navigate } from "react-router-dom";
 
 const DisplayBankDetails = () => {
+
+    const getBankDetails = async () => {
+        try {
+            await axios.get("http://localhost:5000/api/v1/user/get-bank-details", {
+                withCredentials: true
+            }).then(response => {
+                console.log(response);
+            })
+        } catch (err) {
+            if (err.response) {
+                alert(err.response.data.msg)
+            }
+            alert("Something went wrong")
+            Navigate('/')
+        }
+    }
 
     // const [error, setError] = useState({
     //     account_number: '',
@@ -21,9 +40,15 @@ const DisplayBankDetails = () => {
     //     expiry_date: '',
     // });
 
+    useEffect(() => {
+        getBankDetails()
+    },[])
 
     return (
         <>
+            <div className="displayBankDetails">
+                <div className="displayContainer">
+                    <div className="details">
                 <Form className="container mt-3 mb-3" autoComplete='off'>
                     <Row className="mb-3">
                         {/* <Alert>{error}</Alert> */}
@@ -73,7 +98,10 @@ const DisplayBankDetails = () => {
                         </Form.Group>
                     </Row>
 
-                </Form>
+                        </Form>
+                        </div>
+                    </div>
+                </div>
         </>
     );
 }

@@ -213,7 +213,7 @@ const LinkBankDetails = () => {
                 withCredentials:true
             }).then(response => {
                 console.log(response);
-                Navigate("/sidebar/bank-detailsi-final")
+                window.location.reload()
             })
         } catch (err) {
             console.log(err);

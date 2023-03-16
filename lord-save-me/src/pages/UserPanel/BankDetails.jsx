@@ -5,6 +5,7 @@ import SideBar from "../../components/Sidebar/SideBar";
 import DisplayBankDetails from '../UserPanel/DisplayBankDetails'
 import LinkBankDetails from './LinkBankDetails'
 import { useNavigate } from "react-router-dom";
+import "./userPanelStyles/bankDetails.css"
 
 const BankDetails = () => {
 
@@ -38,10 +39,10 @@ const BankDetails = () => {
             <PostLoginNavBar />
             <div style={{display: "flex"}}>
                 <SideBar />
-                <div style={{ display: isLinked ? "block":"none"}}>
+                <div style={{ display: isLinked ? "block":"none"}} className="displayBankDetails">
                     <DisplayBankDetails />
                 </div>
-                <div style={{ display: !isLinked ? "block":"none"}}>
+                <div style={{ display: !isLinked ? "block":"none"}} className="linkBankDetails">
                     <LinkBankDetails />
                 </div>
             </div>

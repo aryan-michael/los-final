@@ -333,5 +333,13 @@ const checkIfAvailable = async (req, res) => {
     res.status(StatusCodes.OK).json({available:false})
 }
 
-module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1,checkisBankAccountLinked,checkIfAvailable };
+const getBankDetails = async (req, res) => {
+    const { userId, email } = req.user;
+    const user = await User.findOne({ _id: userId, email: email }).populate("bankAccount").select("bankAccount")
+    if (!user) throw new NotFoundError('No user found')
+    console.log(user);
+    res.status(StatusCodes.OK).json({user})
+}
+
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1,checkisBankAccountLinked,checkIfAvailable,getBankDetails };
 
