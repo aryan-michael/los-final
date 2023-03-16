@@ -19,5 +19,9 @@
 -> dynamic drop-down to be created using india.json.
 
 
-
+=> 16/03/23
+@ KYC DOCUMENTS
+> map function used to duplicate document upload div.
+> output in the form of array.
+> stock handleSubmit function has been created. (non-fucntional)
 
