@@ -34,7 +34,7 @@ history?
 
 7) Nature of industry (is it risky?) 
 
-STEP1 --> LEAD GENERATION
+STEP1 --> LEAD GENERATION 
 
 1) Basic Client details -> name, mobile, email
 Address, PAN, loan amount

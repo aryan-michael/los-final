@@ -21,7 +21,7 @@ fields will be provided according to loan type
 9) list of existing loans and debts
  
 
-
+ 
 2) Home Loan
 
 1) Photo Identity Proof: Passport / Driving License / Voter ID / PAN Card / Aadhaar Card.

@@ -25,3 +25,6 @@
 > output in the form of array.
 > stock handleSubmit function has been created. (non-fucntional)
 
+=> 17/03/23
+@ KYC DOCUMENTS
+> dropdown list of documents has been set up.
