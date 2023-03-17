@@ -2,11 +2,64 @@ import { useState, useEffect } from "react";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import SideBar from "../../components/Sidebar/SideBar";
 import { Form, Col, Row, Button, InputGroup } from "react-bootstrap";
-import { MDBAccordion, MDBAccordionItem, MDBIcon } from 'mdb-react-ui-kit';
+import DocRequirements from "./DocRequirements";
 
 
 export default function KYC() {
 
+  const business_documents = [
+    'Photo Identity Proof',
+    'Address Proof',
+    'Certificate of Incorporation',
+    'Income Tax Returns',
+    'GST Returns',
+    'Bank Statements (max 1 year old)',
+    'List of existing loans and debts', 
+    'List of Accounts',
+    'Cash Flow Statements',
+    'Cancelled Cheque',
+  ]
+
+  const home_documents = [
+    'Photo Identity Proof',
+    'Address Proof',
+    'Employment Appointment Letter',
+    'Salary slip (3 months old)',
+    'Bank Statement (6 months old)',
+    'Form 16 (2 years)',
+    'Property Document (Sale deed, Khata)',
+    'IT Returns',
+    'Office Address Proof',
+    'Office Ownership Proof',
+    'Business Existence Proof (COI)',
+    'Income Proof',
+
+  ]
+
+  const education_documents = [
+    'Photo Identity Proof (Applicant/Co-Applicant)',
+    'Address Proof (Applicant/Co-Applicant)',
+    'Income Proof (Applicant/Co-Applicant)',
+    'Bank Statements',
+    'Proof of Admission',
+    'Marksheet (S.S.C./H.S.C./Degree/Diploma)',
+    'Collateral Property Document'
+  ]
+
+
+  const personal_documents = [
+    'Photo Identity Proof',
+    'Address Proof',
+    'Income Proof',
+    'Job Continuity Proof',
+    'Bank Statements (max 1 year old)',
+    'Form 16 (2 years)',
+    'Salary Slip',
+    'List of existing loans and debts', 
+    'List of Accounts',
+  ]
+
+  const [modalShow, setModalShow] = useState(false);
 
   const [value,setValue]=useState([1]);
    const handleAdd=()=>{
@@ -96,19 +149,24 @@ export default function KYC() {
                               <Form.Label style={{color: "white"}}>Choose Document</Form.Label>
                               <Form.Select value={data} onChange={e=>handleChange(e,i)} className="form-control" name="salutation" required >
                                   <option defaultValue value=''>Choose...</option>
-                                  <option value="aadhar">Aadhar Card</option>
-                                  <option value="pan">PAN Card</option>
-                                  <option value="gst">GST Returns</option>
+                                  <option disabled>BUSINESS LOAN</option>
+                                  {business_documents.map((option)=><option>{option}</option>)}
+                                  <option disabled>HOME LOAN</option>
+                                  {home_documents.map((option)=><option>{option}</option>)}
+                                  <option disabled>EDUCATION LOAN</option>
+                                  {education_documents.map((option)=><option>{option}</option>)}
+                                  <option disabled>PERSONAL LOAN</option>
+                                  {personal_documents.map((option)=><option>{option}</option>)}
                               </Form.Select>
                               <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
-                              <Form.Control.Feedback type='invalid'>Please provide your salutation.</Form.Control.Feedback>
+                              <Form.Control.Feedback type='invalid'>Please provide a document!</Form.Control.Feedback>
                         </Form.Group>
                       </Col>
 
                       <Col className="col-md-7">
                           <label 
                           style={{color: "white"}}
-                          className="form-label" for="customFile">File should be .jpeg or .pdf</label>
+                          className="form-label" for="customFile">Looks good / please upload</label>
                           <input
                             onChange={onFileUpload}
                             id={1} 
@@ -120,15 +178,28 @@ export default function KYC() {
 
                     </Row>
                   </Col>
-
-                  <Col className="mt-3 col-md-2">
+                <Row>
+                  <Col className="mt-3 col-md-1">
                         <Button
-                        onClick={()=>handleDelete(i)}
-                        type="button"
-                        variant="outline-danger" 
-                        className="me-4 btn btn-sm">Delete</Button>
+                          onClick={()=>handleDelete(i)}
+                          type="button"
+                          variant="outline-danger" 
+                          className="me-4 btn btn-sm">Delete</Button>
                   </Col>
 
+                  <Col className="mt-3 col-md-2">
+                      <Button 
+                        variant="outline-primary" 
+                        className="me-4 btn btn-sm"
+                        onClick={() => setModalShow(true)}>Requirements
+                        </Button>
+
+                      <DocRequirements
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                      />
+                  </Col>
+                </Row>
                 </div>
                 )
             })}
