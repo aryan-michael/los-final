@@ -385,20 +385,20 @@ export default function ClientData() {
             <div style={{ height: '100%', display: 'flex' }}>
                 <AdminSideBar />
                 <Container>
-                <div >
-                    <div className="p-2 title"><MDBBadge pill color='secondary' light>Client Summary</MDBBadge></div>
-                    <DataTable
-                        //title="Client Summary"
-                        columns={columns}
-                        data={clientSummary}
-                        defaultSortFieldId
-                        pagination={10}
-                        fixedHeader
-                        fixedHeaderScrollHeight="450px"
-                        onRowClicked={handleRowClicked}
-                        highlightOnHover
-                    />
-                </div>
+                    <div >
+                        <div className="p-2 title"><MDBBadge pill color='secondary' light>Client Summary</MDBBadge></div>
+                        <DataTable
+                            //title="Client Summary"
+                            columns={columns}
+                            data={clientSummary}
+                            defaultSortFieldId
+                            pagination={10}
+                            fixedHeader
+                            fixedHeaderScrollHeight="450px"
+                            onRowClicked={handleRowClicked}
+                            highlightOnHover
+                        />
+                    </div>
                 </Container>
             </div>
         </>

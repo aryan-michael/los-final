@@ -4,6 +4,7 @@ import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import NewInquiry from "./NewInquiry";
 import { useEffect, useState } from 'react';
 import { MDBBadge } from "mdb-react-ui-kit";
+import "./AddInquiry.css";
 
 const AddInquiry = () => {
 
@@ -30,13 +31,13 @@ const AddInquiry = () => {
         <>
             <PostLoginNavBar />
             <div style={{ display: 'flex' }}>
-                
+
                 <SideBar />
 
                 <Container fluid>
                     <Form className="container mt-3 mb-3" autoComplete='off'>
                         <Row className="p-4 title"><MDBBadge pill color='secondary' light>Apply for a New Loan</MDBBadge></Row>
-                        <Row className="p-3 mb-3">
+                        <Row className="drop p-3 mb-3">
                             {/* ADDING INQUIRY VIA USER */}
                             <Form.Group controlId="formGridState" className="col col-sm-3">
                                 {/*<Form.Label><MDBBadge pill color='secondary' light>Choose loan type</MDBBadge></Form.Label>*/}
@@ -50,12 +51,12 @@ const AddInquiry = () => {
                             </Form.Group>
                         </Row>
                     </Form>
-                    {<div>
+                    <div>
                         {business && <NewInquiry loan_type={"Business"} country={"India"} />}
                         {home && <NewInquiry loan_type={"Home"} country={"India"} />}
                         {education && <NewInquiry loan_type={"Education"} country={"India"} />}
                         {personal && <NewInquiry loan_type={"Personal"} country={"India"} />}
-                    </div>}
+                    </div>
                 </Container>
 
             </div>

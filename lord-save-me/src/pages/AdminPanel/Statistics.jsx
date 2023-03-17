@@ -18,7 +18,7 @@ export default function Statistics() {
         <AdminSideBar />
 
         <Container fluid>
-            <div>
+          <div>
             <Button variant="primary" onClick={handleShow}>
               Launch demo modal
             </Button>
@@ -31,12 +31,12 @@ export default function Statistics() {
                 <Form>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label><MDBBadge pill color='success' light>DECISION</MDBBadge></Form.Label>
-                                <Form.Select className="form-control" name="add-user" required >
-                                    <option defaultValue value=''>Choose...</option>
-                                    <option className="option">Accept</option>
-                                    <option className="option">Reject</option>
-                                    <option className="option">Waitlist</option>
-                                </Form.Select>
+                    <Form.Select className="form-control" name="add-user" required >
+                      <option defaultValue value=''>Choose...</option>
+                      <option className="option">Accept</option>
+                      <option className="option">Reject</option>
+                      <option className="option">Waitlist</option>
+                    </Form.Select>
                   </Form.Group>
                   <Form.Group
                     className="mb-3"
@@ -56,8 +56,8 @@ export default function Statistics() {
                 </Button>
               </Modal.Footer>
             </Modal>
-        
-        </div>
+
+          </div>
         </Container>
 
       </div>

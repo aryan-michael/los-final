@@ -179,9 +179,7 @@ const ClientDetails = () => {
                                     {/* SALUTATION */}
                                     <Form.Group controlId="formGridState" className="col col-sm-4">
                                         <Form.Label>Salutation</Form.Label>
-                                        <Form.Select className="form-control" name="salutation" readOnly >
-                                            <option defaultValue value="Choose...">Choose...</option>
-                                        </Form.Select>
+                                        <Form.Control type="name" name="salutation" className="form-control" readOnly />
                                     </Form.Group>
                                     {/* FIRSTNAME */}
                                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
@@ -207,9 +205,7 @@ const ClientDetails = () => {
                                     {/* GENDER */}
                                     <Form.Group controlId="formGridState" className="col col-sm-3">
                                         <Form.Label>Gender</Form.Label>
-                                        <Form.Select className="form-control" name="gender" readOnly >
-                                            <option defaultValue value="Choose...">Choose...</option>
-                                        </Form.Select>
+                                        <Form.Control name="gender" className="form-control" readOnly />
                                     </Form.Group>
                                     {/* DOB */}
                                     <Form.Group controlId="formGridpin" className="col col-sm-4">
@@ -256,11 +252,7 @@ const ClientDetails = () => {
                                     {/* STATE */}
                                     <Form.Group controlId="formGridState" className="col col-sm-4">
                                         <Form.Label>State</Form.Label>
-                                        <Form.Select className="form-control" name="state" readOnly >
-                                            <option defaultValue value="Choose...">Choose...</option>
-                                            {/* {data ? Object.keys(data).map((d) => (
-                                            <option key={d} value={d}>{d}</option>)) : null} */}
-                                        </Form.Select>
+                                        <Form.Control className="form-control" type="text" name="state" readOnly />
                                     </Form.Group>
                                     {/* Country */}
                                     <Form.Group controlId="formGridpin" className="col col-sm-4">
@@ -282,7 +274,7 @@ const ClientDetails = () => {
                                         defaultSortFieldId
                                         pagination={10}
                                         fixedHeader
-                                        fixedHeaderScrollHeight="450px"
+                                        fixedHeaderScrollHeight="510px"
                                         onRowClicked={handleRowClicked}
                                         highlightOnHover
                                     />
@@ -297,3 +289,6 @@ const ClientDetails = () => {
 }
 
 export default ClientDetails
+
+{/* {data ? Object.keys(data).map((d) => (
+ <option key={d} value={d}>{d}</option>)) : null} */}
