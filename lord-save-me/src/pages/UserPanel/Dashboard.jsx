@@ -59,52 +59,6 @@ export default function ClientData() {
 
     const Navigate = useNavigate();
 
-    // const columns = [
-    //     {
-    //         name: "Client ID",
-    //         selector: (row) => row.ClientID,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Client Name",
-    //         selector: (row) => row.ClientName,
-    //         sortable: true
-    //     }, {
-    //         name: "Profile Picture",
-    //         selector: (row) => <img className="mt-1" src={row.ProfilePicture} alt="MDN logo" />,
-    //     },
-    //     {
-    //         name: "Loan Type",
-    //         selector: (row) => row.LoanType,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Amount (₹)",
-    //         selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Gender",
-    //         selector: (row) => row.Gender,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Age",
-    //         selector: (row) => row.Age,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Interest (%)",
-    //         selector: (row) => row.Interest,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Status",
-    //         selector: (row) => row.Status,
-    //         sortable: true,
-    //     },
-    // ];
-
     const columns = [
         {
             name: "Loan ID",
@@ -410,20 +364,6 @@ export default function ClientData() {
         }
     ];
 
-    // const conditionalRowStyles = [
-    //     {
-    //         when: (row) => row,
-    //         style: {
-    //             "&:hover": {
-    //                 backgroundColor: "green",
-    //                 color: "white",
-    //                 cursor: "pointer"
-    //             }
-    //         }
-    //     }
-    //     // You can also pass a callback to style for additional customization
-    // ];
-
     const handleRowClicked = (row) => {
         console.log(row.ClientName)
     };
@@ -438,7 +378,7 @@ export default function ClientData() {
 
                     <Container fluid>
                         <Row>
-                            <div className="title"> User Dashboard </div>
+                            <div className="p-2 title"><MDBBadge pill color='secondary' light>User Dashboard</MDBBadge></div>
                         </Row>
                         <Row className="text-center ">
                         <Col className="p-3" xs={12} md={6} lg={3}>
@@ -477,17 +417,22 @@ export default function ClientData() {
                         </Col>
                         </Row>
                     </Container>
-                    <DataTable
-                        title="Loan History"
-                        columns={columns}
-                        data={loanDetails}
-                        defaultSortFieldId
-                        pagination={10}
-                        fixedHeader
-                        fixedHeaderScrollHeight="450px"
-                        onRowClicked={handleRowClicked}
-                        highlightOnHover
-                    />
+                    <Container>
+                    <div >
+                        <div className="p-2 h4"><MDBBadge pill color='secondary' light>My Loan History</MDBBadge></div>
+                        <DataTable
+                            //title="My Loan History"
+                            columns={columns}
+                            data={loanDetails}
+                            defaultSortFieldId
+                            pagination={10}
+                            fixedHeader
+                            fixedHeaderScrollHeight="450px"
+                            onRowClicked={handleRowClicked}
+                            highlightOnHover
+                        />
+                    </div>
+                    </Container>
                 </div>
             </div>
         </>

@@ -3,6 +3,7 @@ import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import NewInquiry from "./NewInquiry";
 import { useEffect, useState } from 'react';
+import { MDBBadge } from "mdb-react-ui-kit";
 
 const AddInquiry = () => {
 
@@ -34,13 +35,13 @@ const AddInquiry = () => {
 
                 <Container fluid>
                     <Form className="container mt-3 mb-3" autoComplete='off'>
-                        <Row className="title">Apply for a new loan</Row>
-                        <Row className="mb-3">
+                        <Row className="p-4 title"><MDBBadge pill color='secondary' light>Apply for a New Loan</MDBBadge></Row>
+                        <Row className="p-3 mb-3">
                             {/* ADDING INQUIRY VIA USER */}
                             <Form.Group controlId="formGridState" className="col col-sm-3">
-                                <Form.Label>Choose new loan type</Form.Label>
+                                {/*<Form.Label><MDBBadge pill color='secondary' light>Choose loan type</MDBBadge></Form.Label>*/}
                                 <Form.Select className="form-control" name="add-user" value={loan} onChange={handleChange} required >
-                                    <option defaultValue value=''>Choose...</option>
+                                    <option defaultValue value=''>Choose Loan Type</option>
                                     <option value="business">Business Loan</option>
                                     <option value="home">Home Loan</option>
                                     <option value="education">Education Loan</option>

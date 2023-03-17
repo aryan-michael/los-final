@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import SideBar from "../../components/Sidebar/SideBar";
-import { Form, Col, Row, Button, InputGroup } from "react-bootstrap";
+import { Form, Col, Row, Button, InputGroup, Container } from "react-bootstrap";
 import DocRequirements from "./DocRequirements";
+import { MDBBadge } from "mdb-react-ui-kit";
 
 
 export default function KYC() {
@@ -45,7 +46,6 @@ export default function KYC() {
     'Marksheet (S.S.C./H.S.C./Degree/Diploma)',
     'Collateral Property Document'
   ]
-
 
   const personal_documents = [
     'Photo Identity Proof',
@@ -125,86 +125,89 @@ export default function KYC() {
         <SideBar />
         
         <div className="container-fluid">
-          <div className="title ms-4"> KYC Documents </div>
+          {/*<div className="title ms-4"> KYC Documents </div>*/}
+          <div className="p-4 title"><MDBBadge pill color='secondary' light>KYC Documents</MDBBadge></div> 
             
             <Form onSubmit={handleSubmit} className="upload--container">
 
-              <Row className="ms-4" style={{width: '90vw'}}>
+              <div className="main" style={{width: '90vw'}}>
 
+                {value.map((data,i)=>{
+                  return(
+                    <>
+                    <div className="mt-2">
 
-            {value.map((data,i)=>{
-              return(
-                <div className="mt-2">
+                      <Col 
+                        style={{
+                          backgroundColor: "#212529",
+                          borderRadius: '10px',
+                          width: '750px'
+                        }}>
+                        <Row>
 
-                  <Col 
-                    style={{
-                      backgroundColor: "#212529",
-                      borderRadius: '10px',
-                      width: '750px'
-                    }}>
+                          <Col className="col-md-4">
+                            <Form.Group controlId="formGridState">
+                                  <Form.Label style={{color: "white"}}>Choose Document</Form.Label>
+                                  <Form.Select value={data} onChange={e=>handleChange(e,i)} className="form-control" name="salutation" required >
+                                      <option defaultValue value=''>Choose...</option>
+                                      <option disabled>BUSINESS LOAN</option>
+                                      {business_documents.map((option)=><option>{option}</option>)}
+                                      <option disabled>HOME LOAN</option>
+                                      {home_documents.map((option)=><option>{option}</option>)}
+                                      <option disabled>EDUCATION LOAN</option>
+                                      {education_documents.map((option)=><option>{option}</option>)}
+                                      <option disabled>PERSONAL LOAN</option>
+                                      {personal_documents.map((option)=><option>{option}</option>)}
+                                  </Form.Select>
+                                  <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
+                                  <Form.Control.Feedback type='invalid'>Please provide a document!</Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+
+                          <Col className="col-md-7">
+                              <label 
+                              style={{color: "white"}}
+                              className="form-label" for="customFile">Looks good / please upload</label>
+                              <input
+                                onChange={onFileUpload}
+                                id={1} 
+                                accept=".jpeg, .pdf"
+                                type="file"
+                                className="form-control"
+                                required />
+                          </Col>
+
+                        </Row>
+                      </Col>
                     <Row>
-
-                      <Col className="col-md-4">
-                        <Form.Group controlId="formGridState">
-                              <Form.Label style={{color: "white"}}>Choose Document</Form.Label>
-                              <Form.Select value={data} onChange={e=>handleChange(e,i)} className="form-control" name="salutation" required >
-                                  <option defaultValue value=''>Choose...</option>
-                                  <option disabled>BUSINESS LOAN</option>
-                                  {business_documents.map((option)=><option>{option}</option>)}
-                                  <option disabled>HOME LOAN</option>
-                                  {home_documents.map((option)=><option>{option}</option>)}
-                                  <option disabled>EDUCATION LOAN</option>
-                                  {education_documents.map((option)=><option>{option}</option>)}
-                                  <option disabled>PERSONAL LOAN</option>
-                                  {personal_documents.map((option)=><option>{option}</option>)}
-                              </Form.Select>
-                              <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
-                              <Form.Control.Feedback type='invalid'>Please provide a document!</Form.Control.Feedback>
-                        </Form.Group>
+                      <Col className="mt-3 col-md-1">
+                            <Button
+                              onClick={()=>handleDelete(i)}
+                              type="button"
+                              variant="outline-danger" 
+                              className="me-4 btn btn-sm">Delete</Button>
                       </Col>
 
-                      <Col className="col-md-7">
-                          <label 
-                          style={{color: "white"}}
-                          className="form-label" for="customFile">Looks good / please upload</label>
-                          <input
-                            onChange={onFileUpload}
-                            id={1} 
-                            accept=".jpeg, .pdf"
-                            type="file"
-                            className="form-control"
-                            required />
-                      </Col>
+                      <Col className="mt-3 col-md-2">
+                          <Button 
+                            variant="outline-primary" 
+                            className="me-4 btn btn-sm"
+                            onClick={() => setModalShow(true)}>Requirements
+                            </Button>
 
+                          <DocRequirements
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                          />
+                      </Col>
                     </Row>
-                  </Col>
-                <Row>
-                  <Col className="mt-3 col-md-1">
-                        <Button
-                          onClick={()=>handleDelete(i)}
-                          type="button"
-                          variant="outline-danger" 
-                          className="me-4 btn btn-sm">Delete</Button>
-                  </Col>
+                    </div>
 
-                  <Col className="mt-3 col-md-2">
-                      <Button 
-                        variant="outline-primary" 
-                        className="me-4 btn btn-sm"
-                        onClick={() => setModalShow(true)}>Requirements
-                        </Button>
-
-                      <DocRequirements
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                      />
-                  </Col>
-                </Row>
-                </div>
-                )
-            })}
-
-              </Row>
+                    <div className="p-1" />
+                    </>
+                    )
+                })}
+              </div>
                 
               <div className="p-2" />
 
@@ -223,106 +226,9 @@ export default function KYC() {
               </div> 
               
             </Form>
+            
         </div>
       </div>
     </>
   );
 };
-
-
-                //             <div className="accordion">
-                //       <Col className="col-md-4">
-                //           <MDBAccordion>
-                //              <MDBAccordionItem collapseId={2} headerTitle={<><MDBIcon fas icon="question-circle" /> &nbsp; Policy #2</>}>
-                //                 Legal verification of documents.
-                //              </MDBAccordionItem>
-                //           </MDBAccordion>
-                //       </Col>
-                // </div>
-
-
-            {/*<div className="upload--button">
-              <label className="form-label" for="customFile">PAN Card </label>
-              <input
-                onChange={onFileUpload}
-                id={1} 
-                accept=".jpeg, .pdf"
-                type="file"
-                className="form-control"
-              />
-            </div>
-            <div className="upload--button">
-              <input
-                onChange={onFileUpload}
-                id={2}
-                accept=".jpeg, .pdf"
-                type="file"
-                className="form-control"
-              />
-            </div>
-            <div className="upload--button">
-              <input
-                onChange={onFileUpload}
-                id={3}
-                accept=".jpeg, .pdf"
-                type="file"
-                className="form-control"
-              />
-            </div>
-            {enabled ? (
-              <Button type="submit">Submit</Button>
-            ) : (
-              <Button disabled type="submit">
-                Submit
-              </Button>
-            )}*/}
-
-
-            // <Row>
-            //       <Col style={{
-            //         backgroundColor: "#212529",
-            //         borderRadius: '20px'
-            //       }}>
-            //         <label style={{
-            //         color: "white"}}
-            //         className="form-label" for="customFile">Address Proof</label>
-            //         <input
-            //           onChange={onFileUpload}
-            //           id={2}
-            //           accept=".jpeg, .pdf"
-            //           type="file"
-            //           className="form-control"
-            //           required
-            //         />
-            //       </Col>
-            //     </Row>
-            //     <div className="p-2" />
-            //     <Row>
-            //       <Col style={{
-            //         backgroundColor: "#212529",
-            //         borderRadius: '20px'
-            //       }}>
-            //         <label style={{
-            //         color: "white"}}
-            //         className="form-label" for="customFile">Employment Proof</label>
-            //         <input
-            //           onChange={onFileUpload}
-            //           id={3}
-            //           accept=".jpeg, .pdf"
-            //           type="file"
-            //           className="form-control"
-            //           required
-            //         />
-            //       </Col>
-            //     </Row>
-
-
-            // MDB ACCORDION
-            //                 <Row>
-            //       <MDBAccordion>
-              //       <MDBAccordionItem collapseId={2} headerTitle={<><MDBIcon fas icon="question-circle" /> &nbsp; Policy #2</>}>
-              //       Legal verification of documents.
-              //       </MDBAccordionItem>
-            //       </MDBAccordion>
-            //     </Row>
-            //     <div className="p-2" />

@@ -3,6 +3,7 @@ import AdminSideBar from "../../components/Sidebar/AdminSideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import AdminForms from "../AdminPanel/AdminForms";
 import { useEffect, useState } from 'react';
+import { MDBBadge } from "mdb-react-ui-kit";
 
 const AddUser = () => {
 
@@ -56,13 +57,12 @@ const AddUser = () => {
 
                 <Container fluid>
                     <Form className="container mt-3 mb-3" autoComplete='off'>
-                        <Row className="title">Add User</Row>
+                        <Row className="p-4 title"><MDBBadge pill color='secondary' light>Add New User</MDBBadge></Row>
                         <Row className="mb-3">
                             {/* ADDING USER VIA ADMIN */}
                             <Form.Group controlId="formGridState" className="col col-sm-3">
-                                <Form.Label>Choose loan type</Form.Label>
                                 <Form.Select className="form-control" name="add-user" value={loan} onChange={handleChange} required >
-                                    <option defaultValue value=''>Choose...</option>
+                                    <option defaultValue value=''>Choose Loan Type</option>
                                     <option value="business">Business Loan</option>
                                     <option value="home">Home Loan</option>
                                     <option value="education">Education Loan</option>

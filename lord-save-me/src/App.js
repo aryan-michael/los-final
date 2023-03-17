@@ -34,13 +34,13 @@ import AddUser from "./pages/AdminPanel/AddUser";
 import ClientData from "./pages/AdminPanel/ClientData";
 import ClientDetails from "./pages/AdminPanel/ClientDetails";
 import Statistics from "./pages/AdminPanel/Statistics";
+import LoanData from './pages/AdminPanel/LoanData';
 
 //TESTING
 import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
 import SideBar2 from './components/SideBar2/SideBar2';
 import Creators from './pages/Home/Creators';
-
 
 function App() {
   const [loginToken, setLoginToken] = useState({})
@@ -84,6 +84,7 @@ function App() {
         <Route path="/admin-sidebar/client-data" element={<ClientData />} />
         <Route path="/admin-sidebar/client-details" element={<ClientDetails />} />
         <Route path="/admin-sidebar/statistics" element={<Statistics />} />
+        <Route path="/admin-sidebar/client-details/loan-data" element={<LoanData />} />
 
         {/* TESTING */}
         <Route path='/test' element={<Test />} />

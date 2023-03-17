@@ -1,4 +1,4 @@
-import React from "react";
+import { Container, Form, Row, Col, InputGroup } from 'react-bootstrap';
 import { Navigate, useNavigate } from "react-router-dom";
 import DataTable, { createTheme } from "react-data-table-component";
 import AdminSideBar from "../../components/Sidebar/AdminSideBar";
@@ -384,11 +384,11 @@ export default function ClientData() {
             <PostLoginNavBar />
             <div style={{ height: '100%', display: 'flex' }}>
                 <AdminSideBar />
-                <div style={{ display: 'inline-block' }}>
-
-
+                <Container>
+                <div >
+                    <div className="p-2 title"><MDBBadge pill color='secondary' light>Client Summary</MDBBadge></div>
                     <DataTable
-                        title="Client Summary"
+                        //title="Client Summary"
                         columns={columns}
                         data={clientSummary}
                         defaultSortFieldId
@@ -399,6 +399,7 @@ export default function ClientData() {
                         highlightOnHover
                     />
                 </div>
+                </Container>
             </div>
         </>
     );

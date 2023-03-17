@@ -8,6 +8,7 @@ import { MdCastForEducation } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
+import { MDBBadge } from "mdb-react-ui-kit";
 
 const AdminDashboard = () => {
     return (
@@ -18,7 +19,7 @@ const AdminDashboard = () => {
                 <div>
 	            	<Container fluid>
 	            		<Row>
-	            			<div className="title"> Admin Dashboard </div>
+	            			<div className="p-4 title"><MDBBadge pill color='secondary' light>Admin Dashboard</MDBBadge></div>
 	            		</Row>
 	                	<Row className="text-center ">
 	                    <Col className="p-3" xs={12} md={6} lg={3}>
@@ -57,6 +58,7 @@ const AdminDashboard = () => {
 	                    </Col>
 	                	</Row>
 	            	</Container>
+	              <Footer />
             	</div>
             </div> 
         </>
