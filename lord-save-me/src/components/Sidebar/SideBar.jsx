@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome, FaLock, FaRupeeSign, FaMoneyBill, FaUser } from "react-icons/fa";
 import { HiDocumentArrowUp } from "react-icons/hi2";
-import { AiOutlineUserAdd } from "react-icons/ai";
 import { MdMessage } from "react-icons/md";
-import { BiAnalyse, BiSearch, BiCog } from "react-icons/bi";
+import { BiSearch, BiCog } from "react-icons/bi";
 import { IoInformationCircle } from "react-icons/io5";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -14,7 +14,7 @@ import './SideBar.css';
 
 const routes = [
   {
-    path: "/user-panel/dashboard",
+    path: "/user-panel/user-dashboard",
     name: "Dashboard",
     icon: <FaHome />,
   },
@@ -47,21 +47,16 @@ const routes = [
     icon: <HiDocumentArrowUp />,
   },
   {
-    path: "/user-panel/add-inquiry",
-    name: "Add Inquiry",
-    icon: <AiOutlineUserAdd />,
-  },
-  {
     path: "/user-panel/check-status",
     name: "Check Status",
     icon: <MdMessage />,
   },
   {
-    path: "/user-panel/analytics",
-    name: "Analytics",
-    icon: <BiAnalyse />,
+  	path: "/user-panel/add-inquiry",
+    name: "Add Inquiry",
+   	icon: <AiOutlineUserAdd />,
+    
   },
-
   {
     path: "/user-panel/settings",
     name: "Settings",

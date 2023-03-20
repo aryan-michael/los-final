@@ -1,5 +1,6 @@
 .dYXiNx {
     position: relative !important;
+    overflow-x: hidden !important;
 }
 .gKbhqU {
     justify-content: flex-start !important;
@@ -10,3 +11,10 @@
 .badge {
     font-size: 0.90em !important;
 }
+
+.dYXiNx .rdt_Table {
+	align-items: center;
+}
+
+
+
