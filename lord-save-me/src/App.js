@@ -17,7 +17,7 @@ import AdminSideBar from './components/Sidebar/AdminSideBar';
 import PostLoginNavBar from './components/NavBar/PostLoginNavBar';
 
 //USER PANEL
-import Dashboard from "./pages/UserPanel/Dashboard";
+import Dashboard from "./pages/UserPanel/UserDashboard";
 import KYC from "./pages/UserPanel/KYC";
 import CheckStatus from "./pages/UserPanel/CheckStatus";
 import AddInquiry from './pages/UserPanel/AddInquiry';
@@ -34,13 +34,13 @@ import AddUser from "./pages/AdminPanel/AddUser";
 import ClientData from "./pages/AdminPanel/ClientData";
 import ClientDetails from "./pages/AdminPanel/ClientDetails";
 import Statistics from "./pages/AdminPanel/Statistics";
+import LoanData from './pages/AdminPanel/LoanData';
 
 //TESTING
 import Test from './pages/Register/Test';
 import Practice from './pages/Register/Practice';
 import SideBar2 from './components/SideBar2/SideBar2';
 import Creators from './pages/Home/Creators';
-
 
 function App() {
   const [loginToken, setLoginToken] = useState({})
@@ -68,22 +68,23 @@ function App() {
         <Route path='/admin-sidebar' element={<AdminSideBar />} />
 
         {/* USER PANEL */}
-        <Route path="/sidebar/dashboard" element={<Dashboard />} />
-        <Route path="/sidebar/kyc-docs" element={<KYC />} />
-        <Route path="/sidebar/analytics" element={<Analytics />} />
-        <Route path="/sidebar/check-status" element={<CheckStatus />} />
-        <Route path="/sidebar/add-inquiry" element={<AddInquiry />} />
-        <Route path="/sidebar/my-info/personal-info" element={<PersonalInfo />} />
-        <Route path="/sidebar/my-info/loan-info" element={<LoanInfo />} />
-        <Route path="/sidebar/bank-details" element={<BankDetails />} />
-        {/* <Route path="/sidebar/bank-details-final" element={<DisplayBankDetails />} /> */}
+        <Route path="/user-panel/user-dashboard" element={<Dashboard />} />
+        <Route path="/user-panel/kyc-docs" element={<KYC />} />
+        <Route path="/user-panel/analytics" element={<Analytics />} />
+        <Route path="/user-panel/check-status" element={<CheckStatus />} />
+        <Route path="/user-panel/add-inquiry" element={<AddInquiry />} />
+        <Route path="/user-panel/my-info/personal-info" element={<PersonalInfo />} />
+        <Route path="/user-panel/my-info/loan-info" element={<LoanInfo />} />
+        <Route path="/user-panel/bank-details" element={<BankDetails />} />
+        {/* <Route path="/user-panel/bank-details-final" element={<DisplayBankDetails />} /> */}
 
         {/* ADMIN PANEL */}
-        <Route path="/admin-sidebar/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/admin-sidebar/add-user" element={<AddUser />} />
-        <Route path="/admin-sidebar/client-data" element={<ClientData />} />
-        <Route path="/admin-sidebar/client-details" element={<ClientDetails />} />
-        <Route path="/admin-sidebar/statistics" element={<Statistics />} />
+        <Route path="/admin-panel/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/admin-panel/add-user" element={<AddUser />} />
+        <Route path="/admin-panel/client-data" element={<ClientData />} />
+        <Route path="/admin-panel/client-details" element={<ClientDetails />} />
+        <Route path="/admin-panel/statistics" element={<Statistics />} />
+        <Route path="/admin-panel/client-details/loan-data" element={<LoanData />} />
 
         {/* TESTING */}
         <Route path='/test' element={<Test />} />

@@ -10,7 +10,7 @@ const PostLoginNavBar = () => {
             <Navbar className="navbar" sticky="top" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
-                        <MDBIcon color='secondary' icon='gem' className='me-3' /> LOS
+                        <MDBIcon color='primary' icon='gem' className='me-3' /> LOS
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -37,7 +37,8 @@ const PostLoginNavBar = () => {
                             </NavDropdown> */}
                         </Nav>
                         <Nav>
-                            <Nav.Link href="/sidebar">SideBar</Nav.Link>
+                        	<Nav.Link href="/admin-panel/admin-dashboard">Admin Panel</Nav.Link>
+                            <Nav.Link href="/user-panel/user-dashboard">User Panel</Nav.Link>
                             <NavDropdown title=<CgProfile className="icon" /> 
                             	id="collasible-nav-dropdown">
                                 <NavDropdown.Item eventKey={2} href="">

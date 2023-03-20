@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable, { createTheme } from "react-data-table-component";
 import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
+import Footer from "../../components/Footer/Footer";
 import { MDBBadge } from "mdb-react-ui-kit";
-import './Dashboard.css';
+import './UserDashboard.css';
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Form, Row, Col } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
-import { FaBusinessTime, FaHome } from 'react-icons/fa'; 
+import { FaBusinessTime, FaHome } from 'react-icons/fa';
 import { MdCastForEducation } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
 
@@ -34,13 +35,13 @@ createTheme("solarized", {
     }
 }); //color scheme system
 
-export default function ClientData() {
+export default function UserDashboard() {
 
-    const [loanDetails,setLoanDetails] = useState([])
+    const [loanDetails, setLoanDetails] = useState([])
 
     useEffect(() => {
         getloanDetails()
-    },[])
+    }, [])
 
     const getloanDetails = async () => {
         try {
@@ -58,52 +59,6 @@ export default function ClientData() {
     console.log(loanDetails);
 
     const Navigate = useNavigate();
-
-    // const columns = [
-    //     {
-    //         name: "Client ID",
-    //         selector: (row) => row.ClientID,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Client Name",
-    //         selector: (row) => row.ClientName,
-    //         sortable: true
-    //     }, {
-    //         name: "Profile Picture",
-    //         selector: (row) => <img className="mt-1" src={row.ProfilePicture} alt="MDN logo" />,
-    //     },
-    //     {
-    //         name: "Loan Type",
-    //         selector: (row) => row.LoanType,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Amount (₹)",
-    //         selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Gender",
-    //         selector: (row) => row.Gender,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Age",
-    //         selector: (row) => row.Age,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Interest (%)",
-    //         selector: (row) => row.Interest,
-    //         sortable: true
-    //     },
-    //     {
-    //         name: "Status",
-    //         selector: (row) => row.Status,
-    //         sortable: true,
-    //     },
-    // ];
 
     const columns = [
         {
@@ -410,20 +365,6 @@ export default function ClientData() {
         }
     ];
 
-    // const conditionalRowStyles = [
-    //     {
-    //         when: (row) => row,
-    //         style: {
-    //             "&:hover": {
-    //                 backgroundColor: "green",
-    //                 color: "white",
-    //                 cursor: "pointer"
-    //             }
-    //         }
-    //     }
-    //     // You can also pass a callback to style for additional customization
-    // ];
-
     const handleRowClicked = (row) => {
         console.log(row.ClientName)
     };
@@ -434,61 +375,72 @@ export default function ClientData() {
             <PostLoginNavBar />
             <div style={{ height: '100%', display: 'flex' }}>
                 <SideBar />
-                <div style={{ display: 'inline-block' }}>
 
-                    <Container fluid>
-                        <Row>
-                            <div className="title"> User Dashboard </div>
+                <Container fluid>
+                    <Form className="mt-3 mb-3" autoComplete='off'>
+                        <Row className="p-4 title"><MDBBadge pill color='secondary' light>User Dashboard</MDBBadge></Row>
+
+                        <Row className="text-center p-3 mb-3">
+                            <Col className="p-3" xs={12} md={6} lg={3}>
+                                <div className="tag px-5 pt-5 pb-3">
+                                    <Link to={`loan/business`} className="text-black text-decoration-none ">
+                                        <FaBusinessTime className="icons" />
+                                        <h4 className="mt-2">Business Loan</h4>
+                                    </Link>
+                                </div>
+                            </Col>
+                            <Col className="p-3" xs={12} md={6} lg={3}>
+                                <div className="tag px-5 pt-5 pb-3">
+                                    <Link to={`loan/home`} className="text-black text-decoration-none ">
+                                        <FaHome className="icons" />
+                                        <h4 className="mt-2">Home Loan</h4>
+                                    </Link>
+                                </div>
+                            </Col>
+                            <Col className="p-3" xs={12} md={6} lg={3}>
+                                <div className="tag px-5 pt-5 pb-3">
+
+                                    <Link to={`loan/education`} className="text-black text-decoration-none ">
+                                        <MdCastForEducation className="icons" />
+                                        <h4 className="mt-2">Education Loan</h4>
+                                    </Link>
+                                </div>
+                            </Col>
+                            <Col className="p-3" xs={12} md={6} lg={3}>
+                                <div className="tag px-5 pt-5 pb-3">
+
+                                    <Link to={`loan/personal`} className="text-black text-decoration-none ">
+                                        <BsFillPersonFill className="icons" />
+                                        <h4 className="mt-2">Personal Loan</h4>
+                                    </Link>
+                                </div>
+                            </Col>
                         </Row>
-                        <Row className="text-center ">
-                        <Col className="p-3" xs={12} md={6} lg={3}>
-                            <div className="tag px-5 pt-5 pb-3">
-                                <Link to={`loan/business`} className="text-black text-decoration-none ">
-                                    <FaBusinessTime className="icons" />
-                                    <h4 className="mt-2">Business Loan</h4>
-                                </Link>
-                            </div>
-                        </Col>
-                        <Col className="p-3" xs={12} md={6} lg={3}>
-                            <div className="tag px-5 pt-5 pb-3">
-                                <Link to={`loan/home`} className="text-black text-decoration-none ">
-                                    <FaHome className="icons" />
-                                    <h4 className="mt-2">Home Loan</h4>
-                                </Link>
-                            </div>
-                        </Col>
-                        <Col className="p-3" xs={12} md={6} lg={3}>
-                            <div className="tag px-5 pt-5 pb-3">
 
-                                <Link to={`loan/education`} className="text-black text-decoration-none ">
-                                    <MdCastForEducation className="icons" />
-                                    <h4 className="mt-2">Education Loan</h4>
-                                </Link>
-                            </div>
-                        </Col>
-                        <Col className="p-3" xs={12} md={6} lg={3}>
-                            <div className="tag px-5 pt-5 pb-3">
-
-                                <Link to={`loan/personal`} className="text-black text-decoration-none ">
-                                    <BsFillPersonFill className="icons" />
-                                    <h4 className="mt-2">Personal Loan</h4>
-                                </Link>
-                            </div>
-                        </Col>
+                        <Row className="text-center p-3 mb-3">
+                            <div className="p-2 h4"><MDBBadge pill color='secondary' light>My Loan History</MDBBadge></div>
+                            <DataTable
+                                //title="My Loan History"
+                                columns={columns}
+                                data={loanDetails}
+                                defaultSortFieldId
+                                pagination={10}
+                                fixedHeader
+                                fixedHeaderScrollHeight="450px"
+                                onRowClicked={handleRowClicked}
+                                highlightOnHover
+                            />
                         </Row>
-                    </Container>
-                    <DataTable
-                        title="Loan History"
-                        columns={columns}
-                        data={loanDetails}
-                        defaultSortFieldId
-                        pagination={10}
-                        fixedHeader
-                        fixedHeaderScrollHeight="450px"
-                        onRowClicked={handleRowClicked}
-                        highlightOnHover
-                    />
-                </div>
+
+                        <Row className="text-center p-3 mb-12"></Row>
+
+                        <Row className="text-center p-3 mb-3">
+                            <Footer />
+                        </Row>
+
+                    </Form>
+                </Container>
+
             </div>
         </>
     );

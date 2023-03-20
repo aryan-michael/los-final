@@ -1,27 +1,31 @@
 import { MDBAccordion, MDBAccordionItem, MDBIcon } from 'mdb-react-ui-kit';
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
+import { Container } from "react-bootstrap";
+import { MDBBadge } from "mdb-react-ui-kit";
 
 const Policy = () => { 
 	return (
 		<>
 			<NavBar />
-			<MDBAccordion initialActive={1}>
+			<div className="p-4 title"><MDBBadge pill color='secondary' light>Policy Agreement</MDBBadge></div>
+			<Container >
+			<MDBAccordion /*initialActive={1}*/>
 				<MDBAccordionItem collapseId={1}
 					headerTitle={<><MDBIcon fas icon="question-circle" /> &nbsp; Policy #1</>}>
-					Every loan providing entity will have policies
-					1) CIBIL (Credit Information Bureau India Limited) score -> Credit score of client
-
-					   CIBIL Score is a 3-digit numeric summary of your credit history, rating and report, and ranges from 300 to 900. 
-
-					   The closer your score is to 900, the better your credit rating is.
-
-						eg. 700-900 will be accepted
-						    500-700 will be overrided
-						    below 500 will be rejected
-
-                    2) Equifax  
-                    3) Highmark
+					Every loan providing entity will have policies <br/>
+					1) CIBIL (Credit Information Bureau India Limited) score -> Credit score of client <br/>
+					<br/>
+					   CIBIL Score is a 3-digit numeric summary of your credit history, rating and report, and ranges from 300 to 900. <br/> 
+					<br/>
+					   The closer your score is to 900, the better your credit rating is. <br/>
+					<br/>
+						eg. 700-900 will be accepted <br/>
+						    500-700 will be overrided <br/>
+						    below 500 will be rejected <br/>
+					<br/>
+                    2) Equifax  <br/>
+                    3) Highmark <br/>
 					They are companies like CIBIL approved by the RBI
 				</MDBAccordionItem>
 				<MDBAccordionItem collapseId={2} headerTitle={<><MDBIcon fas icon="question-circle" /> &nbsp; Policy #2</>}>
@@ -40,6 +44,7 @@ const Policy = () => {
 					Nature of industry (is it risky?)
 				</MDBAccordionItem>
 			</MDBAccordion>
+			</Container>
 			<Footer />
 		</>
 	);

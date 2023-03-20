@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Row, InputGroup,Button } from 'react-bootstrap';
+import { Form, Row, InputGroup, Button } from 'react-bootstrap';
 import SideBar from "../../components/Sidebar/SideBar";
 import NavBar from "../../components/NavBar/NavBar";
 import axios from 'axios';
@@ -11,28 +11,28 @@ const PersonalInfo = () => {
 
     const Navigate = useNavigate()
 
-    
+
     const [userDetail, setUserDetails] = useState({})
-    
+
     const getUserDetails = async () => {
         try {
             await axios.get("http://localhost:5000/api/v1/user/getUser", {
-                withCredentials:true
+                withCredentials: true
             }).then(response => {
                 console.log(response.data.user)
                 setUserDetails(response.data.user)
                 return
             })
         } catch (err) {
-                Navigate('/')
-                return
-            }
+            Navigate('/')
+            return
+        }
     }
 
     const logoutUser = async () => {
         try {
             await axios.get("http://localhost:5000/api/v1/user/logout", {
-                withCredentials:true
+                withCredentials: true
             }).then(response => {
                 Navigate('/')
             })
@@ -44,7 +44,7 @@ const PersonalInfo = () => {
     const dob = new Date(userDetail.dob).toDateString()
     useEffect(() => {
         getUserDetails()
-    },[])
+    }, [])
 
     return (
         <>
@@ -136,7 +136,7 @@ const PersonalInfo = () => {
                             {/* Country */}
                             <Form.Group controlId="formGridpin" className="col col-sm-4">
                                 <Form.Label>Country</Form.Label>
-                                <Form.Control className="form-control" type="country"  value={userDetail.country} name="country" readOnly />
+                                <Form.Control className="form-control" type="country" value={userDetail.country} name="country" readOnly />
                             </Form.Group>
                         </Row>
 
@@ -144,11 +144,11 @@ const PersonalInfo = () => {
 
                         </Row>
                         <Button
-                        type="submit"
-                        className="me-4 btn btn-success btn-lg" onClick={logoutUser}
-                    >
-                        logout
-                    </Button>
+                            type="submit"
+                            className="me-4 btn btn-success btn-lg" onClick={logoutUser}
+                        >
+                            logout
+                        </Button>
                     </Form>
                 </div>
             </div>
