@@ -5,7 +5,7 @@ import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import Footer from "../../components/Footer/Footer";
 import { MDBBadge } from "mdb-react-ui-kit";
-import './Dashboard.css';
+import './UserDashboard.css';
 import axios from "axios";
 import { Container, Form, Row, Col } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
@@ -35,7 +35,7 @@ createTheme("solarized", {
     }
 }); //color scheme system
 
-export default function ClientData() {
+export default function UserDashboard() {
 
     const [loanDetails, setLoanDetails] = useState([])
 
@@ -377,7 +377,7 @@ export default function ClientData() {
                 <SideBar />
 
                 <Container fluid>
-                    <Form className="container mt-3 mb-3" autoComplete='off'>
+                    <Form className="mt-3 mb-3" autoComplete='off'>
                         <Row className="p-4 title"><MDBBadge pill color='secondary' light>User Dashboard</MDBBadge></Row>
 
                         <Row className="text-center p-3 mb-3">

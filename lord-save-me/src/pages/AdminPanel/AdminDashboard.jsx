@@ -10,7 +10,7 @@ import { MdCastForEducation } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
 import "./AdminDashboard.css";
 
-export default function ClientData() {
+function AdminDashboard() {
 
 	return (
 		<>
@@ -19,7 +19,7 @@ export default function ClientData() {
 				<AdminSideBar />
 
 				<Container fluid>
-					<Form className="container mt-3 mb-3" autoComplete='off'>
+					<Form className="mt-3 mb-3" autoComplete='off'>
 						<Row className="p-4 title"><MDBBadge pill color='secondary' light>Admin Dashboard</MDBBadge></Row>
 
 						<Row className="text-center p-3 mb-3">
@@ -72,3 +72,5 @@ export default function ClientData() {
 		</>
 	);
 }
+
+export default AdminDashboard

@@ -4,7 +4,7 @@ import { Container, Form, Row, Col, InputGroup, Button, Modal } from 'react-boot
 import { MDBBadge } from "mdb-react-ui-kit";
 import DataTable, { createTheme } from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const LoanData = () => {
 
@@ -31,20 +31,51 @@ const LoanData = () => {
 	}); //color scheme system
 
 	const Navigate = useNavigate();
+	
+	const viewDocument = () => {
+	window.open(`/hello`);
+	}
 
 	const [show, setShow] = useState(false);
+	const [Doc, setDoc] = useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-
+	
+	const handleDocClose = () => setDoc(false);
+	const handleDocShow = () => setDoc(true);
+	
+	const [docName, setdocName] = useState('');
+	
+	useEffect(() => {
+		if(docName !== "")
+		handleDocShow();
+	}, [docName])
+	
+	
+	const [approval, setApproval] = useState(" ");
+	
+	const [approve, setApprove] = useState(false);
+    //const [reject, setReject] = useState(false);
+	
+	useEffect(() => {
+        approval === "approve" ? setApprove(true) : setApprove(false);
+        //approval === "reject" ? setReject(true) : setReject(false);
+    }, [approval])
+		
+	const handleApproval = (e) => {
+		setApproval(e.target.value);
+	}
+	
+	
 	const columns = [
 		{
-			name: "Document ID",
+			name: "Doc ID",
 			selector: (row) => row.DocID,
 			sortable: true
 		},
 		{
-			name: "Document Name",
+			name: "Doc Name",
 			selector: (row) => row.DocName,
 			sortable: true
 		},
@@ -65,78 +96,88 @@ const LoanData = () => {
 			DocID: 1,
 			DocName: "Aston Villa",
 			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-			Verification: <MDBBadge pill color='success' light>Verified</MDBBadge>
+			Verification: [approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>]
 		},
 		{
 			DocID: 2,
 			DocName: "Manchester United",
 			Status: <MDBBadge pill className='mx-1' color='danger' light>Pending</MDBBadge>,
-			Verification: <MDBBadge pill color='success' light>Verified</MDBBadge>
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 3,
 			DocName: "Everton",
 			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-			Verification: <MDBBadge pill color='success' light>Verified</MDBBadge>
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 4,
 			DocName: "Spurs",
 			Status: <MDBBadge pill className='mx-1' color='danger' light>Pending</MDBBadge>,
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 5,
 			DocName: "Aston Villa",
 			Status: <MDBBadge pill className='mx-1' color='danger' light>Pending</MDBBadge>,
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 6,
 			DocName: "Manchester City",
 			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-			Verification: <MDBBadge pill color='success' light>Verified</MDBBadge>
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 7,
 			DocName: "Wolves",
 			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 8,
 			DocName: "Manchester United",
 			Status: <MDBBadge pill className='mx-1' color='danger' light>Pending</MDBBadge>,
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 9,
 			DocName: "Manchester United",
 			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-			Verification: <MDBBadge pill color='success' light>Verified</MDBBadge>
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 10,
 			DocName: "Chelsea",
 			Status: <MDBBadge pill className='mx-1' color='danger' light>Pending</MDBBadge>,
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 11,
 			DocName: "Manchester United",
 			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 12,
 			DocName: "Manchester United",
 			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-			Verification: <MDBBadge pill color='success' light>Verified</MDBBadge>
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 		{
 			DocID: 13,
 			DocName: "Chelsea",
 			Status: <MDBBadge pill className='mx-1' color='danger' light>Pending</MDBBadge>,
+			Verification: approve ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>
 		},
 	];
 
 	const handleRowClicked = (row) => {
-		//OPEN DOCUMENT IN NEW PAGE
+		console.log(row.DocName);
+		//Open modal with check box to approve or reject a document
+		//option will change the tag in verfication column
 	};
+
 
 	return (
 		<>
@@ -200,8 +241,13 @@ const LoanData = () => {
 										pagination={5}
 										fixedHeader
 										fixedHeaderScrollHeight="240px"
-										onRowClicked={handleRowClicked}
+										onRowClicked={(d) => setdocName(d.DocName)}
 										highlightOnHover
+										pointerOnHover
+										//progressPending
+										//theme="dark"
+										//customStyles={customStyles}
+										//selectableRows
 									/>
 								</Row>
 							</Form>
@@ -214,7 +260,8 @@ const LoanData = () => {
 						<Button variant="dark" size="lg" onClick={handleShow}>
 							Take Decision
 						</Button>
-
+						
+						{/*DECISION MODAL*/}
 						<Modal show={show} onHide={handleClose}>
 							<Modal.Header closeButton>
 								<Modal.Title><MDBBadge pill color='warning' light>Final Decision</MDBBadge></Modal.Title>
@@ -249,6 +296,40 @@ const LoanData = () => {
 							</Modal.Footer>
 						</Modal>
 					</div>
+					
+					{/*DOCUMENT MODAL*/}
+					<Modal show={Doc} onHide={handleDocClose}>
+							<Modal.Header closeButton>
+								<Modal.Title><MDBBadge pill color='warning' light>{docName}</MDBBadge></Modal.Title>
+							</Modal.Header>
+							<Modal.Body>
+								<Form>
+									<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+										<Form.Label><MDBBadge pill color='success' light>DECISION</MDBBadge></Form.Label>
+										<Form.Select className="form-control" value={approval} onChange={handleApproval} name="add-user" required >
+											<option defaultValue value=''>Choose...</option>
+											<option className="option">Approve</option>
+											<option className="option">Reject</option>
+										</Form.Select>
+									</Form.Group>
+									<Form.Group
+										className="mb-3"
+										controlId="exampleForm.ControlTextarea1"
+									>
+										<Form.Label><MDBBadge pill color='danger' light>STATE REASONS</MDBBadge></Form.Label>
+										<Form.Control as="textarea" rows={3} />
+									</Form.Group>
+								</Form>
+							</Modal.Body>
+							<Modal.Footer>
+								<Button variant="outline-secondary" onClick={viewDocument}>
+									View
+								</Button>
+								<Button variant="outline-secondary" onClick={handleDocClose}>
+									Save Changes
+								</Button>
+							</Modal.Footer>
+						</Modal>
 				</Container>
 
 			</div>

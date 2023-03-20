@@ -274,7 +274,7 @@ const ClientDetails = () => {
                                         defaultSortFieldId
                                         pagination={10}
                                         fixedHeader
-                                        fixedHeaderScrollHeight="510px"
+                                        fixedHeaderScrollHeight="455px"
                                         onRowClicked={handleRowClicked}
                                         highlightOnHover
                                     />

@@ -18,10 +18,13 @@ export default function Statistics() {
         <AdminSideBar />
 
         <Container fluid>
+        	<div className="p-4 title"><MDBBadge pill color='secondary' light>Statistics</MDBBadge></div>
           <div>
-            <Button variant="primary" onClick={handleShow}>
-              Launch demo modal
-            </Button>
+		      <div className= "text-center">
+		        <Button variant="primary" onClick={handleShow}>
+		          Launch demo modal
+		        </Button>
+			  </div>
 
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
@@ -65,5 +68,15 @@ export default function Statistics() {
   );
 }
 
+
+//<>
+//      <PostLoginNavBar />
+//      <div style={{ display: 'flex' }}>
+//        <SideBar />
+//        <Container fluid>
+//        	<Row className="p-4 title"><MDBBadge pill color='secondary' light>Analytics</MDBBadge></Row>
+//      	</Container>
+//      </div>
+//    </>
 
 

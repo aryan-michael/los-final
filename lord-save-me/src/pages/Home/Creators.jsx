@@ -1,5 +1,6 @@
 import { MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
 import './Creators.css';
+import {Container} from "react-bootstrap";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 
@@ -7,7 +8,8 @@ export default function Creators() {
   return (
     <>
       <NavBar />
-      <MDBCarousel showControls showIndicators className="picture">
+      <Container className="picture">
+      <MDBCarousel showControls showIndicators>
         <MDBCarouselItem
           className='w-100 d-block'
           itemId={1}
@@ -35,6 +37,7 @@ export default function Creators() {
           <p>Backend Development</p>
         </MDBCarouselItem>
       </MDBCarousel>
+      </Container>
       <Footer />
     </>
   );

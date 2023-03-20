@@ -1,6 +1,7 @@
-import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
-
+import SideBar from "../../components/Sidebar/SideBar";
+import { MDBBadge } from "mdb-react-ui-kit";
+import { Container, Form, Row, Col } from 'react-bootstrap';
 
 const Analytics = () => {
   return (
@@ -8,10 +9,12 @@ const Analytics = () => {
       <PostLoginNavBar />
       <div style={{ display: 'flex' }}>
         <SideBar />
-        <div className="title">Analytics</div>
+        <Container fluid>
+        	<Row className="p-4 title"><MDBBadge pill color='secondary' light>Analytics</MDBBadge></Row>
+      	</Container>
       </div>
     </>
   )
 };
 
-export default Analytics;
+export default Analytics

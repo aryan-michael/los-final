@@ -14,23 +14,23 @@ import './SideBar.css';
 
 const routes = [
   {
-    path: "/sidebar/dashboard",
+    path: "/user-panel/dashboard",
     name: "Dashboard",
     icon: <FaHome />,
   },
   {
-    path: "/sidebar/my-info",
+    path: "/user-panel/my-info",
     name: "My Information",
     icon: <IoInformationCircle />,
     exact: true,
     subRoutes: [
       {
-        path: "/sidebar/my-info/personal-info",
+        path: "/user-panel/my-info/personal-info",
         name: "Personal Details",
         icon: <FaUser />,
       },
       {
-        path: "/sidebar/bank-details",
+        path: "/user-panel/bank-details",
         name: "Bank Details",
         icon: <HiDocumentArrowUp />,
       },
@@ -42,44 +42,44 @@ const routes = [
     ],
   },
   {
-    path: "/sidebar/kyc-docs",
+    path: "/user-panel/kyc-docs",
     name: "KYC Documents",
     icon: <HiDocumentArrowUp />,
   },
   {
-    path: "/sidebar/add-inquiry",
+    path: "/user-panel/add-inquiry",
     name: "Add Inquiry",
     icon: <AiOutlineUserAdd />,
   },
   {
-    path: "/sidebar/check-status",
+    path: "/user-panel/check-status",
     name: "Check Status",
     icon: <MdMessage />,
   },
   {
-    path: "/sidebar/analytics",
+    path: "/user-panel/analytics",
     name: "Analytics",
     icon: <BiAnalyse />,
   },
 
   {
-    path: "/sidebar/settings",
+    path: "/user-panel/settings",
     name: "Settings",
     icon: <BiCog />,
     exact: true,
     subRoutes: [
       {
-        path: "/sidebar/settings/profile",
+        path: "/user-panel/settings/profile",
         name: "Profile ",
         icon: <FaUser />,
       },
       {
-        path: "/sidebar/settings/2fa",
+        path: "/user-panel/settings/2fa",
         name: "2FA",
         icon: <FaLock />,
       },
       {
-        path: "/sidebar/settings/billing",
+        path: "/user-panel/settings/billing",
         name: "Billing",
         icon: <FaMoneyBill />,
       },
@@ -222,4 +222,4 @@ const SideBar = ({ children }) => {
   );
 };
 
-export default SideBar;
+export default SideBar
