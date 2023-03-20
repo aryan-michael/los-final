@@ -7,85 +7,85 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 const documentList = [
-		{
-			DocID: 1,
-			DocName: "Aston Villa",
-			VerficationStatus:'Approve',
-			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-		},
-		{
-			DocID: 2,
-			DocName: "Manchester United",
-			VerficationStatus:'Reject',
-			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
-		},
-		{
-			DocID: 3,
-			DocName: "Everton",
-			VerficationStatus:'Approve',
-			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-		},
-		{
-			DocID: 4,
-			DocName: "Spurs",
-			VerficationStatus:'Reject',
-			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
-		},
-		{
-			DocID: 5,
-			DocName: "Aston Villa",
-			VerficationStatus:'Approve',
-			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-		},
-		{
-			DocID: 6,
-			DocName: "Manchester City",
-			VerficationStatus:'Reject',
-			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
-		},
-		{
-			DocID: 7,
-			DocName: "Wolves",
-			VerficationStatus:'Approve',
-			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-		},
-		{
-			DocID: 8,
-			DocName: "Manchester United",
-			VerficationStatus:'Reject',
-			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
-		},
-		{
-			DocID: 9,
-			DocName: "Manchester United",
-			VerficationStatus:'Approve',
-			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-		},
-		{
-			DocID: 10,
-			DocName: "Chelsea",
-			VerficationStatus:'Reject',
-			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
-		},
-		{
-			DocID: 11,
-			DocName: "Manchester United",
-			VerficationStatus:'Approve',
-			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-		},
-		{
-			DocID: 12,
-			DocName: "Manchester United",
-			VerficationStatus:'Reject',
-			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
-		},
-		{
-			DocID: 13,
-			DocName: "Chelsea",
-			VerficationStatus:'Approve',
-			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
-		}
-	];
+	{
+		DocID: 1,
+		DocName: "Aston Villa",
+		VerficationStatus: 'Approve',
+		Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+	},
+	{
+		DocID: 2,
+		DocName: "Manchester United",
+		VerficationStatus: 'Reject',
+		Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+	},
+	{
+		DocID: 3,
+		DocName: "Everton",
+		VerficationStatus: 'Approve',
+		Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+	},
+	{
+		DocID: 4,
+		DocName: "Spurs",
+		VerficationStatus: 'Reject',
+		Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+	},
+	{
+		DocID: 5,
+		DocName: "Aston Villa",
+		VerficationStatus: 'Approve',
+		Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+	},
+	{
+		DocID: 6,
+		DocName: "Manchester City",
+		VerficationStatus: 'Reject',
+		Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+	},
+	{
+		DocID: 7,
+		DocName: "Wolves",
+		VerficationStatus: 'Approve',
+		Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+	},
+	{
+		DocID: 8,
+		DocName: "Manchester United",
+		VerficationStatus: 'Reject',
+		Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+	},
+	{
+		DocID: 9,
+		DocName: "Manchester United",
+		VerficationStatus: 'Approve',
+		Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+	},
+	{
+		DocID: 10,
+		DocName: "Chelsea",
+		VerficationStatus: 'Reject',
+		Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+	},
+	{
+		DocID: 11,
+		DocName: "Manchester United",
+		VerficationStatus: 'Approve',
+		Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+	},
+	{
+		DocID: 12,
+		DocName: "Manchester United",
+		VerficationStatus: 'Reject',
+		Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+	},
+	{
+		DocID: 13,
+		DocName: "Chelsea",
+		VerficationStatus: 'Approve',
+		Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+	}
+];
 
 
 const LoanData = () => {
@@ -113,9 +113,9 @@ const LoanData = () => {
 	}); //color scheme system
 
 	const Navigate = useNavigate();
-	
+
 	const viewDocument = () => {
-	window.open(`/hello`);
+		window.open(`/hello`);
 	}
 
 	const [show, setShow] = useState(false);
@@ -123,61 +123,92 @@ const LoanData = () => {
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-	
+
 	const handleDocClose = () => setDoc(false);
 	const handleDocShow = () => setDoc(true);
-	
+
 	const [docName, setdocName] = useState('');
 	const [doc, setdoc] = useState(null);
-	
-//	useEffect(() => {
-//		if(docName)
-//		handleDocShow();
-//	}, [docName])
-	
-	
-	const [approval, setApproval] = useState();
-	
-	const [approve, setApprove] = useState(false);
-    const [reject, setReject] = useState(false);
-    const [data,setData] = useState(documentList);
-	
-	useEffect(() => {
-        approval === "approve" ? setApprove(true) : setApprove(false);
-        approval === "reject" ? setReject(true) : setReject(false);
-    }, [approval])
-		
-	const handleApproval = (e) => {
-		setdoc({...doc,VerficationStatus:e.target.value});
-//		e.target.val￼ue.trim() && setdoc({...doc,VerficationStatus:''});
-//		setData(data.map(d=>d.DocId === doc.DocId ? {...d,VerficationStatus:e.target.val￼ue}:d));
-	}
-	
-	
-	const columns = [
-		{
-			name: "Doc ID",
-			selector: (row) => row.DocID,
-			sortable: true
-		},
-		{
-			name: "Doc Name",
-			selector: (row) => row.DocName,
-			sortable: true
-		},
-		{
-			name: "Status",
-			selector: (row) => row.Status,
-			sortable: true,
-		},
-		{
-			name: "Verification",
-			selector: (row) => row.VerficationStatus === 'Approve' ?<MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge> ,
-			sortable: true,
-		},
-	];
 
-	
+	//	useEffect(() => {
+	//		if(docName)
+	//		handleDocShow();
+	//	}, [docName])
+
+
+	const [approval, setApproval] = useState();
+
+	const [approve, setApprove] = useState(false);
+	const [reject, setReject] = useState(false);
+	const [data, setData] = useState(documentList);
+
+	useEffect(() => {
+		approval === "approve" ? setApprove(true) : setApprove(false);
+		approval === "reject" ? setReject(true) : setReject(false);
+	}, [approval])
+
+	const handleApproval = (e) => {
+		setdoc({ ...doc, VerficationStatus: e.target.value });
+		//		e.target.val￼ue.trim() && setdoc({...doc,VerficationStatus:''});
+		//		setData(data.map(d=>d.DocId === doc.DocId ? {...d,VerficationStatus:e.target.val￼ue}:d));
+	}
+
+	const [columns, setColumns] = useState([]);
+	const [pending, setPending] = useState(true);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setColumns([
+				{
+					name: "Doc ID",
+					selector: (row) => row.DocID,
+					sortable: true
+				},
+				{
+					name: "Doc Name",
+					selector: (row) => row.DocName,
+					sortable: true
+				},
+				{
+					name: "Status",
+					selector: (row) => row.Status,
+					sortable: true,
+				},
+				{
+					name: "Verification",
+					selector: (row) => row.VerficationStatus === 'Approve' ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>,
+					sortable: true,
+				},
+			]);
+			setPending(false);
+		}, 2000);
+		return () => clearTimeout(timeout);
+	}, []);
+
+	//  const columns = [
+	// 	{
+	// 		name: "Doc ID",
+	// 		selector: (row) => row.DocID,
+	// 		sortable: true
+	// 	},
+	// 	{
+	// 		name: "Doc Name",
+	// 		selector: (row) => row.DocName,
+	// 		sortable: true
+	// 	},
+	// 	{
+	// 		name: "Status",
+	// 		selector: (row) => row.Status,
+	// 		sortable: true,
+	// 	},
+	// 	{
+	// 		name: "Verification",
+	// 		selector: (row) => row.VerficationStatus === 'Approve' ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>,
+	// 		sortable: true,
+	// 	},
+	//  ];
+
+
 	const handleRowClicked = (row) => {
 		console.log(row.DocName);
 		//Open modal with check box to approve or reject a document
@@ -193,6 +224,7 @@ const LoanData = () => {
 
 				<Container fluid>
 					<Row>
+						{/* LOAN INFO */}
 						<Col>
 							<div className="p-4 title"><MDBBadge pill color='secondary' light>Loan Data</MDBBadge></div>
 							<Form className="container mt-3 mb-3">
@@ -234,11 +266,13 @@ const LoanData = () => {
 								</Row>
 							</Form>
 						</Col>
+
+						{/* DOCUMENT TABLE */}
 						<Col>
 							<div className="p-4 title"><MDBBadge pill color='secondary' light>Documents</MDBBadge></div>
 							<Form className="container mt-3 mb-3 personal" autoComplete='off'>
 								<Row className="mb-3">
-								{data?.length>0 && (<DataTable
+									{data?.length > 0 && (<DataTable
 										//title="Loan History"
 										columns={columns}
 										//data={loanDetails}
@@ -247,15 +281,16 @@ const LoanData = () => {
 										pagination={5}
 										fixedHeader
 										fixedHeaderScrollHeight="240px"
-										onRowClicked={(d) => {setdoc(d);handleDocShow()}}
+										onRowClicked={(d) => { setdoc(d); handleDocShow() }}
 										highlightOnHover
 										pointerOnHover
-										//progressPending
-										//theme="dark"
-										//customStyles={customStyles}
-										//selectableRows
+										progressPending={pending}
+									//progressPending
+									//theme="dark"
+									//customStyles={customStyles}
+									//selectableRows
 									/>)}
-									
+
 								</Row>
 							</Form>
 						</Col>
@@ -263,11 +298,17 @@ const LoanData = () => {
 
 					<div className="p-2" />
 
+					<div className="text-center p-3 mb-1" >
+						<Button variant="outline-warning" size="lg" onClick={handleShow}>
+							Send Reminder
+						</Button>
+					</div>
+
 					<div className="text-center p-3 mb-3" >
 						<Button variant="dark" size="lg" onClick={handleShow}>
 							Take Decision
 						</Button>
-						
+
 						{/*DECISION MODAL*/}
 						<Modal show={show} onHide={handleClose}>
 							<Modal.Header closeButton>
@@ -303,10 +344,10 @@ const LoanData = () => {
 							</Modal.Footer>
 						</Modal>
 					</div>
-					
+
 					{/*DOCUMENT MODAL*/}
 					{doc && (
-					<Modal show={Doc} onHide={handleDocClose}>
+						<Modal show={Doc} onHide={handleDocClose}>
 							<Modal.Header closeButton>
 								<Modal.Title><MDBBadge pill color='warning' light>{doc.DocName}</MDBBadge></Modal.Title>
 							</Modal.Header>
@@ -333,15 +374,15 @@ const LoanData = () => {
 								<Button variant="outline-secondary" onClick={viewDocument}>
 									View
 								</Button>
-								<Button variant="outline-secondary" onClick={()=>{
-								setData(data.map(d => d.DocID === doc.DocID ? {...d,VerficationStatus:doc.VerficationStatus} : d));
-								handleDocClose();
+								<Button variant="outline-secondary" onClick={() => {
+									setData(data.map(d => d.DocID === doc.DocID ? { ...d, VerficationStatus: doc.VerficationStatus } : d));
+									handleDocClose();
 								}}>
 									Save Changes
 								</Button>
 							</Modal.Footer>
 						</Modal>
-						)}
+					)}
 				</Container>
 
 			</div>

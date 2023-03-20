@@ -30,6 +30,15 @@ createTheme("solarized", {
 
 export default function ClientData() {
 
+    const customStyles = {
+        headCells: {
+            style: {
+                fontWeight: "bold",
+                fontSize: "0.9rem"
+            }
+        },
+    }
+
     const Navigate = useNavigate();
 
     const columns = [
@@ -396,6 +405,7 @@ export default function ClientData() {
                             fixedHeaderScrollHeight="450px"
                             onRowClicked={handleRowClicked}
                             highlightOnHover
+                            customStyles={customStyles}
                         />
                     </div>
                 </Container>
