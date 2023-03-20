@@ -30,6 +30,15 @@ createTheme("solarized", {
 
 export default function ClientData() {
 
+    const customStyles = {
+        headCells: {
+            style: {
+                fontWeight: "bold",
+                fontSize: "0.9rem"
+            }
+        },
+    }
+
     const Navigate = useNavigate();
 
     const columns = [
@@ -88,8 +97,7 @@ export default function ClientData() {
             LoanAmount: "https://resources.premierleague.com/premierleague/badges/50/t7.png",
             Gender: "Wales",
             Age: "Jamaica",
-            Interest:
-                "https://www.countryflags.com/wp-content/uploads/jamaica-flag-png-large.png",
+            Interest: "FWD",
             Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
         },
         {
@@ -213,7 +221,7 @@ export default function ClientData() {
             LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t8.png",
             Gender: "England",
-            "Gender Image":
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
             Interest: "DEF",
             Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>
@@ -255,7 +263,7 @@ export default function ClientData() {
             LoanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t8.png",
             Gender: "England",
-            "Gender Image":
+            Age:
                 "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
             Interest: "DEF",
             Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
@@ -375,7 +383,7 @@ export default function ClientData() {
     // ];
 
     const handleRowClicked = (row) => {
-        Navigate('/admin-sidebar/client-details');
+        Navigate('/admin-panel/client-details');
     };
     //outputs the name property into the console
 
@@ -385,7 +393,7 @@ export default function ClientData() {
             <div style={{ height: '100%', display: 'flex' }}>
                 <AdminSideBar />
                 <Container>
-                    <div >
+                    <div>
                         <div className="p-2 title"><MDBBadge pill color='secondary' light>Client Summary</MDBBadge></div>
                         <DataTable
                             //title="Client Summary"
@@ -397,6 +405,7 @@ export default function ClientData() {
                             fixedHeaderScrollHeight="450px"
                             onRowClicked={handleRowClicked}
                             highlightOnHover
+                            customStyles={customStyles}
                         />
                     </div>
                 </Container>

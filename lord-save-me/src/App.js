@@ -21,7 +21,6 @@ import Dashboard from "./pages/UserPanel/UserDashboard";
 import KYC from "./pages/UserPanel/KYC";
 import CheckStatus from "./pages/UserPanel/CheckStatus";
 import AddInquiry from './pages/UserPanel/AddInquiry';
-import Analytics from "./pages/UserPanel/Analytics";
 import PersonalInfo from './pages/UserPanel/PersonalInfo';
 import LoanInfo from './pages/UserPanel/LoanInfo';
 import LinkBankDetails from "./pages/UserPanel/LinkBankDetails";
@@ -34,6 +33,7 @@ import AddUser from "./pages/AdminPanel/AddUser";
 import ClientData from "./pages/AdminPanel/ClientData";
 import ClientDetails from "./pages/AdminPanel/ClientDetails";
 import Statistics from "./pages/AdminPanel/Statistics";
+import Analytics from "./pages/AdminPanel/Analytics";
 import LoanData from './pages/AdminPanel/LoanData';
 
 //TESTING
@@ -70,7 +70,6 @@ function App() {
         {/* USER PANEL */}
         <Route path="/user-panel/user-dashboard" element={<Dashboard />} />
         <Route path="/user-panel/kyc-docs" element={<KYC />} />
-        <Route path="/user-panel/analytics" element={<Analytics />} />
         <Route path="/user-panel/check-status" element={<CheckStatus />} />
         <Route path="/user-panel/add-inquiry" element={<AddInquiry />} />
         <Route path="/user-panel/my-info/personal-info" element={<PersonalInfo />} />
@@ -83,8 +82,9 @@ function App() {
         <Route path="/admin-panel/add-user" element={<AddUser />} />
         <Route path="/admin-panel/client-data" element={<ClientData />} />
         <Route path="/admin-panel/client-details" element={<ClientDetails />} />
-        <Route path="/admin-panel/statistics" element={<Statistics />} />
         <Route path="/admin-panel/client-details/loan-data" element={<LoanData />} />
+        <Route path="/admin-panel/statistics" element={<Statistics />} />
+        <Route path="/admin-panel/analytics" element={<Analytics />} />
 
         {/* TESTING */}
         <Route path='/test' element={<Test />} />

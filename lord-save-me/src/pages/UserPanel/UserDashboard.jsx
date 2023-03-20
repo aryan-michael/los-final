@@ -37,336 +37,339 @@ createTheme("solarized", {
 
 export default function UserDashboard() {
 
-    const [loanDetails, setLoanDetails] = useState([])
-
-    useEffect(() => {
-        getloanDetails()
-    }, [])
-
-    const getloanDetails = async () => {
-        try {
-            await axios.get("http://localhost:5000/api/v1/user/getUser1", {
-                withCredentials: true
-            }).then(response => {
-                console.log(response)
-                setLoanDetails(response.data.user.loanInquiries)
-            })
-        } catch (err) {
-            console.log(err);
-        }
+    const customStyles = {
+        headCells: {
+            style: {
+                fontWeight: "bold",
+                fontSize: "0.9rem"
+            }
+        },
     }
 
-    console.log(loanDetails);
+    // const [loanDetails, setLoanDetails] = useState([])
+
+    // useEffect(() => {
+    //     getloanDetails()
+    // }, [])
+
+    // const getloanDetails = async () => {
+    //     try {
+    //         await axios.get("http://localhost:5000/api/v1/user/getUser1", {
+    //             withCredentials: true
+    //         }).then(response => {
+    //             console.log(response)
+    //             setLoanDetails(response.data.user.loanInquiries)
+    //         })
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
+
+    // console.log(loanDetails);
 
     const Navigate = useNavigate();
 
-    const columns = [
-        {
-            name: "Loan ID",
-            selector: (row) => row._id,
-            sortable: true
-        },
-        {
-            name: "Loan Type",
-            selector: (row) => row.loanType,
-            sortable: true
-        },
-        {
-            name: "Amount (₹)",
-            selector: (row) => row.loanAmount,
-            sortable: true
-        },
-        {
-            name: "Loan Status",
-            selector: (row) => row.applicationStatus,
-            sortable: true,
-        },
-    ];
+    const [columns, setColumns] = useState([]);
+    const [pending, setPending] = useState(true);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setColumns([
+                {
+                    name: "Loan ID",
+                    selector: (row) => row._id,
+                    sortable: true
+                },
+                {
+                    name: "Loan Type",
+                    selector: (row) => row.Loan,
+                    sortable: true
+                },
+                {
+                    name: "Amount (₹)",
+                    selector: (row) => row.loanAmount,
+                    sortable: true
+                },
+                // {
+                //     name: "Interest (%)",
+                //     selector: (row) => row.Interest,
+                //     sortable: true
+                // },
+                {
+                    name: "Loan Status",
+                    selector: (row) => row.applicationStatus,
+                    sortable: true,
+                },
+            ]);
+            setPending(false);
+        }, 2000);
+        return () => clearTimeout(timeout);
+    }, []);
+
+    //    const columns = [
+    //        {
+    //            name: "Loan ID",
+    //            selector: (row) => row._id,
+    //            sortable: true
+    //        },
+    //        {
+    //            name: "Loan Type",
+    //            selector: (row) => row.Loan,
+    //            sortable: true
+    //        },
+    //        {
+    //            name: "Amount (₹)",
+    //            selector: (row) => row.loanAmount,
+    //            sortable: true
+    //        },
+    //        {
+    //            name: "Loan Status",
+    //            selector: (row) => row.applicationStatus,
+    //            sortable: true,
+    //        },
+    //    ];
 
     const clientSummary = [
         {
-            ClientID: 1,
+            _id: 1,
             ClientName: "Aaron Ramsey",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p119765.png",
-            LoanType: "Aston Villa",
-            LoanAmount: "https://resources.premierleague.com/premierleague/badges/50/t7.png",
-            Gender: "Wales",
-            Age: "Jamaica",
-            Interest:
-                "https://www.countryflags.com/wp-content/uploads/jamaica-flag-png-large.png",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
+            loanAmount:
+                "https://resources.premierleague.com/premierleague/badges/50/t11.png",
+            Loan: "Aston Villa",
+            Interest: "FWD",
+            applicationStatus: <MDBBadge pill color='success' light>Completed</MDBBadge>
         },
         {
-            ClientID: 2,
+            _id: 2,
             ClientName: "Alex Telles",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p152590.png",
-            LoanType: "Manchester United",
-            LoanAmount:
+            Loan: "Manchester United",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
             Gender: "Brazil",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/brazil-flag-png-large.png",
             Interest: "DEF",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
+            applicationStatus: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
         },
         {
-            ClientID: 3,
+            _id: 3,
             ClientName: "Allan",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p119765.png",
-            LoanType: "Everton",
-            LoanAmount:
+            Loan: "Everton",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t11.png",
             Gender: "England",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
             Interest: "MID",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>
+            applicationStatus: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>
         },
         {
-            ClientID: 4,
+            _id: 4,
             ClientName: "Dele Alli",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p108823.png",
-            LoanType: "Spurs",
-            LoanAmount:
+            Loan: "Spurs",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t6.png",
             Gender: "Brazil",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/brazil-flag-png-large.png",
             Interest: "MID",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
+            applicationStatus: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
         },
         {
-            ClientID: 5,
+            _id: 5,
             ClientName: "Leon Bailey",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p215711.png",
-            LoanType: "Aston Villa",
-            LoanAmount:
+            Loan: "Aston Villa",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t7.png",
             Gender: "Jamaica",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/jamaica-flag-png-large.png",
             Interest: "FWD",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
+            applicationStatus: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
         },
         {
-            ClientID: 6,
+            _id: 6,
             ClientName: "Bernando Silva",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p165809.png",
-            LoanType: "Manchester City",
-            LoanAmount:
+            Loan: "Manchester City",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t43.png",
             Gender: "Portugal",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
             Interest: "MID",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
+            applicationStatus: <MDBBadge pill color='success' light>Completed</MDBBadge>
         },
         {
-            ClientID: 7,
+            _id: 7,
             ClientName: "Willy Boly",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p90585.png",
-            LoanType: "Wolves",
-            LoanAmount:
+            Loan: "Wolves",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t39.png",
             Gender: "Cote D’Ivoire",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/cote-d-ivoire-flag-png-large.png",
             Interest: "DEF",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
+            applicationStatus: <MDBBadge pill color='success' light>Completed</MDBBadge>
         },
         {
-            ClientID: 8,
+            _id: 8,
             ClientName: "Bruno Fernandes",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            LoanType: "Manchester United",
-            LoanAmount:
+            Loan: "Manchester United",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
             Gender: "Portugal",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
             Interest: "MID",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
+            applicationStatus: <MDBBadge pill color='success' light>Completed</MDBBadge>
         },
         {
-            ClientID: 9,
+            _id: 9,
             ClientName: "Edinson Cavani",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            LoanType: "Manchester United",
-            LoanAmount:
+            Loan: "Manchester United",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
             Gender: "Uruguay",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
             Interest: "FWD",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
+            applicationStatus: <MDBBadge pill color='success' light>Completed</MDBBadge>
         },
         {
-            ClientID: 10,
+            _id: 10,
             ClientName: "Ben Chilwell",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            LoanType: "Chelsea",
-            LoanAmount:
+            Loan: "Chelsea",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t8.png",
             Gender: "England",
             "Gender Image":
                 "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
             Interest: "DEF",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>
+            applicationStatus: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>
         },
         {
-            ClientID: 8,
+            _id: 11,
             ClientName: "Bruno Fernandes",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            LoanType: "Manchester United",
-            LoanAmount:
+            Loan: "Manchester United",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
             Gender: "Portugal",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
             Interest: "MID",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>,
+            applicationStatus: <MDBBadge pill color='success' light>Completed</MDBBadge>,
         },
         {
-            ClientID: 9,
+            _id: 12,
             ClientName: "Edinson Cavani",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            LoanType: "Manchester United",
-            LoanAmount:
+            Loan: "Manchester United",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
             Gender: "Uruguay",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
             Interest: "FWD",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>,
+            applicationStatus: <MDBBadge pill color='success' light>Completed</MDBBadge>,
         },
         {
-            ClientID: 10,
+            _id: 13,
             ClientName: "Ben Chilwell",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            LoanType: "Chelsea",
-            LoanAmount:
+            Loan: "Chelsea",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t8.png",
             Gender: "England",
             "Gender Image":
                 "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
             Interest: "DEF",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
+            applicationStatus: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
         },
         {
-            ClientID: 7,
+            _id: 14,
             ClientName: "Willy Boly",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p90585.png",
-            LoanType: "Wolves",
-            LoanAmount:
+            Loan: "Wolves",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t39.png",
             Gender: "Cote D’Ivoire",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/cote-d-ivoire-flag-png-large.png",
             Interest: "DEF",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
+            applicationStatus: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
         },
         {
-            ClientID: 8,
+            _id: 15,
             ClientName: "Bruno Fernandes",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            LoanType: "Manchester United",
-            LoanAmount:
+            Loan: "Manchester United",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
             Gender: "Portugal",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
             Interest: "MID",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
+            applicationStatus: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
         },
         {
-            ClientID: 9,
+            _id: 16,
             ClientName: "Edinson Cavani",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            LoanType: "Manchester United",
-            LoanAmount:
+            Loan: "Manchester United",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t1.png",
             Gender: "Uruguay",
             Age:
                 "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
             Interest: "FWD",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>,
+            applicationStatus: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>,
         },
         {
-            ClientID: 10,
+            _id: 17,
             ClientName: "Ben Chilwell",
             ProfilePicture:
                 "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            LoanType: "Chelsea",
-            LoanAmount:
+            Loan: "Chelsea",
+            loanAmount:
                 "https://resources.premierleague.com/premierleague/badges/50/t8.png",
             Gender: "England",
             "Gender Image":
                 "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
             Interest: "DEF",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>,
-        },
-        {
-            ClientID: 8,
-            ClientName: "Bruno Fernandes",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Portugal",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
-            Interest: "MID",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>,
-        },
-        {
-            ClientID: 9,
-            ClientName: "Edinson Cavani",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Uruguay",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
-            Interest: "FWD",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>,
-        },
-        {
-            ClientID: 10,
-            ClientName: "Ben Chilwell",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            LoanType: "Chelsea",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t8.png",
-            Gender: "England",
-            "Gender Image":
-                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
-            Interest: "DEF",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>,
+            applicationStatus: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>,
         }
     ];
 
     const handleRowClicked = (row) => {
-        console.log(row.ClientName)
+        console.log(row.ClientName);
+        Navigate('/user-panel/my-info/loan-info');
     };
     //outputs the name property into the console
 
@@ -375,73 +378,39 @@ export default function UserDashboard() {
             <PostLoginNavBar />
             <div style={{ height: '100%', display: 'flex' }}>
                 <SideBar />
+                <Container>
+                    <div>
+                        <div className="p-2 title "><MDBBadge pill color='secondary' light>User Dashboard</MDBBadge></div>
+                        <DataTable
+                            //title="Client Summary"
+                            columns={columns}
+                            data={loanDetails}
+                            //data={clientSummary}
+                            defaultSortFieldId
+                            pagination={10}
+                            fixedHeader
+                            fixedHeaderScrollHeight="450px"
+                            onRowClicked={handleRowClicked}
+                            highlightOnHover
+                            progressPending={pending}
+                            customStyles={customStyles}
+                        />
+                    </div>
 
-                <Container fluid>
-                    <Form className="mt-3 mb-3" autoComplete='off'>
-                        <Row className="p-4 title"><MDBBadge pill color='secondary' light>User Dashboard</MDBBadge></Row>
+                    {/* SPACING */}
+                    <div className="text-center p-3 mb-4"></div>
 
-                        <Row className="text-center p-3 mb-3">
-                            <Col className="p-3" xs={12} md={6} lg={3}>
-                                <div className="tag px-5 pt-5 pb-3">
-                                    <Link to={`loan/business`} className="text-black text-decoration-none ">
-                                        <FaBusinessTime className="icons" />
-                                        <h4 className="mt-2">Business Loan</h4>
-                                    </Link>
-                                </div>
-                            </Col>
-                            <Col className="p-3" xs={12} md={6} lg={3}>
-                                <div className="tag px-5 pt-5 pb-3">
-                                    <Link to={`loan/home`} className="text-black text-decoration-none ">
-                                        <FaHome className="icons" />
-                                        <h4 className="mt-2">Home Loan</h4>
-                                    </Link>
-                                </div>
-                            </Col>
-                            <Col className="p-3" xs={12} md={6} lg={3}>
-                                <div className="tag px-5 pt-5 pb-3">
+                    <div className="text-center p-3 mb-3">
+                        <Footer />
+                    </div>
 
-                                    <Link to={`loan/education`} className="text-black text-decoration-none ">
-                                        <MdCastForEducation className="icons" />
-                                        <h4 className="mt-2">Education Loan</h4>
-                                    </Link>
-                                </div>
-                            </Col>
-                            <Col className="p-3" xs={12} md={6} lg={3}>
-                                <div className="tag px-5 pt-5 pb-3">
 
-                                    <Link to={`loan/personal`} className="text-black text-decoration-none ">
-                                        <BsFillPersonFill className="icons" />
-                                        <h4 className="mt-2">Personal Loan</h4>
-                                    </Link>
-                                </div>
-                            </Col>
-                        </Row>
-
-                        <Row className="text-center p-3 mb-3">
-                            <div className="p-2 h4"><MDBBadge pill color='secondary' light>My Loan History</MDBBadge></div>
-                            <DataTable
-                                //title="My Loan History"
-                                columns={columns}
-                                data={loanDetails}
-                                defaultSortFieldId
-                                pagination={10}
-                                fixedHeader
-                                fixedHeaderScrollHeight="450px"
-                                onRowClicked={handleRowClicked}
-                                highlightOnHover
-                            />
-                        </Row>
-
-                        <Row className="text-center p-3 mb-12"></Row>
-
-                        <Row className="text-center p-3 mb-3">
-                            <Footer />
-                        </Row>
-
-                    </Form>
                 </Container>
-
             </div>
         </>
     );
 }
+
+
+
+

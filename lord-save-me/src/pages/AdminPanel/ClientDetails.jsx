@@ -161,7 +161,7 @@ const ClientDetails = () => {
     ];
 
     const handleRowClicked = (row) => {
-        Navigate('/admin-sidebar/client-details/loan-data');
+        Navigate('/admin-panel/client-details/loan-data');
     };
 
 

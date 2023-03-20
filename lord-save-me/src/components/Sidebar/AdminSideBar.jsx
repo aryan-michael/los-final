@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome } from "react-icons/fa";
 import { BsFillPersonPlusFill, BsPersonLinesFill } from "react-icons/bs";
-import { BiSearch } from "react-icons/bi";
+import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { FcStatistics } from "react-icons/fc";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -25,6 +26,11 @@ const routes = [
         path: "/admin-panel/client-data",
         name: "Client Information",
         icon: <BsPersonLinesFill />,
+    },
+    {
+    	path: "/admin-panel/analytics",
+    	name: "Analytics",
+    	icon: <BiAnalyse />,
     },
     {
         path: "/admin-panel/statistics",
