@@ -21,12 +21,13 @@ const User = require('../Model/userModel')
 // }
 
 const authMiddleware = async (req, res, next) => {
-    const authHeader = req.cookies.Token;
-    console.log(">>"+authHeader)
-    if (!authHeader) {
+    console.log(req.cookies);
+    const {Token} = req.cookies;
+    console.log(">>"+Token)
+    if (!Token) {
         throw new UnauthorizedError('Unauthorized');
     } else {
-        const token = authHeader
+        const token = Token
         try {
             const decoded = await jwt.verify(token, process.env.JWT_SECRET);
             req.user = { userId: decoded.userId, email:decoded.email }

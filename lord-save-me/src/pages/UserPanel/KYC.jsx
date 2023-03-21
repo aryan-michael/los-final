@@ -5,59 +5,58 @@ import { Form, Col, Row, Button, InputGroup, Container } from "react-bootstrap";
 import DocRequirements from "./DocRequirements";
 import { MDBBadge } from "mdb-react-ui-kit";
 import "./KYC.css";
-
+import axios from "axios";
 
 export default function KYC() {
 
-  const business_documents = [
-    'Photo Identity Proof',
-    'Address Proof',
-    'Certificate of Incorporation',
-    'Income Tax Returns',
-    'GST Returns',
-    'Bank Statements (max 1 year old)',
-    'List of existing loans and debts',
-    'List of Accounts',
-    'Cash Flow Statements',
-    'Cancelled Cheque',
+ const business_documents = [
+    { name: 'Photo Identity Proof', value: 'document_pan' },
+    { name: 'Address Proof', value: 'document_addressProof' },
+    { name: 'Certificate of Incorporation', value: 'document_COI' },
+    { name: 'Income Tax Returns', value: 'document_ITR' },
+    { name: 'GST Returns', value: 'document_GST' },
+    { name: 'Bank Statements (max 1 year old)', value: 'document_bankStatement' },
+    { name: 'List of existing loans and debts', value: 'document_loans&debts' },
+    { name: 'List of Accounts', value: 'document_accounts' },
+    { name: 'Cash Flow Statements', value: 'document_cashFlow' },
+    { name: 'Cancelled Cheque', value: 'document_cancelledCheque' }
   ]
 
   const home_documents = [
-    'Photo Identity Proof',
-    'Address Proof',
-    'Employment Appointment Letter',
-    'Salary slip (3 months old)',
-    'Bank Statement (6 months old)',
-    'Form 16 (2 years)',
-    'Property Document (Sale deed, Khata)',
-    'IT Returns',
-    'Office Address Proof',
-    'Office Ownership Proof',
-    'Business Existence Proof (COI)',
-    'Income Proof',
-
+    { name: 'Photo Identity Proof', value: 'document_photoID' },
+    { name: 'Address Proof', value: 'document_addressProof' },
+    { name: 'Business Existence Proof (COI)', value: 'document_COI' },
+    { name: 'Income Tax Returns', value: 'document_ITR' },
+    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
+    { name: 'Form 16 (2 years)', value: 'document_form16' },
+    { name: 'Property Document (Sale deed, Khata)', value: 'document_propertyDoc' },
+    { name: 'Office Address Proof', value: 'document_officeAddressProof' },
+    { name: 'Office Ownership Proof', value: 'document_officeOwnershipProof' },
+    { name: 'Income Proof', value: 'document_incomeProof' }
   ]
 
   const education_documents = [
-    'Photo Identity Proof (Applicant/Co-Applicant)',
-    'Address Proof (Applicant/Co-Applicant)',
-    'Income Proof (Applicant/Co-Applicant)',
-    'Bank Statements',
-    'Proof of Admission',
-    'Marksheet (S.S.C./H.S.C./Degree/Diploma)',
-    'Collateral Property Document'
+    { name: 'Photo Identity Proof (Applicant/Co-Applicant)', value: 'document_photoID' },
+    { name: 'Address Proof (Applicant/Co-Applicant)', value: 'document_addressProof' },
+    { name: 'Income Proof (Applicant/Co-Applicant)', value: 'document_incomeProof' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Proof of Admission', value: 'document_proofOfAdmission' },
+    { name: 'Marksheet (S.S.C./H.S.C./Degree/Diploma)', value: 'document_marksheet' },
+    { name: 'Collateral Property Document', value: 'document_collateralPropertyDocument' }
   ]
 
   const personal_documents = [
-    'Photo Identity Proof',
-    'Address Proof',
-    'Income Proof',
-    'Job Continuity Proof',
-    'Bank Statements (max 1 year old)',
-    'Form 16 (2 years)',
-    'Salary Slip',
-    'List of existing loans and debts',
-    'List of Accounts',
+    { name: 'Photo Identity Proof (Applicant/Co-Applicant)', value: 'document_photoID' },
+    { name: 'Address Proof (Applicant/Co-Applicant)', value: 'document_addressProof' },
+    { name: 'Income Proof (Applicant/Co-Applicant)', value: 'document_incomeProof' },
+    { name: 'Job Continuity Proof', value: 'document_jobContinuityProof' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Form 16 (2 years)', value: 'document_form16' },
+    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
+    { name: 'List of existing loans and debts', value: 'document_loans&debts' },
+    { name: 'List of Accounts', value: 'document_accounts' }
   ]
 
   const [modalShow, setModalShow] = useState(false);
@@ -71,13 +70,13 @@ export default function KYC() {
     const inputdata = [...value]
     inputdata[i] = onChangeValue.target.value;
     setValue(inputdata)
-  }
-  const handleDelete = (i) => {
-    const deleteValue = [...value]
-    deleteValue.splice(i, 1)
-    setValue(deleteValue)
-  }
-  console.log(value, "data-");
+   }
+   const handleDelete=(i)=>{
+        const deleteValue=[...value]
+        deleteValue.splice(i,1)
+        setValue(deleteValue)  
+   }
+   console.log(value,"data-");
 
 
   // state that will hold the Array of objects
@@ -85,27 +84,58 @@ export default function KYC() {
   const [files, setFiles] = useState([]);
   // onChange function that reads files on uploading them
   // files read are encoded as Base64
-  function onFileUpload(event) {
+  async function onFileUpload(event) {
     event.preventDefault();
-    // Get the file Id
-    let id = event.target.id;
+    
+    console.log(">",event.target.value);
     // Create an instance of FileReader API
-    let file_reader = new FileReader();
+    // let file_reader = new FileReader();
+    
     // Get the actual file itself
+    const formData = new FormData()
     let file = event.target.files[0];
-    file_reader.onload = () => {
-      // After uploading the file
-      // appending the file to our state array
-      // set the object keys and values accordingly
-      setFiles([...files, { file_id: id, uploaded_file: file_reader.result }]);
-    };
+    formData.append('document', file)
+    const name = document.getElementsByClassName("form-control")
+  
+    await setFiles([...files, { documentType: name.documentType.value, uploaded_file: file,file_name:file.name}]);
+    
+    // setFiles([...files, {formData}]);
     // reading the actual uploaded file
-    file_reader.readAsDataURL(file);
+    // file_reader.readAsDataURL(file);
   }
   // handle submit button for form
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(); 
+
     console.log(files);
+
+    files.forEach(file => {
+      formData.append('fileList',file.uploaded_file)
+    })
+
+    try {
+      await axios.post("http://localhost:5000/api/v1/file/upload/cloud", formData, {
+        withCredentials:true,
+        headers: {
+                    "Content-Type": "multipart/form-data"
+        }
+      }).then(response => {
+        console.log(response);
+      })
+    } catch (err) {
+      console.log(err);
+      return
+    }
+    try {
+      await axios.post("http://localhost:5000/api/v1/file/upload/details", files, {
+        withCredentials: true
+      } ).then(response => {
+        console.log(response);
+      })
+    } catch (err) {
+      console.log(err);
+    }
   }
   // button state whether it's disabled or enabled
   const [enabled, setEnabled] = useState(false);
@@ -154,16 +184,16 @@ export default function KYC() {
                             <Form.Group controlId="formGridState">
                               <Form.Label><MDBBadge pill color='info' light>CHOOSE DOCUMENT</MDBBadge></Form.Label>
                               
-                              <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="salutation" required >
+                              <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="documentType" required >
                                 <option defaultValue value=''>Choose...</option>
                                 <option disabled>-------------------BUSINESS LOAN-------------------</option>
-                                {business_documents.map((option) => <option>{option}</option>)}
+                                {business_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                                 <option disabled>---------------------HOME LOAN--------------------</option>
-                                {home_documents.map((option) => <option>{option}</option>)}
+                                {home_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                                 <option disabled>-----------------EDUCATION LOAN------------------</option>
-                                {education_documents.map((option) => <option>{option}</option>)}
+                                {education_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                                 <option disabled>------------------PERSONAL LOAN------------------</option>
-                                {personal_documents.map((option) => <option>{option}</option>)}
+                                {personal_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                               </Form.Select>
                               <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                               <Form.Control.Feedback type='invalid'>Please provide a document!</Form.Control.Feedback>

@@ -5,6 +5,7 @@ const sendEmail = require('./emailController')
 const NotFoundError = require('../Error/NotFoundError')
 const User = require('../Model/userModel')
 const { generateOtp } = require('../Middleware/AdditionalFunc')
+const UserDocuments = require('../Model/userDocumentsModel')
 
 const createProxyUser = async (req, res) => {
     const proxyUser = await ProxyUser.create(req.body)
@@ -42,7 +43,7 @@ const checkVerficationOtp = async (req, res) => {
     if (!proxyUser) {
         throw new NotFoundError('Invalid OTP')
     }
-    const pUser = await ProxyUser.findOne({ email: proxyUser.email, mobile: proxyUser.mobile })
+    const pUser = await ProxyUser.findOneAndDelete({ email: proxyUser.email, mobile: proxyUser.mobile })
     const u = {
         salutation: pUser.salutation,
         first_name: pUser.first_name,
@@ -62,6 +63,9 @@ const checkVerficationOtp = async (req, res) => {
     }
     console.log(">>",u);
     const user = await User.create(u)
+    const document = await UserDocuments.create({})
+    user.userDocuments = document._id
+    await user.save()
     res.clearCookie("otoken", {
         httpOnly: true,
         secure:true

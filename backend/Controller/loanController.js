@@ -1,5 +1,6 @@
 const Loan = require('../Model/loanModel')
-const ProxyUser  =  require('../Model/proxyUserModel')
+const ProxyUser = require('../Model/proxyUserModel')
+const User  =  require('../Model/userModel')
 const { StatusCodes } = require("http-status-codes")
 const NotFoundError = require('../Error/NotFoundError')
 
@@ -18,9 +19,23 @@ const createLoan = async (req, res) => {
     res.status(StatusCodes.CREATED).json({loan}) 
 }
 
+const addLoanInquiry = async (req, res) => {
+    const { email, userId } = req.user
+    const loan = await Loan.create(req.body)
+    const user = await User.findOneAndUpdate({ email: email,_id:userId }, {
+        $push:{loanInquiries:loan._id}
+    }, {
+        new: true,
+        runValidators: true
+    })
+    console.log(user);
+    if (!user) throw new NotFoundError('User not found')
+    res.status(StatusCodes.CREATED).json({msg:'Success'}) 
+}
+
 const getAllLoan = async (req, res) => {
     const loan = await Loan.find({})
     res.status(StatusCodes.OK).json({loan})
 }
 
-module.exports = {createLoan,getAllLoan}
+module.exports = {createLoan,getAllLoan,addLoanInquiry}

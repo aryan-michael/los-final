@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './NewInquiry.css';
 import { Button } from "react-bootstrap";
 import { MDBBadge } from "mdb-react-ui-kit";
+import axios from 'axios'
 
 //LOAN AMOUNT VALIDATION//
 function validateLoanAmount(value) {
@@ -34,7 +35,7 @@ const fieldValidations = {
 
 //MAIN CONTENT FOR FORMS STARTS HERE//
 function NewInquiry({ loan_type, country, setLoginToken }) {
- 
+
     const [error, setError] = useState({
         pin: '',
         first_name: '',
@@ -52,7 +53,6 @@ function NewInquiry({ loan_type, country, setLoginToken }) {
         businessName: ''
     })  //loan details
 
-    const [validated,setValidated] = useState(false);
     const [loanValidated, setLoanValidated] = useState(false);
 
     const handleLoanDetails = (e) => {
@@ -114,41 +114,26 @@ function NewInquiry({ loan_type, country, setLoginToken }) {
                 firmAddress: loanDetails.firmAddress,
                 businessName: loanDetails.businessName
             }
-            /////////////////////////////////////////Backend Code ///////////////////////////////////////////
-            // try {
-            //     await axios.post('http://localhost:5000/api/v1/user/signup', personalDetails, {
-            //         withCredentials:true
-            //     }).then(response => {
-            //         // setLoginToken(response.data.user)
-            //     })
-            // } catch (err) {
-            //     if (err.response) {
-            //         alert(err.response.data.msg)
-            //         return
-            //     } else {
-            //         alert('Something went wrong!!')
-            //         return
-            //     }
-            // }
 
-            // try {
-            //     await axios.post('http://localhost:5000/api/v1/loan/create', {loanDetails,email:personalDetails.email}, {
-            //         withCredentials:true
-            //     }).then(response => {
-            //         // setLoginToken(response.data.user)
-            //     })
-            // } catch (err) {
-            //     if (err.response) {
-            //         alert(err.response.data.msg)
-            //         return
-            //     } else {
-            //         alert('Something went wrong 222!!')
-            //         return
-            //     }
-            // }
+            try {
+                await axios.post('http://localhost:5000/api/v1/loan/add-inquiry', loanDetails, {
+                    withCredentials:true
+                }).then(response => {
+                    // setLoginToken(response.data.user)
+                })
+            } catch (err) {
+                if (err.response) {
+                    alert(err.response.data.msg)
+                    return
+                } else {
+                    alert('Something went wrong 222!!')
+                    return
+                }
+            }
 
              /////////////////////////////////////////Backend Code ///////////////////////////////////////////
-            Navigate('/otp');
+            alert('Inquiry added')
+            window.location.reload()
         }
     };
 
