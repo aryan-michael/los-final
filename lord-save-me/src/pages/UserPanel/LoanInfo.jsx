@@ -52,7 +52,7 @@ const LoanInfo = () => {
                                 <Row className="mb-3">
                                     {/* LOAN AMOUNT */}
                                     <Form.Group controlId="formBasicNumber" className="col col-sm-8">
-                                        <Form.Label>Desired Loan Amount</Form.Label>
+                        			<Form.Label><MDBBadge pill color='secondary' light>DESIRED LOAN AMOUNT</MDBBadge></Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text id="basic-addon1">₹</InputGroup.Text>
                                             <Form.Control aria-label="Loan Amount" type="number" aria-describedby="basic-addon1" className="form-control" name="loanAmount" value={userDetail.loanAmount} readOnly />
@@ -60,7 +60,7 @@ const LoanInfo = () => {
                                     </Form.Group>
                                     {/* LOAN TYPE : ONLY DISPLAY */}
                                     <Form.Group controlId="formBasicEmail" className="col col-sm-4">
-                                        <Form.Label>Loan Type</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>LOAN TYPE</MDBBadge></Form.Label>
                                         <Form.Control type="text" name="loanType" value={userDetail.loanType} readOnly />
                                     </Form.Group>
                                 </Row>
@@ -68,12 +68,12 @@ const LoanInfo = () => {
                                 <Row className="mb-3">
                                     {/* EMPLOYMENT STATUS */}
                                     <Form.Group controlId="formGridState" className="col col-sm-4">
-                                        <Form.Label>Employment Status</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>EMPLOYMENT STATUS</MDBBadge></Form.Label>
                                         <Form.Control type="text" name="empStatus" value={userDetail.empStatus} readOnly />
                                     </Form.Group>
                                     {/* BUSINESS NAME */}
                                     <Form.Group controlId="formBasicEmail" className="col col-sm-8">
-                                        <Form.Label>Firm Name / Business Name</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>FIRM NAME / BUSINESS NAME</MDBBadge></Form.Label>
                                         <Form.Control type="name" name="businessName" className="form-control" value={userDetail.businessName} readOnly />
                                     </Form.Group>
                                 </Row>
@@ -81,7 +81,7 @@ const LoanInfo = () => {
                                 <Row className="mb-3">
                                     {/* FIRM/BUSINESS ADDRESS*/}
                                     <Form.Group className=" col col-sm-12" controlId="formGridAddress1">
-                                        <Form.Label>Firm Address / Business Address</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>FIRM ADDRESS / BUSINESS ADDRESS</MDBBadge></Form.Label>
                                         <Form.Control className="form-control" type="text" name="firmAddress" value={userDetail.firmAddress} readOnly />
                                     </Form.Group>
                                 </Row>

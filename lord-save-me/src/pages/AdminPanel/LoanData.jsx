@@ -5,6 +5,7 @@ import { MDBBadge } from "mdb-react-ui-kit";
 import DataTable, { createTheme } from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import "./LoanData.css";
 
 const documentList = [
 	{
@@ -130,6 +131,7 @@ const LoanData = () => {
 	const [docName, setdocName] = useState('');
 	const [doc, setdoc] = useState(null);
 
+
 	//	useEffect(() => {
 	//		if(docName)
 	//		handleDocShow();
@@ -160,22 +162,22 @@ const LoanData = () => {
 		const timeout = setTimeout(() => {
 			setColumns([
 				{
-					name: "Doc ID",
+					name: <MDBBadge pill color='dark' light>Doc ID</MDBBadge>,
 					selector: (row) => row.DocID,
 					sortable: true
 				},
 				{
-					name: "Doc Name",
+					name: <MDBBadge pill color='dark' light>Doc Name</MDBBadge>,
 					selector: (row) => row.DocName,
 					sortable: true
 				},
 				{
-					name: "Status",
+					name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
 					selector: (row) => row.Status,
 					sortable: true,
 				},
 				{
-					name: "Verification",
+					name: <MDBBadge pill color='dark' light>Verification</MDBBadge>,
 					selector: (row) => row.VerficationStatus === 'Approve' ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge>,
 					sortable: true,
 				},
@@ -222,16 +224,14 @@ const LoanData = () => {
 			<div style={{ display: 'flex' }}>
 				<AdminSideBar />
 
-				<Container fluid>
-					<Row>
-						{/* LOAN INFO */}
-						<Col>
-							<div className="p-4 title"><MDBBadge pill color='secondary' light>Loan Data</MDBBadge></div>
+				<Container>
+						{/* LOAN INFO */}		
+						<div className="p-4 title"><MDBBadge pill color='secondary' light>Loan Data</MDBBadge></div>
 							<Form className="container mt-3 mb-3">
 								<Row className="mb-3">
 									{/* LOAN AMOUNT */}
 									<Form.Group controlId="formBasicNumber" className="col col-sm-8">
-										<Form.Label>Desired Loan Amount</Form.Label>
+										<Form.Label><MDBBadge pill color='secondary' light>DESIRED LOAN AMOUNT</MDBBadge></Form.Label>
 										<InputGroup>
 											<InputGroup.Text id="basic-addon1">₹</InputGroup.Text>
 											<Form.Control aria-label="Loan Amount" type="amount" aria-describedby="basic-addon1" className="form-control" readOnly />
@@ -239,7 +239,7 @@ const LoanData = () => {
 									</Form.Group>
 									{/* LOAN TYPE : ONLY DISPLAY */}
 									<Form.Group controlId="formBasicEmail" className="col col-sm-4">
-										<Form.Label>Loan Type</Form.Label>
+										<Form.Label><MDBBadge pill color='secondary' light>LOAN TYPE</MDBBadge></Form.Label>
 										<Form.Control type="text" name="loanType" readOnly />
 									</Form.Group>
 								</Row>
@@ -247,12 +247,12 @@ const LoanData = () => {
 								<Row className="mb-3">
 									{/* EMPLOYMENT STATUS */}
 									<Form.Group controlId="formGridState" className="col col-sm-4">
-										<Form.Label>Employment Status</Form.Label>
+										<Form.Label><MDBBadge pill color='secondary' light>EMPLOYMENT STATUS</MDBBadge></Form.Label>
 										<Form.Control className="form-control" name="empStatus" readOnly />
 									</Form.Group>
 									{/* BUSINESS NAME */}
 									<Form.Group controlId="formBasicEmail" className="col col-sm-8">
-										<Form.Label>Firm Name / Business Name</Form.Label>
+										<Form.Label><MDBBadge pill color='secondary' light>FIRM/BUSINESS NAME</MDBBadge></Form.Label>
 										<Form.Control type="name" name="businessName" readOnly />
 									</Form.Group>
 								</Row>
@@ -260,18 +260,20 @@ const LoanData = () => {
 								<Row className="mb-3">
 									{/* FIRM/BUSINESS ADDRESS*/}
 									<Form.Group className=" col col-sm-12" controlId="formGridAddress1">
-										<Form.Label>Firm Address / Business Address</Form.Label>
+										<Form.Label><MDBBadge pill color='secondary' light>FIRM/BUSINESS ADDRESS</MDBBadge></Form.Label>
 										<Form.Control className="form-control" type="text" name="firmAddress" readOnly />
 									</Form.Group>
 								</Row>
 							</Form>
-						</Col>
+						
+						<Row className="p-2"></Row>
+
+				
 
 						{/* DOCUMENT TABLE */}
-						<Col>
-							<div className="p-4 title"><MDBBadge pill color='secondary' light>Documents</MDBBadge></div>
-							<Form className="container mt-3 mb-3 personal" autoComplete='off'>
-								<Row className="mb-3">
+				
+							<div>
+								<div className="p-4 title"><MDBBadge pill color='secondary' light>Documents</MDBBadge></div>
 									{data?.length > 0 && (<DataTable
 										//title="Loan History"
 										columns={columns}
@@ -291,21 +293,22 @@ const LoanData = () => {
 									//selectableRows
 									/>)}
 
-								</Row>
-							</Form>
-						</Col>
-					</Row>
+							</div>
+					
+					
 
 					<div className="p-2" />
 
 					<div className="text-center p-3 mb-1" >
-						<Button variant="outline-warning" size="lg" onClick={handleShow}>
+						<Button 
+							className="me-4"
+							variant="outline-warning" size="lg" onClick={handleShow}>
 							Send Reminder
 						</Button>
-					</div>
-
-					<div className="text-center p-3 mb-3" >
-						<Button variant="dark" size="lg" onClick={handleShow}>
+					
+						<Button 
+							className="me-4"
+							variant="dark" size="lg" onClick={handleShow}>
 							Take Decision
 						</Button>
 
@@ -383,8 +386,8 @@ const LoanData = () => {
 							</Modal.Footer>
 						</Modal>
 					)}
+				
 				</Container>
-
 			</div>
 		</>
 	)

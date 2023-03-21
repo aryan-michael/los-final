@@ -41,7 +41,7 @@ export default function UserDashboard() {
         headCells: {
             style: {
                 fontWeight: "bold",
-                fontSize: "0.9rem"
+                fontSize: "0.9rem",
             }
         },
     }
@@ -76,17 +76,17 @@ export default function UserDashboard() {
         const timeout = setTimeout(() => {
             setColumns([
                 {
-                    name: "Loan ID",
+                    name: <MDBBadge pill color='dark' light>Loan ID</MDBBadge>,
                     selector: (row) => row._id,
                     sortable: true
                 },
                 {
-                    name: "Loan Type",
+                    name: <MDBBadge pill color='dark' light>Loan Type</MDBBadge>,
                     selector: (row) => row.Loan,
                     sortable: true
-                },
+                }, 
                 {
-                    name: "Amount (₹)",
+                    name: <MDBBadge pill color='dark' light>Amount (₹)</MDBBadge>,
                     selector: (row) => row.loanAmount,
                     sortable: true
                 },
@@ -96,7 +96,7 @@ export default function UserDashboard() {
                 //     sortable: true
                 // },
                 {
-                    name: "Loan Status",
+                    name: <MDBBadge pill color='dark' light>Loan Status</MDBBadge>,
                     selector: (row) => row.applicationStatus,
                     sortable: true,
                 },
@@ -384,8 +384,8 @@ export default function UserDashboard() {
                         <DataTable
                             //title="Client Summary"
                             columns={columns}
-                            data={loanDetails}
-                            //data={clientSummary}
+                            //data={loanDetails}
+                            data={clientSummary}
                             defaultSortFieldId
                             pagination={10}
                             fixedHeader
@@ -393,7 +393,7 @@ export default function UserDashboard() {
                             onRowClicked={handleRowClicked}
                             highlightOnHover
                             progressPending={pending}
-                            customStyles={customStyles}
+                           	customStyles={customStyles}
                         />
                     </div>
 

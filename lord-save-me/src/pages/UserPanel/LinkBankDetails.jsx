@@ -120,27 +120,27 @@ const LinkBankDetails = () => {
 
     const Navigate = useNavigate()
 
-    // useEffect(() => {
-    //     checkIsBankAccountLinked()
-    // },[])
+     useEffect(() => {
+         checkIsBankAccountLinked()
+     },[])
 
-    // const checkIsBankAccountLinked = async (req, res) => {
-    //     try {
-    //         await axios.get("http://localhost:5000/api/v1/user/cibal", {
-    //             withCredentials:true
-    //         }).then(response => {
-    //             console.log(response);
-    //             if (!response.data.bankAccount) {
-    //                 return
-    //             }
-    //             Navigate("/sidebar/bank-details-final")
-    //         })
-    //     } catch (err) {
-    //         Navigate('/')
-    //         console.log(err);
-    //         return
-    //     }
-    // }
+     const checkIsBankAccountLinked = async (req, res) => {
+         try {
+             await axios.get("http://localhost:5000/api/v1/user/cibal", {
+                 withCredentials:true
+             }).then(response => {
+                 console.log(response);
+                 if (!response.data.bankAccount) {
+                     return
+                 }
+                 Navigate("/sidebar/bank-details-final")
+             })
+         } catch (err) {
+             Navigate('/')
+             console.log(err);
+             return
+         }
+     }
 
     const [placeOtp, setPlaceOtp] = useState(false)
 
@@ -214,7 +214,7 @@ const LinkBankDetails = () => {
                 withCredentials: true
             }).then(response => {
                 console.log(response);
-                Navigate("/sidebar/bank-detailsi-final")
+                Navigate("/user-panel/bank-details-final")
             })
         } catch (err) {
             console.log(err);
@@ -268,14 +268,14 @@ const LinkBankDetails = () => {
                 <Form className="container mt-3 mb-3" autoComplete='off' validated={validated} hasValidation>
                     <Row className="mb-3">
                         {/* <Alert>{error.expiry_date}</Alert> */}
-                        <div className="p-4 title"><MDBBadge pill color='secondary' light>Bank Details</MDBBadge></div>
+                        <div className="p-4 title"><MDBBadge pill color='info' light>Bank Details</MDBBadge></div>
                     </Row>
 
                     <Row className="mb-4">
                         {/* BANK ACCOUNT NUMBER */}
                         <Form.Group controlId="formBasicEmail" className="col col-sm-12">
                             <Form.Control.Feedback style={{ display: error.account_number ? "block" : "none" }} type='invalid'>{error.account_number}</Form.Control.Feedback>
-                            <Form.Label>Bank Account Number</Form.Label>
+                            <Form.Label><MDBBadge pill color='info' light>BANK ACCOUNT NUMBER</MDBBadge></Form.Label>
                             <Form.Control type="account_number" name="account_number" className="form-control" value={bankDetails.account_number} onChange={handleBankDetails} required />
                             <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                             <Form.Control.Feedback type='invalid'>Please provide your 14 digit bank account number</Form.Control.Feedback>
@@ -286,7 +286,7 @@ const LinkBankDetails = () => {
                         {/* CREDIT/DEBIT CARD INFO */}
                         <Form.Group controlId="formBasicEmail" className="col col-sm-8">
                             <Form.Control.Feedback style={{ display: error.card_number ? "block" : "none" }} type='invalid'>{error.card_number}</Form.Control.Feedback>
-                            <Form.Label>Credit / Debit Card Number</Form.Label>
+                            <Form.Label><MDBBadge pill color='info' light>CREDIT / DEBIT CARD NUMBER</MDBBadge></Form.Label>
                             <Form.Control type="card_number" name="card_number" className="form-control" value={bankDetails.card_number} onChange={handleBankDetails} required />
                             <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                             <Form.Control.Feedback type='invalid'>Please provide your credit/debit card number</Form.Control.Feedback>
@@ -294,7 +294,7 @@ const LinkBankDetails = () => {
                         {/* CVV */}
                         <Form.Group controlId="formBasicEmail" className="col col-sm-4">
                             <Form.Control.Feedback style={{ display: error.cvv ? "block" : "none" }} type='invalid'>{error.cvv}</Form.Control.Feedback>
-                            <Form.Label>CVV</Form.Label>
+                            <Form.Label><MDBBadge pill color='info' light>CVV</MDBBadge></Form.Label>
                             <Form.Control type="password" name="cvv" className="form-control" value={bankDetails.cvv} onChange={handleBankDetails} required />
                             <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                             <Form.Control.Feedback type='invalid'>Please enter your cvv</Form.Control.Feedback>
@@ -305,7 +305,7 @@ const LinkBankDetails = () => {
                         {/* CARD HOLDER"S NAME*/}
                         <Form.Group controlId="formGridpin" className="col col-sm-8">
                             <Form.Control.Feedback style={{ display: error.cardholder ? "block" : "none" }} type='invalid'>{error.cardholder}</Form.Control.Feedback>
-                            <Form.Label>Card Holder's Name</Form.Label>
+                            <Form.Label><MDBBadge pill color='info' light>CARD HOLDER'S NAME</MDBBadge></Form.Label>
                             <Form.Control className="form-control" type="text" name="cardholder" value={bankDetails.cardholder} onChange={handleBankDetails} required />
                             <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                             <Form.Control.Feedback type='invalid'>Please provide the name on the card</Form.Control.Feedback>
@@ -313,18 +313,18 @@ const LinkBankDetails = () => {
                         {/* CARD EXPIRY DATE */}
                         <Form.Group controlId="formGridpin" className="col col-sm-4">
                             <Form.Control.Feedback style={{ display: error.expiry_date ? "block" : "none" }} type='invalid'>{error.expiry_date}</Form.Control.Feedback>
-                            <Form.Label>Expiry Date</Form.Label>
+                            <Form.Label><MDBBadge pill color='info' light>EXPIRY DATE</MDBBadge></Form.Label>
                             <Form.Control className="form-control" type="date" name="expiry_date" value={bankDetails.expiry_date} onChange={handleBankDetails} required />
                             <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                             <Form.Control.Feedback type='invalid'>Please provide the expiry date of your card</Form.Control.Feedback>
                         </Form.Group>
                     </Row>
 
-                    <div className="p-4"></div>
+                    <div className="p-2"></div>
 
                     {/* SUBMIT BUTTON */}
                     <div className="text-center p-3 mb-3" >
-                        <Button variant="primary" size="lg  " onClick={handleSubmit}>
+                        <Button variant="outline-primary" size="lg  " onClick={handleSubmit}>
                             Submit
                         </Button>
                     </div>

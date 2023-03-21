@@ -2,14 +2,14 @@
     padding-bottom: 20px;
 }
 .tag {
-    border-radius: 56px;
-    background: #e0e0e0;
-    box-shadow: 23px 23px 46px #bebebe, -23px -23px 46px #ffffff;
+    border-radius: 58px;
+    background: linear-gradient(45deg, #dbe1e5, #b9bdc1);
+    box-shadow: 22px -22px 30px #96999c, -22px 22px 30px #ffffff;
 }
 .icons {
     font-size: 3.5rem;
-    color: rgb(10, 10, 94);
+    color: #000066;
 }
 .icons:hover {
-    color: rgb(19, 105, 23)
+    color: #006699
 }
