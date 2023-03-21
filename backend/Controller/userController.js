@@ -222,7 +222,6 @@ const getUser1 = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
-    console.log(req.headers.authorization)
     const { userId,email} = req.user;
     const user = await User.findOneAndUpdate({ _id: userId,email:email }, req.body, { new: true, runValidators: true })
     if (!user) {

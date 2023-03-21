@@ -65,6 +65,10 @@ let userSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref:"BankAccount"
     },
+    userDocuments: {
+        type: mongoose.Types.ObjectId,
+        ref : "UserDocuments"
+    },
     isBlocked: {
         type: Boolean,
         default: false
