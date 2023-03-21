@@ -1,80 +1,173 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import SideBar from "../../components/Sidebar/SideBar";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { MDBBadge } from "mdb-react-ui-kit";
+import { Container, Form, Row, Col } from 'react-bootstrap';
+import DataTable from "react-data-table-component";
+import './CheckStatus.css';
 
 const CheckStatus = () => {
+	
+	const customStyles = {
+        headCells: {
+            style: {
+                fontWeight: "bold",
+                fontSize: "0.9rem",
+            }
+        },
+    }
+	
+	const documentList = [
+		{
+			DocID: 1,
+			DocName: "Aston Villa",
+			VerficationStatus:'Approve',
+			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+		},
+		{
+			DocID: 2,
+			DocName: "Manchester United",
+			VerficationStatus:'Reject',
+			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+		},
+		{
+			DocID: 3,
+			DocName: "Everton",
+			VerficationStatus:'Approve',
+			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+		},
+		{
+			DocID: 4,
+			DocName: "Spurs",
+			VerficationStatus:'Reject',
+			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+		},
+		{
+			DocID: 5,
+			DocName: "Aston Villa",
+			VerficationStatus:'Approve',
+			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+		},
+		{
+			DocID: 6,
+			DocName: "Manchester City",
+			VerficationStatus:'Reject',
+			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+		},
+		{
+			DocID: 7,
+			DocName: "Wolves",
+			VerficationStatus:'Approve',
+			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+		},
+		{
+			DocID: 8,
+			DocName: "Manchester United",
+			VerficationStatus:'Reject',
+			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+		},
+		{
+			DocID: 9,
+			DocName: "Manchester United",
+			VerficationStatus:'Approve',
+			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+		},
+		{
+			DocID: 10,
+			DocName: "Chelsea",
+			VerficationStatus:'Reject',
+			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+		},
+		{
+			DocID: 11,
+			DocName: "Manchester United",
+			VerficationStatus:'Approve',
+			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+		},
+		{
+			DocID: 12,
+			DocName: "Manchester United",
+			VerficationStatus:'Reject',
+			Status: <MDBBadge pill color='danger' light>Pending</MDBBadge>,
+		},
+		{
+			DocID: 13,
+			DocName: "Chelsea",
+			VerficationStatus:'Approve',
+			Status: <MDBBadge pill color='success' light>Received</MDBBadge>,
+		}
+	];
 
-  const [val,setVal]=useState([]);
-   const handleAdd=()=>{
-       const abc=[...val,[]]
-       setVal(abc)
-   }
-   const handleChange=(onChangeValue,i)=>{
-    const inputdata=[...val]
-    inputdata[i]=onChangeValue.target.value;
-    setVal(inputdata)
-   }
-   const handleDelete=(i)=>{
-       const deletVal=[...val]
-       deletVal.splice(i,1)
-       setVal(deletVal)  
-   }
-   console.log(val,"data-");
+	
+	
+	const Navigate = useNavigate();
+	
+	const viewDocument = () => {
+		window.open(`/hello`);
+	}
+		
+	
+	const [columns, setColumns] = useState([]);
+    const [pending, setPending] = useState(true);
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setColumns([
+                {
+					name: <MDBBadge pill color='dark' light>Document ID</MDBBadge>,
+					selector: (row) => row.DocID,
+					sortable: true
+				},
+				{
+					name: <MDBBadge pill color='dark' light>Document Name</MDBBadge>,
+					selector: (row) => row.DocName,
+					sortable: true
+				},
+				{
+					name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
+					selector: (row) => row.Status,
+					sortable: true,
+				},
+				{
+					name: <MDBBadge pill color='dark' light>Verification</MDBBadge>,
+					selector: (row) => row.VerficationStatus === 'Approve' ?<MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge> ,
+					sortable: true,
+				},
+            ]);
+            setPending(false);
+        }, 2000);
+        return () => clearTimeout(timeout);
+    }, []);
+		
 
   return (
     <>
       <PostLoginNavBar />
       <div style={{ display: 'flex' }}>
         <SideBar />
-        <div>
-
-          <Button onClick={()=>handleAdd()}>Add</Button>
-            {val.map((data,i)=>{
-                return(
-                   <div>
-                        <Form.Group controlId="formGridState">
-                              <Form.Label style={{color: "black"}}>Choose Document</Form.Label>
-                              <Form.Select value={data} onChange={e=>handleChange(e,i)} className="form-control" name="salutation" required >
-                                  <option defaultValue value=''>Choose...</option>
-                                  <option value="Mr.">Mr.</option>
-                                  <option value="Mrs.">Mrs.</option>
-                                  <option value="Ms.">Ms.</option>
-                              </Form.Select>
-                              <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
-                              <Form.Control.Feedback type='invalid'>Please provide your salutation.</Form.Control.Feedback>
-                        </Form.Group>
-                        {/*<input value={data} onChange={e=>handleChange(e,i)} />*/}
-                        <Button onClick={()=>handleDelete(i)}>x</Button>
-                   </div>
-                )
-            })}
-
-        </div>
+        <Container>
+        	<Row className="p-4 title"><MDBBadge pill color='secondary' light>Check Document Status</MDBBadge></Row>
+        	
+        	<Row>
+						<DataTable	
+							columns={columns}
+							data={documentList}
+							defaultSortFieldId
+							pagination={5}
+							fixedHeader
+							fixedHeaderScrollHeight="400px"
+							onRowClicked={viewDocument}
+							highlightOnHover
+							pointerOnHover
+							progressPending={pending}
+                           	customStyles={customStyles}
+						/>
+        	</Row>
+      	</Container>
       </div>
     </>
-  );
+  )
 };
 
 export default CheckStatus
-
-
-
-
-
-// return(
-//     <>
-//     <button onClick={()=>handleAdd()}>Add</button>
-//         {val.map((data,i)=>{
-//             return(
-//                <div>
-//                     <input value={data} onChange={e=>handleChange(e,i)} />
-//                     <button onClick={()=>handleDelete(i)}>x</button>
-//                </div>
-//             )
-//         })}
-//     </>
-// );
-// }
-// export default AddDynamicInput;

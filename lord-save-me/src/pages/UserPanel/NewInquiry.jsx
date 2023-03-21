@@ -3,6 +3,7 @@ import LoanDetails from "../Register/LoanDetails";
 import { useNavigate } from 'react-router-dom';
 import './NewInquiry.css';
 import { Button } from "react-bootstrap";
+import { MDBBadge } from "mdb-react-ui-kit";
 import axios from 'axios'
 
 //LOAN AMOUNT VALIDATION//
@@ -147,7 +148,7 @@ function NewInquiry({ loan_type, country, setLoginToken }) {
             <div className="form-container">
                 
                 <div className="header text-center">
-                    <h1>Loan Details</h1>
+                    <div className="p-4 title"><MDBBadge pill color='secondary' light>Loan Details</MDBBadge></div>
                 </div>
                 <div className="body">{pageDisplay()}</div>
                 <div className="footer text-center">

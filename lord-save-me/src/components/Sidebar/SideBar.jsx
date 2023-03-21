@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { FaBars, FaHome, FaLock, FaRupeeSign, FaMoneyBill, FaUser } from "react-icons/fa";
+import { FaBars, FaHome, FaLock, FaRupeeSign, FaHandshake, FaUser } from "react-icons/fa";
 import { HiDocumentArrowUp } from "react-icons/hi2";
-import { AiOutlineUserAdd } from "react-icons/ai";
-import { MdMessage } from "react-icons/md";
-import { BiAnalyse, BiSearch, BiCog } from "react-icons/bi";
+import { SiHomebridge } from "react-icons/si";
+import { BiSearch, BiCog } from "react-icons/bi";
 import { IoInformationCircle } from "react-icons/io5";
+import { AiOutlineUserAdd, AiOutlineFileProtect, AiOutlineFileAdd } from "react-icons/ai";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -14,23 +14,23 @@ import './SideBar.css';
 
 const routes = [
   {
-    path: "/sidebar/dashboard",
+    path: "/user-panel/user-dashboard",
     name: "Dashboard",
-    icon: <FaHome />,
+    icon: <SiHomebridge />,
   },
   {
-    path: "/sidebar/my-info",
+    path: "/user-panel/my-info",
     name: "My Information",
     icon: <IoInformationCircle />,
     exact: true,
     subRoutes: [
       {
-        path: "/sidebar/my-info/personal-info",
+        path: "/user-panel/my-info/personal-info",
         name: "Personal Details",
         icon: <FaUser />,
       },
       {
-        path: "/sidebar/bank-details",
+        path: "/user-panel/bank-details",
         name: "Bank Details",
         icon: <HiDocumentArrowUp />,
       },
@@ -42,46 +42,41 @@ const routes = [
     ],
   },
   {
-    path: "/sidebar/kyc-docs",
+    path: "/user-panel/kyc-docs",
     name: "KYC Documents",
-    icon: <HiDocumentArrowUp />,
+    icon: <AiOutlineFileAdd />,
   },
   {
-    path: "/sidebar/add-inquiry",
-    name: "Add Inquiry",
-    icon: <AiOutlineUserAdd />,
-  },
-  {
-    path: "/sidebar/check-status",
+    path: "/user-panel/check-status",
     name: "Check Status",
-    icon: <MdMessage />,
+    icon: <AiOutlineFileProtect />,
   },
   {
-    path: "/sidebar/analytics",
-    name: "Analytics",
-    icon: <BiAnalyse />,
+  	path: "/user-panel/add-inquiry",
+    name: "Add Inquiry",
+   	icon: <AiOutlineUserAdd />,
+    
   },
-
   {
-    path: "/sidebar/settings",
+    path: "/user-panel/settings",
     name: "Settings",
     icon: <BiCog />,
     exact: true,
     subRoutes: [
       {
-        path: "/sidebar/settings/profile",
+        path: "/user-panel/settings/profile",
         name: "Profile ",
         icon: <FaUser />,
       },
       {
-        path: "/sidebar/settings/2fa",
+        path: "/user-panel/settings/2fa",
         name: "2FA",
         icon: <FaLock />,
       },
       {
-        path: "/sidebar/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
+        path: "/user-panel/settings/helpdesk",
+        name: "Help Desk",
+        icon: <FaHandshake />,
       },
     ],
   },
@@ -222,4 +217,4 @@ const SideBar = ({ children }) => {
   );
 };
 
-export default SideBar;
+export default SideBar

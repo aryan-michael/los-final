@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { FaBars, FaHome } from "react-icons/fa";
 import { BsFillPersonPlusFill, BsPersonLinesFill } from "react-icons/bs";
-import { BiSearch } from "react-icons/bi";
+import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { FcStatistics } from "react-icons/fc";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -12,87 +13,30 @@ import './SideBar.css';
 
 const routes = [
     {
-        path: "/admin-sidebar/admin-dashboard",
+        path: "/admin-panel/admin-dashboard",
         name: "Dashboard",
         icon: <FaHome />,
     },
     {
-        path: "/admin-sidebar/add-user",
+        path: "/admin-panel/add-user",
         name: "Add User",
         icon: <BsFillPersonPlusFill />,
     },
     {
-        path: "/admin-sidebar/client-data",
+        path: "/admin-panel/client-data",
         name: "Client Information",
         icon: <BsPersonLinesFill />,
     },
     {
-        path: "/admin-sidebar/statistics",
+    	path: "/admin-panel/analytics",
+    	name: "Analytics",
+    	icon: <BiAnalyse />,
+    },
+    {
+        path: "/admin-panel/statistics",
         name: "Statistics",
         icon: <FcStatistics />,
     },
-    // {
-    //     path: "/sidebar/client-data",
-    //     name: "Client Information",
-    //     icon: <IoInformationCircle />,
-    //     exact: true,
-    //     subRoutes: [
-    //         {
-    //             path: "/sidebar/my-info/personal-info",
-    //             name: "Personal ",
-    //             icon: <FaUser />,
-    //         },
-    //         {
-    //             path: "/sidebar/my-info/loan-info",
-    //             name: "Loan",
-    //             icon: <FaRupeeSign />,
-    //         },
-    //     ],
-    // },
-    // {
-    //     path: "/sidebar/kyc-docs",
-    //     name: "KYC Documents",
-    //     icon: <HiDocumentArrowUp />,
-    // },
-    // {
-    //     path: "/sidebar/add-inquiry",
-    //     name: "Add Inquiry",
-    //     icon: <AiOutlineUserAdd />,
-    // },
-    // {
-    //     path: "/sidebar/check-status",
-    //     name: "Check Status",
-    //     icon: <MdMessage />,
-    // },
-    // {
-    //     path: "/sidebar/analytics",
-    //     name: "Analytics",
-    //     icon: <BiAnalyse />,
-    // },
-
-    // {
-    //     path: "/sidebar/settings",
-    //     name: "Settings",
-    //     icon: <BiCog />,
-    //     exact: true,
-    //     subRoutes: [
-    //         {
-    //             path: "/sidebar/settings/profile",
-    //             name: "Profile ",
-    //             icon: <FaUser />,
-    //         },
-    //         {
-    //             path: "/sidebar/settings/2fa",
-    //             name: "2FA",
-    //             icon: <FaLock />,
-    //         },
-    //         {
-    //             path: "/sidebar/settings/billing",
-    //             name: "Billing",
-    //             icon: <FaMoneyBill />,
-    //         },
-    //     ],
-    // },
 ];
 
 const AdminSideBar = ({ children }) => {

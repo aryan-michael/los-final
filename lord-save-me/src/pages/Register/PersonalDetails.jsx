@@ -1,5 +1,7 @@
 import React from 'react';
 import { Form, Row, InputGroup } from 'react-bootstrap';
+import { MDBBadge } from "mdb-react-ui-kit";
+import data from "../../india.json";
 
 const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,check}) => {
 
@@ -8,8 +10,8 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,c
             <Form className="container mt-3 mb-3" autoComplete='off' validated={validated} hasValidation  >
                 <Row className="mb-3">
                     {/* SALUTATION */}
-                    <Form.Group controlId="formGridState" className="col col-sm-4">
-                        <Form.Label>Salutation</Form.Label>
+                    <Form.Group controlId="formGridState" className="col col-sm-2">
+                        <Form.Label><MDBBadge pill color='secondary' light>SALUTATION</MDBBadge></Form.Label>
                         <Form.Select className="form-control" name="salutation" value={personalDetails.salutation} onChange={setPersonalDetails} required >
                             <option defaultValue value=''>Choose...</option>
                             <option value="Mr.">Mr.</option>
@@ -19,29 +21,29 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,c
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your salutation.</Form.Control.Feedback>
                     </Form.Group>
+                    
                     {/* FIRSTNAME */}
-                    <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                        <Form.Label>First Name</Form.Label>
+                    <Form.Group controlId="formBasicEmail" className="col col-sm-3">
+                        <Form.Label><MDBBadge pill color='secondary' light>FIRST NAME</MDBBadge></Form.Label>
                         <Form.Control type="name" name="first_name" value={personalDetails.first_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your first name.</Form.Control.Feedback>
                         <Form.Control.Feedback style={{ display: error.first_name ? 'block' : 'none' }} type='invalid'>{error.first_name}</Form.Control.Feedback>
                         {/* <p style={{ display: error.first_name ? 'block' : 'none' }}>{error.first_name}</p> */}
                     </Form.Group>
-                </Row>
-
-                <Row className="mb-3">
+                    
                     {/* MIDDLENAME */}
-                    <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                        <Form.Label>Middle Name</Form.Label>
+                    <Form.Group controlId="formBasicEmail" className="col col-sm-3">
+                        <Form.Label><MDBBadge pill color='secondary' light>MIDDLE NAME</MDBBadge></Form.Label>
                         <Form.Control type="name" name="middle_name" value={personalDetails.middle_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your middle name.</Form.Control.Feedback>
                         <Form.Control.Feedback style={{ display: error.middle_name ? 'block' : 'none' }} type='invalid'>{error.middle_name}</Form.Control.Feedback>
                     </Form.Group>
+                    
                     {/* LASTNAME */}
-                    <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                        <Form.Label>Last Name</Form.Label>
+                    <Form.Group controlId="formBasicEmail" className="col col-sm-3">
+                        <Form.Label><MDBBadge pill color='secondary' light>LAST NAME</MDBBadge></Form.Label>
                         <Form.Control type="name" name="last_name" value={personalDetails.last_name} onChange={setPersonalDetails} className="form-control" required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your last name.</Form.Control.Feedback>
@@ -51,8 +53,8 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,c
 
                 <Row className="mb-3">
                     {/* GENDER */}
-                    <Form.Group controlId="formGridState" className="col col-sm-3">
-                        <Form.Label>Gender</Form.Label>
+                    <Form.Group controlId="formGridState" className="col col-sm-6">
+                        <Form.Label><MDBBadge pill color='secondary' light>GENDER</MDBBadge></Form.Label>
                         <Form.Select className="form-control" name="gender" value={personalDetails.gender} onChange={setPersonalDetails} required>
                             <option defaultValue value=''>Choose...</option>
                             <option value="Male">Male</option>
@@ -62,8 +64,8 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,c
                         <Form.Control.Feedback type='invalid'>Please provide your gender.</Form.Control.Feedback>
                     </Form.Group>
                     {/* DOB */}
-                    <Form.Group controlId="formGridpin" className="col col-sm-4">
-                        <Form.Label>Date Of Birth</Form.Label>
+                    <Form.Group controlId="formGridpin" className="col col-sm-6">
+                        <Form.Label><MDBBadge pill color='secondary' light>DATE OF BIRTH</MDBBadge></Form.Label>
                         <Form.Control className="form-control" type="date" name="dob" value={personalDetails.dob} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your DOB.</Form.Control.Feedback>
@@ -74,7 +76,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,c
                 <Row className="mb-3">
                     {/* MOBILE */}
                     <Form.Group controlId="formBasicMobile" className="col col-sm-6">
-                        <Form.Label>Mobile Number</Form.Label>
+                        <Form.Label><MDBBadge pill color='secondary' light>MOBILE NUMBER</MDBBadge></Form.Label>
                         <InputGroup hasValidation>
                             <InputGroup.Text id="basic-addon1">+91</InputGroup.Text>
                             <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" value={personalDetails.mobile} onChange={setPersonalDetails} required />
@@ -86,7 +88,7 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,c
                     </Form.Group>
                     {/* EMAIL */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label><MDBBadge pill color='secondary' light>EMAIL</MDBBadge></Form.Label>
                         <Form.Control aria-label="Recipient's username" type="email" name="email" value={personalDetails.email} onChange={setPersonalDetails} required />
                         {/* <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback> */}
                         <Form.Control.Feedback type='invalid'>Please provide your email.</Form.Control.Feedback>
@@ -97,15 +99,15 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,c
 
                 <Row className="mb-3">
                     {/* ADDRESS*/}
-                    <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
-                        <Form.Label>Address</Form.Label>
+                    <Form.Group className=" col col-sm-8" controlId="formGridAddress1">
+                        <Form.Label><MDBBadge pill color='secondary' light>ADDRESS</MDBBadge></Form.Label>
                         <Form.Control className="form-control" type="text" name="address" value={personalDetails.address} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your address.</Form.Control.Feedback>
                     </Form.Group>
                     {/* PINCODE */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
-                        <Form.Label>Pin Code</Form.Label>
+                        <Form.Label><MDBBadge pill color='secondary' light>PIN CODE</MDBBadge></Form.Label>
                         <Form.Control className="form-control" type="pin" name="pin" value={personalDetails.pin} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your pincode.</Form.Control.Feedback>
@@ -116,27 +118,25 @@ const PersonalDetails = ({ personalDetails, setPersonalDetails,validated,error,c
                 <Row className="mb-3">
                     {/* CITY */}
                     <Form.Group controlId="formGridCity" className="col col-sm-4">
-                        <Form.Label>City</Form.Label>
+                        <Form.Label><MDBBadge pill color='secondary' light>CITY</MDBBadge></Form.Label>
                         <Form.Control className="form-control" type="text" name="city" value={personalDetails.city} onChange={setPersonalDetails} required />
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please provide your city.</Form.Control.Feedback>
                     </Form.Group>
                     {/* STATE */}
                     <Form.Group controlId="formGridState" className="col col-sm-4">
-                        <Form.Label>State</Form.Label>
+                        <Form.Label><MDBBadge pill color='secondary' light>STATE</MDBBadge></Form.Label>
                         <Form.Select className="form-control" name="state" value={personalDetails.state} onChange={setPersonalDetails} required>
                             <option defaultValue value=''>Choose...</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Rajasthan">Rajasthan</option>
-                            <option value="Kashmir">Kashmir</option>
+                            {data ? Object.keys(data).map((d) => (
+ 							<option key={d} value={d}>{d}</option>)) : null} 
                         </Form.Select>
                         <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type='invalid'>Please choose your state.</Form.Control.Feedback>
                     </Form.Group>
                     {/* Country */}
                     <Form.Group controlId="formGridpin" className="col col-sm-4">
-                        <Form.Label>Country</Form.Label>
+                        <Form.Label><MDBBadge pill color='secondary' light>COUNTRY</MDBBadge></Form.Label>
                         <Form.Control className="form-control" type="text" name="country" value={personalDetails.country} readOnly />
                     </Form.Group>
                 </Row>

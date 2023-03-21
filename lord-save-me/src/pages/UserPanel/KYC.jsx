@@ -1,22 +1,74 @@
 import { useState, useEffect } from "react";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import SideBar from "../../components/Sidebar/SideBar";
-import { Form, Col, Row, Button, InputGroup } from "react-bootstrap";
-import { MDBAccordion, MDBAccordionItem, MDBIcon } from 'mdb-react-ui-kit';
+import { Form, Col, Row, Button, InputGroup, Container } from "react-bootstrap";
+import DocRequirements from "./DocRequirements";
+import { MDBBadge } from "mdb-react-ui-kit";
+import "./KYC.css";
 import axios from "axios";
 
 export default function KYC() {
 
-  
+ const business_documents = [
+    { name: 'Photo Identity Proof', value: 'document_pan' },
+    { name: 'Address Proof', value: 'document_addressProof' },
+    { name: 'Certificate of Incorporation', value: 'document_COI' },
+    { name: 'Income Tax Returns', value: 'document_ITR' },
+    { name: 'GST Returns', value: 'document_GST' },
+    { name: 'Bank Statements (max 1 year old)', value: 'document_bankStatement' },
+    { name: 'List of existing loans and debts', value: 'document_loans&debts' },
+    { name: 'List of Accounts', value: 'document_accounts' },
+    { name: 'Cash Flow Statements', value: 'document_cashFlow' },
+    { name: 'Cancelled Cheque', value: 'document_cancelledCheque' }
+  ]
+
+  const home_documents = [
+    { name: 'Photo Identity Proof', value: 'document_photoID' },
+    { name: 'Address Proof', value: 'document_addressProof' },
+    { name: 'Business Existence Proof (COI)', value: 'document_COI' },
+    { name: 'Income Tax Returns', value: 'document_ITR' },
+    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
+    { name: 'Form 16 (2 years)', value: 'document_form16' },
+    { name: 'Property Document (Sale deed, Khata)', value: 'document_propertyDoc' },
+    { name: 'Office Address Proof', value: 'document_officeAddressProof' },
+    { name: 'Office Ownership Proof', value: 'document_officeOwnershipProof' },
+    { name: 'Income Proof', value: 'document_incomeProof' }
+  ]
+
+  const education_documents = [
+    { name: 'Photo Identity Proof (Applicant/Co-Applicant)', value: 'document_photoID' },
+    { name: 'Address Proof (Applicant/Co-Applicant)', value: 'document_addressProof' },
+    { name: 'Income Proof (Applicant/Co-Applicant)', value: 'document_incomeProof' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Proof of Admission', value: 'document_proofOfAdmission' },
+    { name: 'Marksheet (S.S.C./H.S.C./Degree/Diploma)', value: 'document_marksheet' },
+    { name: 'Collateral Property Document', value: 'document_collateralPropertyDocument' }
+  ]
+
+  const personal_documents = [
+    { name: 'Photo Identity Proof (Applicant/Co-Applicant)', value: 'document_photoID' },
+    { name: 'Address Proof (Applicant/Co-Applicant)', value: 'document_addressProof' },
+    { name: 'Income Proof (Applicant/Co-Applicant)', value: 'document_incomeProof' },
+    { name: 'Job Continuity Proof', value: 'document_jobContinuityProof' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Form 16 (2 years)', value: 'document_form16' },
+    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
+    { name: 'List of existing loans and debts', value: 'document_loans&debts' },
+    { name: 'List of Accounts', value: 'document_accounts' }
+  ]
+
+  const [modalShow, setModalShow] = useState(false);
 
   const [value, setValue] = useState([1]);
-   const handleAdd=()=>{
-       const x=[...value,[]]
-       setValue(x)
-   }
-   const handleChange=(onChangeValue,i)=>{
-    const inputdata=[...value]
-    inputdata[i]=onChangeValue.target.value;
+  const handleAdd = () => {
+    const x = [...value, []]
+    setValue(x)
+  }
+  const handleChange = (onChangeValue, i) => {
+    const inputdata = [...value]
+    inputdata[i] = onChangeValue.target.value;
     setValue(inputdata)
    }
    const handleDelete=(i)=>{
@@ -102,189 +154,121 @@ export default function KYC() {
       <PostLoginNavBar />
       <div style={{ display: 'flex' }}>
         <SideBar />
-        
+
         <div className="container-fluid">
-          <div className="title ms-4"> KYC Documents </div>
-            
-            <Form onSubmit={handleSubmit} className="upload--container">
 
-              <Row className="ms-4" style={{width: '90vw'}}>
+          <div className="p-4 title"><MDBBadge pill color='secondary' light>KYC Documents</MDBBadge></div>
 
+          <Form onSubmit={handleSubmit} className="container mt-3 mb-3">
 
-            {value.map((data,i)=>{
-              return(
-                <div className="mt-2">
+            {/* DOC UPLOAD ROW */}
+            <Row className="drop p-3 mb-3" >
 
-                  <Col 
-                    style={{
-                      backgroundColor: "#212529",
-                      borderRadius: '10px',
-                      width: '750px'
-                    }}>
-                    <Row>
+              {/* MAP FUNCTION */}
+              {value.map((data, i) => {
+                return (
+                  <>
+                    <div className="mt-2">
 
-                      <Col className="col-md-4">
-                        <Form.Group controlId="formGridState">
-                              <Form.Label style={{color: "white"}}>Choose Document</Form.Label>
-                              <Form.Select value={data} onChange={e=>handleChange(e,i)} className="form-control" name="documentType" required >
-                                  <option defaultValue value=''>Choose...</option>
-                                  <option value="document_aadhar">Aadhar Card</option>
-                                  <option value="document_pan">PAN Card</option>
-                                  <option value="document_gst_return">GST Returns</option>
+                      {/* MAIN DOC UPLOAD COLUMN */}
+                      <Col style={{
+                        paddingLeft: "5px",
+                        paddingRight: "5px",
+                        backgroundColor: "#212529",
+                        borderRadius: '10px',
+                      }}>
+                        <Row>
+
+                          {/* CHOOSE DOCUMENT */}
+                          <Col className="col-md-4">
+                            <Form.Group controlId="formGridState">
+                              <Form.Label><MDBBadge pill color='info' light>CHOOSE DOCUMENT</MDBBadge></Form.Label>
+                              
+                              <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="documentType" required >
+                                <option defaultValue value=''>Choose...</option>
+                                <option disabled>-------------------BUSINESS LOAN-------------------</option>
+                                {business_documents.map((option) => <option value={option.value}>{option.name}</option>)}
+                                <option disabled>---------------------HOME LOAN--------------------</option>
+                                {home_documents.map((option) => <option value={option.value}>{option.name}</option>)}
+                                <option disabled>-----------------EDUCATION LOAN------------------</option>
+                                {education_documents.map((option) => <option value={option.value}>{option.name}</option>)}
+                                <option disabled>------------------PERSONAL LOAN------------------</option>
+                                {personal_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                               </Form.Select>
                               <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
-                              <Form.Control.Feedback type='invalid'>Please provide your salutation.</Form.Control.Feedback>
-                        </Form.Group>
+                              <Form.Control.Feedback type='invalid'>Please provide a document!</Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+
+                          {/* TEXT ABOVE DOCUMENT */}
+                          <Col className="col-md-8">
+                            <label
+                              style={{ color: "white" }}
+                              className="form-label" for="customFile"><MDBBadge pill color='info' light>LOOKS GOOD / PLEASE UPLOAD</MDBBadge>
+                            </label>
+                            <input
+                              onChange={onFileUpload}
+                              id={1}
+                              accept=".jpeg, .pdf"
+                              type="file"
+                              className="form-control"
+                              required />
+                          </Col>
+
+                        </Row>
+
                       </Col>
 
-                      <Col className="col-md-7">
-                          <label 
-                          style={{color: "white"}}
-                          className="form-label" for="customFile">File should be .jpeg or .pdf</label>
-                        <input
-                          
-                            onChange={onFileUpload}
-                            id={1} 
-                            accept=".jpeg, .pdf"
-                            type="file"
-                            className="form-control"
-                            required />
-                      </Col>
+                      {/* BLANK SPACE */}
+                      <div className="p-1" />
 
-                    </Row>
-                  </Col>
-
-                  <Col className="mt-3 col-md-2">
+                      {/* DELETE & REQUIREMENTS BUTTONS */}
+                      <div className="text-center p-3 mb-3" >
                         <Button
-                        onClick={()=>handleDelete(i)}
-                        type="button"
-                        variant="outline-danger" 
-                        className="me-4 btn btn-sm">Delete</Button>
-                  </Col>
+                          onClick={() => handleDelete(i)}
+                          type="button"
+                          variant="outline-danger"
+                          className="me-4 btn btn-sm">Delete</Button>
 
-                </div>
+                        <Button
+                          variant="outline-primary"
+                          className="me-4 btn btn-sm"
+                          onClick={() => setModalShow(true)}>Requirements
+                        </Button>
+                        <DocRequirements
+                          show={modalShow}
+                          onHide={() => setModalShow(false)}
+                        />
+                      </div>
+
+                    </div>
+
+                  </>
                 )
-            })}
+              })}
 
-              </Row>
-                
-              <div className="p-2" />
-
-              <div style={{margin: "0 360px 0 0"}} className="text-center">
-                    <Button
-                        onClick={()=>handleAdd()}
-                        type="button"
-                        variant="outline-dark" 
-                        className="me-4 btn btn-sm">Add Document</Button>
+            </Row>
 
 
-                    <Button
-                        type="submit"
-                        variant="outline-success"
-                        className="me-4 btn btn-sm">Submit</Button>
-              </div> 
-              
-            </Form>
+            {/* ADD DOC & SUBMIT BUTTON */}
+            <div className="text-center p-3 mb-3" >
+              <Button
+                onClick={() => handleAdd()}
+                type="button"
+                variant="dark"
+                className="me-4 btn btn-sm">Add Document</Button>
+
+
+              <Button
+                type="submit"
+                variant="success"
+                className="me-4 btn btn-sm">Submit</Button>
+            </div>
+
+          </Form>
+
         </div>
       </div>
     </>
   );
 };
-
-
-                //             <div className="accordion">
-                //       <Col className="col-md-4">
-                //           <MDBAccordion>
-                //              <MDBAccordionItem collapseId={2} headerTitle={<><MDBIcon fas icon="question-circle" /> &nbsp; Policy #2</>}>
-                //                 Legal verification of documents.
-                //              </MDBAccordionItem>
-                //           </MDBAccordion>
-                //       </Col>
-                // </div>
-
-
-            {/*<div className="upload--button">
-              <label className="form-label" for="customFile">PAN Card </label>
-              <input
-                onChange={onFileUpload}
-                id={1} 
-                accept=".jpeg, .pdf"
-                type="file"
-                className="form-control"
-              />
-            </div>
-            <div className="upload--button">
-              <input
-                onChange={onFileUpload}
-                id={2}
-                accept=".jpeg, .pdf"
-                type="file"
-                className="form-control"
-              />
-            </div>
-            <div className="upload--button">
-              <input
-                onChange={onFileUpload}
-                id={3}
-                accept=".jpeg, .pdf"
-                type="file"
-                className="form-control"
-              />
-            </div>
-            {enabled ? (
-              <Button type="submit">Submit</Button>
-            ) : (
-              <Button disabled type="submit">
-                Submit
-              </Button>
-            )}*/}
-
-
-            // <Row>
-            //       <Col style={{
-            //         backgroundColor: "#212529",
-            //         borderRadius: '20px'
-            //       }}>
-            //         <label style={{
-            //         color: "white"}}
-            //         className="form-label" for="customFile">Address Proof</label>
-            //         <input
-            //           onChange={onFileUpload}
-            //           id={2}
-            //           accept=".jpeg, .pdf"
-            //           type="file"
-            //           className="form-control"
-            //           required
-            //         />
-            //       </Col>
-            //     </Row>
-            //     <div className="p-2" />
-            //     <Row>
-            //       <Col style={{
-            //         backgroundColor: "#212529",
-            //         borderRadius: '20px'
-            //       }}>
-            //         <label style={{
-            //         color: "white"}}
-            //         className="form-label" for="customFile">Employment Proof</label>
-            //         <input
-            //           onChange={onFileUpload}
-            //           id={3}
-            //           accept=".jpeg, .pdf"
-            //           type="file"
-            //           className="form-control"
-            //           required
-            //         />
-            //       </Col>
-            //     </Row>
-
-
-            // MDB ACCORDION
-            //                 <Row>
-            //       <MDBAccordion>
-              //       <MDBAccordionItem collapseId={2} headerTitle={<><MDBIcon fas icon="question-circle" /> &nbsp; Policy #2</>}>
-              //       Legal verification of documents.
-              //       </MDBAccordionItem>
-            //       </MDBAccordion>
-            //     </Row>
-            //     <div className="p-2" />

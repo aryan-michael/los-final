@@ -25,3 +25,24 @@
 > output in the form of array.
 > stock handleSubmit function has been created. (non-fucntional)
 
+=> 17/03/23
+@ KYC DOCUMENTS
+> dropdown list of documents has been set up.
+
+@ PERSONAL INFO & LOAN INFO (READ_ONLY)
+> PersonalInfo & LoanInfo pages styling remains (login issue).
+
+@ GENERAL
+> styling of every page has been completed except for a few less important pages.
+
+@LOAN_DATA
+> buttons will be added to the document verification column on admin side.
+> results will be reflected on the CheckStatus page on user side.
+
+
+=> 20/03/23
+@ APP.JS
+> major route changes | sidebar & admin-sidebar changed to user-panel & admin-panel
+
+@STATISTICS, ANALYTICS, CHECK STATUS
+> base styling of these empty pages done. content can be added when needed.
