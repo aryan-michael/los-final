@@ -10,54 +10,53 @@ import "./KYC.css";
 export default function KYC() {
 
   const business_documents = [
-    'Photo Identity Proof',
-    'Address Proof',
-    'Certificate of Incorporation',
-    'Income Tax Returns',
-    'GST Returns',
-    'Bank Statements (max 1 year old)',
-    'List of existing loans and debts',
-    'List of Accounts',
-    'Cash Flow Statements',
-    'Cancelled Cheque',
+    { name: 'Photo Identity Proof', value: 'document_photoID' },
+    { name: 'Address Proof', value: 'document_addressProof' },
+    { name: 'Certificate of Incorporation', value: 'document_COI' },
+    { name: 'Income Tax Returns', value: 'document_ITR' },
+    { name: 'GST Returns', value: 'document_GST' },
+    { name: 'Bank Statements (max 1 year old)', value: 'document_bankStatement' },
+    { name: 'List of existing loans and debts', value: 'document_loans&debts' },
+    { name: 'List of Accounts', value: 'document_accounts' },
+    { name: 'Cash Flow Statements', value: 'document_cashFlow' },
+    { name: 'Cancelled Cheque', value: 'document_cancelledCheque' }
   ]
 
   const home_documents = [
-    'Photo Identity Proof',
-    'Address Proof',
-    'Employment Appointment Letter',
-    'Salary slip (3 months old)',
-    'Bank Statement (6 months old)',
-    'Form 16 (2 years)',
-    'Property Document (Sale deed, Khata)',
-    'IT Returns',
-    'Office Address Proof',
-    'Office Ownership Proof',
-    'Business Existence Proof (COI)',
-    'Income Proof',
-
+    { name: 'Photo Identity Proof', value: 'document_photoID' },
+    { name: 'Address Proof', value: 'document_addressProof' },
+    { name: 'Business Existence Proof (COI)', value: 'document_COI' },
+    { name: 'Income Tax Returns', value: 'document_ITR' },
+    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
+    { name: 'Form 16 (2 years)', value: 'document_form16' },
+    { name: 'Property Document (Sale deed, Khata)', value: 'document_propertyDoc' },
+    { name: 'Office Address Proof', value: 'document_officeAddressProof' },
+    { name: 'Office Ownership Proof', value: 'document_officeOwnershipProof' },
+    { name: 'Income Proof', value: 'document_incomeProof' }
   ]
 
   const education_documents = [
-    'Photo Identity Proof (Applicant/Co-Applicant)',
-    'Address Proof (Applicant/Co-Applicant)',
-    'Income Proof (Applicant/Co-Applicant)',
-    'Bank Statements',
-    'Proof of Admission',
-    'Marksheet (S.S.C./H.S.C./Degree/Diploma)',
-    'Collateral Property Document'
+    { name: 'Photo Identity Proof (Applicant/Co-Applicant)', value: 'document_photoID' },
+    { name: 'Address Proof (Applicant/Co-Applicant)', value: 'document_addressProof' },
+    { name: 'Income Proof (Applicant/Co-Applicant)', value: 'document_incomeProof' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Proof of Admission', value: 'document_proofOfAdmission' },
+    { name: 'Marksheet (S.S.C./H.S.C./Degree/Diploma)', value: 'document_marksheet' },
+    { name: 'Collateral Property Document', value: 'document_collateralPropertyDocument' }
   ]
 
   const personal_documents = [
-    'Photo Identity Proof',
-    'Address Proof',
-    'Income Proof',
-    'Job Continuity Proof',
-    'Bank Statements (max 1 year old)',
-    'Form 16 (2 years)',
-    'Salary Slip',
-    'List of existing loans and debts',
-    'List of Accounts',
+    { name: 'Photo Identity Proof (Applicant/Co-Applicant)', value: 'document_photoID' },
+    { name: 'Address Proof (Applicant/Co-Applicant)', value: 'document_addressProof' },
+    { name: 'Income Proof (Applicant/Co-Applicant)', value: 'document_incomeProof' },
+    { name: 'Job Continuity Proof', value: 'document_jobContinuityProof' },
+    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Form 16 (2 years)', value: 'document_form16' },
+    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
+    { name: 'List of existing loans and debts', value: 'document_loans&debts' },
+    { name: 'List of Accounts', value: 'document_accounts' }
   ]
 
   const [modalShow, setModalShow] = useState(false);
@@ -153,17 +152,17 @@ export default function KYC() {
                           <Col className="col-md-4">
                             <Form.Group controlId="formGridState">
                               <Form.Label><MDBBadge pill color='info' light>CHOOSE DOCUMENT</MDBBadge></Form.Label>
-                              
+
                               <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="salutation" required >
                                 <option defaultValue value=''>Choose...</option>
                                 <option disabled>-------------------BUSINESS LOAN-------------------</option>
-                                {business_documents.map((option) => <option>{option}</option>)}
+                                {business_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                                 <option disabled>---------------------HOME LOAN--------------------</option>
-                                {home_documents.map((option) => <option>{option}</option>)}
+                                {home_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                                 <option disabled>-----------------EDUCATION LOAN------------------</option>
-                                {education_documents.map((option) => <option>{option}</option>)}
+                                {education_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                                 <option disabled>------------------PERSONAL LOAN------------------</option>
-                                {personal_documents.map((option) => <option>{option}</option>)}
+                                {personal_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                               </Form.Select>
                               <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                               <Form.Control.Feedback type='invalid'>Please provide a document!</Form.Control.Feedback>
