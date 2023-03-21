@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import { Form, Row } from 'react-bootstrap';
+import axios from "axios"
+import { Navigate } from "react-router-dom";
 import { MDBBadge } from "mdb-react-ui-kit";
 
 const DisplayBankDetails = () => {
+
+    const getBankDetails = async () => {
+        try {
+            await axios.get("http://localhost:5000/api/v1/user/get-bank-details", {
+                withCredentials: true
+            }).then(response => {
+                console.log(response);
+            })
+        } catch (err) {
+            if (err.response) {
+                alert(err.response.data.msg)
+            }
+            alert("Something went wrong")
+            Navigate('/')
+        }
+    }
 
     // const [error, setError] = useState({
     //     account_number: '',
@@ -22,6 +40,9 @@ const DisplayBankDetails = () => {
     //     expiry_date: '',
     // });
 
+    useEffect(() => {
+        getBankDetails()
+    },[])
 
     return (
         <>

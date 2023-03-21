@@ -5,7 +5,7 @@ import { Form, Col, Row, Button, InputGroup, Container } from "react-bootstrap";
 import DocRequirements from "./DocRequirements";
 import { MDBBadge } from "mdb-react-ui-kit";
 import "./KYC.css";
-
+import axios from "axios";
 
 export default function KYC() {
 
@@ -84,27 +84,58 @@ export default function KYC() {
   const [files, setFiles] = useState([]);
   // onChange function that reads files on uploading them
   // files read are encoded as Base64
-  function onFileUpload(event) {
+  async function onFileUpload(event) {
     event.preventDefault();
-    // Get the file Id
-    let id = event.target.id;
+
+    console.log(">", event.target.value);
     // Create an instance of FileReader API
-    let file_reader = new FileReader();
+    // let file_reader = new FileReader();
+
     // Get the actual file itself
+    const formData = new FormData()
     let file = event.target.files[0];
-    file_reader.onload = () => {
-      // After uploading the file
-      // appending the file to our state array
-      // set the object keys and values accordingly
-      setFiles([...files, { file_id: id, uploaded_file: file_reader.result }]);
-    };
+    formData.append('document', file)
+    const name = document.getElementsByClassName("form-control")
+
+    await setFiles([...files, { documentType: name.documentType.value, uploaded_file: file, file_name: file.name }]);
+
+    // setFiles([...files, {formData}]);
     // reading the actual uploaded file
-    file_reader.readAsDataURL(file);
+    // file_reader.readAsDataURL(file);
   }
   // handle submit button for form
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+
     console.log(files);
+
+    files.forEach(file => {
+      formData.append('fileList', file.uploaded_file)
+    })
+
+    try {
+      await axios.post("http://localhost:5000/api/v1/file/upload/cloud", formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(response => {
+        console.log(response);
+      })
+    } catch (err) {
+      console.log(err);
+      return
+    }
+    try {
+      await axios.post("http://localhost:5000/api/v1/file/upload/details", files, {
+        withCredentials: true
+      }).then(response => {
+        console.log(response);
+      })
+    } catch (err) {
+      console.log(err);
+    }
   }
   // button state whether it's disabled or enabled
   const [enabled, setEnabled] = useState(false);
@@ -153,7 +184,7 @@ export default function KYC() {
                             <Form.Group controlId="formGridState">
                               <Form.Label><MDBBadge pill color='info' light>CHOOSE DOCUMENT</MDBBadge></Form.Label>
 
-                              <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="salutation" required >
+                              <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="documentType" required >
                                 <option defaultValue value=''>Choose...</option>
                                 <option disabled>-------------------BUSINESS LOAN-------------------</option>
                                 {business_documents.map((option) => <option value={option.value}>{option.name}</option>)}

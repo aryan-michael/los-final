@@ -6,6 +6,7 @@ import SideBar from "../../components/Sidebar/SideBar";
 import DisplayBankDetails from '../UserPanel/DisplayBankDetails'
 import LinkBankDetails from './LinkBankDetails'
 import { useNavigate } from "react-router-dom";
+import "./userPanelStyles/bankDetails.css"
 
 const BankDetails = () => {
 

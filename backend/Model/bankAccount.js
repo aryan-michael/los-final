@@ -32,6 +32,21 @@ const bankAccountSchema = mongoose.Schema({
     },
     otpTokenExpiry: {
         type:Date
+    },
+    ongoing_loans: {
+        type:Number
+    },
+    registered_address: {
+        type: String
+    },
+    registered_mobile: {
+        type: Number
+    },
+    no_of_credit_cards: {
+        type: Number
+    },
+    membership_level:{
+        type: String
     }
 }, {
     timestampes : true
