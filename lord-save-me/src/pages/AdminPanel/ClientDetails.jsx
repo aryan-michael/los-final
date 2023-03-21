@@ -32,34 +32,71 @@ createTheme("solarized", {
 const ClientDetails = () => {
 
     const Navigate = useNavigate();
+	
+	const [columns, setColumns] = useState([]);
+	const [pending, setPending] = useState(true);
 
-    const columns = [
-        {
-            name: "Loan ID",
-            selector: (row) => row.LoanID,
-            sortable: true
-        },
-        {
-            name: "Type",
-            selector: (row) => row.LoanType,
-            sortable: true
-        },
-        {
-            name: "Amount",
-            selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
-            sortable: true
-        },
-        {
-            name: "ROI (%)",
-            selector: (row) => row.Interest,
-            sortable: true
-        },
-        {
-            name: "Status",
-            selector: (row) => row.Status,
-            sortable: true,
-        },
-    ];
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setColumns([
+				{
+				    name: <MDBBadge pill color='dark' light>Loan ID</MDBBadge>,
+				    selector: (row) => row.LoanID,
+				    sortable: true
+				},
+				{
+				    name: <MDBBadge pill color='dark' light>Type</MDBBadge>,
+				    selector: (row) => row.LoanType,
+				    sortable: true
+				},
+				{
+				    name: <MDBBadge pill color='dark' light>Amount</MDBBadge>,
+				    selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
+				    sortable: true
+				},
+				{
+				    name: <MDBBadge pill color='dark' light>ROI (%)</MDBBadge>,
+				    selector: (row) => row.Interest,
+				    sortable: true
+				},
+				{
+				    name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
+				    selector: (row) => row.Status,
+				    sortable: true,
+				},
+			]);
+			setPending(false);
+		}, 2000);
+		return () => clearTimeout(timeout);
+	}, []);
+	
+//    const columns = [
+//        {
+//            name: <MDBBadge pill color='dark' light>Loan ID</MDBBadge>,
+//            selector: (row) => row.LoanID,
+//            sortable: true
+//        },
+//        {
+//            name: <MDBBadge pill color='dark' light>Type</MDBBadge>,
+//            selector: (row) => row.LoanType,
+//            sortable: true
+//        },
+//        {
+//            name: <MDBBadge pill color='dark' light>Amount</MDBBadge>,
+//            selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
+//            sortable: true
+//        },
+//        {
+//            name: <MDBBadge pill color='dark' light>ROI (%)</MDBBadge>,
+//            selector: (row) => row.Interest,
+//            sortable: true
+//        },
+//        {
+//            name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
+//            selector: (row) => row.Status,
+//            sortable: true,
+//        },
+//    ];
 
     const clientSummary = [
         {
@@ -170,102 +207,111 @@ const ClientDetails = () => {
             <PostLoginNavBar />
             <div style={{ display: 'flex' }}>
                 <AdminSideBar />
-                <Container fluid>
+                <Container>
                     <Row>
-                        <Col>
+                        
                             <div className="p-2 title"><MDBBadge pill color='secondary' light>Personal Details</MDBBadge></div>
                             <Form className="container mt-3 mb-3 personal" autoComplete='off'>
                                 <Row className="mb-3">
+                                
                                     {/* SALUTATION */}
-                                    <Form.Group controlId="formGridState" className="col col-sm-4">
-                                        <Form.Label>Salutation</Form.Label>
+                                    <Form.Group controlId="formGridState" className="col col-sm-3">
+                                        <Form.Label><MDBBadge pill color='secondary' light>SALUTATION</MDBBadge></Form.Label>
                                         <Form.Control type="name" name="salutation" className="form-control" readOnly />
                                     </Form.Group>
+                                    
                                     {/* FIRSTNAME */}
-                                    <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                                        <Form.Label>First Name</Form.Label>
+                                    <Form.Group controlId="formBasicEmail" className="col col-sm-5">
+                                        <Form.Label><MDBBadge pill color='secondary' light>FIRST NAME</MDBBadge></Form.Label>
                                         <Form.Control type="name" name="first_name" className="form-control" readOnly />
                                     </Form.Group>
-                                </Row>
 
-                                <Row className="mb-3">
                                     {/* MIDDLENAME */}
-                                    <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                                        <Form.Label>Middle Name</Form.Label>
+                                    <Form.Group controlId="formBasicEmail" className="col col-sm-4">
+                                        <Form.Label><MDBBadge pill color='secondary' light>MIDDLE NAME</MDBBadge></Form.Label>
                                         <Form.Control type="name" name="middle_name" className="form-control" readOnly />
                                     </Form.Group>
+                                </Row>
+                                   
+                                <Row className="mb-3">
+                                
                                     {/* LASTNAME */}
                                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                                        <Form.Label>Last Name</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>LAST NAME</MDBBadge></Form.Label>
                                         <Form.Control type="name" name="last_name" className="form-control" readOnly />
                                     </Form.Group>
-                                </Row>
-
-                                <Row className="mb-3">
-                                    {/* GENDER */}
-                                    <Form.Group controlId="formGridState" className="col col-sm-3">
-                                        <Form.Label>Gender</Form.Label>
-                                        <Form.Control name="gender" className="form-control" readOnly />
-                                    </Form.Group>
+                                    
                                     {/* DOB */}
-                                    <Form.Group controlId="formGridpin" className="col col-sm-4">
-                                        <Form.Label>Date Of Birth</Form.Label>
+                                    <Form.Group controlId="formGridpin" className="col col-sm-6">
+                                        <Form.Label><MDBBadge pill color='secondary' light>DATE OF BIRTH</MDBBadge></Form.Label>
                                         <Form.Control className="form-control" type="date" name="dob" readOnly />
                                     </Form.Group>
                                 </Row>
 
                                 <Row className="mb-3">
+                                
+                                    {/* GENDER */}
+                                    <Form.Group controlId="formGridState" className="col col-sm-4">
+                                        <Form.Label><MDBBadge pill color='secondary' light>GENDER</MDBBadge></Form.Label>
+                                        <Form.Control name="gender" className="form-control" readOnly />
+                                    </Form.Group>
+                                    
                                     {/* MOBILE */}
-                                    <Form.Group controlId="formBasicMobile" className="col col-sm-6">
-                                        <Form.Label>Mobile Number</Form.Label>
+                                    <Form.Group controlId="formBasicMobile" className="col col-sm-8">
+                                        <Form.Label><MDBBadge pill color='secondary' light>MOBILE NUMBER</MDBBadge></Form.Label>
                                         <InputGroup hasValidation>
                                             <InputGroup.Text id="basic-addon1">+91</InputGroup.Text>
                                             <Form.Control aria-label="Mobile Number" type="mobile" aria-describedby="basic-addon1" className="form-control" name="mobile" readOnly />
                                         </InputGroup>
-                                    </Form.Group>
-                                    {/* EMAIL */}
-                                    <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control aria-label="Recipient's username" type="email" name="email" readOnly />
-                                    </Form.Group>
+                                    </Form.Group>   
                                 </Row>
 
-                                <Row className="mb-3">
-                                    {/* ADDRESS*/}
-                                    <Form.Group className=" col col-sm-6" controlId="formGridAddress1">
-                                        <Form.Label>Address</Form.Label>
-                                        <Form.Control className="form-control" type="text" name="address" readOnly />
+                                <Row className="mb-3">                                   
+                                    {/* EMAIL */}
+                                    <Form.Group controlId="formBasicEmail" className="col col-sm-8">
+                                        <Form.Label><MDBBadge pill color='secondary' light>EMAIL</MDBBadge></Form.Label>
+                                        <Form.Control aria-label="Recipient's username" type="email" name="email" readOnly />
                                     </Form.Group>
+                                    
                                     {/* PINCODE */}
                                     <Form.Group controlId="formGridpin" className="col col-sm-4">
-                                        <Form.Label>Pin Code</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>PIN CODE</MDBBadge></Form.Label>
                                         <Form.Control className="form-control" type="pin" name="pin" readOnly />
                                     </Form.Group>
                                 </Row>
 
                                 <Row className="mb-3">
+                                    {/* ADDRESS*/}
+                                    <Form.Group className=" col col-sm-12" controlId="formGridAddress1">
+                                        <Form.Label><MDBBadge pill color='secondary' light>ADDRESS</MDBBadge></Form.Label>
+                                        <Form.Control className="form-control" type="text" name="address" readOnly />
+                                    </Form.Group>
+                                    
+                                </Row>
+
+                                <Row className="mb-3">
                                     {/* CITY */}
                                     <Form.Group controlId="formGridCity" className="col col-sm-4">
-                                        <Form.Label>City</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>CITY</MDBBadge></Form.Label>
                                         <Form.Control className="form-control" type="text" name="city" readOnly />
                                     </Form.Group>
                                     {/* STATE */}
                                     <Form.Group controlId="formGridState" className="col col-sm-4">
-                                        <Form.Label>State</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>STATE</MDBBadge></Form.Label>
                                         <Form.Control className="form-control" type="text" name="state" readOnly />
                                     </Form.Group>
                                     {/* Country */}
                                     <Form.Group controlId="formGridpin" className="col col-sm-4">
-                                        <Form.Label>Country</Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>COUNTRY</MDBBadge></Form.Label>
                                         <Form.Control className="form-control" type="text" name="country" readOnly />
                                     </Form.Group>
                                 </Row>
                             </Form>
-                        </Col>
-                        <Col>
+                       
+                        <Row className="p-2"></Row>
                             <div className="p-2 title"><MDBBadge pill color='secondary' light>Loan History</MDBBadge></div>
-                            <Form className="container mt-3 mb-3 personal" autoComplete='off'>
-                                <Row className="mb-3">
+                            
+                                <div>
                                     <DataTable
                                         //title="Loan History"
                                         columns={columns}
@@ -277,10 +323,10 @@ const ClientDetails = () => {
                                         fixedHeaderScrollHeight="455px"
                                         onRowClicked={handleRowClicked}
                                         highlightOnHover
+                                        progressPending={pending}
                                     />
-                                </Row>
-                            </Form>
-                        </Col>
+                                </div>
+                       
                     </Row>
                 </Container>
             </div>

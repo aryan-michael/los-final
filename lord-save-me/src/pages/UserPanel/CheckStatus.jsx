@@ -1,11 +1,22 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import SideBar from "../../components/Sidebar/SideBar";
 import { MDBBadge } from "mdb-react-ui-kit";
 import { Container, Form, Row, Col } from 'react-bootstrap';
 import DataTable from "react-data-table-component";
+import './CheckStatus.css';
 
 const CheckStatus = () => {
+	
+	const customStyles = {
+        headCells: {
+            style: {
+                fontWeight: "bold",
+                fontSize: "0.9rem",
+            }
+        },
+    }
 	
 	const documentList = [
 		{
@@ -97,30 +108,38 @@ const CheckStatus = () => {
 	}
 		
 	
-	const columns = [
-		{
-			name: "Document ID",
-			selector: (row) => row.DocID,
-			sortable: true
-		},
-		{
-			name: "Document Name",
-			selector: (row) => row.DocName,
-			sortable: true
-		},
-		{
-			name: "Status",
-			selector: (row) => row.Status,
-			sortable: true,
-		},
-		{
-			name: "Verification",
-			selector: (row) => row.VerficationStatus === 'Approve' ?<MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge> ,
-			sortable: true,
-		},
-	];	
+	const [columns, setColumns] = useState([]);
+    const [pending, setPending] = useState(true);
 
-	
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setColumns([
+                {
+					name: <MDBBadge pill color='dark' light>Document ID</MDBBadge>,
+					selector: (row) => row.DocID,
+					sortable: true
+				},
+				{
+					name: <MDBBadge pill color='dark' light>Document Name</MDBBadge>,
+					selector: (row) => row.DocName,
+					sortable: true
+				},
+				{
+					name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
+					selector: (row) => row.Status,
+					sortable: true,
+				},
+				{
+					name: <MDBBadge pill color='dark' light>Verification</MDBBadge>,
+					selector: (row) => row.VerficationStatus === 'Approve' ?<MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge> ,
+					sortable: true,
+				},
+            ]);
+            setPending(false);
+        }, 2000);
+        return () => clearTimeout(timeout);
+    }, []);
+		
 
   return (
     <>
@@ -141,6 +160,8 @@ const CheckStatus = () => {
 							onRowClicked={viewDocument}
 							highlightOnHover
 							pointerOnHover
+							progressPending={pending}
+                           	customStyles={customStyles}
 						/>
         	</Row>
       	</Container>

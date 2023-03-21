@@ -152,7 +152,8 @@ export default function KYC() {
                           {/* CHOOSE DOCUMENT */}
                           <Col className="col-md-4">
                             <Form.Group controlId="formGridState">
-                              <Form.Label style={{ color: "white" }}>Choose Document</Form.Label>
+                              <Form.Label><MDBBadge pill color='info' light>CHOOSE DOCUMENT</MDBBadge></Form.Label>
+                              
                               <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="salutation" required >
                                 <option defaultValue value=''>Choose...</option>
                                 <option disabled>-------------------BUSINESS LOAN-------------------</option>
@@ -173,7 +174,8 @@ export default function KYC() {
                           <Col className="col-md-8">
                             <label
                               style={{ color: "white" }}
-                              className="form-label" for="customFile">Looks good / please upload</label>
+                              className="form-label" for="customFile"><MDBBadge pill color='info' light>LOOKS GOOD / PLEASE UPLOAD</MDBBadge>
+                            </label>
                             <input
                               onChange={onFileUpload}
                               id={1}
@@ -211,29 +213,25 @@ export default function KYC() {
 
                     </div>
 
-                    {/* BLANK SPACE */}
-                    <div className="p-2" />
                   </>
                 )
               })}
 
             </Row>
 
-            {/* BLANK SPACE */}
-            <div className="p-2" />
 
             {/* ADD DOC & SUBMIT BUTTON */}
             <div className="text-center p-3 mb-3" >
               <Button
                 onClick={() => handleAdd()}
                 type="button"
-                variant="outline-dark"
+                variant="dark"
                 className="me-4 btn btn-sm">Add Document</Button>
 
 
               <Button
                 type="submit"
-                variant="outline-success"
+                variant="success"
                 className="me-4 btn btn-sm">Submit</Button>
             </div>
 

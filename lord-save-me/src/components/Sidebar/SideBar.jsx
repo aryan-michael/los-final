@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { FaBars, FaHome, FaLock, FaRupeeSign, FaMoneyBill, FaUser } from "react-icons/fa";
+import { FaBars, FaHome, FaLock, FaRupeeSign, FaHandshake, FaUser } from "react-icons/fa";
 import { HiDocumentArrowUp } from "react-icons/hi2";
-import { MdMessage } from "react-icons/md";
+import { SiHomebridge } from "react-icons/si";
 import { BiSearch, BiCog } from "react-icons/bi";
 import { IoInformationCircle } from "react-icons/io5";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUserAdd, AiOutlineFileProtect, AiOutlineFileAdd } from "react-icons/ai";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
@@ -16,7 +16,7 @@ const routes = [
   {
     path: "/user-panel/user-dashboard",
     name: "Dashboard",
-    icon: <FaHome />,
+    icon: <SiHomebridge />,
   },
   {
     path: "/user-panel/my-info",
@@ -44,12 +44,12 @@ const routes = [
   {
     path: "/user-panel/kyc-docs",
     name: "KYC Documents",
-    icon: <HiDocumentArrowUp />,
+    icon: <AiOutlineFileAdd />,
   },
   {
     path: "/user-panel/check-status",
     name: "Check Status",
-    icon: <MdMessage />,
+    icon: <AiOutlineFileProtect />,
   },
   {
   	path: "/user-panel/add-inquiry",
@@ -74,9 +74,9 @@ const routes = [
         icon: <FaLock />,
       },
       {
-        path: "/user-panel/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill />,
+        path: "/user-panel/settings/helpdesk",
+        name: "Help Desk",
+        icon: <FaHandshake />,
       },
     ],
   },

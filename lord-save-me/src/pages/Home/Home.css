@@ -5,8 +5,8 @@
 }
 .icons {
     font-size: 3.5rem;
-    color: rgb(10, 10, 94);
+    color: #000066;
 }
 .icons:hover {
-    color: rgb(19, 105, 23)
+    color: #006699 
 }

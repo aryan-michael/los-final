@@ -25,7 +25,7 @@ export default function Footer() {
                     <a href='' className='me-4 text-reset'>
                         <MDBIcon color='secondary' fab icon='linkedin' />
                     </a>
-                    <a href='' className='me-4 text-reset'>
+                    <a href='https://github.com/aryan-michael/los-final' className='me-4 text-reset'>
                         <MDBIcon color='secondary' fab icon='github' />
                     </a>
                 </div>
@@ -45,7 +45,7 @@ export default function Footer() {
                         </MDBCol>
 
                         <MDBCol md='2' lg='2' xl='2' className='mx-auto mb-4'>
-                            <h6 className='text-uppercase fw-bold mb-4'>Products</h6>
+                            <h6 className='text-uppercase fw-bold mb-4'>Technologies</h6>
                             <p>
                                 <a href='https://beta.reactjs.org/' className='text-reset'>
                                     React
@@ -93,7 +93,7 @@ export default function Footer() {
                         </MDBCol>
 
                         <MDBCol md='4' lg='3' xl='3' className='mx-auto mb-md-0 mb-4'>
-                            <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
+                            <h6 className='text-uppercase fw-bold mb-4'>Contact Us</h6>
                             <p>
                                 <MDBIcon color='secondary' icon='home' className='me-3' />
                                 Ahmedabad, Gujarat, IND
@@ -103,10 +103,10 @@ export default function Footer() {
                                 endsemproject@zohomail.in
                             </p>
                             <p>
-                                <MDBIcon color='secondary' icon='phone' className='me-3' /> +XX XXXXX XXXXX
+                                <MDBIcon color='secondary' icon='phone' className='me-3' /> +91 XXXXX XXXXX
                             </p>
                             <p>
-                                <MDBIcon color='secondary' icon='phone' className='me-3' /> +XX XXXXX XXXXX
+                                <MDBIcon color='secondary' icon='phone' className='me-3' /> +91 XXXXX XXXXX
                             </p>
                         </MDBCol>
                     </MDBRow>

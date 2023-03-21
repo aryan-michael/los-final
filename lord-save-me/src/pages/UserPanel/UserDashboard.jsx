@@ -37,97 +37,97 @@ createTheme("solarized", {
 
 export default function UserDashboard() {
 
-	const customStyles = {
-		rows: {
-			style: {
-				alignItems: "center",
-				fontWeight: "bold"
-			}
-		}
-	}
+    const customStyles = {
+        headCells: {
+            style: {
+                fontWeight: "bold",
+                fontSize: "0.9rem",
+            }
+        },
+    }
 
-//    const [loanDetails, setLoanDetails] = useState([])
+    // const [loanDetails, setLoanDetails] = useState([])
 
-//    useEffect(() => {
-//        getloanDetails()
-//    }, [])
+    // useEffect(() => {
+    //     getloanDetails()
+    // }, [])
 
-//    const getloanDetails = async () => {
-//        try {
-//            await axios.get("http://localhost:5000/api/v1/user/getUser1", {
-//                withCredentials: true
-//            }).then(response => {
-//                console.log(response)
-//                setLoanDetails(response.data.user.loanInquiries)
-//            })
-//        } catch (err) {
-//            console.log(err);
-//        }
-//    }
-//
-//    console.log(loanDetails);
+    // const getloanDetails = async () => {
+    //     try {
+    //         await axios.get("http://localhost:5000/api/v1/user/getUser1", {
+    //             withCredentials: true
+    //         }).then(response => {
+    //             console.log(response)
+    //             setLoanDetails(response.data.user.loanInquiries)
+    //         })
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
+
+    // console.log(loanDetails);
 
     const Navigate = useNavigate();
 
-	const [columns, setColumns] = useState([]);
-	const [pending, setPending] = useState(true);
+    const [columns, setColumns] = useState([]);
+    const [pending, setPending] = useState(true);
 
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setColumns([
-				{
-				    name: "Loan ID",
-				    selector: (row) => row._id,
-				    sortable: true
-				},
-				{
-				    name: "Loan Type",
-				    selector: (row) => row.Loan,
-				    sortable: true
-				},
-				{
-				    name: "Amount (₹)",
-				    selector: (row) => row.loanAmount,
-				    sortable: true
-				},
-				{
-				    name: "Interest (%)",
-				    selector: (row) => row.Interest,
-				    sortable: true
-				},
-				{
-				    name: "Loan Status",
-				    selector: (row) => row.applicationStatus,
-				    sortable: true,
-				},
-			]);
-			setPending(false);
-		}, 2000);
-		return () => clearTimeout(timeout);
-	}, []);		
-	
-//    const columns = [
-//        {
-//            name: "Loan ID",
-//            selector: (row) => row._id,
-//            sortable: true
-//        },
-//        {
-//            name: "Loan Type",
-//            selector: (row) => row.Loan,
-//            sortable: true
-//        },
-//        {
-//            name: "Amount (₹)",
-//            selector: (row) => row.loanAmount,
-//            sortable: true
-//        },
-//        {
-//            name: "Loan Status",
-//            selector: (row) => row.applicationStatus,
-//            sortable: true,
-//        },
-//    ];
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setColumns([
+                {
+                    name: <MDBBadge pill color='dark' light>Loan ID</MDBBadge>,
+                    selector: (row) => row._id,
+                    sortable: true
+                },
+                {
+                    name: <MDBBadge pill color='dark' light>Loan Type</MDBBadge>,
+                    selector: (row) => row.Loan,
+                    sortable: true
+                }, 
+                {
+                    name: <MDBBadge pill color='dark' light>Amount (₹)</MDBBadge>,
+                    selector: (row) => row.loanAmount,
+                    sortable: true
+                },
+                // {
+                //     name: "Interest (%)",
+                //     selector: (row) => row.Interest,
+                //     sortable: true
+                // },
+                {
+                    name: <MDBBadge pill color='dark' light>Loan Status</MDBBadge>,
+                    selector: (row) => row.applicationStatus,
+                    sortable: true,
+                },
+            ]);
+            setPending(false);
+        }, 2000);
+        return () => clearTimeout(timeout);
+    }, []);
+
+    //    const columns = [
+    //        {
+    //            name: "Loan ID",
+    //            selector: (row) => row._id,
+    //            sortable: true
+    //        },
+    //        {
+    //            name: "Loan Type",
+    //            selector: (row) => row.Loan,
+    //            sortable: true
+    //        },
+    //        {
+    //            name: "Amount (₹)",
+    //            selector: (row) => row.loanAmount,
+    //            sortable: true
+    //        },
+    //        {
+    //            name: "Loan Status",
+    //            selector: (row) => row.applicationStatus,
+    //            sortable: true,
+    //        },
+    //    ];
 
     const clientSummary = [
         {
@@ -368,7 +368,8 @@ export default function UserDashboard() {
     ];
 
     const handleRowClicked = (row) => {
-        console.log(row.ClientName)
+        console.log(row.ClientName);
+        Navigate('/user-panel/my-info/loan-info');
     };
     //outputs the name property into the console
 
@@ -392,18 +393,18 @@ export default function UserDashboard() {
                             onRowClicked={handleRowClicked}
                             highlightOnHover
                             progressPending={pending}
-                            customStyles={customStyles}
+                           	customStyles={customStyles}
                         />
                     </div>
-                    
-                    
+
+                    {/* SPACING */}
                     <div className="text-center p-3 mb-4"></div>
 
-					<div className="text-center p-3 mb-3">
-						<Footer />
-					</div>
-                    
-                    
+                    <div className="text-center p-3 mb-3">
+                        <Footer />
+                    </div>
+
+
                 </Container>
             </div>
         </>

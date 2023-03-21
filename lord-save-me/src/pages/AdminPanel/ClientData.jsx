@@ -30,49 +30,58 @@ createTheme("solarized", {
 
 export default function ClientData() {
 
+    const customStyles = {
+        headCells: {
+            style: {
+                fontWeight: "bold",
+                fontSize: "0.9rem"
+            }
+        },
+    }
+
     const Navigate = useNavigate();
 
     const columns = [
         {
-            name: "Client ID",
+            name: <MDBBadge pill color='dark' light>Client ID</MDBBadge>,
             selector: (row) => row.ClientID,
             sortable: true
         },
         {
-            name: "Client Name",
+            name: <MDBBadge pill color='dark' light>Client Name</MDBBadge>,
             selector: (row) => row.ClientName,
             sortable: true
         }, {
-            name: "Profile Picture",
+            name: <MDBBadge pill color='dark' light>Profile Picture</MDBBadge>,
             selector: (row) => <img className="mt-1" src={row.ProfilePicture} alt="MDN logo" />,
         },
         {
-            name: "Loan Type",
+            name: <MDBBadge pill color='dark' light>Loan Type</MDBBadge>,
             selector: (row) => row.LoanType,
             sortable: true
         },
         {
-            name: "Amount (₹)",
+            name: <MDBBadge pill color='dark' light>Amount (₹)</MDBBadge>,
             selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
             sortable: true
         },
         {
-            name: "Gender",
+            name: <MDBBadge pill color='dark' light>Gender</MDBBadge>,
             selector: (row) => row.Gender,
             sortable: true
         },
         {
-            name: "Age",
+            name: <MDBBadge pill color='dark' light>Age</MDBBadge>,
             selector: (row) => row.Age,
             sortable: true
         },
         {
-            name: "Interest (%)",
+            name: <MDBBadge pill color='dark' light>Interest (%)</MDBBadge>,
             selector: (row) => row.Interest,
             sortable: true
         },
         {
-            name: "Status",
+            name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
             selector: (row) => row.Status,
             sortable: true,
         },
@@ -396,6 +405,7 @@ export default function ClientData() {
                             fixedHeaderScrollHeight="450px"
                             onRowClicked={handleRowClicked}
                             highlightOnHover
+                            customStyles={customStyles}
                         />
                     </div>
                 </Container>

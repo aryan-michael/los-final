@@ -3,7 +3,8 @@ import PersonalDetails from "./PersonalDetails";
 import LoanDetails from "./LoanDetails";
 import { useNavigate } from 'react-router-dom';
 import './Forms.css';
-import axios from 'axios'
+import axios from 'axios';
+import { MDBBadge } from "mdb-react-ui-kit";
 import { Alert, Button, Col, Container, Navbar, Row } from "react-bootstrap";
 import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
 import NavBar from "../../components/NavBar/NavBar";
@@ -401,17 +402,19 @@ function Forms({ loan_type, country,setLoginToken }) {
             
             <div className="form-container">
                 {/* <Alert>{error.first_name}</Alert> */}
-                <Container className="h-100">
-                    <Row className="h-100">
-                        <Col className="align-self-center">
-                            <MultiStepProgressBar step={progressStep} />
-                        </Col>
-                    </Row>
-                </Container>
-                <div className="header text-center">
-                    <h1>{FormTitles[page]}</h1>
-                </div>
+              <Container className="h-100">
+                <Row className="p-2"></Row>
+                    
+                <div className="p-2 title"><MDBBadge pill color='secondary' light>{FormTitles[page]}</MDBBadge></div>
+                    
+                <Row className="h-100">
+                   <Col className="align-self-center">
+                       <MultiStepProgressBar step={progressStep} />
+                   </Col>
+                </Row>
+                      
                 <div className="body">{pageDisplay()}</div>
+                
                 <div className="footer text-center">
                     <button
                         type="button"
@@ -434,9 +437,10 @@ function Forms({ loan_type, country,setLoginToken }) {
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
                     </Button>
                 </div>
+              </Container>
             </div>
-            </div>
-            </>
+         </div>
+      </>
     );
 }
 
