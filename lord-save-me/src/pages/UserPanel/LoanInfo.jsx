@@ -4,31 +4,22 @@ import SideBar from "../../components/Sidebar/SideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import axios from 'axios';
 import { MDBBadge } from "mdb-react-ui-kit";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const LoanInfo = () => {
+
+    const {loanId} = useParams()
+
     const Navigate = useNavigate()
-    const [userDetail, setUserDetails] = useState({})
+    const [loanDetails, setLoanDetails] = useState({})
 
-    const logoutUser = async () => {
+
+    const getLoanInquiryDetails = async () => {
         try {
-            await axios.get("http://localhost:5000/api/v1/user/logout", {
+            await axios.get(`http://localhost:5000/api/v1/user/loan/inquiry/${loanId}`, {
                 withCredentials: true
             }).then(response => {
-                Navigate('/')
-            })
-        } catch (err) {
-            Navigate('/')
-        }
-    }
-
-    const getUserDetails = async () => {
-        try {
-            await axios.get("http://localhost:5000/api/v1/user/getUser1", {
-                withCredentials: true
-            }).then(response => {
-                setUserDetails(response.data.user)
-                return
+                setLoanDetails(response.data)
             })
         } catch (err) {
             Navigate('/')
@@ -37,7 +28,7 @@ const LoanInfo = () => {
     }
 
     useEffect(() => {
-        getUserDetails()
+        getLoanInquiryDetails()
     }, [])
     return (
         <>
@@ -55,13 +46,13 @@ const LoanInfo = () => {
                         			<Form.Label><MDBBadge pill color='secondary' light>DESIRED LOAN AMOUNT</MDBBadge></Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text id="basic-addon1">₹</InputGroup.Text>
-                                            <Form.Control aria-label="Loan Amount" type="number" aria-describedby="basic-addon1" className="form-control" name="loanAmount" value={userDetail.loanAmount} readOnly />
+                                            <Form.Control aria-label="Loan Amount" type="number" aria-describedby="basic-addon1" className="form-control" name="loanAmount" value={loanDetails.loanAmount} readOnly />
                                         </InputGroup>
                                     </Form.Group>
                                     {/* LOAN TYPE : ONLY DISPLAY */}
                                     <Form.Group controlId="formBasicEmail" className="col col-sm-4">
                                         <Form.Label><MDBBadge pill color='secondary' light>LOAN TYPE</MDBBadge></Form.Label>
-                                        <Form.Control type="text" name="loanType" value={userDetail.loanType} readOnly />
+                                        <Form.Control type="text" name="loanType" value={loanDetails.loanType} readOnly />
                                     </Form.Group>
                                 </Row>
 
@@ -69,12 +60,12 @@ const LoanInfo = () => {
                                     {/* EMPLOYMENT STATUS */}
                                     <Form.Group controlId="formGridState" className="col col-sm-4">
                                         <Form.Label><MDBBadge pill color='secondary' light>EMPLOYMENT STATUS</MDBBadge></Form.Label>
-                                        <Form.Control type="text" name="empStatus" value={userDetail.empStatus} readOnly />
+                                        <Form.Control type="text" name="empStatus" value={loanDetails.empStatus} readOnly />
                                     </Form.Group>
                                     {/* BUSINESS NAME */}
                                     <Form.Group controlId="formBasicEmail" className="col col-sm-8">
                                         <Form.Label><MDBBadge pill color='secondary' light>FIRM NAME / BUSINESS NAME</MDBBadge></Form.Label>
-                                        <Form.Control type="name" name="businessName" className="form-control" value={userDetail.businessName} readOnly />
+                                        <Form.Control type="name" name="businessName" className="form-control" value={loanDetails.businessName} readOnly />
                                     </Form.Group>
                                 </Row>
 
@@ -82,7 +73,7 @@ const LoanInfo = () => {
                                     {/* FIRM/BUSINESS ADDRESS*/}
                                     <Form.Group className=" col col-sm-12" controlId="formGridAddress1">
                                         <Form.Label><MDBBadge pill color='secondary' light>FIRM ADDRESS / BUSINESS ADDRESS</MDBBadge></Form.Label>
-                                        <Form.Control className="form-control" type="text" name="firmAddress" value={userDetail.firmAddress} readOnly />
+                                        <Form.Control className="form-control" type="text" name="firmAddress" value={loanDetails.firmAddress} readOnly />
                                     </Form.Group>
                                 </Row>
                             </Form>

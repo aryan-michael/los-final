@@ -1,10 +1,12 @@
 import { Container, Form, Row, Col, InputGroup } from 'react-bootstrap';
-import { Navigate, useNavigate } from "react-router-dom";
 import DataTable, { createTheme } from "react-data-table-component";
 import AdminSideBar from "../../components/Sidebar/AdminSideBar";
 import PostLoginNavBar from "../../components/NavBar/PostLoginNavBar";
 import { MDBBadge } from "mdb-react-ui-kit";
 import './ClientData.css';
+import axios from "axios"
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 createTheme("solarized", {
     text: {
@@ -30,6 +32,29 @@ createTheme("solarized", {
 
 export default function ClientData() {
 
+    const Navigate = useNavigate()
+
+    const [clientData,setClientData] = useState([])
+
+    const getClientData = async () => {
+        try {
+            axios.get('http://localhost:5000/api/v1/admin/getAll', {
+                withCredentials:true
+            }).then(response => {
+                console.log(response);
+                setClientData(response.data)
+                console.log(clientData);
+            })
+        } catch (err) {
+            console.log(err);
+            Navigate('/')
+        }
+    }
+    
+    useEffect(() => {
+        getClientData()
+    },[])
+
     const customStyles = {
         headCells: {
             style: {
@@ -39,334 +64,36 @@ export default function ClientData() {
         },
     }
 
-    const Navigate = useNavigate();
 
     const columns = [
         {
             name: <MDBBadge pill color='dark' light>Client ID</MDBBadge>,
-            selector: (row) => row.ClientID,
+            selector: (row) => row.client_ID,
             sortable: true
         },
         {
             name: <MDBBadge pill color='dark' light>Client Name</MDBBadge>,
-            selector: (row) => row.ClientName,
-            sortable: true
-        }, {
-            name: <MDBBadge pill color='dark' light>Profile Picture</MDBBadge>,
-            selector: (row) => <img className="mt-1" src={row.ProfilePicture} alt="MDN logo" />,
-        },
-        {
-            name: <MDBBadge pill color='dark' light>Loan Type</MDBBadge>,
-            selector: (row) => row.LoanType,
+            selector: (row) => row.client_name,
             sortable: true
         },
         {
-            name: <MDBBadge pill color='dark' light>Amount (₹)</MDBBadge>,
-            selector: (row) => <img src={row.LoanAmount} alt="MDN logo" />,
+            name: <MDBBadge pill color='dark' light>Client Phone</MDBBadge>,
+            selector: (row) => row.client_mobile,
             sortable: true
         },
         {
-            name: <MDBBadge pill color='dark' light>Gender</MDBBadge>,
-            selector: (row) => row.Gender,
+            name: <MDBBadge pill color='dark' light>Client Email</MDBBadge>,
+            selector: (row) => row.client_email ,
             sortable: true
         },
         {
-            name: <MDBBadge pill color='dark' light>Age</MDBBadge>,
-            selector: (row) => row.Age,
+            name: <MDBBadge pill color='dark' light>No of Inquiries</MDBBadge>,
+            selector: (row) => row.client_inquiries ,
             sortable: true
-        },
-        {
-            name: <MDBBadge pill color='dark' light>Interest (%)</MDBBadge>,
-            selector: (row) => row.Interest,
-            sortable: true
-        },
-        {
-            name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
-            selector: (row) => row.Status,
-            sortable: true,
         },
     ];
 
-    const clientSummary = [
-        {
-            ClientID: 1,
-            ClientName: "Aaron Ramsey",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p119765.png",
-            LoanType: "Aston Villa",
-            LoanAmount: "https://resources.premierleague.com/premierleague/badges/50/t7.png",
-            Gender: "Wales",
-            Age: "Jamaica",
-            Interest: "FWD",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
-        },
-        {
-            ClientID: 2,
-            ClientName: "Alex Telles",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p152590.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Brazil",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/brazil-flag-png-large.png",
-            Interest: "DEF",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
-        },
-        {
-            ClientID: 3,
-            ClientName: "Allan",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p119765.png",
-            LoanType: "Everton",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t11.png",
-            Gender: "England",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
-            Interest: "MID",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>
-        },
-        {
-            ClientID: 4,
-            ClientName: "Dele Alli",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p108823.png",
-            LoanType: "Spurs",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t6.png",
-            Gender: "Brazil",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/brazil-flag-png-large.png",
-            Interest: "MID",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
-        },
-        {
-            ClientID: 5,
-            ClientName: "Leon Bailey",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p215711.png",
-            LoanType: "Aston Villa",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t7.png",
-            Gender: "Jamaica",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/jamaica-flag-png-large.png",
-            Interest: "FWD",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>
-        },
-        {
-            ClientID: 6,
-            ClientName: "Bernando Silva",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p165809.png",
-            LoanType: "Manchester City",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t43.png",
-            Gender: "Portugal",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
-            Interest: "MID",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
-        },
-        {
-            ClientID: 7,
-            ClientName: "Willy Boly",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p90585.png",
-            LoanType: "Wolves",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t39.png",
-            Gender: "Cote D’Ivoire",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/cote-d-ivoire-flag-png-large.png",
-            Interest: "DEF",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
-        },
-        {
-            ClientID: 8,
-            ClientName: "Bruno Fernandes",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Portugal",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
-            Interest: "MID",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
-        },
-        {
-            ClientID: 9,
-            ClientName: "Edinson Cavani",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Uruguay",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
-            Interest: "FWD",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>
-        },
-        {
-            ClientID: 10,
-            ClientName: "Ben Chilwell",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            LoanType: "Chelsea",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t8.png",
-            Gender: "England",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
-            Interest: "DEF",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>
-        },
-        {
-            ClientID: 8,
-            ClientName: "Bruno Fernandes",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Portugal",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
-            Interest: "MID",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>,
-        },
-        {
-            ClientID: 9,
-            ClientName: "Edinson Cavani",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Uruguay",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
-            Interest: "FWD",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>,
-        },
-        {
-            ClientID: 10,
-            ClientName: "Ben Chilwell",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            LoanType: "Chelsea",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t8.png",
-            Gender: "England",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
-            Interest: "DEF",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
-        },
-        {
-            ClientID: 7,
-            ClientName: "Willy Boly",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p90585.png",
-            LoanType: "Wolves",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t39.png",
-            Gender: "Cote D’Ivoire",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/cote-d-ivoire-flag-png-large.png",
-            Interest: "DEF",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
-        },
-        {
-            ClientID: 8,
-            ClientName: "Bruno Fernandes",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Portugal",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
-            Interest: "MID",
-            Status: <MDBBadge pill color='warning' light>Waitlisted</MDBBadge>,
-        },
-        {
-            ClientID: 9,
-            ClientName: "Edinson Cavani",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Uruguay",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
-            Interest: "FWD",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>,
-        },
-        {
-            ClientID: 10,
-            ClientName: "Ben Chilwell",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            LoanType: "Chelsea",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t8.png",
-            Gender: "England",
-            "Gender Image":
-                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
-            Interest: "DEF",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>,
-        },
-        {
-            ClientID: 8,
-            ClientName: "Bruno Fernandes",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p141746.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Portugal",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/portugal-flag-400.png",
-            Interest: "MID",
-            Status: <MDBBadge pill className='mx-2' color='danger' light>Rejected</MDBBadge>,
-        },
-        {
-            ClientID: 9,
-            ClientName: "Edinson Cavani",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p40720.png",
-            LoanType: "Manchester United",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t1.png",
-            Gender: "Uruguay",
-            Age:
-                "https://www.countryflags.com/wp-content/uploads/uruguay-flag-png-large.png",
-            Interest: "FWD",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>,
-        },
-        {
-            ClientID: 10,
-            ClientName: "Ben Chilwell",
-            ProfilePicture:
-                "https://resources.premierleague.com/premierleague/photos/players/40x40/p172850.png",
-            LoanType: "Chelsea",
-            LoanAmount:
-                "https://resources.premierleague.com/premierleague/badges/50/t8.png",
-            Gender: "England",
-            "Gender Image":
-                "https://www.countryflags.com/wp-content/uploads/england-flag-jpg-xl.jpg",
-            Interest: "DEF",
-            Status: <MDBBadge pill color='success' light>Completed</MDBBadge>,
-        }
-    ];
+    
 
     // const conditionalRowStyles = [
     //     {
@@ -383,7 +110,8 @@ export default function ClientData() {
     // ];
 
     const handleRowClicked = (row) => {
-        Navigate('/admin-panel/client-details');
+        console.log(row);
+        Navigate(`/admin-panel/client-details/${row.client_ID}/${row.client_email}`);
     };
     //outputs the name property into the console
 
@@ -398,7 +126,7 @@ export default function ClientData() {
                         <DataTable
                             //title="Client Summary"
                             columns={columns}
-                            data={clientSummary}
+                            data={clientData}
                             defaultSortFieldId
                             pagination={10}
                             fixedHeader

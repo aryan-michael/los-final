@@ -3,8 +3,7 @@ const mongoose = require('mongoose')
 const documentSchema = mongoose.Schema({
     file_name: {
         type: String,
-        requried: [true, 'Please provide file name'],
-        unique:true
+        requried: [true, 'Please provide file name']
     },
     file_location: {
         type: String,

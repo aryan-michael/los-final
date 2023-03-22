@@ -16,7 +16,7 @@ const createLoan = async (req, res) => {
         runValidators: true
     })
     if (!user) throw new NotFoundError('User not found')
-    res.status(StatusCodes.CREATED).json({loan}) 
+    res.status(StatusCodes.CREATED).json({msg:'Inquiry added'}) 
 }
 
 const addLoanInquiry = async (req, res) => {

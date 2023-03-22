@@ -9,8 +9,21 @@ const jwt = require('jsonwebtoken')
 const sendEmail = require('./emailController');
 const crypto = require('crypto')
 const generateOtp = require('../Middleware/AdditionalFunc')
+const UserDocuments = require('../Model/userDocumentsModel')
 
 
+const checkAuth = async (req, res) => {
+    const { userId, email } = req.user;
+    const user = await User.findOne({ _id: userId, email: email })
+    if (!user) throw new NotFoundError(`No user found`)
+    if (user.role === 'user') {
+        return res.status(StatusCodes.OK).json({islogedIn:true,user:true})
+    }
+    if (user.role === 'admin') {
+        return res.status(StatusCodes.OK).json({islogedIn:true,admin:true})
+    }
+    
+}
 
 const createUser = async (req, res) => {
     const user = await User.create(req.body);
@@ -162,7 +175,12 @@ const checkLoginOtp = async (req, res) => {
         httpOnly: true,
         expires: new Date(Date.now() + 1000*60*60*24)
     })
-    res.status(StatusCodes.OK).json({ user: token ,msg:'Success'})
+    if (user.role === 'user') {
+        return res.status(StatusCodes.OK).json({user:true,admin:false})
+    }
+    if (user.role === 'admin') {
+        return res.status(StatusCodes.OK).json({admin:true,user:false})
+    }
 }
 
 const handleRefreshToken = async (req, res) => {
@@ -340,5 +358,73 @@ const getBankDetails = async (req, res) => {
     res.status(StatusCodes.OK).json({user})
 }
 
-module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1,checkisBankAccountLinked,checkIfAvailable,getBankDetails };
+const getLoanInquiryDetails = async (req, res) => {
+    const { userId, email } = req.user;
+    const {loanId} = req.params
+    const user = await User.findOne({ _id: userId, email: email }).populate("loanInquiries").select("loanInquiries")
+    if (!user) throw new NotFoundError('No user found')
+    console.log(user);
+    const loanInquiries = user.loanInquiries
+    let inquiryDetails = {}
+    const inquiry = loanInquiries.map((loanInquiry) => {
+        if (loanInquiry._id.toString() === loanId) {
+            inquiryDetails = {
+                loanType: loanInquiry.loanType,
+                loanAmount: loanInquiry.loanAmount,
+                empStatus: loanInquiry.empStatus,
+                firmAddress: loanInquiry.firmAddress,
+                businessName: loanInquiry.businessName,
+                applicationStatus: loanInquiry.applicationStatus,
+                applicationDate: loanInquiry.applicationDate.toDateString()
+            }
+        }
+    })
+    await Promise.all(inquiry)
+    res.status(StatusCodes.OK).json(inquiryDetails)
+}
+
+const getUserDocumentDetails = async (req, res) => {
+    const { userId: userId, email: email } = req.user;
+    const user = await User.findOne({ _id: userId, email: email }).select("userDocuments")
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID:${userId}`)
+    }
+    const documents = await UserDocuments.findOne({ _id: user.userDocuments.toString() },{_id:0})
+    console.log(documents);
+    let documentsDetails = []
+
+    function doc() {
+        for (key in documents) {
+            console.log(key);
+            if (key === 'document_photoID' || key === 'document_addressProof' || key === 'document_bankStatement' || key === 'document_ITR' || key === 'document_incomeProof' || key === 'document_loans_debts' || key === 'document_accounts' || key === 'document_COI' || key === 'document_GST' || key === 'document_cashFlow' || key === 'document_cancelledCheque' || key === 'document_proofOfAdmission' || key === 'document_marksheet' || key === 'document_marksheet' || key === 'document_COI' || key === 'document_employmentLetter' || key === 'document_salarySlip' || key === 'document_form16' || key === 'document_propertyDoc' || key === 'document_officeAddressProof' || key === 'document_officeOwnershipProof' || key === 'document_jobContinuityProof' || key === 'document_form16' || key === 'document_salarySlip') {
+                let update = {
+                    document_type: key,
+                    document_verification: documents[key].file_verification,
+                    document_status: documents[key].file_status
+                }
+                console.log(update);
+                documentsDetails.push(update)
+            }
+        }
+    }
+    await doc()
+    res.status(StatusCodes.OK).json(documentsDetails)
+}
+
+const getUserLoanDocumentLink = async (req, res) => {
+    const { userId: userId, email: email } = req.user;
+    const { doc } = req.params;
+    const user = await User.findOne({ _id: userId, email: email }).select("userDocuments")
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID:${userId}`)
+    }
+    const documents = await UserDocuments.findOne({ _id: user.userDocuments.toString() }, { _id: 0 })
+    const url = documents[doc].file_location
+    if (!url) throw new NotFoundError('No documents found')
+    res.status(StatusCodes.OK).send(url)
+}
+
+
+
+module.exports = { createUser, getAllUser, login, getUser, updateUser, deleteUser, getAdmin, blockUser, unblockUser, handleRefreshToken, logout, passwordReset, forgetPasswordToken, resetPassword,updateUserLoanDetails,checkOtp,setUserPassword,checkLoginOtp,getUser1,checkisBankAccountLinked,checkIfAvailable,getBankDetails,checkAuth,getLoanInquiryDetails,getUserDocumentDetails,getUserLoanDocumentLink };
 

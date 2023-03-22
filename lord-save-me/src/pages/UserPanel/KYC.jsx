@@ -9,14 +9,14 @@ import axios from "axios";
 
 export default function KYC() {
 
-  const business_documents = [
+ const common_documents = [
     { name: 'Photo Identity Proof', value: 'document_photoID' },
     { name: 'Address Proof', value: 'document_addressProof' },
     { name: 'Bank Statements (max 1 year old)', value: 'document_bankStatement' },
     { name: 'Income Tax Returns', value: 'document_ITR' },
     { name: 'Income Proof', value: 'document_incomeProof' },
-    { name: 'List of existing loans and debts', value: 'document_loans&debts' },
-    { name: 'List of Accounts', value: 'document_accounts' }
+    { name: 'List of existing loans and debts', value: 'document_loans_debts' },
+   { name: 'List of Accounts', value: 'document_accounts' },
  ]
  
  const business_documents = [  
@@ -25,9 +25,12 @@ export default function KYC() {
     { name: 'Cash Flow Statements', value: 'document_cashFlow' },
     { name: 'Cancelled Cheque', value: 'document_cancelledCheque' }
  ]
+ ]
 
  const home_documents = [
+ const home_documents = [
     { name: 'Business Existence Proof (COI)', value: 'document_COI' },
+    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },  
     { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },  
     { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
@@ -35,19 +38,21 @@ export default function KYC() {
     { name: 'Office Address Proof', value: 'document_officeAddressProof' },
     { name: 'Office Ownership Proof', value: 'document_officeOwnershipProof' },
  ]
+ ]
 
+ const education_documents = [
  const education_documents = [
     { name: 'Proof of Admission', value: 'document_proofOfAdmission' },
     { name: 'Marksheet (S.S.C./H.S.C./Degree/Diploma)', value: 'document_marksheet' },
-    { name: 'Collateral Property Document', value: 'document_collateralPropertyDocument' }
+    { name: 'Collateral Property Document', value: 'document_marksheet' }
  ]
 
+ const personal_documents = [
  const personal_documents = [
     { name: 'Job Continuity Proof', value: 'document_jobContinuityProof' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
     { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },  
  ]
-
   const [modalShow, setModalShow] = useState(false);
 
   const [value, setValue] = useState([1]);
@@ -84,10 +89,17 @@ export default function KYC() {
     const formData = new FormData()
     let file = event.target.files[0];
     formData.append('document', file)
-    const name = document.getElementsByClassName("form-control")
-
-    await setFiles([...files, { documentType: name.documentType.value, uploaded_file: file, file_name: file.name }]);
-
+    console.log(files.length);
+    const name = document.getElementsByClassName("doc")
+    console.log(name.doc.value);
+    if (files.length === 0) {
+      await setFiles([...files, { documentType: name.doc.value, uploaded_file: file, file_name: file.name }]);
+    }
+    else {
+      const name = value[files.length]
+      await setFiles([...files, { documentType: name, uploaded_file: file, file_name: file.name }]);
+    }
+    
     // setFiles([...files, {formData}]);
     // reading the actual uploaded file
     // file_reader.readAsDataURL(file);
@@ -125,6 +137,7 @@ export default function KYC() {
     } catch (err) {
       console.log(err);
     }
+    window.location.reload()
   }
   // button state whether it's disabled or enabled
   const [enabled, setEnabled] = useState(false);
@@ -172,20 +185,20 @@ export default function KYC() {
                           <Col className="col-md-4">
                             <Form.Group controlId="formGridState">
                               <Form.Label><MDBBadge pill color='info' light>CHOOSE DOCUMENT</MDBBadge></Form.Label>
-
-                              <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="documentType" required >
+                              
+                              <Form.Select value={data} onChange={e => handleChange(e, i)} name="documentType" className="form-control" required >
                                 <option defaultValue value=''>Choose...</option>
-                                <option disabled>-----------------COMMON FOR ALL-------------------</option>
-                                {common_documents.map((option) => <option value={option.value}>{option.name}</option>)}
+                                <option disabled>-----------------COMMON FOR ALL-------------------</option> 
+                                {common_documents.map((option) => <option value={option.value} className="doc" name="doc" >{option.name}</option>)}
                                 <option disabled>-------------------BUSINESS LOAN-------------------</option>
-                                {business_documents.map((option) => <option value={option.value}>{option.name}</option>)}
+                                {business_documents.map((option) => <option value={option.value}  >{option.name}</option>)}
                                 <option disabled>---------------------HOME LOAN--------------------</option>
-                                {home_documents.map((option) => <option value={option.value}>{option.name}</option>)}
+                                {home_documents.map((option) => <option value={option.value} >{option.name}</option>)}
                                 <option disabled>-----------------EDUCATION LOAN------------------</option>
-                                {education_documents.map((option) => <option value={option.value}>{option.name}</option>)}
+                                {education_documents.map((option) => <option value={option.value} >{option.name}</option>)}
                                 <option disabled>------------------PERSONAL LOAN------------------</option>
-                                {personal_documents.map((option) => <option value={option.value}>{option.name}</option>)}
-                              </Form.Select>
+                                {personal_documents.map((option) => <option value={option.value} >{option.name}</option>)}
+                                </Form.Select> 
                               <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                               <Form.Control.Feedback type='invalid'>Please provide a document!</Form.Control.Feedback>
                             </Form.Group>

@@ -46,26 +46,26 @@ export default function UserDashboard() {
         },
     }
 
-    // const [loanDetails, setLoanDetails] = useState([])
+    const [loanDetails, setLoanDetails] = useState([])
 
-    // useEffect(() => {
-    //     getloanDetails()
-    // }, [])
+    useEffect(() => {
+        getloanDetails()
+    }, [])
 
-    // const getloanDetails = async () => {
-    //     try {
-    //         await axios.get("http://localhost:5000/api/v1/user/getUser1", {
-    //             withCredentials: true
-    //         }).then(response => {
-    //             console.log(response)
-    //             setLoanDetails(response.data.user.loanInquiries)
-    //         })
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
+    const getloanDetails = async () => {
+        try {
+            await axios.get("http://localhost:5000/api/v1/user/getUser1", {
+                withCredentials: true
+            }).then(response => {
+                console.log(response)
+                setLoanDetails(response.data.user.loanInquiries)
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-    // console.log(loanDetails);
+    console.log(loanDetails);
 
     const Navigate = useNavigate();
 
@@ -82,7 +82,7 @@ export default function UserDashboard() {
                 },
                 {
                     name: <MDBBadge pill color='dark' light>Loan Type</MDBBadge>,
-                    selector: (row) => row.Loan,
+                    selector: (row) => row.loanType,
                     sortable: true
                 }, 
                 {
@@ -97,7 +97,7 @@ export default function UserDashboard() {
                 // },
                 {
                     name: <MDBBadge pill color='dark' light>Loan Status</MDBBadge>,
-                    selector: (row) => row.applicationStatus,
+                    selector: (row) => row.applicationStatus !== 'Pending' ? <MDBBadge pill color='success' light>Accepted</MDBBadge> : <MDBBadge pill color='danger' light>Pending</MDBBadge>,
                     sortable: true,
                 },
             ]);
@@ -369,7 +369,7 @@ export default function UserDashboard() {
 
     const handleRowClicked = (row) => {
         console.log(row.ClientName);
-        Navigate('/user-panel/my-info/loan-info');
+        Navigate(`/user-panel/my-info/loan-info/${row._id}`);
     };
     //outputs the name property into the console
 
@@ -385,7 +385,7 @@ export default function UserDashboard() {
                             //title="Client Summary"
                             columns={columns}
                             //data={loanDetails}
-                            data={clientSummary}
+                            data={loanDetails}
                             defaultSortFieldId
                             pagination={10}
                             fixedHeader

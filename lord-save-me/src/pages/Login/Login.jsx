@@ -82,9 +82,14 @@ function Login() {
                 withCredentials: true
             }).then(response => {
                 console.log(response)
-                alert(response.data.msg)
-                const cookie = document.cookie
-                console.log(cookie);
+                if (response.data.user && !response.data.admin) {
+                    Navigate('/user-panel/user-dashboard')
+                    return
+                }
+                else{
+                    Navigate('/admin-panel/admin-dashboard')
+                    return
+                }
             })
         } catch (err) {
             if (err.response) {
@@ -95,7 +100,6 @@ function Login() {
                 return
             }
         }
-        Navigate('/sidebar/my-info/personal-info')
     }
 
     return (
