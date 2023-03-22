@@ -1,26 +1,26 @@
 import React from 'react';
-import {
-    MDBContainer,
-    MDBInput,
-    MDBBtn,
-    MDBIcon
-}
-    from 'mdb-react-ui-kit';
+import { MDBContainer, MDBInput, MDBBtn, MDBIcon, MDBBadge } from 'mdb-react-ui-kit';
 
 function ForgotPassword() {
     return (
-        <MDBContainer className="p-3 my-5 d-flex flex-column w-25">
-            <div className="d-flex mx-auto">
-                <p>Reset Password</p>
+    <>
+    	<MDBContainer>
+        	<div className="title p-2"><MDBBadge pill color='primary' light>RESET PASSWORD</MDBBadge></div>
+        </MDBContainer>
+        
+        <MDBContainer className="p-1 my-5 d-flex flex-column w-50">
+			<div className="d-flex mx-auto">
+                <h5><MDBBadge pill color='primary' light>Please enter your Registered Email</MDBBadge></h5>
             </div>
+        </MDBContainer>
+    	
+        <MDBContainer className="p-3 my-5 d-flex flex-column w-25">
 
             <MDBInput wrapperClass='mb-4' label='Registered Email' id='form1' type='email' />
 
             <MDBBtn className="mb-4">Send Link</MDBBtn>
 
-            <div className="d-flex text-center mx-auto">
-                <p>A password reset link has been sent to your registered email.</p>
-            </div>
+            
 
             <div className="text-center">
 
@@ -45,6 +45,13 @@ function ForgotPassword() {
             </div>
 
         </MDBContainer>
+        
+        <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
+        	<div className="d-flex text-center mx-auto">
+                <h5><MDBBadge pill color='primary' light>A password reset link will be sent to your registered email</MDBBadge></h5>
+            </div>
+        </MDBContainer>
+        </>
     );
 }
 

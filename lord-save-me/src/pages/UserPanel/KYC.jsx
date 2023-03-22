@@ -25,9 +25,12 @@ export default function KYC() {
     { name: 'Cash Flow Statements', value: 'document_cashFlow' },
     { name: 'Cancelled Cheque', value: 'document_cancelledCheque' }
  ]
+ ]
 
  const home_documents = [
+ const home_documents = [
     { name: 'Business Existence Proof (COI)', value: 'document_COI' },
+    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },  
     { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },  
     { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
@@ -35,13 +38,16 @@ export default function KYC() {
     { name: 'Office Address Proof', value: 'document_officeAddressProof' },
     { name: 'Office Ownership Proof', value: 'document_officeOwnershipProof' },
  ]
+ ]
 
+ const education_documents = [
  const education_documents = [
     { name: 'Proof of Admission', value: 'document_proofOfAdmission' },
     { name: 'Marksheet (S.S.C./H.S.C./Degree/Diploma)', value: 'document_marksheet' },
     { name: 'Collateral Property Document', value: 'document_marksheet' }
  ]
 
+ const personal_documents = [
  const personal_documents = [
     { name: 'Job Continuity Proof', value: 'document_jobContinuityProof' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
@@ -58,13 +64,13 @@ export default function KYC() {
     const inputdata = [...value]
     inputdata[i] = onChangeValue.target.value;
     setValue(inputdata)
-   }
-   const handleDelete=(i)=>{
-        const deleteValue=[...value]
-        deleteValue.splice(i,1)
-        setValue(deleteValue)  
-   }
-   console.log(value,"data-");
+  }
+  const handleDelete = (i) => {
+    const deleteValue = [...value]
+    deleteValue.splice(i, 1)
+    setValue(deleteValue)
+  }
+  console.log(value, "data-");
 
 
   // state that will hold the Array of objects
@@ -74,11 +80,11 @@ export default function KYC() {
   // files read are encoded as Base64
   async function onFileUpload(event) {
     event.preventDefault();
-    
-    console.log(">",event.target.value);
+
+    console.log(">", event.target.value);
     // Create an instance of FileReader API
     // let file_reader = new FileReader();
-    
+
     // Get the actual file itself
     const formData = new FormData()
     let file = event.target.files[0];
@@ -101,19 +107,19 @@ export default function KYC() {
   // handle submit button for form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(); 
+    const formData = new FormData();
 
     console.log(files);
 
     files.forEach(file => {
-      formData.append('fileList',file.uploaded_file)
+      formData.append('fileList', file.uploaded_file)
     })
 
     try {
       await axios.post("http://localhost:5000/api/v1/file/upload/cloud", formData, {
-        withCredentials:true,
+        withCredentials: true,
         headers: {
-                    "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data"
         }
       }).then(response => {
         console.log(response);
@@ -125,7 +131,7 @@ export default function KYC() {
     try {
       await axios.post("http://localhost:5000/api/v1/file/upload/details", files, {
         withCredentials: true
-      } ).then(response => {
+      }).then(response => {
         console.log(response);
       })
     } catch (err) {
