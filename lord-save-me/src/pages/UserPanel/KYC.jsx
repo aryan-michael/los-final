@@ -8,9 +8,9 @@ import "./KYC.css";
 import axios from "axios";
 
 export default function KYC() {
- 
- const common_documents = [
- 	{ name: 'Photo Identity Proof', value: 'document_photoID' },
+
+  const business_documents = [
+    { name: 'Photo Identity Proof', value: 'document_photoID' },
     { name: 'Address Proof', value: 'document_addressProof' },
     { name: 'Bank Statements (max 1 year old)', value: 'document_bankStatement' },
     { name: 'Income Tax Returns', value: 'document_ITR' },
@@ -59,13 +59,13 @@ export default function KYC() {
     const inputdata = [...value]
     inputdata[i] = onChangeValue.target.value;
     setValue(inputdata)
-   }
-   const handleDelete=(i)=>{
-        const deleteValue=[...value]
-        deleteValue.splice(i,1)
-        setValue(deleteValue)  
-   }
-   console.log(value,"data-");
+  }
+  const handleDelete = (i) => {
+    const deleteValue = [...value]
+    deleteValue.splice(i, 1)
+    setValue(deleteValue)
+  }
+  console.log(value, "data-");
 
 
   // state that will hold the Array of objects
@@ -75,19 +75,19 @@ export default function KYC() {
   // files read are encoded as Base64
   async function onFileUpload(event) {
     event.preventDefault();
-    
-    console.log(">",event.target.value);
+
+    console.log(">", event.target.value);
     // Create an instance of FileReader API
     // let file_reader = new FileReader();
-    
+
     // Get the actual file itself
     const formData = new FormData()
     let file = event.target.files[0];
     formData.append('document', file)
     const name = document.getElementsByClassName("form-control")
-  
-    await setFiles([...files, { documentType: name.documentType.value, uploaded_file: file,file_name:file.name}]);
-    
+
+    await setFiles([...files, { documentType: name.documentType.value, uploaded_file: file, file_name: file.name }]);
+
     // setFiles([...files, {formData}]);
     // reading the actual uploaded file
     // file_reader.readAsDataURL(file);
@@ -95,19 +95,19 @@ export default function KYC() {
   // handle submit button for form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(); 
+    const formData = new FormData();
 
     console.log(files);
 
     files.forEach(file => {
-      formData.append('fileList',file.uploaded_file)
+      formData.append('fileList', file.uploaded_file)
     })
 
     try {
       await axios.post("http://localhost:5000/api/v1/file/upload/cloud", formData, {
-        withCredentials:true,
+        withCredentials: true,
         headers: {
-                    "Content-Type": "multipart/form-data"
+          "Content-Type": "multipart/form-data"
         }
       }).then(response => {
         console.log(response);
@@ -119,7 +119,7 @@ export default function KYC() {
     try {
       await axios.post("http://localhost:5000/api/v1/file/upload/details", files, {
         withCredentials: true
-      } ).then(response => {
+      }).then(response => {
         console.log(response);
       })
     } catch (err) {
@@ -172,7 +172,7 @@ export default function KYC() {
                           <Col className="col-md-4">
                             <Form.Group controlId="formGridState">
                               <Form.Label><MDBBadge pill color='info' light>CHOOSE DOCUMENT</MDBBadge></Form.Label>
-                              
+
                               <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="documentType" required >
                                 <option defaultValue value=''>Choose...</option>
                                 <option disabled>-----------------COMMON FOR ALL-------------------</option>
