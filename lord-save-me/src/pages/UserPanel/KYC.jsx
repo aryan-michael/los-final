@@ -8,56 +8,45 @@ import "./KYC.css";
 import axios from "axios";
 
 export default function KYC() {
-
- const business_documents = [
-    { name: 'Photo Identity Proof', value: 'document_pan' },
+ 
+ const common_documents = [
+ 	{ name: 'Photo Identity Proof', value: 'document_photoID' },
     { name: 'Address Proof', value: 'document_addressProof' },
-    { name: 'Certificate of Incorporation', value: 'document_COI' },
-    { name: 'Income Tax Returns', value: 'document_ITR' },
-    { name: 'GST Returns', value: 'document_GST' },
     { name: 'Bank Statements (max 1 year old)', value: 'document_bankStatement' },
+    { name: 'Income Tax Returns', value: 'document_ITR' },
+    { name: 'Income Proof', value: 'document_incomeProof' },
     { name: 'List of existing loans and debts', value: 'document_loans&debts' },
-    { name: 'List of Accounts', value: 'document_accounts' },
+    { name: 'List of Accounts', value: 'document_accounts' }
+ ]
+ 
+ const business_documents = [  
+    { name: 'Certificate of Incorporation', value: 'document_COI' },
+    { name: 'GST Returns', value: 'document_GST' },
     { name: 'Cash Flow Statements', value: 'document_cashFlow' },
     { name: 'Cancelled Cheque', value: 'document_cancelledCheque' }
-  ]
+ ]
 
-  const home_documents = [
-    { name: 'Photo Identity Proof', value: 'document_photoID' },
-    { name: 'Address Proof', value: 'document_addressProof' },
+ const home_documents = [
     { name: 'Business Existence Proof (COI)', value: 'document_COI' },
-    { name: 'Income Tax Returns', value: 'document_ITR' },
-    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },
-    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },  
     { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
     { name: 'Property Document (Sale deed, Khata)', value: 'document_propertyDoc' },
     { name: 'Office Address Proof', value: 'document_officeAddressProof' },
     { name: 'Office Ownership Proof', value: 'document_officeOwnershipProof' },
-    { name: 'Income Proof', value: 'document_incomeProof' }
-  ]
+ ]
 
-  const education_documents = [
-    { name: 'Photo Identity Proof (Applicant/Co-Applicant)', value: 'document_photoID' },
-    { name: 'Address Proof (Applicant/Co-Applicant)', value: 'document_addressProof' },
-    { name: 'Income Proof (Applicant/Co-Applicant)', value: 'document_incomeProof' },
-    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
+ const education_documents = [
     { name: 'Proof of Admission', value: 'document_proofOfAdmission' },
     { name: 'Marksheet (S.S.C./H.S.C./Degree/Diploma)', value: 'document_marksheet' },
     { name: 'Collateral Property Document', value: 'document_collateralPropertyDocument' }
-  ]
+ ]
 
-  const personal_documents = [
-    { name: 'Photo Identity Proof (Applicant/Co-Applicant)', value: 'document_photoID' },
-    { name: 'Address Proof (Applicant/Co-Applicant)', value: 'document_addressProof' },
-    { name: 'Income Proof (Applicant/Co-Applicant)', value: 'document_incomeProof' },
+ const personal_documents = [
     { name: 'Job Continuity Proof', value: 'document_jobContinuityProof' },
-    { name: 'Bank Statements (6 months old)', value: 'document_bankStatement' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
-    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
-    { name: 'List of existing loans and debts', value: 'document_loans&debts' },
-    { name: 'List of Accounts', value: 'document_accounts' }
-  ]
+    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },  
+ ]
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -186,6 +175,8 @@ export default function KYC() {
                               
                               <Form.Select value={data} onChange={e => handleChange(e, i)} className="form-control" name="documentType" required >
                                 <option defaultValue value=''>Choose...</option>
+                                <option disabled>-----------------COMMON FOR ALL-------------------</option>
+                                {common_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                                 <option disabled>-------------------BUSINESS LOAN-------------------</option>
                                 {business_documents.map((option) => <option value={option.value}>{option.name}</option>)}
                                 <option disabled>---------------------HOME LOAN--------------------</option>

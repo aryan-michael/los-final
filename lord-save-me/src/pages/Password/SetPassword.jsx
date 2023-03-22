@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import {
-    MDBContainer,
-    MDBInput,
-    MDBCheckbox,
-    MDBBtn,
-    MDBIcon,
-    MDBValidationItem,
-    MDBValidation,
-    MDBModalContent
-}
-    from 'mdb-react-ui-kit';
+import { MDBContainer, MDBInput, MDBCheckbox, MDBBtn, MDBIcon, MDBValidationItem, MDBValidation, MDBBadge } from 'mdb-react-ui-kit';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -59,19 +49,28 @@ function SetPassword({ setLoginToken, loginToken }) {
     return (
         <div>
         <MDBValidation>
-        <MDBContainer className="p-3 my-5 d-flex flex-column w-25">
-            <div className="d-flex mx-auto">
-                <p>Set a Strong Password</p>
+        
+        <MDBContainer>
+        	<div className="title p-2"><MDBBadge pill color='primary' light>SET A NEW PASSWORD</MDBBadge></div>
+        </MDBContainer>
+        
+        <MDBContainer className="p-1 my-5 d-flex flex-column w-50">
+			<div className="d-flex mx-auto">
+                <h5><MDBBadge pill color='primary' light>Set a Strong Password</MDBBadge></h5>
             </div>
+        </MDBContainer>
+        
+        <MDBContainer className="p-3 my-5 d-flex flex-column w-25">
+            
             <MDBValidationItem feedback='Please enter your password' invalid >
-                    <MDBInput wrapperClass='mb-4' id='form1' type='password' onChange={handleChange} name='pass' value={password.pass} autoComplete='off' placeholder='Password' required />
+                    <MDBInput wrapperClass='mb-4' id='form1' label='Password' type='password' onChange={handleChange} name='pass' value={password.pass} autoComplete='off'  required />
                 </MDBValidationItem>
             <MDBValidationItem feedback='Please Re-enter your password' invalid >
-                    <MDBInput wrapperClass='mb-4' placeholder='Re-enter Password' onChange={handleChange} name='re_pass' value={password.re_pass} id='form2' type='password' autoComplete='off' required />
+                    <MDBInput wrapperClass='mb-4' label='Re-enter Password' onChange={handleChange} name='re_pass' value={password.re_pass} id='form2' type='password' autoComplete='off' required />
             </MDBValidationItem>        
 
-            <div className="d-flex justify-content-between mx-3 mb-4">
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Show Password' />
+            <div className="d-flex justify-content-between mb-4">
+                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label=<MDBBadge pill color='primary' light>Show Password</MDBBadge> />
             </div>
 
             <MDBBtn className="mb-4" onClick={sendPass}>Confirm New Password</MDBBtn>
