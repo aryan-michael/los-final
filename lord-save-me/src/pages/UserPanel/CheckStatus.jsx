@@ -133,11 +133,12 @@ const CheckStatus = () => {
     }, []);
 		
 
-	const getUserDocumentsDetails = async (req, res) => {
+	const getUserDocumentsDetails = async () => {
 		try {
 			await axios.get('http://localhost:5000/api/v1/user/documents/getAll', {
 				withCredentials: true
 			}).then(response => {
+				console.log(response.data);
 				setDocumentDetails(response.data)
 			})
 		} catch (err) {
