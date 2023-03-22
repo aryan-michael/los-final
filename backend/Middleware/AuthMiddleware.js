@@ -39,8 +39,8 @@ const authMiddleware = async (req, res, next) => {
 }
 
 const isAdmin = async (req, res, next) => {
-    const { email } = req.user;
-    const findUser = await User.findOne({ email });
+    const { email,userId } = req.user;
+    const findUser = await User.findOne({email:email,userId:userId});
     if (!findUser) {
         throw new NotFoundError('Admin not found')
     } else {

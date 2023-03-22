@@ -11,6 +11,7 @@ const bankRoute = require('./routes/bankAccountRoutes')
 const proxyUserRoute = require('./routes/proxyUserRoutes')
 const fileUploadRoute = require('./routes/fileUploadRoutes')
 const userDocumentsRoute = require('./routes/userDocumentsRoutes')
+const adminRoute = require('./routes/adminRoutes')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -57,7 +58,7 @@ app.use('/api/v1/bank', bankRoute)
 app.use('/api/v1/proxyUser', proxyUserRoute)
 app.use('/api/v1/file', fileUploadRoute)
 app.use('/api/v1/user/document',userDocumentsRoute)
-
+app.use('/api/v1/admin',adminRoute)
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware)

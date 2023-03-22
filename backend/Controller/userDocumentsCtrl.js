@@ -19,4 +19,6 @@ const changeDetails = async (req, res) => {
     res.status(StatusCodes.OK).json(doc)
 }
 
+
+
 module.exports = {createUserDocuments,changeDetails}

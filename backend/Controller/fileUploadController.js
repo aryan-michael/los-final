@@ -116,22 +116,26 @@ const uploadFileCloud = async (req, res) => {
 };
 
 const getFileDetails = async (req, res) => {
+    console.log("bb",req.body);
     const { userId, email } = req.user
     const user = await User.findOne({ _id: userId, email: email })
     if (!user) throw new NotFoundError('No user Found')
     console.log(user.userDocuments);
     try {
-        let documents = req.body.map((document) => {
-            console.log(document.file_name);
+        let documents = req.body.map(async (document) => {
+            console.log(document.documentType);
+            const location = await Document.findOneAndDelete({file_name:`${user._id}_${document.file_name}`})
+            console.log("location",location);
             let update = {
                 [document.documentType]: {
-                    file_name: `${userId}_${document.file_name}`,
-                    file_verification: 'unverified',
-                    file_status:'uploaded'
+                    file_name: `${user._id}_${document.file_name}`,
+                    file_verification: 'Unverified',
+                    file_status: 'Uploaded',
+                    file_location: location.file_location
                 }
                     
             }
-            console.log(update);
+            console.log(">uuu",update);
             return UserDocuments.findOneAndUpdate({
                 _id: user.userDocuments
             },update , {
@@ -142,23 +146,12 @@ const getFileDetails = async (req, res) => {
         const doc = await Promise.all(documents)
         console.log(doc);
     } catch {
-        const doc = await UserDocuments.findOneAndUpdate({
-                _id: user.userDocuments
-            },
-                {
-                    [req.body.documentType]: {
-                        file_name: [req.body.file_name]
-                    }
-                }, {
-                new: true,
-                runValidators: true
-        })
-        console.log(doc);
+        console.log("err occured");
     }
     
     console.log(">>",req.body);
     res.status(StatusCodes.OK).json({
-        msg: req.body})
+        msg: "done"})
 }
 
 
