@@ -25,9 +25,9 @@ export default function KYC() {
     { name: 'Cash Flow Statements', value: 'document_cashFlow' },
     { name: 'Cancelled Cheque', value: 'document_cancelledCheque' }
  ]
- ]
+ 
 
- const home_documents = [
+
  const home_documents = [
     { name: 'Business Existence Proof (COI)', value: 'document_COI' },
     { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },  
@@ -38,16 +38,15 @@ export default function KYC() {
     { name: 'Office Address Proof', value: 'document_officeAddressProof' },
     { name: 'Office Ownership Proof', value: 'document_officeOwnershipProof' },
  ]
- ]
+ 
 
- const education_documents = [
  const education_documents = [
     { name: 'Proof of Admission', value: 'document_proofOfAdmission' },
     { name: 'Marksheet (S.S.C./H.S.C./Degree/Diploma)', value: 'document_marksheet' },
     { name: 'Collateral Property Document', value: 'document_marksheet' }
  ]
 
- const personal_documents = [
+
  const personal_documents = [
     { name: 'Job Continuity Proof', value: 'document_jobContinuityProof' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
@@ -90,15 +89,15 @@ export default function KYC() {
     let file = event.target.files[0];
     formData.append('document', file)
     console.log(files.length);
-    const name = document.getElementsByClassName("doc")
-    console.log(name.doc.value);
-    if (files.length === 0) {
-      await setFiles([...files, { documentType: name.doc.value, uploaded_file: file, file_name: file.name }]);
-    }
-    else {
+    // const name = document.getElementsByClassName("doc")
+    // console.log(name.doc.value);
+    // if (files.length === 0) {
+    //   await setFiles([...files, { documentType: name.doc.value, uploaded_file: file, file_name: file.name }]);
+    // }
+ 
       const name = value[files.length]
       await setFiles([...files, { documentType: name, uploaded_file: file, file_name: file.name }]);
-    }
+    
     
     // setFiles([...files, {formData}]);
     // reading the actual uploaded file
