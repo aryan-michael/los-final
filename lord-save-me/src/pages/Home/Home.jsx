@@ -8,11 +8,11 @@ import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
- 
+
     return (
         <>
             <NavBar />
-            <Container fluid>
+            <Container>
                 <Row className="text-center ">
                     <Col className="p-3" xs={12} md={6} lg={3}>
                         <div className="tag px-5 pt-5 pb-3">
