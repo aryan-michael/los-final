@@ -9,7 +9,7 @@ import axios from "axios";
 
 export default function KYC() {
 
-  const business_documents = [
+  const common_documents = [
     { name: 'Photo Identity Proof', value: 'document_photoID' },
     { name: 'Address Proof', value: 'document_addressProof' },
     { name: 'Bank Statements (max 1 year old)', value: 'document_bankStatement' },
