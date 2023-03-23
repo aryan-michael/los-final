@@ -176,15 +176,38 @@ function AdminForms({ loan_type, country, setLoginToken }) {
         businessName: ''
     })  //loan details
 
+    const [check, setCheck] = useState({
+        mobile: '',
+        email:''
+    })
+
     const [validated,setValidated] = useState(false)
     const [loanValidated, setLoanValidated] = useState(false)
     
     const [progressStep, setProgressStep] = useState(1);
 
-    const handlePersonalDetails = (e) => {
+    const handlePersonalDetails = async (e) => {
         const targetName = e.target.name
         let valid = { status: true, value: e.target.value }
         const validateFn = fieldValidations[targetName]
+        if (targetName === 'mobile' || targetName === 'email') {
+            let error = ''
+            const data = {
+                [targetName] : e.target.value
+            }
+            const tag = targetName.toLocaleUpperCase()
+            await axios.post("http://localhost:5000/api/v1/user/cia", data).then(response => {
+            console.log(response.data.available)
+            if (!response.data.available) {
+                console.log("here");
+                error = `${tag}: already taken.`
+            }
+            })
+            setCheck({
+                    ...check, 
+                    [targetName]:error
+                })
+        }
         if (typeof validateFn === "function") {
             valid = validateFn(valid.value) // boolean value
         }
@@ -211,11 +234,12 @@ function AdminForms({ loan_type, country, setLoginToken }) {
         setPersonalDetails(x);
     };
 
-    const handleLoanDetails = (e) => {
+    const handleLoanDetails = async (e) => {
         const targetName = e.target.name
         let valid = { status: true, value: e.target.value }
 
         const validateFn = fieldValidations[targetName]
+        
         if (typeof validateFn === "function") {
             valid = validateFn(valid.value) 
         }
@@ -308,9 +332,10 @@ function AdminForms({ loan_type, country, setLoginToken }) {
             }
             /////////////////////////////////////////Backend Code ///////////////////////////////////////////
             try {
-                await axios.post('http://localhost:5000/api/v1/user/signup', personalDetails, {
+                await axios.post('http://localhost:5000/api/v1/admin/create/user', personalDetails, {
                     withCredentials:true
                 }).then(response => {
+                    console.log(response);
                     // setLoginToken(response.data.user)
                 })
             } catch (err) {
@@ -327,7 +352,8 @@ function AdminForms({ loan_type, country, setLoginToken }) {
                 await axios.post('http://localhost:5000/api/v1/loan/create', {loanDetails,email:personalDetails.email}, {
                     withCredentials:true
                 }).then(response => {
-                    // setLoginToken(response.data.user)
+                    alert(response.data.msg)
+                    window.location.reload()
                 })
             } catch (err) {
                 if (err.response) {
@@ -340,7 +366,6 @@ function AdminForms({ loan_type, country, setLoginToken }) {
             }
 
              /////////////////////////////////////////Backend Code ///////////////////////////////////////////
-            Navigate('/otp');
         } else {
             if (!isFormEmpty) {
                 if (personalDetails.pin.length < 6 || personalDetails.mobile.length < 10 || error.dob || error.email) {
@@ -363,9 +388,9 @@ function AdminForms({ loan_type, country, setLoginToken }) {
 
     const pageDisplay = () => {
         if (page === 0) {
-            return <PersonalDetails personalDetails={personalDetails} setPersonalDetails={handlePersonalDetails} validated={validated} error={error} />;
+            return <PersonalDetails personalDetails={personalDetails} setPersonalDetails={handlePersonalDetails} validated={validated} error={error} check={check} />;
         } else {
-            return <LoanDetails loanDetails={loanDetails} setLoanDetails={handleLoanDetails} loanValidated={loanValidated} error={error} />;
+            return <LoanDetails loanDetails={loanDetails} setLoanDetails={handleLoanDetails} loanValidated={loanValidated} error={error} chech={check} />;
         }
     };
     return (

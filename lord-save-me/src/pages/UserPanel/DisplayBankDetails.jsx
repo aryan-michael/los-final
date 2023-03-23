@@ -8,12 +8,15 @@ import { MDBBadge } from "mdb-react-ui-kit";
 
 const DisplayBankDetails = () => {
 
+    const [bankDetails,setBankDetails] = useState({})
+
     const getBankDetails = async () => {
         try {
             await axios.get("http://localhost:5000/api/v1/user/get-bank-details", {
                 withCredentials: true
             }).then(response => {
-                console.log(response);
+                console.log(response.data.user);
+                setBankDetails(response.data.user)
             })
         } catch (err) {
             if (err.response) {
@@ -50,14 +53,14 @@ const DisplayBankDetails = () => {
 
                 <Row className="mb-3">
                     {/* <Alert>{error}</Alert> */}
-                    <div className="p-4 title"><MDBBadge pill color='secondary' light>Bank Details Finale</MDBBadge></div>
+                    <div className="p-4 title"><MDBBadge pill color='secondary' light>Bank Details</MDBBadge></div>
                 </Row>
 
                 <Row className="mb-3">
                     {/* BANK ACCOUNT NUMBER */}
                     <Form.Group controlId="formBasicEmail" className="col col-sm-6">
-                        <Form.Label>Bank Account Number</Form.Label>
-                        <Form.Control type="number" name="account_number" className="form-control" readOnly />
+                        <Form.Label>Account Holders Name</Form.Label>
+                        <Form.Control type="number" name="account_number" value={bankDetails.cardholder} className="form-control" readOnly />
                     </Form.Group>
 
                     {/* OTP */}

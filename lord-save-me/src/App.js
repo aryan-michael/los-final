@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 //HOME PAGE
+import HomePage from './pages/Home/HomePage';
 import Home from './pages/Home/Home';
 import Policy from './pages/Home/Policy';
 import Forms from './pages/Register/Forms';
@@ -9,6 +10,7 @@ import Login from './pages/Login/Login';
 import SetPassword from './pages/Password/SetPassword';
 import ForgotPassword from './pages/Password/ForgotPassword';
 import OTP from './pages/Password/OTP';
+import UserVerification from './pages/Password/UserVerification';
 
 //COMPONENTS
 import NavBar from './components/NavBar/NavBar';
@@ -48,16 +50,18 @@ function App() {
     <>
       <Routes>
         {/* HOME */}
-        <Route exact path='/' element={<Home />} />
-        <Route path='loan/business' element={<Forms loan_type={"Business"} country={"India"} />} />
-        <Route path='loan/home' element={<Forms loan_type={"Home"} country={"India"} />} />
-        <Route path='loan/education' element={<Forms loan_type={"Education"} country={"India"} />} />
-        <Route path='loan/personal' element={<Forms loan_type={"Personal"} country={"India"} />} />
+        <Route exact path='/' element={<HomePage />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='home/loan/business' element={<Forms loan_type={"Business"} country={"India"} />} />
+        <Route path='home/loan/home' element={<Forms loan_type={"Home"} country={"India"} />} />
+        <Route path='home/loan/education' element={<Forms loan_type={"Education"} country={"India"} />} />
+        <Route path='home/loan/personal' element={<Forms loan_type={"Personal"} country={"India"} />} />
         <Route path='/otp' element={<OTP />} />
         <Route path='/set-password' element={<SetPassword />} />
         <Route path='/login/client' element={<Login />} />
         <Route path='/login/admin' element={<Login />} />
         <Route path='/forgot-password/:id' element={<ForgotPassword />} />
+        <Route path='/user/verify/:userToken' element={<UserVerification />} />
         <Route path='/policy' element={<Policy />} />
         <Route path='/creators' element={<Creators />} />
 
@@ -73,7 +77,7 @@ function App() {
         <Route path="/user-panel/check-status" element={<CheckStatus />} />
         <Route path="/user-panel/add-inquiry" element={<AddInquiry />} />
         <Route path="/user-panel/my-info/personal-info" element={<PersonalInfo />} />
-        <Route path="/user-panel/my-info/loan-info" element={<LoanInfo />} />
+        <Route path="/user-panel/my-info/loan-info/:loanId" element={<LoanInfo />} />
         <Route path="/user-panel/bank-details" element={<BankDetails />} />
         {/* <Route path="/user-panel/bank-details-final" element={<DisplayBankDetails />} /> */}
 
@@ -81,8 +85,8 @@ function App() {
         <Route path="/admin-panel/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin-panel/add-user" element={<AddUser />} />
         <Route path="/admin-panel/client-data" element={<ClientData />} />
-        <Route path="/admin-panel/client-details" element={<ClientDetails />} />
-        <Route path="/admin-panel/client-details/loan-data" element={<LoanData />} />
+        <Route path="/admin-panel/client-details/:id/:email" element={<ClientDetails />} />
+        <Route path="/admin-panel/client-details/loan-data/:userId/:email/:loanId" element={<LoanData />} />
         <Route path="/admin-panel/statistics" element={<Statistics />} />
         <Route path="/admin-panel/analytics" element={<Analytics />} />
 

@@ -6,6 +6,7 @@ import { MDBBadge } from "mdb-react-ui-kit";
 import { Container, Form, Row, Col } from 'react-bootstrap';
 import DataTable from "react-data-table-component";
 import './CheckStatus.css';
+import axios from "axios"
 
 const CheckStatus = () => {
 	
@@ -103,43 +104,69 @@ const CheckStatus = () => {
 	
 	const Navigate = useNavigate();
 	
-	const viewDocument = () => {
-		window.open(`/hello`);
+	const viewDocument = async (row) => {
+		let url = ''
+		try {
+			await axios.get(`http://localhost:5000/api/v1/user/document/link/${row.document_type}`, {
+				withCredentials: true
+			}).then(response => {
+				url = response.data;
+				window.open(url)
+			})
+		} catch (err) {
+			if (err.response.data.msg) {
+				alert(err.response.data.msg)
+				return
+			}
+			alert('Something went wrong')
+		}
+		// window.open(`/hello`);
 	}
 		
-	
+	const[documentDetails,setDocumentDetails] = useState([])
+
 	const [columns, setColumns] = useState([]);
     const [pending, setPending] = useState(true);
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
+	useEffect(() => {
+		getUserDocumentsDetails()
+    }, []);
+		
+
+	const getUserDocumentsDetails = async () => {
+		try {
+			await axios.get('http://localhost:5000/api/v1/user/documents/getAll', {
+				withCredentials: true
+			}).then(response => {
+				console.log(response.data);
+				setDocumentDetails(response.data)
+			})
+		} catch (err) {
+			console.log(err);
+			Navigate('/')
+		}
+		const timeout = setTimeout(() => {
             setColumns([
-                {
-					name: <MDBBadge pill color='dark' light>Document ID</MDBBadge>,
-					selector: (row) => row.DocID,
-					sortable: true
-				},
 				{
 					name: <MDBBadge pill color='dark' light>Document Name</MDBBadge>,
-					selector: (row) => row.DocName,
+					selector: (row) => row.document_type,
 					sortable: true
 				},
 				{
 					name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
-					selector: (row) => row.Status,
+					selector: (row) => row.document_status === 'Uploaded' ?<MDBBadge pill color='success' light>Uploaded</MDBBadge> : <MDBBadge pill color='danger' light>Pending</MDBBadge> ,
 					sortable: true,
 				},
 				{
 					name: <MDBBadge pill color='dark' light>Verification</MDBBadge>,
-					selector: (row) => row.VerficationStatus === 'Approve' ?<MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>Rejected</MDBBadge> ,
+					selector: (row) => row.document_verification === 'Verified' ?<MDBBadge pill color='success' light>Verified</MDBBadge> : <MDBBadge pill color='danger' light>Unverified</MDBBadge> ,
 					sortable: true,
 				},
             ]);
             setPending(false);
         }, 2000);
         return () => clearTimeout(timeout);
-    }, []);
-		
+	}
 
   return (
     <>
@@ -152,7 +179,7 @@ const CheckStatus = () => {
         	<Row>
 						<DataTable	
 							columns={columns}
-							data={documentList}
+							data={documentDetails}
 							defaultSortFieldId
 							pagination={5}
 							fixedHeader

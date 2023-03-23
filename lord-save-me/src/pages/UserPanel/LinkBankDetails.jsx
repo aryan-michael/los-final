@@ -120,9 +120,9 @@ const LinkBankDetails = () => {
 
     const Navigate = useNavigate()
 
-     useEffect(() => {
-         checkIsBankAccountLinked()
-     },[])
+    //  useEffect(() => {
+    //      checkIsBankAccountLinked()
+    //  },[])
 
      const checkIsBankAccountLinked = async (req, res) => {
          try {
@@ -133,7 +133,7 @@ const LinkBankDetails = () => {
                  if (!response.data.bankAccount) {
                      return
                  }
-                 Navigate("/sidebar/bank-details-final")
+                 window.location.reload()
              })
          } catch (err) {
              Navigate('/')
