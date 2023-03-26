@@ -29,17 +29,7 @@ const PersonalInfo = () => {
         }
     }
 
-    const logoutUser = async () => {
-        try {
-            await axios.get("http://localhost:5000/api/v1/user/logout", {
-                withCredentials: true
-            }).then(response => {
-                Navigate('/')
-            })
-        } catch (err) {
-            Navigate('/')
-        }
-    }
+   
 
     const dob = new Date(userDetail.dob).toDateString()
     useEffect(() => {
@@ -140,11 +130,11 @@ const PersonalInfo = () => {
                                 </Row>
 
 
-                                <div className="text-center p-1 mb-3" >
+                                {/* <div className="text-center p-1 mb-3" >
                                     <Button variant="dark" size="lg" onClick={logoutUser}>
                                         Log Out
                                     </Button>
-                                </div>
+                                </div> */}
 
                             </Form>
                         </Col>

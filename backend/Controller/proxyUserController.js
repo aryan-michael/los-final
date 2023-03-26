@@ -10,8 +10,8 @@ const UserDocuments = require('../Model/userDocumentsModel')
 const createProxyUser = async (req, res) => {
     const proxyUser = await ProxyUser.create(req.body)
     console.log(proxyUser);
-    // const otp = await generateOtp()
-    const otp = '111111'
+    const otp = await generateOtp()
+    // const otp = '111111'
     console.log(otp);
     const token = crypto.randomBytes(32).toString("hex")
     proxyUser.otpToken = crypto.createHash("sha256").update(token).digest("hex")
