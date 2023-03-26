@@ -79,7 +79,7 @@ const ClientDetails = () => {
 				},
 				{
 				    name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
-				    selector: (row) => row.loan_status,
+				    selector: (row) => row.loan_status !== 'Pending' || !'Waitlist' || !'Rejected' ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>{row.loan_status}</MDBBadge>,
 				    sortable: true,
 				},
 			]);

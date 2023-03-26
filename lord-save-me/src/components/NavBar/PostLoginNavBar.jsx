@@ -3,8 +3,24 @@ import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import { CgProfile } from 'react-icons/cg';
 import { MDBIcon } from "mdb-react-ui-kit";
 import "./NavBars.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PostLoginNavBar = () => {
+    const Navigate = useNavigate()
+
+     const logoutUser = async () => {
+        try {
+            await axios.get("http://localhost:5000/api/v1/user/logout", {
+                withCredentials: true
+            }).then(response => {
+                Navigate('/')
+            })
+        } catch (err) {
+            Navigate('/')
+        }
+    }
+
     return ( 
         <>
             <Navbar className="navbar" sticky="top" variant="dark">
@@ -37,14 +53,14 @@ const PostLoginNavBar = () => {
                             </NavDropdown> */}
                         </Nav>
                         <Nav>
-                        	<Nav.Link href="/admin-panel/admin-dashboard">Admin Panel</Nav.Link>
-                            <Nav.Link href="/user-panel/user-dashboard">User Panel</Nav.Link>
+                        	{/* <Nav.Link href="/admin-panel/admin-dashboard">Admin Panel</Nav.Link>
+                            <Nav.Link href="/user-panel/user-dashboard">User Panel</Nav.Link> */}
                             <NavDropdown title=<CgProfile className="icon" /> 
                             	id="collasible-nav-dropdown">
                                 <NavDropdown.Item eventKey={2} href="">
                                     Profile Settings
                                 </NavDropdown.Item>
-                                <NavDropdown.Item href="/login/client">
+                                <NavDropdown.Item href="/login/client" onClick={logoutUser}>
                                     Log Out
                                 </NavDropdown.Item>
                             </NavDropdown> 

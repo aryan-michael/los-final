@@ -131,7 +131,8 @@ const LoanData = () => {
 
 	const [docName, setdocName] = useState('');
 	const [doc, setdoc] = useState(null);
-	const [docDecision,setDocDecision] = useState('')
+	const [docDecision, setDocDecision] = useState('')
+	const [loanDecision,setLoanDecision] = useState('')
 
 	//	useEffect(() => {
 	//		if(docName)
@@ -157,7 +158,25 @@ const LoanData = () => {
 	}
 
 	const handleDocSaveChange = async (e) => {
+		console.log(doc);
 		console.log(docDecision);
+		try {
+			await axios.post(`http://localhost:5000/api/v1/admin//getUser/loan/document/set/${userId}/${email}/${doc}`,{
+				decision:docDecision
+			},{
+				withCredentials: true
+			}).then(response => {
+				console.log(response);
+				window.location.reload()
+			})
+		} catch (err) {
+			if (err.response.data.msg) {
+				alert(err.response.data.msg)
+				return
+			}
+			alert('Something went wrong')
+			return 
+		}
 	}
 
 	const [columns, setColumns] = useState([]);
@@ -178,6 +197,24 @@ const LoanData = () => {
 			}).then(response => {
 				url = response.data
 				window.open(url)
+			})
+		} catch (err) {
+			if (err.response.data.msg) {
+				alert(err.response.data.msg)
+				return
+			}
+			alert('Something went wrong')
+			return 
+		}
+		
+	}
+
+	const handleReminder = async (req, res) => {
+		try {
+			await axios.get(`http://localhost:5000/api/v1/admin/getUser/loan/send/mail/${userId}/${email}/${loanId}`, {
+				withCredentials: true
+			}).then(response => {
+				alert(response.data.msg)
 			})
 		} catch (err) {
 			if (err.response.data.msg) {
@@ -264,6 +301,26 @@ const LoanData = () => {
 		} catch (err) {
 			console.log(err);
 			Navigate('/')
+		}
+	}
+
+	const handleLoanStatus = async (req, res) => {
+		try {
+			await axios.post(`http://localhost:5000/api/v1/admin/getUser/loan/status/set/${userId}/${email}/${loanId}`, {
+				decision: loanDecision
+			}, {
+				withCredentials: true
+			}).then(response => {
+				alert(response.data.msg)
+				window.location.reload()
+			})
+		} catch (err) {
+			if (err.response.data.msg) {
+				alert(err.response.data.msg)
+				return
+			}
+			alert('Something went wrong')
+			return 
 		}
 	}
 
@@ -363,7 +420,7 @@ const LoanData = () => {
 					<div className="text-center p-3 mb-1" >
 						<Button 
 							className="me-4"
-							variant="outline-warning" size="lg" onClick={handleShow}>
+							variant="outline-warning" size="lg" onClick={handleReminder}>
 							Send Reminder
 						</Button>
 					
@@ -381,12 +438,12 @@ const LoanData = () => {
 							<Modal.Body>
 								<Form>
 									<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-										<Form.Label><MDBBadge pill color='success' light>DECISION</MDBBadge></Form.Label>
-										<Form.Select className="form-control" name="add-user" required >
+										<Form.Label><MDBBadge pill color='success'  light>DECISION</MDBBadge></Form.Label>
+										<Form.Select className="form-control" name="add-user" required onChange={(e)=>setLoanDecision(e.target.value)}>
 											<option defaultValue value=''>Choose...</option>
-											<option className="option">Accept</option>
-											<option className="option">Reject</option>
-											<option className="option">Waitlist</option>
+											<option className="option" value="Accepted">Accept</option>
+											<option className="option" value="Rejected">Reject</option>
+											<option className="option" value="Waitlist">Waitlist</option>
 										</Form.Select>
 									</Form.Group>
 									<Form.Group
@@ -402,7 +459,7 @@ const LoanData = () => {
 								<Button variant="outline-secondary" onClick={handleClose}>
 									Close
 								</Button>
-								<Button variant="outline-secondary" onClick={handleClose}>
+								<Button variant="outline-secondary" onClick={handleLoanStatus}>
 									Save Changes
 								</Button>
 							</Modal.Footer>
