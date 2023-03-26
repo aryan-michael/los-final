@@ -13,6 +13,7 @@ const ProxyUser = require('../Model/proxyUserModel')
 const UserDocuments = require('../Model/userDocumentsModel')
 const Loan = require('../Model/loanModel')
 
+
 const getAllUserDetails = async (req, res) => {
     const users = await User.find({role:'user'})
     console.log(users);
@@ -237,38 +238,122 @@ const setLoanDocumentVerify = async (req, res) => {
         throw new NotFoundError(`No user found with USER_ID:${userId}`)
     }
     const documents = await UserDocuments.findOne({ _id: user.userDocuments.toString() }, { _id: 0 })
-    let statement = ''
+    let updateDoc = ''
+    let details = documents[doc]
     async function docf() {
         if (documents[doc].file_location) {
-            if (decision === 'Accept') {
-                // documents[doc].file_verification = 'Verified'
-                // console.log(documents[doc].file_verification);
-                // // documents.markModified([doc]);
-                // documents.
-                // console.log(documents[doc]);
-                statement = 'Verified'
+            if (decision === 'Approve') {
+                details.file_verification = 'Verified'
+                updateDoc = await UserDocuments.findOneAndUpdate({ _id: user.userDocuments.toString() }, {
+                    [doc]: details
+                }, {
+                    new: true,
+                runValidators:true})
             }
             else if (decision === 'Reject') {
-                // documents[doc].file_location = undefined,
-                //     documents[doc].file_status = 'Pending',
-                //     documents[doc].file_verification = 'Unverified',
-                //     documents[doc].file_name = undefined,
-                //     await documents.save()
-                statement = 'Unverified'
+                details.file_verification = 'Unverified'
+                details.file_name = '',
+                details.file_location = '',
+                details.file_status = 'Pending'    
+                updateDoc = await UserDocuments.findOneAndUpdate({ _id: user.userDocuments.toString() }, {
+                    [doc]: details
+                }, {
+                    new: true,
+                runValidators:true})
             }
         } else {
             throw new NotFoundError('No document uploaded')
         }
     }
     await docf()
-    documents[doc].file_verification = statement;
-    console.log('here');
-    await documents.save()
-    const url = documents[doc]
-    if (!url) throw new NotFoundError('No documents found')
-    res.status(StatusCodes.OK).send(url)
+    res.status(StatusCodes.OK).send("true")
 }
 
+const setDocumentStatus = async (req, res) => {
+    const { userId: userId, email: email, loanId: loanId } = req.params;
+    const user = await User.findOne({ _id: userId, email: email }).select("userDocuments")
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID:${userId}`)
+    }
+    const loanDetails = await Loan.findOne({ _id: loanId })
+    const loanType = loanDetails.loanType;
+    const documents = await UserDocuments.findOne({_id:user.userDocuments.toString()},{_id:0})
+    let requiredDocuments = []
+    function doc() {
+        for (key in documents) {
+            if (loanType === 'Business') {
+                if (key === 'document_photoID' || key === 'document_addressProof' || key === 'document_bankStatement' || key === 'document_ITR' || key === 'document_incomeProof' || key === 'document_loans_debts' || key === 'document_accounts' || key === 'document_COI' || key === 'document_GST' || key === 'document_cashFlow' || key === 'document_cancelledCheque') {
+                    if (documents[key].file_location === undefined || '') {
+                        requiredDocuments.push(key)
+                    }
+                    
+                }
+            }else if (loanType === 'Education') {
+                if (key === 'document_photoID' || key === 'document_addressProof' || key === 'document_bankStatement' || key === 'document_ITR' || key === 'document_incomeProof' || key === 'document_loans_debts' || key === 'document_accounts' || key === 'document_proofOfAdmission' || key === 'document_marksheet' || key === 'document_marksheet') {
+                    // let update = {
+                    //     document_type: key,
+                    //     document_verification: documents[key].file_verification,
+                    //     document_status: documents[key].file_status
+                    // }
+                    // requiredDocuments.push(update)
+                    if (documents[key].file_location === '') {
+                        requiredDocuments.push(key)
+                    }
+                }
+            }else if (loanType === 'Home') {
+                if (key === 'document_photoID' || key === 'document_addressProof' || key === 'document_bankStatement' || key === 'document_ITR' || key === 'document_incomeProof' || key === 'document_loans_debts' || key === 'document_accounts' || key === 'document_COI' || key === 'document_employmentLetter' || key === 'document_salarySlip' || key === 'document_form16' || key === 'document_propertyDoc' || key === 'document_officeAddressProof' || key === 'document_officeOwnershipProof') {
+                    // let update = {
+                    //     document_type: key,
+                    //     document_verification: documents[key].file_verification,
+                    //     document_status: documents[key].file_status
+                    // }
+                    // requiredDocuments.push(update)
+                    if (documents[key].file_location === '') {
+                        requiredDocuments.push(key)
+                    }
+                }
+            }else if (loanType === 'Personal') {
+                if (key === 'document_photoID' || key === 'document_addressProof' || key === 'document_bankStatement' || key === 'document_ITR' || key === 'document_incomeProof' || key === 'document_loans_debts' || key === 'document_accounts' || key === 'document_jobContinuityProof' || key === 'document_form16' || key === 'document_salarySlip') {
+                    // let update = {
+                    //     document_type: key,
+                    //     document_verification: documents[key].file_verification,
+                    //     document_status: documents[key].file_status
+                    // }
+                    // requiredDocuments.push(update)
+                    if (documents[key].file_location === '') {
+                        requiredDocuments.push(key)
+                    }
+                }
+            }
+        }
+    }
+    const printList = () =>{
+        return `<li>Hello</li>`
+    }
+    await doc()
+    const url = `<p> Hello ${user.first_name} ${user.last_name},<br></br>To complete your ${loanType} loan with id: '${loanId}' <br></br> please provide the following documents <br></br> ${requiredDocuments}</p>`
+    // const url = "hello"
+    const data = {
+        to: email,
+        subject: 'Account verification',
+        text: 'Hello user',
+        html: url
+    }
+    sendEmail(data)
+    res.status(StatusCodes.OK).json({msg:"Mail sent"})
+}
 
+const setLoanStatus = async (req, res) => {
+    const { userId: userId, email: email, loanId: loanId } = req.params;
+    const {decision} = req.body
+    const user = await User.findOne({ _id: userId, email: email }).select("userDocuments")
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID:${userId}`)
+    }
+    const loanDetails = await Loan.findOne({ _id: loanId })
+    loanDetails.applicationStatus = decision
+    await loanDetails.save()
+    res.status(StatusCodes.OK).json({msg:"Status Updated"})
+}
 
-module.exports = {getAllUserDetails,getUserDetails,getUserLoanInquiries,getLoanInquiryDetails,createProxyUser,checkVerficationDetails,getLoanDocumentDetails,getLoanDocumentLink,setLoanDocumentVerify}
+module.exports = {getAllUserDetails,getUserDetails,getUserLoanInquiries,getLoanInquiryDetails,createProxyUser,checkVerficationDetails,getLoanDocumentDetails,getLoanDocumentLink,setLoanDocumentVerify,setDocumentStatus,setLoanStatus}
