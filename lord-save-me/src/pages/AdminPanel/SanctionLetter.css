@@ -1,0 +1,21 @@
+.sanction-letter {
+	background-color: #FFF;
+	max-width: 800px;
+	margin: auto;
+	padding: 20px;
+	border: 2px solid;
+}
+
+.main-1 {
+	border: 1px solid;
+	align-items: center;
+	width: 60%;
+}
+
+table td {
+	border: 1px solid;
+}
+
+td {
+	padding: 3px;
+}
