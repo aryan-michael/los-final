@@ -3,7 +3,8 @@ import PersonalDetails from "../../pages/Register/PersonalDetails";
 import LoanDetails from "../../pages/Register/LoanDetails";
 import { useNavigate } from 'react-router-dom';
 import './AdminForms.css';
-import axios from 'axios'
+import axios from 'axios';
+import { MDBBadge } from "mdb-react-ui-kit";
 import { Alert, Button, Col, Container, Navbar, Row } from "react-bootstrap";
 import { MultiStepProgressBar } from "../../components/MultiStepProgressBar/MultiStepProgressBar";
 
@@ -407,7 +408,7 @@ function AdminForms({ loan_type, country, setLoginToken }) {
                     </Row>
                 </Container>
                 <div className="header text-center">
-                    <h1>{FormTitles[page]}</h1>
+                    <div className="p-2 title"><MDBBadge pill color='secondary' light>{FormTitles[page]}</MDBBadge></div>
                 </div>
                 <div className="body">{pageDisplay()}</div>
                 <div className="footer text-center">
@@ -421,7 +422,7 @@ function AdminForms({ loan_type, country, setLoginToken }) {
                             if (progressStep === 2) {
                                 setProgressStep(1);
                             }
-                        }}>Previous</button>
+                        }}>Previous</button> 
 
                     <Button
                         type="submit"

@@ -1,15 +1,15 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 //import { BiPowerOff } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
-import { MDBIcon } from "mdb-react-ui-kit";
 import "./NavBars.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import logo from "../../images/ad los-nav.png";
 
 const PostLoginNavBar = () => {
     const Navigate = useNavigate()
 
-     const logoutUser = async () => {
+    const logoutUser = async () => {
         try {
             await axios.get("http://localhost:5000/api/v1/user/logout", {
                 withCredentials: true
@@ -21,12 +21,13 @@ const PostLoginNavBar = () => {
         }
     }
 
-    return ( 
+    return (
         <>
             <Navbar className="navbar" sticky="top" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
-                        <MDBIcon color='primary' icon='gem' className='me-3' /> LOS
+                        <img src={logo} alt="company logo" />
+                        {/* <MDBIcon color='primary' icon='gem' className='me-3' /> LOS */}
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -53,17 +54,17 @@ const PostLoginNavBar = () => {
                             </NavDropdown> */}
                         </Nav>
                         <Nav>
-                        	{/* <Nav.Link href="/admin-panel/admin-dashboard">Admin Panel</Nav.Link>
+                            {/* <Nav.Link href="/admin-panel/admin-dashboard">Admin Panel</Nav.Link>
                             <Nav.Link href="/user-panel/user-dashboard">User Panel</Nav.Link> */}
-                            <NavDropdown title=<CgProfile className="icon" /> 
-                            	id="collasible-nav-dropdown">
+                            <NavDropdown title=<CgProfile className="icon" />
+                                id="collasible-nav-dropdown">
                                 <NavDropdown.Item eventKey={2} href="">
                                     Profile Settings
                                 </NavDropdown.Item>
                                 <NavDropdown.Item href="/login/client" onClick={logoutUser}>
                                     Log Out
                                 </NavDropdown.Item>
-                            </NavDropdown> 
+                            </NavDropdown>
                             {/*<Nav.Link href="/login/client"><CgProfile /></Nav.Link>*/}
                         </Nav>
                         <br />

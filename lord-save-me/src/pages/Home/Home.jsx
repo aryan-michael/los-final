@@ -29,9 +29,9 @@ const Home = () => {
                                 <h4 className="mt-2">Home Loan</h4>
                             </Link>
                         </div>
-                    </Col>
+                    </Col> 
                     <Col className="p-3" xs={12} md={6} lg={3}>
-                        <div className="tag px-5 pt-5 pb-3">
+                        <div className="tag px-4 pt-5 pb-3">
 
                             <Link to={`loan/education`} className="text-black text-decoration-none ">
                                 <MdCastForEducation className="icons" />

@@ -37,6 +37,8 @@ import ClientDetails from "./pages/AdminPanel/ClientDetails";
 import Statistics from "./pages/AdminPanel/Statistics";
 import Analytics from "./pages/AdminPanel/Analytics";
 import LoanData from './pages/AdminPanel/LoanData';
+import SanctionLetterForm from './pages/AdminPanel/SanctionLetterForm';
+import SanctionLetter from './pages/AdminPanel/SanctionLetter';
 
 //TESTING
 import Test from './pages/Register/Test';
@@ -94,6 +96,8 @@ function App() {
         <Route path='/test' element={<Test />} />
         <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar2' element={<SideBar2 />} />
+        <Route path="/admin-panel/sanction" element={<SanctionLetterForm />} />
+        <Route path="/admin-panel/sanction-letter" element={<SanctionLetter />} />
 
       </Routes>
     </>

@@ -19,53 +19,54 @@ function AdminDashboard() {
 				<AdminSideBar />
 
 				<Container fluid>
-					<Form className="mt-3 mb-3" autoComplete='off'>
+					
 						<Row className="p-4 title"><MDBBadge pill color='secondary' light>Admin Dashboard</MDBBadge></Row>
 
-						<Row className="text-center p-3 mb-3">
-							<Col className="p-3" xs={12} md={6} lg={3}>
-								<div className="tag px-5 pt-5 pb-3">
-									<Link to={`loan/business`} className="text-black text-decoration-none ">
+						<Row className="tile text-center p-3 mb-1">
+							<Col className="p-3" xs={16} md={10} lg={4}>
+								<div className="tag px-5 pt-4 pb-2">
 										<FaBusinessTime className="icons" />
 										<h4 className="mt-2">Business Loan</h4>
-									</Link>
+										<h6>✅ Approved - 4</h6>
+										<h6>❌ Rejected - 7</h6>
 								</div>
 							</Col>
-							<Col className="p-3" xs={12} md={6} lg={3}>
-								<div className="tag px-5 pt-5 pb-3">
-									<Link to={`loan/home`} className="text-black text-decoration-none ">
+							<Col className="p-3" xs={16} md={10} lg={4}>
+								<div className="tag px-5 pt-4 pb-2">
 										<FaHome className="icons" />
 										<h4 className="mt-2">Home Loan</h4>
-									</Link>
+										<h6>✅ Approved - 9</h6>
+										<h6>❌ Rejected - 13</h6>
 								</div>
 							</Col>
-							<Col className="p-3" xs={12} md={6} lg={3}>
-								<div className="tag px-5 pt-5 pb-3">
-
-									<Link to={`loan/education`} className="text-black text-decoration-none ">
+						</Row>
+						
+						<Row className="tile text-center p-3 mb-1">
+							<Col className="p-3" xs={16} md={10} lg={4}>
+								<div className="tag px-5 pt-4 pb-2">
 										<MdCastForEducation className="icons" />
 										<h4 className="mt-2">Education Loan</h4>
-									</Link>
+										<h6>✅ Approved - 1</h6>
+										<h6>❌ Rejected - 4</h6>
 								</div>
 							</Col>
-							<Col className="p-3" xs={12} md={6} lg={3}>
-								<div className="tag px-5 pt-5 pb-3">
-
-									<Link to={`loan/personal`} className="text-black text-decoration-none ">
+							<Col className="p-3" xs={16} md={10} lg={4}>
+								<div className="tag px-5 pt-4 pb-2">
 										<BsFillPersonFill className="icons" />
 										<h4 className="mt-2">Personal Loan</h4>
-									</Link>
+										<h6>✅ Approved - 2</h6>
+										<h6>❌ Rejected - 8</h6>
 								</div>
 							</Col>
 						</Row>
 
-						<Row className="text-center p-3 mb-4"></Row>
+						<Row className="text-center p-3"></Row>
 
 						<Row className="text-center p-3 mb-3">
 							<Footer />
 						</Row>
 
-					</Form>
+
 				</Container>
 
 			</div>
@@ -74,3 +75,12 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard
+
+
+
+
+
+
+
+
+						

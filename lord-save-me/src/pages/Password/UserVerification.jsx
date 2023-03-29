@@ -6,7 +6,8 @@ import {
     MDBBtn,
     MDBIcon,
     MDBValidation,
-    MDBValidationItem
+    MDBValidationItem,
+    MDBBadge
 }
     from 'mdb-react-ui-kit';
 import { Form } from 'react-bootstrap';
@@ -149,26 +150,32 @@ function UserVerification() {
 
     return (
         <>
-            <p style={{
-                display: 'flex',
-                justifyContent: 'center',
-            }}>Please enter the details which were used to register your inquiry</p>
+        	<MDBContainer>
+        		<div className="title p-2"><MDBBadge pill color='primary' light>USER VERIFICATION</MDBBadge></div>
+        	</MDBContainer>
+        	
+        	<MDBContainer className="p-1 my-5 d-flex flex-column w-50">
+				<div className="d-flex mx-auto">
+		            <h5><MDBBadge pill color='primary' light>Please enter the details which were used to register your inquiry</MDBBadge></h5>
+		        </div>
+        	</MDBContainer>
+
         <MDBValidation>
-        <MDBContainer className="p-5 my-5 d-flex flex-column w-25" >
+        <MDBContainer className="p-3 my-5 d-flex flex-column w-25" >
             <MDBValidationItem feedback='Please enter email' invalid>
-                        <MDBInput wrapperClass='mb-5' label='Enter email' id='form1' type='text' value={data.email} name='email' onChange={handleChange} required />
+                        <MDBInput wrapperClass='mb-5' label='Enter Email' id='form1' type='text' value={data.email} name='email' onChange={handleChange} required />
                         <p className="error" style={{
                             display: error.email ? 'block' : 'none', color: 'red'
                         }}>{error.email}</p>
                 </MDBValidationItem>
                 <MDBValidationItem feedback='Please enter mobile number' invalid>
-                        <MDBInput wrapperClass='mb-5' label='Enter mobile number' id='form1' type='text' value={data.mobile} name='mobile' onChange={handleChange} required />
+                        <MDBInput wrapperClass='mb-5' label='Enter Mobile Number' id='form1' type='text' value={data.mobile} name='mobile' onChange={handleChange} required />
                         <p className="error" style={{
                             display: error.mobile ? 'block' : 'none', color: 'red'
                         }}>{error.mobile}</p>
                 </MDBValidationItem>
                 <MDBValidationItem feedback='Please enter date of birth' invalid>
-                        <MDBInput wrapperClass='mb-4' label='Enter date of birth' id='form1' type='date' value={data.dob} name='dob' onChange={handleChange} required />
+                        <MDBInput wrapperClass='mb-4' label='Enter Date of Birth' id='form1' type='date' value={data.dob} name='dob' onChange={handleChange} required />
                         <p className="error" style={{
                             display: error.dob ? 'block' : 'none', color: 'red'
                         }}>{error.dob}</p>

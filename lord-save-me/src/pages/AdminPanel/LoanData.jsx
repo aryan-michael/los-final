@@ -92,7 +92,7 @@ const documentList = [
 
 const LoanData = () => {
 
-	const{userId,email,loanId} = useParams()
+	const { userId, email, loanId } = useParams()
 
 	createTheme("solarized", {
 		text: {
@@ -118,7 +118,7 @@ const LoanData = () => {
 
 	const Navigate = useNavigate();
 
-	
+
 
 	const [show, setShow] = useState(false);
 	const [Doc, setDoc] = useState(false);
@@ -132,7 +132,7 @@ const LoanData = () => {
 	const [docName, setdocName] = useState('');
 	const [doc, setdoc] = useState(null);
 	const [docDecision, setDocDecision] = useState('')
-	const [loanDecision,setLoanDecision] = useState('')
+	const [loanDecision, setLoanDecision] = useState('')
 
 	//	useEffect(() => {
 	//		if(docName)
@@ -161,9 +161,9 @@ const LoanData = () => {
 		console.log(doc);
 		console.log(docDecision);
 		try {
-			await axios.post(`http://localhost:5000/api/v1/admin//getUser/loan/document/set/${userId}/${email}/${doc}`,{
-				decision:docDecision
-			},{
+			await axios.post(`http://localhost:5000/api/v1/admin//getUser/loan/document/set/${userId}/${email}/${doc}`, {
+				decision: docDecision
+			}, {
 				withCredentials: true
 			}).then(response => {
 				console.log(response);
@@ -175,14 +175,14 @@ const LoanData = () => {
 				return
 			}
 			alert('Something went wrong')
-			return 
+			return
 		}
 	}
 
 	const [columns, setColumns] = useState([]);
 	const [pending, setPending] = useState(true);
 	const [loanDetails, setLoanDetails] = useState({})
-	const [loanDocumentDetails,setLoanDocumentDetails] = useState([])
+	const [loanDocumentDetails, setLoanDocumentDetails] = useState([])
 
 	useEffect(() => {
 		getLoanDetails();
@@ -204,9 +204,9 @@ const LoanData = () => {
 				return
 			}
 			alert('Something went wrong')
-			return 
+			return
 		}
-		
+
 	}
 
 	const handleReminder = async (req, res) => {
@@ -222,9 +222,9 @@ const LoanData = () => {
 				return
 			}
 			alert('Something went wrong')
-			return 
+			return
 		}
-		
+
 	}
 
 	//  const columns = [
@@ -253,7 +253,7 @@ const LoanData = () => {
 	const loanDocuments = async () => {
 		try {
 			axios.get(`http://localhost:5000/api/v1/admin/getUser/loan/documents/${userId}/${email}/${loanId}`, {
-				withCredentials:true
+				withCredentials: true
 			}).then(response => {
 				console.log(response.data);
 				setLoanDocumentDetails(response.data)
@@ -269,7 +269,7 @@ const LoanData = () => {
 				// 	sortable: true
 				// },
 				{
-					name: <MDBBadge pill color='dark' light>Documnet Name</MDBBadge>,
+					name: <MDBBadge pill color='dark' light>Document Name</MDBBadge>,
 					selector: (row) => row.document_type,
 					sortable: true
 				},
@@ -294,7 +294,7 @@ const LoanData = () => {
 	const getLoanDetails = async () => {
 		try {
 			await axios.get(`http://localhost:5000/api/v1/admin/getUser/loan/details/${userId}/${email}/${loanId}`, {
-				withCredentials:true
+				withCredentials: true
 			}).then(response => {
 				setLoanDetails(response.data)
 			})
@@ -320,7 +320,7 @@ const LoanData = () => {
 				return
 			}
 			alert('Something went wrong')
-			return 
+			return
 		}
 	}
 
@@ -339,92 +339,88 @@ const LoanData = () => {
 				<AdminSideBar />
 
 				<Container>
-						{/* LOAN INFO */}		
-						<div className="p-4 title"><MDBBadge pill color='secondary' light>Loan Data</MDBBadge></div>
-							<Form className="container mt-3 mb-3">
-								<Row className="mb-3">
-									{/* LOAN AMOUNT */}
-									<Form.Group controlId="formBasicNumber" className="col col-sm-8">
-										<Form.Label><MDBBadge pill color='secondary' light>DESIRED LOAN AMOUNT</MDBBadge></Form.Label>
-										<InputGroup>
-											<InputGroup.Text id="basic-addon1">₹</InputGroup.Text>
-											<Form.Control aria-label="Loan Amount" type="amount" aria-describedby="basic-addon1" className="form-control" value={loanDetails.loan_amount} readOnly />
-										</InputGroup>
-									</Form.Group>
-									{/* LOAN TYPE : ONLY DISPLAY */}
-									<Form.Group controlId="formBasicEmail" className="col col-sm-4">
-										<Form.Label><MDBBadge pill color='secondary' light>LOAN TYPE</MDBBadge></Form.Label>
-										<Form.Control type="text" name="loanType" value={loanDetails.loan_type} readOnly />
-									</Form.Group>
-								</Row>
+					{/* LOAN INFO */}
+					<div className="p-4 title"><MDBBadge pill color='secondary' light>Loan #</MDBBadge></div>
+					<Form className="container mt-3 mb-3">
+						<Row className="mb-3">
+							{/* LOAN AMOUNT */}
+							<Form.Group controlId="formBasicNumber" className="col col-sm-8">
+								<Form.Label><MDBBadge pill color='secondary' light>DESIRED LOAN AMOUNT</MDBBadge></Form.Label>
+								<InputGroup>
+									<InputGroup.Text id="basic-addon1">₹</InputGroup.Text>
+									<Form.Control aria-label="Loan Amount" type="amount" aria-describedby="basic-addon1" className="form-control" value={loanDetails.loan_amount} readOnly />
+								</InputGroup>
+							</Form.Group>
+							{/* LOAN TYPE : ONLY DISPLAY */}
+							<Form.Group controlId="formBasicEmail" className="col col-sm-4">
+								<Form.Label><MDBBadge pill color='secondary' light>LOAN TYPE</MDBBadge></Form.Label>
+								<Form.Control type="text" name="loanType" value={loanDetails.loan_type} readOnly />
+							</Form.Group>
+						</Row>
 
-								<Row className="mb-3">
-									{/* EMPLOYMENT STATUS */}
-									<Form.Group controlId="formGridState" className="col col-sm-4">
-										<Form.Label><MDBBadge pill color='secondary' light>EMPLOYMENT STATUS</MDBBadge></Form.Label>
-										<Form.Control className="form-control" name="empStatus" value={loanDetails.emp_status} readOnly />
-									</Form.Group>
-									{/* BUSINESS NAME */}
-									<Form.Group controlId="formBasicEmail" className="col col-sm-8">
-										<Form.Label><MDBBadge pill color='secondary' light>FIRM/BUSINESS NAME</MDBBadge></Form.Label>
-										<Form.Control type="name" name="businessName" value={loanDetails.buisness_name} readOnly />
-									</Form.Group>
-								</Row>
+						<Row className="mb-3">
+							{/* EMPLOYMENT STATUS */}
+							<Form.Group controlId="formGridState" className="col col-sm-4">
+								<Form.Label><MDBBadge pill color='secondary' light>EMPLOYMENT STATUS</MDBBadge></Form.Label>
+								<Form.Control className="form-control" name="empStatus" value={loanDetails.emp_status} readOnly />
+							</Form.Group>
+							{/* BUSINESS NAME */}
+							<Form.Group controlId="formBasicEmail" className="col col-sm-8">
+								<Form.Label><MDBBadge pill color='secondary' light>FIRM/BUSINESS NAME</MDBBadge></Form.Label>
+								<Form.Control type="name" name="businessName" value={loanDetails.buisness_name} readOnly />
+							</Form.Group>
+						</Row>
 
-								<Row className="mb-3">
-									{/* FIRM/BUSINESS ADDRESS*/}
-									<Form.Group className=" col col-sm-8" controlId="formGridAddress1">
-										<Form.Label><MDBBadge pill color='secondary' light>FIRM/BUSINESS ADDRESS</MDBBadge></Form.Label>
-										<Form.Control className="form-control" type="text" name="firmAddress" value={loanDetails.firm_address} readOnly />
-									</Form.Group>
-									<Form.Group className=" col col-sm-4" controlId="formGridAddress1">
-										<Form.Label><MDBBadge pill color='secondary' light>APPLICATION STATUS</MDBBadge></Form.Label>
-										<Form.Control className="form-control" type="text" name="application_status" value={loanDetails.application_status} readOnly />
-									</Form.Group>
-								</Row>
-							</Form>
-						
-						<Row className="p-2"></Row>
+						<Row className="mb-3">
+							{/* FIRM/BUSINESS ADDRESS*/}
+							<Form.Group className=" col col-sm-8" controlId="formGridAddress1">
+								<Form.Label><MDBBadge pill color='secondary' light>FIRM/BUSINESS ADDRESS</MDBBadge></Form.Label>
+								<Form.Control className="form-control" type="text" name="firmAddress" value={loanDetails.firm_address} readOnly />
+							</Form.Group>
+							<Form.Group className=" col col-sm-4" controlId="formGridAddress1">
+								<Form.Label><MDBBadge pill color='secondary' light>APPLICATION STATUS</MDBBadge></Form.Label>
+								<Form.Control className="form-control" type="text" name="application_status" value={loanDetails.application_status} readOnly />
+							</Form.Group>
+						</Row>
+					</Form>
 
-				
+					<Row className="p-2"></Row>
 
-						{/* DOCUMENT TABLE */}
-				
-							<div>
-								<div className="p-4 title"><MDBBadge pill color='secondary' light>Documents</MDBBadge></div>
-									{data?.length > 0 && (<DataTable
-										//title="Loan History"
-										columns={columns}
-										//data={loanDetails}
-										data={loanDocumentDetails}
-										defaultSortFieldId
-										pagination={5}
-										fixedHeader
-										fixedHeaderScrollHeight="240px"
+					{/* DOCUMENT TABLE */}
+
+					<div>
+						<div className="p-4 title"><MDBBadge pill color='secondary' light>Documents</MDBBadge></div>
+						{data?.length > 0 && (<DataTable
+							//title="Loan History"
+							columns={columns}
+							//data={loanDetails}
+							data={loanDocumentDetails}
+							defaultSortFieldId
+							pagination={5}
+							fixedHeader
+							fixedHeaderScrollHeight="240px"
 							onRowClicked={(d) => { let type = d.document_type; setdoc(type); handleDocShow() }}
-										highlightOnHover
-										pointerOnHover
-										progressPending={pending}
-									//progressPending
-									//theme="dark"
-									//customStyles={customStyles}
-									//selectableRows
-									/>)}
+							highlightOnHover
+							pointerOnHover
+							progressPending={pending}
+						//progressPending
+						//theme="dark"
+						//customStyles={customStyles}
+						//selectableRows
+						/>)}
 
-							</div>
-					
-					
+					</div>
 
 					<div className="p-2" />
 
 					<div className="text-center p-3 mb-1" >
-						<Button 
+						<Button
 							className="me-4"
 							variant="outline-warning" size="lg" onClick={handleReminder}>
 							Send Reminder
 						</Button>
-					
-						<Button 
+
+						<Button
 							className="me-4"
 							variant="dark" size="lg" onClick={handleShow}>
 							Take Decision
@@ -438,18 +434,15 @@ const LoanData = () => {
 							<Modal.Body>
 								<Form>
 									<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-										<Form.Label><MDBBadge pill color='success'  light>DECISION</MDBBadge></Form.Label>
-										<Form.Select className="form-control" name="add-user" required onChange={(e)=>setLoanDecision(e.target.value)}>
+										<Form.Label><MDBBadge pill color='success' light>DECISION</MDBBadge></Form.Label>
+										<Form.Select className="form-control" name="add-user" required onChange={(e) => setLoanDecision(e.target.value)}>
 											<option defaultValue value=''>Choose...</option>
 											<option className="option" value="Accepted">Accept</option>
 											<option className="option" value="Rejected">Reject</option>
 											<option className="option" value="Waitlist">Waitlist</option>
 										</Form.Select>
 									</Form.Group>
-									<Form.Group
-										className="mb-3"
-										controlId="exampleForm.ControlTextarea1"
-									>
+									<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
 										<Form.Label><MDBBadge pill color='danger' light>STATE REASONS</MDBBadge></Form.Label>
 										<Form.Control as="textarea" rows={3} />
 									</Form.Group>
@@ -505,7 +498,7 @@ const LoanData = () => {
 							</Modal.Footer>
 						</Modal>
 					)}
-				
+
 				</Container>
 			</div>
 		</>
