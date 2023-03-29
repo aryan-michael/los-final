@@ -1,14 +1,16 @@
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import { MDBIcon } from "mdb-react-ui-kit";
 import "./NavBars.css";
+import logo from "../../images/ad los-nav.png";
 
 const NavBar = () => {
     return (
-        <> 
+        <>
             <Navbar className="navbar" sticky="top" variant="dark">
                 <Container >
                     <Navbar.Brand href="/">
-                        <MDBIcon color='primary' icon='gem' className='me-3' /> LOS
+                        <img src={logo} alt="company logo" />
+                        {/* <MDBIcon color='primary' icon='gem' className='me-3' /> LOS */}
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">

@@ -6,16 +6,41 @@
 	border: 2px solid;
 }
 
+.header {
+	text-align: center;
+}
+
+.main-0 {
+	border: none;
+	width: 100%;
+}
+
+.main0-left {
+	text-align: left;
+}
+
+.main0-right {
+	text-align: right;
+}
+
 .main-1 {
 	border: 1px solid;
 	align-items: center;
 	width: 60%;
 }
 
-table td {
+.main-2 {
 	border: 1px solid;
+	align-items: center;
+	width: 100%;
 }
 
-td {
-	padding: 3px;
+.main-1 td {
+	border: 1px solid;
+	padding: 4px;
+}
+
+.main-2 td {
+	border: 1px solid;
+	padding: 4px;
 }

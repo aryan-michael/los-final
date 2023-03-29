@@ -51,3 +51,10 @@
 @ SANCTION LETTER
 > Form in the works for the Admin to enter final loan approval details before sanction.
 > HTML Page in the works for a downloadable sanction letter. 
+
+=> 29/03/23
+@ SANCTION LETTER FORM & SANCTION LETTER
+> Form has been completed using usual methods.
+> Sanction Letter JSX page has been created and needs to be made dynamic.
+> Routes have been updated in the testing section of App.js.
+> They haven't been linked to any pages.
