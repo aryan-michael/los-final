@@ -2,10 +2,10 @@ import { Container, Button } from "react-bootstrap";
 import { useState } from "react";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import "./SanctionLetter.css";
+import "./SanctionLetterUser.css";
 import logo from "../../images/ad los.png";
 
-const SanctionLetter = () => {
+const SanctionLetterUser = () => {
 
 	const [loader, setLoader] = useState(false);
 
@@ -160,7 +160,7 @@ const SanctionLetter = () => {
 	);
 }
 
-export default SanctionLetter
+export default SanctionLetterUser
 
 
 

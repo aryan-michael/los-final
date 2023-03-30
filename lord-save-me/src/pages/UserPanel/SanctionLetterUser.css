@@ -1,0 +1,46 @@
+.sanction-letter {
+    background-color: #FFF;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid;
+}
+
+.header {
+    text-align: center;
+}
+
+.main-0 {
+    border: none;
+    width: 100%;
+}
+
+.main0-left {
+    text-align: left;
+}
+
+.main0-right {
+    text-align: right;
+}
+
+.main-1 {
+    border: 1px solid;
+    align-items: center;
+    width: 60%;
+}
+
+.main-2 {
+    border: 1px solid;
+    align-items: center;
+    width: 100%;
+}
+
+.main-1 td {
+    border: 1px solid;
+    padding: 4px;
+}
+
+.main-2 td {
+    border: 1px solid;
+    padding: 4px;
+}

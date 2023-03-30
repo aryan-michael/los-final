@@ -25,9 +25,10 @@ import CheckStatus from "./pages/UserPanel/CheckStatus";
 import AddInquiry from './pages/UserPanel/AddInquiry';
 import PersonalInfo from './pages/UserPanel/PersonalInfo';
 import LoanInfo from './pages/UserPanel/LoanInfo';
+import SanctionLetterUser from './pages/UserPanel/SanctionLetterUser';
 import LinkBankDetails from "./pages/UserPanel/LinkBankDetails";
-import DisplayBankDetails from "./pages/UserPanel/DisplayBankDetails"
-import BankDetails from "./pages/UserPanel/BankDetails"
+import DisplayBankDetails from "./pages/UserPanel/DisplayBankDetails";
+import BankDetails from "./pages/UserPanel/BankDetails";
 
 //ADMIN PANEL
 import AdminDashboard from "./pages/AdminPanel/AdminDashboard";
@@ -81,6 +82,7 @@ function App() {
         <Route path="/user-panel/my-info/personal-info" element={<PersonalInfo />} />
         <Route path="/user-panel/my-info/loan-info/:loanId" element={<LoanInfo />} />
         <Route path="/user-panel/bank-details" element={<BankDetails />} />
+        <Route path="/user-panel/sanction-letter" element={<SanctionLetterUser />} />
         {/* <Route path="/user-panel/bank-details-final" element={<DisplayBankDetails />} /> */}
 
         {/* ADMIN PANEL */}
@@ -91,13 +93,13 @@ function App() {
         <Route path="/admin-panel/client-details/loan-data/:userId/:email/:loanId" element={<LoanData />} />
         <Route path="/admin-panel/statistics" element={<Statistics />} />
         <Route path="/admin-panel/analytics" element={<Analytics />} />
+        <Route path="/admin-panel/sanction-letter-form" element={<SanctionLetterForm />} />
+        <Route path="/admin-panel/sanction-letter" element={<SanctionLetter />} />
 
         {/* TESTING */}
         <Route path='/test' element={<Test />} />
         <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar2' element={<SideBar2 />} />
-        <Route path="/admin-panel/sanction" element={<SanctionLetterForm />} />
-        <Route path="/admin-panel/sanction-letter" element={<SanctionLetter />} />
 
       </Routes>
     </>
