@@ -10,7 +10,7 @@ const UserDocuments = require('../Model/userDocumentsModel')
 const createProxyUser = async (req, res) => {
     const proxyUser = await ProxyUser.create(req.body)
     console.log(proxyUser);
-    // const otp = await generateOtp()
+    //const otp = await generateOtp()
     const otp = '111111'
     console.log(otp);
     const token = crypto.randomBytes(32).toString("hex")
@@ -26,12 +26,12 @@ const createProxyUser = async (req, res) => {
         text: 'Hello user',
         html: url
     }
-    const threeMin = 1000*60*3
-    res.cookie("otoken", proxyUser.otpToken,{
+    const threeMin = 1000 * 60 * 3
+    res.cookie("otoken", proxyUser.otpToken, {
         httpOnly: true,
         expires: new Date(Date.now() + threeMin)
     })
-    // sendEmail(data)
+    //sendEmail(data)
     res.status(StatusCodes.CREATED).json({ msg: "User successfully registered" })
 }
 
@@ -39,7 +39,7 @@ const checkVerficationOtp = async (req, res) => {
     const { otp } = req.body;
     const { otoken } = req.cookies;
     console.log(otp, otoken);
-    const proxyUser = await ProxyUser.findOne({userOTP: otp, otpExp: { $gt: Date.now() }, otpToken: otoken})
+    const proxyUser = await ProxyUser.findOne({ userOTP: otp, otpExp: { $gt: Date.now() }, otpToken: otoken })
     if (!proxyUser) {
         throw new NotFoundError('Invalid OTP')
     }
@@ -61,21 +61,21 @@ const checkVerficationOtp = async (req, res) => {
         role: pUser.role,
         loanInquiries: pUser.loanInquiries,
     }
-    console.log(">>",u);
+    console.log(">>", u);
     const user = await User.create(u)
     const document = await UserDocuments.create({})
     user.userDocuments = document._id
     await user.save()
     res.clearCookie("otoken", {
         httpOnly: true,
-        secure:true
+        secure: true
     })
     const token = await user.createJWT()
     res.cookie("Token", token, {
         httpOnly: true,
-        expires: new Date(Date.now()+1000*60*3)
+        expires: new Date(Date.now() + 1000 * 60 * 3)
     })
-    res.status(StatusCodes.OK).json({msg:'Success'})
+    res.status(StatusCodes.OK).json({ msg: 'Success' })
 }
 
-module.exports = {createProxyUser,checkVerficationOtp}
+module.exports = { createProxyUser, checkVerficationOtp }

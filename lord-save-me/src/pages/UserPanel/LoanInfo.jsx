@@ -8,11 +8,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const LoanInfo = () => {
 
-    const {loanId} = useParams()
+    const { loanId } = useParams()
 
     const Navigate = useNavigate()
     const [loanDetails, setLoanDetails] = useState({})
 
+    const handleSubmit = () => {
+        console.log("downloaded");
+        Navigate('/user-panel/sanction-letter');
+    }
 
     const getLoanInquiryDetails = async () => {
         try {
@@ -43,7 +47,7 @@ const LoanInfo = () => {
                                 <Row className="mb-3">
                                     {/* LOAN AMOUNT */}
                                     <Form.Group controlId="formBasicNumber" className="col col-sm-8">
-                        			<Form.Label><MDBBadge pill color='secondary' light>DESIRED LOAN AMOUNT</MDBBadge></Form.Label>
+                                        <Form.Label><MDBBadge pill color='secondary' light>DESIRED LOAN AMOUNT</MDBBadge></Form.Label>
                                         <InputGroup>
                                             <InputGroup.Text id="basic-addon1">₹</InputGroup.Text>
                                             <Form.Control aria-label="Loan Amount" type="number" aria-describedby="basic-addon1" className="form-control" name="loanAmount" value={loanDetails.loanAmount} readOnly />
@@ -76,6 +80,14 @@ const LoanInfo = () => {
                                         <Form.Control className="form-control" type="text" name="firmAddress" value={loanDetails.firmAddress} readOnly />
                                     </Form.Group>
                                 </Row>
+
+                                {/* SUBMIT BUTTON */}
+                                <div className="text-center p-3 mb-3" >
+                                    <Button variant="primary" size="lg" onClick={handleSubmit}>
+                                        View Sanction Letter
+                                    </Button>
+                                </div>
+
                             </Form>
                         </Col>
                     </Row>
