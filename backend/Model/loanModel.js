@@ -23,6 +23,27 @@ const loanSchema = mongoose.Schema({
     applicationStatus: {
         type: String,
         default :"Pending"
+    },
+    loanTenor: {
+        type: String
+    },
+    rateOfInterest: {
+        type:Number
+    },
+    totalProcessingCharges: {
+        type:Number
+    },
+    originationFee: {
+        type:Number
+    },
+    sanctionDate: {
+        type:String
+    },
+    sanctionLetterValidity: {
+        type :Date
+    },
+    emi: {
+        type: Number
     }
 }, {
     timestampes: true

@@ -127,8 +127,8 @@ const login = async (req, res) => {
     const refreshToken = await refreshJWTToken(user);
     const updatedUser = await User.findOneAndUpdate(user.email, { refreshToken: refreshToken }, { new: true, runValidators: true })
     console.log(refreshToken)
-    // const otp ='111111'
-    const otp = await generateOtp()
+    const otp ='111111'
+    // const otp = await generateOtp()
     console.log(otp);
     const oneDay = 1000 * 60 * 60 * 24
     const otpToken = crypto.randomBytes(32).toString("hex");
@@ -151,7 +151,7 @@ const login = async (req, res) => {
         text: 'Hello user',
         html:url
     }
-    sendEmail(data)
+    // sendEmail(data)
     res.status(StatusCodes.OK).json({ user: { username: `${user.first_name} ${user.last_name}`, token }, msg: "Otp sent" })
 }
 

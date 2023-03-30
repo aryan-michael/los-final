@@ -356,4 +356,22 @@ const setLoanStatus = async (req, res) => {
     res.status(StatusCodes.OK).json({msg:"Status Updated"})
 }
 
-module.exports = {getAllUserDetails,getUserDetails,getUserLoanInquiries,getLoanInquiryDetails,createProxyUser,checkVerficationDetails,getLoanDocumentDetails,getLoanDocumentLink,setLoanDocumentVerify,setDocumentStatus,setLoanStatus}
+const getLoanDetailsForSanction = async (req, res) => {
+    const { userId: userId, email: email, loanId: loanId } = req.params;
+    const user = await User.findOne({ _id: userId, email: email })
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID:${userId}`)
+    }
+    const loanDetails = await Loan.findOne({ _id: loanId })
+    const userLoanDetails = {
+        loanId: loanDetails._id,
+        loanAmount: loanDetails.loanAmount,
+        applicantsName:user.salutation +' '+ user.first_name + ' ' + user.middle_name + ' ' + user.last_name,
+        mobile: user.mobile,
+        loanType: loanDetails.loanType,
+        email: user.email
+    }
+    res.status(StatusCodes.OK).json(userLoanDetails)
+}
+
+module.exports = {getAllUserDetails,getUserDetails,getUserLoanInquiries,getLoanInquiryDetails,createProxyUser,checkVerficationDetails,getLoanDocumentDetails,getLoanDocumentLink,setLoanDocumentVerify,setDocumentStatus,setLoanStatus,getLoanDetailsForSanction}

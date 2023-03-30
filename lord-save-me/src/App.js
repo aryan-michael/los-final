@@ -47,7 +47,7 @@ import SideBar2 from './components/SideBar2/SideBar2';
 import Creators from './pages/Home/Creators';
 
 function App() {
-  const [loginToken, setLoginToken] = useState({})
+  const [sanctionDetails, setSanctionDetails] = useState({})
   return (
     <>
       <Routes>
@@ -96,8 +96,8 @@ function App() {
         <Route path='/test' element={<Test />} />
         <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar2' element={<SideBar2 />} />
-        <Route path="/admin-panel/sanction" element={<SanctionLetterForm />} />
-        <Route path="/admin-panel/sanction-letter" element={<SanctionLetter />} />
+        <Route path="/admin-panel/sanction/:userId/:email/:loanId" element={<SanctionLetterForm setSanctionDetails={setSanctionDetails} />} />
+        <Route path="/admin-panel/sanction-letter" element={<SanctionLetter sanctionDetails={sanctionDetails}  />} />
 
       </Routes>
     </>
