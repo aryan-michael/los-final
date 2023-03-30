@@ -9,49 +9,49 @@ import axios from "axios";
 
 export default function KYC() {
 
- const common_documents = [
+  const common_documents = [
     { name: 'Photo Identity Proof', value: 'document_photoID' },
     { name: 'Address Proof', value: 'document_addressProof' },
     { name: 'Bank Statements (max 1 year old)', value: 'document_bankStatement' },
     { name: 'Income Tax Returns', value: 'document_ITR' },
     { name: 'Income Proof', value: 'document_incomeProof' },
     { name: 'List of existing loans and debts', value: 'document_loans_debts' },
-   { name: 'List of Accounts', value: 'document_accounts' },
- ]
- 
- const business_documents = [  
+    { name: 'List of Accounts', value: 'document_accounts' },
+  ]
+
+  const business_documents = [
     { name: 'Certificate of Incorporation', value: 'document_COI' },
     { name: 'GST Returns', value: 'document_GST' },
     { name: 'Cash Flow Statements', value: 'document_cashFlow' },
     { name: 'Cancelled Cheque', value: 'document_cancelledCheque' }
- ]
- 
+  ]
 
 
- const home_documents = [
+
+  const home_documents = [
     { name: 'Business Existence Proof (COI)', value: 'document_COI' },
-    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },  
-    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },  
+    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },
+    { name: 'Employment Appointment Letter', value: 'document_employmentLetter' },
     { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
     { name: 'Property Document (Sale deed, Khata)', value: 'document_propertyDoc' },
     { name: 'Office Address Proof', value: 'document_officeAddressProof' },
     { name: 'Office Ownership Proof', value: 'document_officeOwnershipProof' },
- ]
- 
+  ]
 
- const education_documents = [
+
+  const education_documents = [
     { name: 'Proof of Admission', value: 'document_proofOfAdmission' },
     { name: 'Marksheet (S.S.C./H.S.C./Degree/Diploma)', value: 'document_marksheet' },
     { name: 'Collateral Property Document', value: 'document_marksheet' }
- ]
+  ]
 
 
- const personal_documents = [
+  const personal_documents = [
     { name: 'Job Continuity Proof', value: 'document_jobContinuityProof' },
     { name: 'Form 16 (2 years)', value: 'document_form16' },
-    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },  
- ]
+    { name: 'Salary slip (3 months old)', value: 'document_salarySlip' },
+  ]
   const [modalShow, setModalShow] = useState(false);
 
   const [value, setValue] = useState([1]);
@@ -94,11 +94,11 @@ export default function KYC() {
     // if (files.length === 0) {
     //   await setFiles([...files, { documentType: name.doc.value, uploaded_file: file, file_name: file.name }]);
     // }
- 
-      const name = value[files.length]
-      await setFiles([...files, { documentType: name, uploaded_file: file, file_name: file.name }]);
-    
-    
+
+    const name = value[files.length]
+    await setFiles([...files, { documentType: name, uploaded_file: file, file_name: file.name }]);
+
+
     // setFiles([...files, {formData}]);
     // reading the actual uploaded file
     // file_reader.readAsDataURL(file);
@@ -184,10 +184,10 @@ export default function KYC() {
                           <Col className="col-md-4">
                             <Form.Group controlId="formGridState">
                               <Form.Label><MDBBadge pill color='info' light>CHOOSE DOCUMENT</MDBBadge></Form.Label>
-                              
+
                               <Form.Select value={data} onChange={e => handleChange(e, i)} name="documentType" className="form-control" required >
                                 <option defaultValue value=''>Choose...</option>
-                                <option disabled>-----------------COMMON FOR ALL-------------------</option> 
+                                <option disabled>-----------------COMMON FOR ALL-------------------</option>
                                 {common_documents.map((option) => <option value={option.value} className="doc" name="doc" >{option.name}</option>)}
                                 <option disabled>-------------------BUSINESS LOAN-------------------</option>
                                 {business_documents.map((option) => <option value={option.value}  >{option.name}</option>)}
@@ -197,7 +197,7 @@ export default function KYC() {
                                 {education_documents.map((option) => <option value={option.value} >{option.name}</option>)}
                                 <option disabled>------------------PERSONAL LOAN------------------</option>
                                 {personal_documents.map((option) => <option value={option.value} >{option.name}</option>)}
-                                </Form.Select> 
+                              </Form.Select>
                               <Form.Control.Feedback type='valid'>Looks good!</Form.Control.Feedback>
                               <Form.Control.Feedback type='invalid'>Please provide a document!</Form.Control.Feedback>
                             </Form.Group>
@@ -231,13 +231,15 @@ export default function KYC() {
                           onClick={() => handleDelete(i)}
                           type="button"
                           variant="outline-danger"
-                          className="me-4 btn btn-sm">Delete</Button>
+                          className="me-4 btn btn-sm">Delete
+                        </Button>
 
                         <Button
                           variant="outline-primary"
                           className="me-4 btn btn-sm"
                           onClick={() => setModalShow(true)}>Requirements
                         </Button>
+
                         <DocRequirements
                           show={modalShow}
                           onHide={() => setModalShow(false)}
