@@ -312,6 +312,10 @@ const LoanData = () => {
 				withCredentials: true
 			}).then(response => {
 				alert(response.data.msg)
+				if (loanDecision === 'Accepted') {
+					Navigate(`/admin-panel/sanction/${userId}/${email}/${loanId}`)
+					return
+				}
 				window.location.reload()
 			})
 		} catch (err) {
@@ -422,7 +426,12 @@ const LoanData = () => {
 
 						<Button
 							className="me-4"
-							variant="dark" size="lg" onClick={handleShow}>
+							variant="dark" size="lg" onClick={handleShow} style={{display:loanDetails.application_status === 'Accepted'?'block':'none'}}>
+							View Sanction Letter
+						</Button>
+						<Button
+							className="me-4"
+							variant="dark" size="lg" onClick={handleShow} style={{display:loanDetails.application_status !== 'Accepted'?'block':'none'}}>
 							Take Decision
 						</Button>
 
