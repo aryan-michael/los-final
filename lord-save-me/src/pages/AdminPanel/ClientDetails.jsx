@@ -79,7 +79,7 @@ const ClientDetails = () => {
 				},
 				{
 				    name: <MDBBadge pill color='dark' light>Status</MDBBadge>,
-				    selector: (row) => row.loan_status !== 'Pending' || !'Waitlist' || !'Rejected' ? <MDBBadge pill color='success' light>Approved</MDBBadge> : <MDBBadge pill color='danger' light>{row.loan_status}</MDBBadge>,
+				    selector: (row) => row.loan_status === 'Pending'?<MDBBadge pill color='success' light>{row.loan_status}</MDBBadge> : <MDBBadge pill color='danger' light>{row.loan_status}</MDBBadge>,
 				    sortable: true,
 				},
 			]);
@@ -241,7 +241,7 @@ const ClientDetails = () => {
                 <Container>
                     <Row>
                         
-                            <div className="p-2 title"><MDBBadge pill color='secondary' light>Personal Details</MDBBadge></div>
+                        <div className="p-2 title"><MDBBadge pill color='secondary' light>User ID: {id}</MDBBadge></div>
                             <Form className="container mt-3 mb-3 personal" autoComplete='off'>
                                 <Row className="mb-3">
                                 

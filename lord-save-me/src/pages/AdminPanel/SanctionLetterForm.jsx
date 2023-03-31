@@ -141,44 +141,62 @@ const SanctionLetterForm = ({ setSanctionDetails }) => {
         e.preventDefault();
 
         let isFormEmpty = false;
-            // const form = e.currentTarget;
-            // if (form.checkValidity() === false) {
-            //     e.stopPropagation()
-            // }
-            // setLoanValidated(true)
-            for (let x in data) {
-                if (data[x] === '') {
-                    console.log("ld data showing", x, data[x]);
-                    isFormEmpty = true;
-                    alert('Form is Empty')
-                    break
-                }
-                else {
-                    let sanctionDetails = {
-                        loanId: loanDetails.loanId,
-                        loanAmount: loanDetails.loanAmount,
-                        applicantsName: loanDetails.applicantsName,
-                        mobile: loanDetails.mobile,
-                        email: loanDetails.email,
-                        sanctionDate: data.sanctionDate,
-                        sanctionLetterValidity: data.sanctionLetterValidity,
-                        rateOfInterest: data.rateOfInterest,
-                        loanTenor: data.loanTenor,
-                        totalProcessingCharges: data.totalProcessingCharges,
-                        originationFee: data.originationFee,
-                        emi: data.emi,
-                        loanType: loanDetails.loanType
-                    }
-                    await setSanctionDetails(sanctionDetails) 
-                    window.open('/admin-panel/sanction-letter')
-                }
-                
+        // const form = e.currentTarget;
+        // if (form.checkValidity() === false) {
+        //     e.stopPropagation()
+        // }
+        // setLoanValidated(true)
+        for (let x in data) {
+            if (data[x] === '') {
+                console.log("ld data showing", x, data[x]);
+                isFormEmpty = true;
+                alert('Form is Empty')
+                break
             }
-        
+            else {
+                let sanctionDetails = {
+                    loanId: loanDetails.loanId,
+                    loanAmount: loanDetails.loanAmount,
+                    applicantsName: loanDetails.applicantsName,
+                    mobile: loanDetails.mobile,
+                    email: loanDetails.email,
+                    sanctionDate: data.sanctionDate,
+                    sanctionLetterValidity: data.sanctionLetterValidity,
+                    rateOfInterest: data.rateOfInterest,
+                    loanTenor: data.loanTenor,
+                    totalProcessingCharges: data.totalProcessingCharges,
+                    originationFee: data.originationFee,
+                    emi: data.emi,
+                    loanType: loanDetails.loanType
+                }
+                try {
+                    await axios.post(`http://localhost:5000/api/v1/admin/getUser/loan/details/saction/update/${userId}/${email}/${loanId}`, data, {
+                        withCredentials: true
+                    }).then(response => {
+                        alert(response.data.msg);
+                    })
+                } catch (err) {
+                    if (err.response) {
+                        alert(err.response.data.msg)
+                        Navigate('/')
+                        return
+                    } else {
+                        alert('Something went wrong!!')
+                        Navigate('/')
+                        return
+                    }
+                }
+            
+                await setSanctionDetails(sanctionDetails)
+                window.open(`/admin-panel/sanction-letter/${userId}/${email}/${loanId}`)
+            }
+                
+        }
+    }
 
     
             /////////////////////////////////////////Backend Code ///////////////////////////////////////////
-    }
+    
 
     return (
         <>

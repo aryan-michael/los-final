@@ -101,7 +101,7 @@ function App() {
         <Route path='/practice' element={<Practice />} />
         <Route path='/sidebar2' element={<SideBar2 />} />
         <Route path="/admin-panel/sanction/:userId/:email/:loanId" element={<SanctionLetterForm setSanctionDetails={setSanctionDetails} />} />
-        <Route path="/admin-panel/sanction-letter" element={<SanctionLetter sanctionDetails={sanctionDetails}  />} />
+        <Route path="/admin-panel/sanction-letter/:userId/:email/:loanId" element={<SanctionLetter sanctionDetails={sanctionDetails}  />} />
 
       </Routes>
     </>

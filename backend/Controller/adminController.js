@@ -11,7 +11,8 @@ const crypto = require('crypto')
 const generateOtp = require('../Middleware/AdditionalFunc')
 const ProxyUser = require('../Model/proxyUserModel')
 const UserDocuments = require('../Model/userDocumentsModel')
-const Loan = require('../Model/loanModel')
+const Loan = require('../Model/loanModel');
+const { log } = require('console');
 
 
 const getAllUserDetails = async (req, res) => {
@@ -374,4 +375,94 @@ const getLoanDetailsForSanction = async (req, res) => {
     res.status(StatusCodes.OK).json(userLoanDetails)
 }
 
-module.exports = {getAllUserDetails,getUserDetails,getUserLoanInquiries,getLoanInquiryDetails,createProxyUser,checkVerficationDetails,getLoanDocumentDetails,getLoanDocumentLink,setLoanDocumentVerify,setDocumentStatus,setLoanStatus,getLoanDetailsForSanction}
+const updateLoanSanctionLetterDetails = async (req, res) => {
+    const { userId: userId, email: email, loanId: loanId } = req.params;
+    const user = await User.findOne({ _id: userId, email: email })
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID: ${userId}`)
+    }
+    const loanDetails = await Loan.findOneAndUpdate({ _id: loanId } ,req.body
+    , {
+        new: true,
+        runValidators:true
+    })
+    if(!loanDetails) throw new NotFoundError(`No loan found with loan_id: ${loanId}`)
+    // const userLoanDetails = {
+    //     loanId: loanDetails._id,
+    //     loanAmount: loanDetails.loanAmount,
+    //     applicantsName:user.salutation +' '+ user.first_name + ' ' + user.middle_name + ' ' + user.last_name,
+    //     mobile: user.mobile,
+    //     loanType: loanDetails.loanType,
+    //     email: user.email
+    // }
+    console.log(loanDetails);
+    res.status(StatusCodes.OK).json({msg:'done'})
+}
+
+const getLoanSanctionLetterDetails = async (req, res) => {
+    const { userId: userId, email: email, loanId: loanId } = req.params;
+    const user = await User.findOne({ _id: userId, email: email })
+    if (!user) {
+        throw new NotFoundError(`No user found with USER_ID: ${userId}`)
+    }
+    const loanDetails = await Loan.findOne({ _id: loanId })
+    if(!loanDetails) throw new NotFoundError(`No loan found with loan_id: ${loanId}`)
+    const userLoanDetails = {
+        loanId: loanDetails._id,
+        loanAmount: loanDetails.loanAmount,
+        applicantsName:user.salutation +' '+ user.first_name + ' ' + user.middle_name + ' ' + user.last_name,
+        mobile: user.mobile,
+        loanType: loanDetails.loanType,
+        email: user.email,
+        sanctionDate: loanDetails.sanctionDate.toDateString(),
+        sanctionLetterValidity: loanDetails.sanctionLetterValidity.toDateString(),
+        rateOfInterest: loanDetails.rateOfInterest,
+        loanTenor: loanDetails.loanTenor,
+        totalProcessingCharges: loanDetails.totalProcessingCharges,
+        originationFee: loanDetails.originationFee,
+        emi: loanDetails.emi
+    }
+    // console.log(loanDetails);
+    res.status(StatusCodes.OK).json(userLoanDetails)
+}
+
+const getLoanTypeCount = async (req, res) => {
+    const loanDetails = await Loan.find({});
+    var loanTypeCount = {
+        Home: {
+            Accepted: 0,
+            Rejected: 0,
+            Pending: 0,
+            Waitlist: 0
+        }, Personal: {
+            Accepted: 0,
+            Rejected: 0,
+            Pending: 0,
+            Waitlist: 0
+        }, Business: {
+            Accepted: 0,
+            Rejected: 0,
+            Pending: 0,
+            Waitlist: 0
+        }, Education: {
+            Accepted: 0,
+            Rejected: 0,
+            Pending: 0,
+            Waitlist: 0
+        }
+    }
+    console.log(loanDetails.length);
+    let i = 0;
+    // console.log(loanTypeCount);
+    let ld = loanDetails.map((loan) => {
+        i++;
+            loanTypeCount[loan.loanType][loan.applicationStatus]++;
+            console.log(loanTypeCount);
+
+    })
+    
+    await Promise.all(ld)
+    res.status(StatusCodes.OK).json(loanTypeCount)
+}
+
+module.exports = {getAllUserDetails,getUserDetails,getUserLoanInquiries,getLoanInquiryDetails,createProxyUser,checkVerficationDetails,getLoanDocumentDetails,getLoanDocumentLink,setLoanDocumentVerify,setDocumentStatus,setLoanStatus,getLoanDetailsForSanction,updateLoanSanctionLetterDetails,getLoanSanctionLetterDetails,getLoanTypeCount}

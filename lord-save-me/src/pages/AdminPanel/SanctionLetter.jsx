@@ -1,11 +1,43 @@
 import { Container, Button } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import "./SanctionLetter.css";
 import logo from "../../images/ad los.png";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
-const SanctionLetter = ({sanctionDetails}) => {
+const SanctionLetter = ({ sanctionDetails }) => {
+
+	const Navigate = useNavigate()
+
+	const { userId, email, loanId } = useParams()
+
+	const [sanctionLetterDetails,setSanctionLetterDetails] = useState({})
+	
+	useEffect(() => {
+		getSanctionLetterDetails()
+	},[])
+	
+	const getSanctionLetterDetails = async () => {
+		try {
+                    await axios.get(`http://localhost:5000/api/v1/admin/getUser/loan/details/saction/letter/details/${userId}/${email}/${loanId}`, {
+                        withCredentials: true
+                    }).then(response => {
+                        setSanctionLetterDetails(response.data)
+                    })
+                } catch (err) {
+                    if (err.response) {
+						alert(err.response.data.msg)
+						// Navigate('/')
+                        return
+                    } else {
+						alert('Something went wrong!!')
+					}
+			Navigate('/')
+			return
+                }
+	}
 
 	const [loader, setLoader] = useState(false);
 
@@ -42,12 +74,12 @@ const SanctionLetter = ({sanctionDetails}) => {
 							<tr width="20%">
 								<td className="main0-left">
 									<tr>
-										<td><h5>Date: {sanctionDetails.sanctionDate}</h5></td>
+										<td><h5>Date: {sanctionLetterDetails.sanctionDate}</h5></td>
 
 									</tr>
 									<div className="p-5"></div>
 									<tr>
-										<td><h5>To {sanctionDetails.applicantsName},</h5></td>
+										<td><h5>To {sanctionLetterDetails.applicantsName},</h5></td>
 									</tr>
 								</td>
 								<td className="main0-right"><img src={logo} alt="company logo" /></td>
@@ -71,23 +103,23 @@ const SanctionLetter = ({sanctionDetails}) => {
 						<tbody>
 							<tr>
 								<td width="35%">Application No.:</td>
-								<td><b>{sanctionDetails.loanId}</b></td>
+								<td><b>{sanctionLetterDetails.loanId}</b></td>
 							</tr>
 							<tr>
 								<td>Sanctioned Date:</td>
-								<td><b>{sanctionDetails.sanctionDate}</b></td>
+								<td><b>{sanctionLetterDetails.sanctionDate}</b></td>
 							</tr>
 							<tr>
 								<td>Applicant's Name:</td>
-								<td><b>{sanctionDetails.applicantsName}</b></td>
+								<td><b>{sanctionLetterDetails.applicantsName}</b></td>
 							</tr>
 							<tr>
 								<td>Mobile Number:</td>
-								<td><b>{sanctionDetails.mobile}</b></td>
+								<td><b>{sanctionLetterDetails.mobile}</b></td>
 							</tr>
 							<tr>
 								<td>Email:</td>
-								<td><b>{sanctionDetails.email}</b></td>
+								<td><b>{sanctionLetterDetails.email}</b></td>
 							</tr>
 						</tbody>
 					</table>
@@ -98,35 +130,35 @@ const SanctionLetter = ({sanctionDetails}) => {
 						<tbody>
 							<tr>
 								<td width="30%">Loan Type:</td>
-								<td><b>{sanctionDetails.loanType}</b></td>
+								<td><b>{sanctionLetterDetails.loanType}</b></td>
 							</tr>
 							<tr>
 								<td>Loan Amount Sanctioned:</td>
-								<td><b>{sanctionDetails.loanAmount}</b></td>
+								<td><b>{sanctionLetterDetails.loanAmount}</b></td>
 							</tr>
 							<tr>
 								<td>Floating Interest Rate:</td>
-								<td><b>{sanctionDetails.rateOfInterest}% - Rate applicable at the time of disbursement</b></td>
+								<td><b>{sanctionLetterDetails.rateOfInterest}% - Rate applicable at the time of disbursement</b></td>
 							</tr>
 							<tr>
 								<td>Loan Tenor (in years)</td>
-								<td><b>{sanctionDetails.loanTenor} years</b></td>
+								<td><b>{sanctionLetterDetails.loanTenor} years</b></td>
 							</tr>
 							<tr>
 								<td>Total Processing Charges:</td>
-								<td><b>Upto {sanctionDetails.totalProcessingCharges}% of the total loan amount</b></td>
+								<td><b>Upto {sanctionLetterDetails.totalProcessingCharges}% of the total loan amount</b></td>
 							</tr>
 							<tr>
 								<td>Origination Fee (inclusive of GST):</td>
-								<td><b>{sanctionDetails.originationFee}</b></td>
+								<td><b>{sanctionLetterDetails.originationFee}</b></td>
 							</tr>
 							<tr>
 								<td>Sanction Letter Validity:</td>
-								<td><b>{sanctionDetails.sanctionLetterValidity}</b></td>
+								<td><b>{sanctionLetterDetails.sanctionLetterValidity}</b></td>
 							</tr>
 							<tr>
 								<td>EMI (INR):</td>
-								<td><b>{sanctionDetails.emi}</b></td>
+								<td><b>{sanctionLetterDetails.emi}</b></td>
 							</tr>
 						</tbody>
 					</table>

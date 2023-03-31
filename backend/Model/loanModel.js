@@ -37,7 +37,7 @@ const loanSchema = mongoose.Schema({
         type:Number
     },
     sanctionDate: {
-        type:String
+        type:Date
     },
     sanctionLetterValidity: {
         type :Date
