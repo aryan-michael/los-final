@@ -344,7 +344,7 @@ const LoanData = () => {
 
 				<Container>
 					{/* LOAN INFO */}
-					<div className="p-4 title"><MDBBadge pill color='secondary' light>Loan #</MDBBadge></div>
+					<div className="p-4 title"><MDBBadge pill color='secondary' light>Loan ID: {loanId}</MDBBadge></div>
 					<Form className="container mt-3 mb-3">
 						<Row className="mb-3">
 							{/* LOAN AMOUNT */}
