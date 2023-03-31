@@ -335,6 +335,7 @@ const LoanData = () => {
 		//option will change the tag in verfication column
 	};
 
+	//const buttonText = loanDetails.application_status === 'Accepted' ? 'View Sanction Letter' : 'Take Decision';
 
 	return (
 		<>
@@ -418,22 +419,24 @@ const LoanData = () => {
 					<div className="p-2" />
 
 					<div className="text-center p-3 mb-1" >
+						
 						<Button
 							className="me-4"
-							variant="outline-warning" size="lg" onClick={handleReminder}>
+							variant="outline-warning" 
+							size="lg" 
+							onClick={handleReminder}>
 							Send Reminder
 						</Button>
-
-						<Button
-							className="me-4"
-							variant="dark" size="lg" onClick={handleShow} style={{display:loanDetails.application_status === 'Accepted'?'block':'none'}}>
-							View Sanction Letter
+						
+						<Button 
+							className="me-4" 
+							variant="dark" 
+							size="lg" 
+							onClick={handleShow}>
+						    {loanDetails.application_status === 'Accepted' ? 'View Sanction Letter' : 'Take Decision'}
 						</Button>
-						<Button
-							className="me-4"
-							variant="dark" size="lg" onClick={handleShow} style={{display:loanDetails.application_status !== 'Accepted'?'block':'none'}}>
-							Take Decision
-						</Button>
+						
+					
 
 						{/*DECISION MODAL*/}
 						<Modal show={show} onHide={handleClose}>
