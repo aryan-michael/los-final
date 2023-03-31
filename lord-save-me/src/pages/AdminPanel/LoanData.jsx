@@ -337,6 +337,15 @@ const LoanData = () => {
 
 	//const buttonText = loanDetails.application_status === 'Accepted' ? 'View Sanction Letter' : 'Take Decision';
 
+
+	const handleClick = () => {
+		if (loanDetails.application_status === 'Accepted') {
+		  handleSanctionLetter();
+		} else {
+		  handleShow();
+		}
+	  };
+
 	return (
 		<>
 			<PostLoginNavBar />
@@ -432,7 +441,7 @@ const LoanData = () => {
 							className="me-4" 
 							variant="dark" 
 							size="lg" 
-							onClick={handleShow}>
+							onClick={handleClick}>
 						    {loanDetails.application_status === 'Accepted' ? 'View Sanction Letter' : 'Take Decision'}
 						</Button>
 						
